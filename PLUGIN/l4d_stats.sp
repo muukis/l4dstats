@@ -214,7 +214,7 @@ Version History
 #include <adminmenu>
 
 #define PLUGIN_NAME "Custom Player Stats"
-#define PLUGIN_VERSION "1.4B117"
+#define PLUGIN_VERSION "1.4B120"
 #define PLUGIN_DESCRIPTION "Player Stats and Ranking for Left 4 Dead and Left 4 Dead 2."
 
 #define MAX_LINE_WIDTH 64
@@ -229,7 +229,7 @@ Version History
 #define GAMEMODE_SURVIVAL 3
 #define GAMEMODE_SCAVENGE 4
 #define GAMEMODE_REALISMVERSUS 5
-#define GAMEMODE_MUTATIONS 6
+#define GAMEMODE_OTHERMUTATIONS 6
 #define GAMEMODES 7
 
 #define INF_ID_SMOKER 1
@@ -542,6 +542,7 @@ new bool:RankChangeFirstCheck[MAXPLAYERS + 1];
 
 // MapTiming
 new Float:MapTimingStartTime = -1.0;
+new bool:MapTimingBlocked = false;
 new Handle:MapTimingSurvivors = INVALID_HANDLE; // Survivors at the beginning of the map
 new Handle:MapTimingInfected = INVALID_HANDLE; // Survivors at the beginning of the map
 new String:MapTimingMenuInfo[MAXPLAYERS + 1][MAX_LINE_WIDTH];
@@ -1238,7 +1239,9 @@ public Menu_CreateClearTMMenuHandler(Handle:menu, MenuAction:action, param1, par
 		case MenuAction_Cancel:
 		{
 			if (param2 == MenuCancel_ExitBack && RankAdminMenu != INVALID_HANDLE)
+			{
 				DisplayTopMenu(RankAdminMenu, param1, TopMenuPosition_LastCategory);
+			}
 		}
 	}
 }
@@ -1250,38 +1253,66 @@ public ClearRankTopItemHandler(Handle:topmenu, TopMenuAction:action, TopMenuObje
 	if (action == TopMenuAction_DisplayOption)
 	{
 		if (object_id == MenuClearPlayers)
+		{
 			Format(buffer, maxlength, "Clear players");
+		}
 		else if (object_id == MenuClearMaps)
+		{
 			Format(buffer, maxlength, "Clear maps");
+		}
 		else if (object_id == MenuClearAll)
+		{
 			Format(buffer, maxlength, "Clear all");
+		}
 		else if (object_id == MenuClearTimedMaps)
+		{
 			Format(buffer, maxlength, "Clear timed maps");
+		}
 		else if (object_id == MenuRemoveCustomMaps)
+		{
 			Format(buffer, maxlength, "Remove custom maps");
+		}
 		else if (object_id == MenuCleanPlayers)
+		{
 			Format(buffer, maxlength, "Clean players");
+		}
 		else if (object_id == MenuClear)
+		{
 			Format(buffer, maxlength, "Clear...");
+		}
 	}
 
 	// When an item is selected do the following
 	else if (action == TopMenuAction_SelectOption)
 	{
 		if (object_id == MenuClearPlayers)
+		{
 			DisplayYesNoPanel(client, "Do you really want to clear the player stats?", ClearPlayersPanelHandler);
+		}
 		else if (object_id == MenuClearMaps)
+		{
 			DisplayYesNoPanel(client, "Do you really want to clear the map stats?", ClearMapsPanelHandler);
+		}
 		else if (object_id == MenuClearAll)
+		{
 			DisplayYesNoPanel(client, "Do you really want to clear all stats?", ClearAllPanelHandler);
+		}
 		else if (object_id == MenuClearTimedMaps)
+		{
 			DisplayYesNoPanel(client, "Do you really want to clear all map timings?", ClearTMAllPanelHandler);
+		}
 		else if (object_id == MenuRemoveCustomMaps)
+		{
 			DisplayYesNoPanel(client, "Do you really want to remove the custom maps?", RemoveCustomMapsPanelHandler);
+		}
 		else if (object_id == MenuCleanPlayers)
+		{
 			DisplayYesNoPanel(client, "Do you really want to clean the player stats?", CleanPlayersPanelHandler);
+		}
 		else if (object_id == MenuClear)
+		{
 			Menu_CreateClearMenu(client, 0);
+		}
 	}
 }
 
@@ -1517,6 +1548,7 @@ public action_DifficultyChanged(Handle:convar, const String:oldValue[], const St
 	if (convar == cvar_Difficulty)
 	{
 		MapTimingStartTime = -1.0;
+		MapTimingBlocked = true;
 	}
 }
 
@@ -1560,7 +1592,7 @@ public SetCurrentGamemodeName()
 		{
 			Format(CurrentGamemodeLabel, sizeof(CurrentGamemodeLabel), "Realism Versus");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(CurrentGamemodeLabel, sizeof(CurrentGamemodeLabel), "Mutations");
 		}
@@ -1570,10 +1602,14 @@ public SetCurrentGamemodeName()
 		}
 	}
 
-	if (CurrentGamemodeID == GAMEMODE_MUTATIONS)
+	if (CurrentGamemodeID == GAMEMODE_OTHERMUTATIONS)
+	{
 		GetConVarString(cvar_Gamemode, CurrentMutation, sizeof(CurrentMutation));
+	}
 	else
+	{
 		CurrentMutation[0] = 0;
+	}
 }
 
 // Scavenge round start event (occurs when door opens or players leave the start area)
@@ -1593,6 +1629,7 @@ public Action:event_RoundStart(Handle:event, const String:name[], bool:dontBroad
 	CheckCurrentMapDB();
 
 	MapTimingStartTime = 0.0;
+	MapTimingBlocked = false;
 
 	ResetRankChangeCheck();
 }
@@ -1692,7 +1729,7 @@ public Action:timer_ProtectedFriendly(Handle:timer, any:data)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -1764,13 +1801,21 @@ public Action:timer_InfectedDamageCheck(Handle:timer, any:data)
 		GetClientRankAuthString(data, iID, sizeof(iID));
 
 		if (CurrentGamemodeID == GAMEMODE_VERSUS)
+		{
 			Format(query, sizeof(query), "UPDATE %splayers SET points_infected = points_infected + %i WHERE steamid = '%s'", DbPrefix, Score, iID);
+		}
 		else if (CurrentGamemodeID == GAMEMODE_REALISMVERSUS)
+		{
 			Format(query, sizeof(query), "UPDATE %splayers SET points_realism_infected = points_realism_infected + %i WHERE steamid = '%s'", DbPrefix, Score, iID);
+		}
 		else if (CurrentGamemodeID == GAMEMODE_SCAVENGE)
+		{
 			Format(query, sizeof(query), "UPDATE %splayers SET points_scavenge_infected = points_scavenge_infected + %i WHERE steamid = '%s'", DbPrefix, Score, iID);
+		}
 		else
+		{
 			Format(query, sizeof(query), "UPDATE %splayers SET points_mutations = points_mutations + %i WHERE steamid = '%s'", DbPrefix, Score, iID);
+		}
 
 		SendSQLUpdate(query);
 
@@ -2003,9 +2048,9 @@ QueryClientGameModeRank(Client, SQLTCallback:callback=INVALID_FUNCTION)
 			{
 				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_realismversus > 0 AND points_realism_survivors + points_realism_infected >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_REALISMVERSUS]);
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
-				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_mutations > 0 AND points_mutations >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_MUTATIONS]);
+				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_mutations > 0 AND points_mutations >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_OTHERMUTATIONS]);
 			}
 			default:
 			{
@@ -2049,9 +2094,9 @@ QueryClientGameModeRankDP(Handle:dp, SQLTCallback:callback)
 			{
 				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_realismversus > 0 AND points_realism_survivors + points_realism_infected >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_REALISMVERSUS]);
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
-				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_mutations > 0 AND points_mutations >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_MUTATIONS]);
+				Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_mutations > 0 AND points_mutations >= %i", DbPrefix, ClientGameModePoints[Client][GAMEMODE_OTHERMUTATIONS]);
 			}
 			default:
 			{
@@ -2144,7 +2189,7 @@ QueryRank_2(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_FUNCTION)
 		{
 			Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_realismversus > 0", DbPrefix);
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE playtime_mutations > 0", DbPrefix);
 		}
@@ -2623,7 +2668,7 @@ public UpdatePlayerFull(Client, const String:SteamID[], const String:Name[])
 		{
 			Format(Playtime, sizeof(Playtime), "playtime_realismversus");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(Playtime, sizeof(Playtime), "playtime_mutations");
 		}
@@ -2905,7 +2950,7 @@ public Action:timer_FriendlyFireDamageEnd(Handle:timer, any:dp)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3159,7 +3204,7 @@ public InterstitialPlayerUpdate(client)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3335,7 +3380,7 @@ public Action:event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 			}
@@ -3428,7 +3473,7 @@ public Action:event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 			}
@@ -3542,29 +3587,36 @@ IncrementMeleeKills(client)
 public Action:event_TankKilled(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (StatsDisabled() || CampaignOver)
+	{
 		return;
+	}
 
 	if (TankCount >= 3)
+	{
 		return;
+	}
 
-	new Score = ModifyScoreDifficulty(GetConVarInt(cvar_Tank), 2, 4, TEAM_SURVIVORS);
+	new BaseScore = ModifyScoreDifficulty(GetConVarInt(cvar_Tank), 2, 4, TEAM_SURVIVORS);
 	new Mode = GetConVarInt(cvar_AnnounceMode);
 	new Deaths = 0;
-	new Modifier = 0;
+	new Players = 0;
 
 	new maxplayers = GetMaxClients();
 	for (new i = 1; i <= maxplayers; i++)
 	{
 		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
 		{
-			if (IsPlayerAlive(i))
-				Modifier++;
-			else
+			Players++;
+
+			if (!IsPlayerAlive(i))
+			{
 				Deaths++;
+			}
 		}
 	}
 
-	Score = Score * Modifier;
+	// This was proposed by AlliedModders users el_psycho and PatriotGames (Thanks!)
+	new Score = (BaseScore * ((Players - Deaths) / Players)) / Players;
 
 	decl String:UpdatePoints[32];
 
@@ -3590,7 +3642,7 @@ public Action:event_TankKilled(Handle:event, const String:name[], bool:dontBroad
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3616,7 +3668,9 @@ public Action:event_TankKilled(Handle:event, const String:name[], bool:dontBroad
 	}
 
 	if (Mode && Score > 0)
+	{
 		StatsPrintToChatTeam(TEAM_SURVIVORS, "\x03ALL SURVIVORS \x01have earned \x04%i \x01points for killing a Tank with \x05%i Deaths\x01!", Score, Deaths);
+	}
 
 	UpdateMapStat("kills", 1);
 	UpdateMapStat("points", Score);
@@ -3678,7 +3732,7 @@ GiveAdrenaline(Giver, Recipient, AdrenalineID = -1)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3782,7 +3836,7 @@ GivePills(Giver, Recipient, PillsID = -1)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3875,7 +3929,7 @@ public Action:event_DefibPlayer(Handle:event, const String:name[], bool:dontBroa
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -3971,7 +4025,7 @@ public Action:event_HealPlayer(Handle:event, const String:name[], bool:dontBroad
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -4093,7 +4147,7 @@ public Action:event_CampaignWin(Handle:event, const String:name[], bool:dontBroa
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			Format(UpdatePointsPenalty, sizeof(UpdatePointsPenalty), "points_realism_infected");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -4217,7 +4271,7 @@ public Action:timer_PanicEventEnd(Handle:timer, Handle:hndl)
 				{
 					Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 				}
-				case GAMEMODE_MUTATIONS:
+				case GAMEMODE_OTHERMUTATIONS:
 				{
 					Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 				}
@@ -4336,7 +4390,7 @@ public Action:event_PlayerBlindEnd(Handle:event, const String:name[], bool:dontB
 				{
 					Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 				}
-				case GAMEMODE_MUTATIONS:
+				case GAMEMODE_OTHERMUTATIONS:
 				{
 					Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 				}
@@ -4462,7 +4516,7 @@ PlayerIncap(Attacker, Victim)
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 			}
@@ -4927,7 +4981,7 @@ public Action:event_JockeyRelease(Handle:event, const String:name[], bool:dontBr
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 			}
@@ -5036,7 +5090,7 @@ public Action:event_ChargerKilled(Handle:event, const String:name[], bool:dontBr
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -5282,7 +5336,7 @@ public Action:event_UpgradePackAdded(Handle:event, const String:name[], bool:don
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -5370,7 +5424,7 @@ public Action:event_GascanPoured(Handle:event, const String:name[], bool:dontBro
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -5467,24 +5521,33 @@ public Action:event_GascanPoured(Handle:event, const String:name[], bool:dontBro
 public Action:event_Achievement(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (StatsDisabled())
+	{
 		return;
+	}
 
 	new Player = GetClientOfUserId(GetEventInt(event, "player"));
 	new Achievement = GetEventInt(event, "achievement");
 
 	if (IsClientBot(Player))
+	{
 		return;
+	}
 
 	if (DEBUG)
+	{
 		LogMessage("Achievement earned: %i", Achievement);
+	}
 }
 
 // Saferoom door opens.
 
 public Action:event_DoorOpen(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if(MapTimingStartTime != 0.0 || !GetEventBool(event, "checkpoint") || !GetEventBool(event, "closed") || CurrentGamemodeID == GAMEMODE_SURVIVAL || StatsDisabled())
+	if(MapTimingBlocked || MapTimingStartTime != 0.0 || !GetEventBool(event, "checkpoint") || !GetEventBool(event, "closed") || CurrentGamemodeID == GAMEMODE_SURVIVAL || StatsDisabled())
+	{
+		MapTimingBlocked = true;
 		return Plugin_Continue;
+	}
 
 	StartMapTiming();
 
@@ -5493,8 +5556,11 @@ public Action:event_DoorOpen(Handle:event, const String:name[], bool:dontBroadca
 
 public Action:event_StartArea(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if(MapTimingStartTime != 0.0 || CurrentGamemodeID == GAMEMODE_SURVIVAL || StatsDisabled())
+	if(MapTimingBlocked || MapTimingStartTime != 0.0 || CurrentGamemodeID == GAMEMODE_SURVIVAL || StatsDisabled())
+	{
+		MapTimingBlocked = true;
 		return Plugin_Continue;
+	}
 
 	StartMapTiming();
 
@@ -5503,15 +5569,19 @@ public Action:event_StartArea(Handle:event, const String:name[], bool:dontBroadc
 
 public Action:event_PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if(MapTimingStartTime != 0.0 || GetEventBool(event, "isbot"))
+	if(MapTimingBlocked || MapTimingStartTime != 0.0 || GetEventBool(event, "isbot"))
+	{
 		return Plugin_Continue;
+	}
 
 	new Player = GetClientOfUserId(GetEventInt(event, "userid"));
 	//new NewTeam = GetEventInt(event, "team");
 	//new OldTeam = GetEventInt(event, "oldteam");
 
 	if (Player <= 0)
+	{
 		return Plugin_Continue;
+	}
 
 	decl String:PlayerID[MAX_LINE_WIDTH];
 	GetClientRankAuthString(Player, PlayerID, sizeof(PlayerID));
@@ -5690,7 +5760,7 @@ public Action:event_RevivePlayer(Handle:event, const String:name[], bool:dontBro
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -5785,17 +5855,23 @@ L4D1:
 public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (StatsDisabled())
+	{
 		return;
+	}
 
 	new PlayerID = GetEventInt(event, "userid");
 
 	if (!PlayerID)
+	{
 		return;
+	}
 
 	new User = GetClientOfUserId(PlayerID);
 
 	if (IsClientBot(User))
+	{
 		return;
+	}
 
 	new SubjectID = GetEventInt(event, "subjectentid");
 	new Mode = GetConVarInt(cvar_AnnounceMode);
@@ -5812,7 +5888,9 @@ public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 67) // Protect friendly
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		ProtectedFriendlyCounter[User]++;
 
@@ -5829,7 +5907,9 @@ public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroad
 	else if (AwardID == 79) // Respawn friendly
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		Recipient = GetClientOfUserId(GetClientUserId(SubjectID));
 
@@ -5845,9 +5925,13 @@ public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroad
 		if (Score > 0)
 		{
 			if (Mode == 1 || Mode == 2)
+			{
 				StatsPrintToChat(User, "You have earned \x04%i \x01points for Rescuing \x05%s\x01!", Score, RecipientName);
+			}
 			else if (Mode == 3)
+			{
 				StatsPrintToChatAll("\x05%s \x01has earned \x04%i \x01points for Rescuing \x05%s\x01!", UserName, Score, RecipientName);
+			}
 		}
 	}
 	else if (AwardID == 80) // Kill Tank with no deaths
@@ -5899,13 +5983,17 @@ public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroad
 		UpdateMapStat("restarts", 1);
 
 		if (!GetConVarBool(cvar_EnableNegativeScore))
+		{
 			return;
+		}
 
 		Score = ModifyScoreDifficultyNR(GetConVarInt(cvar_Restart), 2, 3, TEAM_SURVIVORS);
 		Score = 400 - Score;
 
 		if (Mode)
+		{
 			StatsPrintToChat(User, "\x03ALL SURVIVORS \x01have \x03LOST \x04%i \x01points for \x03All Survivors Dying!", Score);
+		}
 
 		Score = Score * -1;
 	}
@@ -5943,7 +6031,7 @@ public Action:event_Award_L4D1(Handle:event, const String:name[], bool:dontBroad
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -5991,17 +6079,23 @@ L4D2:
 public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (StatsDisabled())
+	{
 		return;
+	}
 
 	new PlayerID = GetEventInt(event, "userid");
 
 	if (!PlayerID)
+	{
 		return;
+	}
 
 	new User = GetClientOfUserId(PlayerID);
 
 	if (IsClientBot(User))
+	{
 		return;
+	}
 
 	new SubjectID = GetEventInt(event, "subjectentid");
 	new Mode = GetConVarInt(cvar_AnnounceMode);
@@ -6020,7 +6114,9 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 67) // Protect friendly
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		ProtectedFriendlyCounter[User]++;
 
@@ -6038,10 +6134,14 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 68) // Pills given
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		if (CurrentGamemodeID == GAMEMODE_SURVIVAL && !GetConVarBool(cvar_EnableSvMedicPoints))
+		{
 			return;
+		}
 
 		Recipient = GetClientOfUserId(GetClientUserId(SubjectID));
 
@@ -6053,10 +6153,14 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 69) // Adrenaline given
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		if (CurrentGamemodeID == GAMEMODE_SURVIVAL && !GetConVarBool(cvar_EnableSvMedicPoints))
+		{
 			return;
+		}
 
 		Recipient = GetClientOfUserId(GetClientUserId(SubjectID));
 
@@ -6068,7 +6172,9 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 85) // Incap friendly
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		Recipient = GetClientOfUserId(GetClientUserId(SubjectID));
 
@@ -6080,12 +6186,16 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 	if (AwardID == 80) // Respawn friendly
 	{
 		if (!SubjectID)
+		{
 			return;
+		}
 
 		Recipient = GetClientOfUserId(GetClientUserId(SubjectID));
 
 		if (IsClientBot(Recipient))
+		{
 			return;
+		}
 
 		Score = ModifyScoreDifficulty(GetConVarInt(cvar_Rescue), 2, 3, TEAM_SURVIVORS);
 		GetClientName(Recipient, RecipientName, sizeof(RecipientName));
@@ -6096,9 +6206,13 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 		if (Score > 0)
 		{
 			if (Mode == 1 || Mode == 2)
+			{
 				StatsPrintToChat(User, "You have earned \x04%i \x01points for Rescuing \x05%s\x01!", Score, RecipientName);
+			}
 			else if (Mode == 3)
+			{
 				StatsPrintToChatAll("\x05%s \x01has earned \x04%i \x01points for Rescuing \x05%s\x01!", UserName, Score, RecipientName);
+			}
 		}
 	}
 	else if (AwardID == 81) // Kill Tank with no deaths
@@ -6192,7 +6306,7 @@ public Action:event_Award_L4D2(Handle:event, const String:name[], bool:dontBroad
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -6248,6 +6362,7 @@ public SurvivalStart()
 	UpdateMapStat("restarts", 1);
 	SurvivalStarted = true;
 	MapTimingStartTime = 0.0;
+	MapTimingBlocked = false;
 	StartMapTiming();
 }
 
@@ -6289,7 +6404,7 @@ public Action:event_CarAlarm(Handle:event, const String:name[], bool:dontBroadca
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -6367,7 +6482,7 @@ public Action:event_WitchCrowned(Handle:event, const String:name[], bool:dontBro
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			}
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 			}
@@ -6583,9 +6698,13 @@ public Action:cmd_ShowTimedMapsTimer(client, args)
 	if (MapTimingStartTime <= 0.0)
 	{
 		if (client == 0)
+		{
 			PrintToConsole(0, "[RANK] Map timer has not started");
+		}
 		else
+		{
 			StatsPrintToChatPreFormatted(client, "Map timer has not started");
+		}
 
 		return Plugin_Handled;
 	}
@@ -6657,10 +6776,25 @@ DisplayYesNoPanel(client, const String:title[], MenuHandler:handler, delay=30)
 	CloseHandle(panel);
 }
 
+public bool:IsTeamGamemode()
+{
+	return IsGamemode("versus") ||
+				 IsGamemode("realismversus") ||
+				 IsGamemode("scavenge") ||
+				 IsGamemode("mutation11") ||	// Healthpackalypse!
+				 IsGamemode("mutation12") ||	// Realism Versus
+				 IsGamemode("mutation13") ||	// Follow the Liter
+				 IsGamemode("mutation15") ||	// Versus Survival
+				 IsGamemode("mutation18") ||	// Bleed Out Versus
+				 IsGamemode("mutation19") ||	// Taaannnkk!
+				 IsGamemode("community3") ||	// Riding My Survivor
+				 IsGamemode("community6");		// Confogl
+}
+
 // Run Team Shuffle.
 public Action:cmd_ShuffleTeams(client, args)
 {
-	if (!IsGamemode("versus") && !IsGamemode("realismversus") && !IsGamemode("scavenge"))
+	if (!IsTeamGamemode())
 	{
 		PrintToConsole(client, "[RANK] Team shuffle is not enabled in this gamemode!");
 		return Plugin_Handled;
@@ -6915,17 +7049,19 @@ public DisplayRankMenu(client)
 	AddMenuItem(menu, "showtimer", "Show current timer");
 	AddMenuItem(menu, "showrank", "Show others rank");
 	AddMenuItem(menu, "showppm", "Show others PPM");
-	if (GetConVarBool(cvar_EnableRankVote) && (
-				CurrentGamemodeID == GAMEMODE_REALISMVERSUS ||
-				CurrentGamemodeID == GAMEMODE_VERSUS && !IsGamemode("teamversus") ||
-				CurrentGamemodeID == GAMEMODE_SCAVENGE && !IsGamemode("teamscavenge")
-			))
+	if (GetConVarBool(cvar_EnableRankVote) && IsTeamGamemode())
+	{
 		AddMenuItem(menu, "rankvote", "Vote for team shuffle by PPM");
+	}
 	AddMenuItem(menu, "timedmaps", "Show all map timings");
 	if (IsSingleTeamGamemode())
+	{
 		AddMenuItem(menu, "maptimes", "Show current map timings");
+	}
 	if (GetConVarInt(cvar_AnnounceMode))
+	{
 		AddMenuItem(menu, "showsettings", "Modify rank settings");
+	}
 	//AddMenuItem(menu, "showmaptimes", "Show others current map timings");
 
 	Format(Title, sizeof(Title), "About %s", PLUGIN_NAME);
@@ -7039,7 +7175,7 @@ public GetClientGameModePoints(Handle:owner, Handle:hndl, const String:error[], 
 		ClientGameModePoints[client][GAMEMODE_SURVIVAL] = SQL_FetchInt(hndl, GAMEMODE_SURVIVAL);
 		ClientGameModePoints[client][GAMEMODE_SCAVENGE] = SQL_FetchInt(hndl, GAMEMODE_SCAVENGE);
 		ClientGameModePoints[client][GAMEMODE_REALISMVERSUS] = SQL_FetchInt(hndl, GAMEMODE_REALISMVERSUS);
-		ClientGameModePoints[client][GAMEMODE_MUTATIONS] = SQL_FetchInt(hndl, GAMEMODE_MUTATIONS);
+		ClientGameModePoints[client][GAMEMODE_OTHERMUTATIONS] = SQL_FetchInt(hndl, GAMEMODE_OTHERMUTATIONS);
 	}
 }
 
@@ -7389,21 +7525,31 @@ public StartRankVote(client)
 	if (L4DStatsConf == INVALID_HANDLE)
 	{
 		if (client > 0)
+		{
 			StatsPrintToChatPreFormatted(client, "The \x04Rank Vote \x01is \x03DISABLED\x01. \x05Plugin configurations failed.");
+		}
 		else
+		{
 			PrintToConsole(0, "[RANK] The Rank Vote is DISABLED! Could not load gamedata/l4d_stats.txt.");
+		}
 	}
 
 	else if (!GetConVarBool(cvar_EnableRankVote))
 	{
 		if (client > 0)
+		{
 			StatsPrintToChatPreFormatted(client, "The \x04Rank Vote \x01is \x03DISABLED\x01.");
+		}
 		else
+		{
 			PrintToConsole(0, "[RANK] The Rank Vote is DISABLED.");
+		}
 	}
 
 	else
+	{
 		InitializeRankVote(client);
+	}
 }
 
 // Toggle client rank mute.
@@ -7493,7 +7639,9 @@ public Action:cmd_RankVote(client, args)
 	}
 
 	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
+	{
 		return Plugin_Handled;
+	}
 
 	new ClientFlags = GetUserFlagBits(client);
 	new bool:IsAdmin = ((ClientFlags & ADMFLAG_GENERIC) == ADMFLAG_GENERIC);
@@ -7771,9 +7919,13 @@ public ExecuteTeamShuffle(Handle:owner, Handle:hndl, const String:error[], any:d
 			if (i == 0)
 			{
 				if (team == TEAM_SURVIVORS)
+				{
 					RemoveFromArray(SurvivorArray, FindValueInArray(SurvivorArray, client));
+				}
 				else
+				{
 					RemoveFromArray(InfectedArray, FindValueInArray(InfectedArray, client));
+				}
 
 				topteam = team;
 				i++;
@@ -7784,16 +7936,24 @@ public ExecuteTeamShuffle(Handle:owner, Handle:hndl, const String:error[], any:d
 			if (i++ % 2)
 			{
 				if (topteam == TEAM_SURVIVORS && team == TEAM_INFECTED)
+				{
 					RemoveFromArray(InfectedArray, FindValueInArray(InfectedArray, client));
+				}
 				else if (topteam == TEAM_INFECTED && team == TEAM_SURVIVORS)
+				{
 					RemoveFromArray(SurvivorArray, FindValueInArray(SurvivorArray, client));
+				}
 			}
 			else
 			{
 				if (topteam == TEAM_SURVIVORS && team == TEAM_SURVIVORS)
+				{
 					RemoveFromArray(SurvivorArray, FindValueInArray(SurvivorArray, client));
+				}
 				else if (topteam == TEAM_INFECTED && team == TEAM_INFECTED)
+				{
 					RemoveFromArray(InfectedArray, FindValueInArray(InfectedArray, client));
+				}
 			}
 		}
 	}
@@ -7818,7 +7978,9 @@ public ExecuteTeamShuffle(Handle:owner, Handle:hndl, const String:error[], any:d
 
 			// Change Survivors team to Spectators (TEMPORARILY)
 			for (i = 0; i < GetArraySize(SurvivorArray); i++)
+			{
 				ChangeRankPlayerTeam(GetArrayCell(SurvivorArray, i), TEAM_SPECTATORS);
+			}
 
 			// Change Infected team to Survivors
 			for (i = 0; i < GetArraySize(InfectedArray); i++)
@@ -7943,7 +8105,7 @@ public CreateTimedMapsMenu(Handle:owner, Handle:hndl, const String:error[], any:
 				strcopy(GamemodeTitle, sizeof(GamemodeTitle), "Survival");
 			case GAMEMODE_REALISM:
 				strcopy(GamemodeTitle, sizeof(GamemodeTitle), "Realism");
-			case GAMEMODE_MUTATIONS:
+			case GAMEMODE_OTHERMUTATIONS:
 			{
 				strcopy(GamemodeTitle, sizeof(GamemodeTitle), "Mutations");
 				//SQL_FetchString(hndl, 1, MutationInfo, sizeof(MutationInfo));
@@ -8761,7 +8923,7 @@ public ClearTMMutationsPanelHandler(Handle:menu, MenuAction:action, param1, para
 
 	if (param2 == 1)
 	{
-		if (DoFastQuery(param1, "DELETE FROM %stimedmaps WHERE gamemode = %i", DbPrefix, GAMEMODE_MUTATIONS))
+		if (DoFastQuery(param1, "DELETE FROM %stimedmaps WHERE gamemode = %i", DbPrefix, GAMEMODE_OTHERMUTATIONS))
 			StatsPrintToChatPreFormatted(param1, "Clearing map timings for Mutations successful!");
 		else
 			StatsPrintToChatPreFormatted(param1, "Clearing map timings for Mutations failed!");
@@ -9025,7 +9187,7 @@ HunterSmokerSave(Savior, Victim, BasePoints, AdvMult, ExpertMult, String:SaveFro
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -9196,7 +9358,7 @@ InvalidGameMode()
 	{
 		return false;
 	}
-	else if (CurrentGamemodeID == GAMEMODE_MUTATIONS && GetConVarBool(cvar_EnableMutations))
+	else if (CurrentGamemodeID == GAMEMODE_OTHERMUTATIONS && GetConVarBool(cvar_EnableMutations))
 	{
 		return false;
 	}
@@ -9508,7 +9670,7 @@ public CheckSurvivorsWin()
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 			Format(UpdatePointsPenalty, sizeof(UpdatePointsPenalty), "points_realism_infected");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -9776,7 +9938,9 @@ bool:IsClientAlive(client)
 bool:IsGamemode(const String:Gamemode[])
 {
 	if (StrContains(CurrentGamemode, Gamemode, false) != -1)
+	{
 		return true;
+	}
 
 	return false;
 }
@@ -9784,25 +9948,46 @@ bool:IsGamemode(const String:Gamemode[])
 GetGamemodeID(const String:Gamemode[])
 {
 	if (StrEqual(Gamemode, "coop", false))
+	{
 		return GAMEMODE_COOP;
+	}
 	else if (StrEqual(Gamemode, "survival", false))
+	{
 		return GAMEMODE_SURVIVAL;
+	}
 	else if (StrEqual(Gamemode, "versus", false))
+	{
 		return GAMEMODE_VERSUS;
+	}
 	else if (StrEqual(Gamemode, "teamversus", false) && GetConVarInt(cvar_EnableTeamVersus))
+	{
 		return GAMEMODE_VERSUS;
+	}
 	else if (StrEqual(Gamemode, "scavenge", false))
+	{
 		return GAMEMODE_SCAVENGE;
+	}
 	else if (StrEqual(Gamemode, "teamscavenge", false) && GetConVarInt(cvar_EnableTeamScavenge))
+	{
 		return GAMEMODE_SCAVENGE;
+	}
 	else if (StrEqual(Gamemode, "realism", false))
+	{
 		return GAMEMODE_REALISM;
+	}
 	else if (StrEqual(Gamemode, "mutation12", false))
+	{
 		return GAMEMODE_REALISMVERSUS;
+	}
 	else if (StrEqual(Gamemode, "teamrealismversus", false) && GetConVarInt(cvar_EnableTeamRealismVersus))
+	{
 		return GAMEMODE_REALISMVERSUS;
-	else if (StrContains(Gamemode, "mutation", false) == 0)
-		return GAMEMODE_MUTATIONS;
+	}
+	else if (StrContains(Gamemode, "mutation", false) == 0 ||
+					 StrContains(Gamemode, "community", false) == 0)
+	{
+		return GAMEMODE_OTHERMUTATIONS;
+	}
 
 	return GAMEMODE_UNKNOWN;
 }
@@ -10053,7 +10238,7 @@ UpdateFriendlyFire(Attacker, Victim)
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_realism_survivors");
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			Format(UpdatePoints, sizeof(UpdatePoints), "points_mutations");
 		}
@@ -10131,7 +10316,7 @@ UpdatePlayerScore(Client, Score)
 		{
 			UpdatePlayerScoreScavenge(Client, GetClientTeam(Client), Score);
 		}
-		case GAMEMODE_MUTATIONS:
+		case GAMEMODE_OTHERMUTATIONS:
 		{
 			UpdatePlayerScore2(Client, Score, "points_mutations");
 		}
@@ -10747,13 +10932,15 @@ public PrintToConsoleAll(const String:Message[], any:...)
 
 MapTimingEnabled()
 {
-	return CurrentGamemodeID == GAMEMODE_COOP || CurrentGamemodeID == GAMEMODE_SURVIVAL || CurrentGamemodeID == GAMEMODE_REALISM || CurrentGamemodeID == GAMEMODE_MUTATIONS;
+	return MapTimingBlocked || CurrentGamemodeID == GAMEMODE_COOP || CurrentGamemodeID == GAMEMODE_SURVIVAL || CurrentGamemodeID == GAMEMODE_REALISM || CurrentGamemodeID == GAMEMODE_OTHERMUTATIONS;
 }
 
 public StartMapTiming()
 {
 	if (!MapTimingEnabled() || MapTimingStartTime != 0.0 || StatsDisabled())
+	{
 		return;
+	}
 
 	MapTimingStartTime = GetEngineTime();
 
@@ -10802,10 +10989,13 @@ GetCurrentDifficulty()
 public StopMapTiming()
 {
 	if (!MapTimingEnabled() || MapTimingStartTime <= 0.0 || StatsDisabled())
+	{
 		return;
+	}
 
 	new Float:TotalTime = GetEngineTime() - MapTimingStartTime;
 	MapTimingStartTime = -1.0;
+	MapTimingBlocked = true;
 
 	new Handle:dp = INVALID_HANDLE;
 	new ClientTeam, enabled, maxplayers = GetMaxClients();
@@ -10987,24 +11177,34 @@ public InitializeRankVote(client)
 	if (StatsDisabled())
 	{
 		if (client == 0)
+		{
 			PrintToConsole(0, "[RANK] Cannot initiate vote when the plugin is disabled!");
+		}
 		else
+		{
 			StatsPrintToChatPreFormatted2(client, true, "Cannot initiate vote when the plugin is disabled!");
+		}
 
 		return;
 	}
 
 	// No TEAM gamemodes are allowed
-	if (!IsGamemode("versus") && !IsGamemode("scavenge") && !IsGamemode("realismversus"))
+	if (!IsTeamGamemode())
 	{
 		if (client == 0)
+		{
 			PrintToConsole(0, "[RANK] The Rank Vote is not enabled in this gamemode!");
+		}
 		else
 		{
 			if (ServerVersion == SERVER_VERSION_L4D1)
+			{
 				StatsPrintToChatPreFormatted2(client, true, "The \x04Rank Vote \x01is enabled in \x03Versus \x01gamemode!");
+			}
 			else
+			{
 				StatsPrintToChatPreFormatted2(client, true, "The \x04Rank Vote \x01is enabled in \x03Versus\x01, \x03Realism Versus \x01and \x03Scavenge \x01gamemodes!");
+			}
 		}
 
 		return;
@@ -11013,9 +11213,13 @@ public InitializeRankVote(client)
 	if (RankVoteTimer != INVALID_HANDLE)
 	{
 		if (client > 0)
+		{
 			DisplayRankVote(client);
+		}
 		else
+		{
 			PrintToConsole(client, "[RANK] The Rank Vote is already initiated!");
+		}
 
 		return;
 	}
@@ -11042,7 +11246,9 @@ public InitializeRankVote(client)
 	new i;
 
 	for (i = 0; i <= MAXPLAYERS; i++)
+	{
 		PlayerRankVote[i] = RANKVOTE_NOVOTE;
+	}
 
 	new maxplayers = GetMaxClients();
 
@@ -11053,7 +11259,9 @@ public InitializeRankVote(client)
 			team = GetClientTeam(i);
 
 			if (team == TEAM_SURVIVORS || team == TEAM_INFECTED)
+			{
 				DisplayRankVote(i);
+			}
 		}
 	}
 
@@ -11065,7 +11273,9 @@ public InitializeRankVote(client)
 		StatsPrintToChatAll2(true, "The \x04Rank Vote \x01was initiated by \x05%s\x01!", UserName);
 	}
 	else
+	{
 		StatsPrintToChatAllPreFormatted2(true, "The \x04Rank Vote \x01was initiated from Server Console!");
+	}
 }
 
 /*
@@ -11237,7 +11447,9 @@ public StatsPrintToChat(Client, const String:Message[], any:...)
 {
 	// CHECK IF CLIENT HAS MUTED THE PLUGIN
 	if (ClientRankMute[Client])
+	{
 		return;
+	}
 
 	new String:FormattedMessage[MAX_MESSAGE_WIDTH];
 	VFormat(FormattedMessage, sizeof(FormattedMessage), Message, 3);
@@ -11249,7 +11461,9 @@ public StatsPrintToChat2(Client, bool:Forced, const String:Message[], any:...)
 {
 	// CHECK IF CLIENT HAS MUTED THE PLUGIN
 	if (!Forced && ClientRankMute[Client])
+	{
 		return;
+	}
 
 	new String:FormattedMessage[MAX_MESSAGE_WIDTH];
 	VFormat(FormattedMessage, sizeof(FormattedMessage), Message, 4);
@@ -11266,7 +11480,9 @@ public StatsPrintToChatPreFormatted2(Client, bool:Forced, const String:Message[]
 {
 	// CHECK IF CLIENT HAS MUTED THE PLUGIN
 	if (!Forced && ClientRankMute[Client])
+	{
 		return;
+	}
 
 	PrintToChat(Client, "\x04[\x03RANK\x04] \x01%s", Message);
 }
@@ -11274,10 +11490,14 @@ public StatsPrintToChatPreFormatted2(Client, bool:Forced, const String:Message[]
 stock StatsGetClientTeam(client)
 {
 	if (client <= 0 || !IsClientConnected(client))
+	{
 		return TEAM_UNDEFINED;
+	}
 
 	if (IsFakeClient(client) || IsClientInGame(client))
+	{
 		return GetClientTeam(client);
+	}
 
 	return TEAM_UNDEFINED;
 }
