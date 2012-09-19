@@ -105,8 +105,12 @@ $showplayercity = 0;
 // Try out the usable parameters yourself
 $googlemaps_addparam = "&t=h&z=5";
 
+// Show Google Maps at the index.php
+$showmap = true;
+
 // Google Maps (index.php) API key (get yours from http://code.google.com/apis/maps/signup.html)
-$googlemaps_apikey = "";
+// No longer required... waiting for deletion
+//$googlemaps_apikey = "";
 
 // Show Google Maps (index.php) location for the first # players online (useful when web stats hosts multiple game servers)
 // 0 to show all players

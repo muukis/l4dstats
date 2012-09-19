@@ -233,6 +233,7 @@ if (mysql_num_rows($result) > 0)
 		$stats->set("player_country", "<tr><td>Location:</td><td>" . $ip2c->get_country_flag($row['ip']) . $link_start . $city_name . $country_name . $link_stop . "</td></tr>");
 	}
 	$stats->set("player_steamid", $row['steamid']);
+	$stats->set("player_ip", $row['ip']);
 
 	$stats->set("player_timedmaps", $times . " runs");
 

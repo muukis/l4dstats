@@ -54,6 +54,7 @@
 <tr><td>Name:</td><td><?php echo $player_name;?></td></tr>
 <?php echo $player_country;?>
 <tr><td>Steam ID:</td><td><?php echo $player_steamid;?></td></tr>
+<tr><td>IP:</td><td><?php echo $player_ip;?></td></tr>
 <tr><td>Steam Community:</td><td><?php echo $player_url;?></td></tr>
 <tr><td>Last Online:</td><td><?php echo $player_lastonline;?></td></tr>
 <tr onmouseover="showtip('<b>Playtime:</b><br>&nbsp;&nbsp;Coop: <?php echo $player_playtime_coop;?><br><?php echo $player_playtime_realism;?>&nbsp;&nbsp;Survival: <?php echo $player_playtime_survival;?><br>&nbsp;&nbsp;Versus: <?php echo $player_playtime_versus;?><?php echo $player_playtime_scavenge;?>');" onmouseout="hidetip();"><td>Total Playtime:</td><td><?php echo $player_playtime;?></td></tr>
