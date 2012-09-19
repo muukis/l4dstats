@@ -1,0 +1,71 @@
+<?php
+/*
+================================================
+LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
+Copyright (c) 2010 Mikko Andersson
+================================================
+CleanDB / Players Cleaning page - "cleandb.php"
+================================================
+*/
+
+/////////////////////////////////////////////////////////////////////////////////////
+// CONFIGURABLES
+
+// Last time player was online in months (set 0 to disable)
+$last_online_months = 2;
+
+// Minimum time the player has to have played (set 0 to disable)
+$min_playtime_minutes = 30;
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+function getplayerscount()
+{
+	$result = mysql_query("SELECT COUNT(*) AS playerscount FROM " . $mysql_tableprefix . "players");
+
+	if ($result && mysql_num_rows($result) > 0 && ($row = mysql_fetch_array($result)))
+		return $row['playerscount'];
+
+	return -1;
+}
+
+
+// Include the primary PHP functions file
+include("./common.php");
+
+
+?>
+<html>
+	<head>
+		<title>CUSTOM PLAYER STATS - CLEAN DATABASE</title>
+	</head>
+	<body>
+		Starting database cleanup...<br /><br />
+<?php
+	$playercount1 = getplayerscount();
+
+	if ($last_online_months > 0)
+	{
+		$query = "DELETE FROM " . $mysql_tableprefix . "players WHERE lastontime < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL " . $last_online_months . " MONTH))";
+		if (mysql_query($query)) echo "<font color=\"darkgreen\">Last time online: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Last time online: " . mysql_error() . "</font><br />\n";
+	}
+	else
+		echo "<font color=\"orange\">Last time online: Cleaning disabled!</font><br />\n";
+
+	if ($min_playtime_minutes > 0)
+	{
+		$query = "DELETE FROM " . $mysql_tableprefix . "players WHERE " . $TOTALPLAYTIME . " < " . $min_playtime_minutes . " AND lastontime < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 HOUR))";
+		if (mysql_query($query)) echo "<font color=\"darkgreen\">Total playtime: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Total playtime: " . mysql_error() . "</font><br />\n";
+	}
+	else
+		echo "<font color=\"orange\">Total playtime: Cleaning disabled!</font><br />\n";
+
+	$playercount2 = getplayerscount();
+	$playercleaned = $playercount1 - $playercount2;
+?>
+		<br />
+		Done!<br /><br />
+		<b>Players cleaned: <?php echo $playercleaned; ?></b>
+	</body>
+</html>
