@@ -1913,7 +1913,7 @@ public Action:InitPlayers(Handle:timer)
 	}
 }
 
-QueryClientPoints(Client, SQLTCallback:callback=INVALID_HANDLE)
+QueryClientPoints(Client, SQLTCallback:callback=INVALID_FUNCTION)
 {
 	decl String:SteamID[MAX_LINE_WIDTH];
 
@@ -1921,9 +1921,9 @@ QueryClientPoints(Client, SQLTCallback:callback=INVALID_HANDLE)
 	QueryClientPointsSteamID(Client, SteamID, callback);
 }
 
-QueryClientPointsSteamID(Client, const String:SteamID[], SQLTCallback:callback=INVALID_HANDLE)
+QueryClientPointsSteamID(Client, const String:SteamID[], SQLTCallback:callback=INVALID_FUNCTION)
 {
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 		callback = GetClientPoints;
 
 	decl String:query[512];
@@ -1947,9 +1947,9 @@ QueryClientPointsDP(Handle:dp, SQLTCallback:callback)
 	SQL_TQuery(db, callback, query, dp);
 }
 
-QueryClientRank(Client, SQLTCallback:callback=INVALID_HANDLE)
+QueryClientRank(Client, SQLTCallback:callback=INVALID_FUNCTION)
 {
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 		callback = GetClientRank;
 
 	decl String:query[256];
@@ -1972,7 +1972,7 @@ QueryClientRankDP(Handle:dp, SQLTCallback:callback)
 	SQL_TQuery(db, callback, query, dp);
 }
 /*
-QueryClientGameModeRank(Client, SQLTCallback:callback=INVALID_HANDLE)
+QueryClientGameModeRank(Client, SQLTCallback:callback=INVALID_FUNCTION)
 {
 	if (!InvalidGameMode())
 	{
@@ -2063,7 +2063,7 @@ QueryClientGameModeRankDP(Handle:dp, SQLTCallback:callback)
 	}
 }
 /*
-QueryClientGameModePoints(Client, SQLTCallback:callback=INVALID_HANDLE)
+QueryClientGameModePoints(Client, SQLTCallback:callback=INVALID_FUNCTION)
 {
 	decl String:SteamID[MAX_LINE_WIDTH];
 
@@ -2071,7 +2071,7 @@ QueryClientGameModePoints(Client, SQLTCallback:callback=INVALID_HANDLE)
 	QueryClientGameModePointsStmID(Client, SteamID, callback);
 }
 
-QueryClientGameModePointsStmID(Client, const String:SteamID[], SQLTCallback:callback=INVALID_HANDLE)
+QueryClientGameModePointsStmID(Client, const String:SteamID[], SQLTCallback:callback=INVALID_FUNCTION)
 {
 	if (cbGetRankTotal == INVALID_HANDLE)
 		callback = GetClientGameModePoints;
@@ -2103,9 +2103,9 @@ QueryRanks()
 	QueryRank_2();
 }
 */
-QueryRank_1(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_HANDLE)
+QueryRank_1(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_FUNCTION)
 {
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 		callback = GetRankTotal;
 
 	decl String:query[1024];
@@ -2115,9 +2115,9 @@ QueryRank_1(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_HANDLE)
 	SQL_TQuery(db, callback, query, dp);
 }
 
-QueryRank_2(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_HANDLE)
+QueryRank_2(Handle:dp=INVALID_HANDLE, SQLTCallback:callback=INVALID_FUNCTION)
 {
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 		callback = GetGameModeRankTotal;
 
 	decl String:query[1024];
@@ -2512,14 +2512,14 @@ public GetClientRankMute(Handle:owner, Handle:hndl, const String:error[], any:cl
 
 // Run a SQL query, used for UPDATE's only.
 
-SendSQLUpdate(const String:query[], SQLTCallback:callback=INVALID_HANDLE)
+SendSQLUpdate(const String:query[], SQLTCallback:callback=INVALID_FUNCTION)
 {
 	if (db == INVALID_HANDLE)
 	{
 		return;
 	}
 
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 	{
 		callback = SQLErrorCheckCallback;
 	}
@@ -6978,16 +6978,16 @@ public GetClientPointsRankChange(Handle:owner, Handle:hndl, const String:error[]
 }
 
 // Generate client's point total.
-GetClientPointsWorker(Handle:owner, Handle:hndl, const String:error[], any:client, SQLTCallback:callback=INVALID_HANDLE)
+GetClientPointsWorker(Handle:owner, Handle:hndl, const String:error[], any:client, SQLTCallback:callback=INVALID_FUNCTION)
 {
 	if (!client)
 	{
 		return;
 	}
 	
-	if (callback == INVALID_HANDLE)
+	if (callback == INVALID_FUNCTION)
 	{
-		LogError("GetClientPointsWorker method invoke failed: SQLTCallback:callback=INVALID_HANDLE");
+		LogError("GetClientPointsWorker method invoke failed: SQLTCallback:callback=INVALID_FUNCTION");
 		return;
 	}
 
