@@ -2632,7 +2632,7 @@ public UpdatePlayer(client)
 	ReplaceString(Name, sizeof(Name), "\"", "");
 	ReplaceString(Name, sizeof(Name), "'", "");
 	ReplaceString(Name, sizeof(Name), ";", "");
-	ReplaceString(Name, sizeof(Name), "´", "");
+	ReplaceString(Name, sizeof(Name), "ï¿½", "");
 	ReplaceString(Name, sizeof(Name), "`", "");
 
 	UpdatePlayerFull(client, SteamID, Name);
@@ -9213,14 +9213,18 @@ HunterSmokerSave(Savior, Victim, BasePoints, AdvMult, ExpertMult, String:SaveFro
 
 bool:IsClientBot(client)
 {
-	if (client == 0 || !IsClientConnected(client))
+	if (client == 0 || !IsClientConnected(client) || IsFakeClient(client))
+	{
 		return true;
+	}
 
 	decl String:SteamID[MAX_LINE_WIDTH];
 	GetClientRankAuthString(client, SteamID, sizeof(SteamID));
 
 	if (StrEqual(SteamID, "BOT", false))
+	{
 		return true;
+	}
 
 	return false;
 }
