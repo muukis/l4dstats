@@ -214,7 +214,7 @@ Version History
 #include <adminmenu>
 
 #define PLUGIN_NAME "Custom Player Stats"
-#define PLUGIN_VERSION "1.4B120"
+#define PLUGIN_VERSION "1.4B121"
 #define PLUGIN_DESCRIPTION "Player Stats and Ranking for Left 4 Dead and Left 4 Dead 2."
 
 #define MAX_LINE_WIDTH 64
