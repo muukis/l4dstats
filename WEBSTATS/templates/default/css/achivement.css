@@ -1,0 +1,94 @@
+.achievement-base {
+	font-family: Arial,Helvetica,Verdana,sans-serif;
+	padding-left: 15px;
+}
+
+.achievement-progress-text {
+	float: right;
+	width: 220px;
+}
+
+.achievement-progress-bar {
+	width: 500px;
+	height: 14px;
+	margin: 0px;
+	padding: 0px;
+	background-color: rgb(38, 38, 38);
+}
+
+.achievement-img img {
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin-right: 9px;
+	margin-top: 2px;
+	border-radius: 2px 2px 2px 2px;
+}
+
+.achievement-img .achieved {
+	opacity:0.7;
+	position: absolute;
+	background: url(img/shadow.png);
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin-right: 9px;
+	margin-top: 2px;
+	border-radius: 2px 2px 2px 2px;
+}
+
+.achievement-img .notachieved {
+	opacity:0.7;
+	position: absolute;
+	background: url(img/locked-shadow.png);
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin-right: 9px;
+	margin-top: 2px;
+	border-radius: 2px 2px 2px 2px;
+}
+
+.achievement-desc-base {
+	float: left;
+	position: relative;
+	background-color: rgb(55,55,55);
+	border: 1px solid rgb(94,94,94);
+	border-radius: 4px 4px 4px 4px;
+	width: 757px;
+	height: 66px;
+}
+
+.achievement-desc {
+	position: absolute;
+	top: 7px;
+	left: 6px;
+	right: 6px;
+	width: 730px;
+}
+
+.achievement-desc h3 {
+	font-weight: bold;
+	font-size: 15px;
+	font-variant: small-caps;
+	color: rgb(225, 225, 225);
+	margin: 0;
+}
+
+.achievement-desc h4 {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+    font-weight: bold;
+    font-size: 12px;
+    color: rgb(137, 137, 137);
+	margin: 0;
+}
+
+
+.achievement-desc h5 {
+    font-weight: normal;
+    font-size: 12px;
+    color: rgb(137, 137, 137);
+	margin: 0;
+}
