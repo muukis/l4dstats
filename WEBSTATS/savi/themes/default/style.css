@@ -1,0 +1,32 @@
+.steamprofile {
+	position: absolute;
+}
+
+.steamprofile .sp-avatar {
+	padding: 3px;
+	border-radius: 3px 3px 3px 3px;
+	background-color: rgb(84, 84, 84);
+	width: 120px;
+	height: 120px;
+}
+
+.steamprofile .sp-avatar img  {
+	width: 120px;
+	height: 120px;
+}
+
+.sp-bg-game {
+	color: red;
+}
+
+.steamprofile .sp-in-game .sp-avatar {
+	background: linear-gradient(to bottom, rgb(155, 200, 97) 5%, rgb(120, 158, 76) 95%) repeat scroll 0% 0% transparent;
+}
+
+.steamprofile .sp-online .sp-avatar {
+	background: linear-gradient(to bottom, rgb(123, 175, 214) 5%, rgb(80, 109, 146) 95%) repeat scroll 0% 0% transparent;
+}
+
+.steamprofile .sp-offline .sp-avatar {
+	background: linear-gradient(to bottom, rgb(112, 108, 107) 5%, rgb(78, 77, 77) 95%) repeat scroll 0% 0% transparent;
+}

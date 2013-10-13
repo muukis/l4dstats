@@ -17,6 +17,27 @@ include("./common.php");
 // Load outer template
 $tpl = new Template("./templates/" . $templatefiles['motd.tpl']);
 
+	// Multilang support
+		//-- BASE
+	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
+	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
+	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
+	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
+		//-- MENU
+	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
+	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
+	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
+	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
+	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
+	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
+	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
+	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
+		//-- SEARCH
+	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
+	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
+	
+	// End
+
 $tpl->set("stylesheet", $templatefiles['style.css']); // Stylesheet for the page
 $tpl->set("header_extra", $header_extra); // Players served
 $tpl->set("site_name", $site_name); // Site name

@@ -11,6 +11,9 @@ Common PHP functions and code - "common.php"
 // Include configuration file
 include("./config.php");
 
+// Include Language file
+include("./languages.php");
+
 // Include Template engine class
 include("./class_template.php");
 
@@ -236,7 +239,7 @@ function createtablerowtooltip($row, $i)
 	$ppm_realismversus = number_format(getppm($row['points_realism_survivors'] + $row['points_realism_infected'], $row['playtime_realismversus']), 2);
 	$ppm_mutations = number_format(getppm($row['points_mutations'], $row['playtime_mutations']), 2);
 
-  return "<tr onmouseover=\"showtip('<b>Coop: " . $points_coop . " (PPM: " . $ppm_coop . ")<br>" . ($game_version != 1 ? "Realism: " . $points_realism . " (PPM: " . $ppm_realism . ")<br>Mutations: " . $points_mutations . " (PPM: " . $ppm_mutations . ")<br>" : "") . "Survival: " . $points_survival . " (PPM: " . $ppm_survival . ")<br>Versus: " . $points_versus . " (PPM: " . $ppm_versus . ")</b><br>&nbsp;&nbsp;Survivors: " . $points_versus_sur . "<br>&nbsp;&nbsp;Infected: " . $points_versus_inf . "<br>" . ($game_version != 1 ? "<b>Scavenge: " . $points_scavenge . " (PPM: " . $ppm_scavenge . ")</b><br>&nbsp;&nbsp;Survivors: " . $points_scavenge_sur . "<br>&nbsp;&nbsp;Infected: " . $points_scavenge_inf . "<br><b>Realism&nbsp;Versus: " . $points_realismversus . " (PPM: " . $ppm_realismversus . ")</b><br>&nbsp;&nbsp;Survivors: " . $points_realismversus_sur . "<br>&nbsp;&nbsp;Infected: " . $points_realismversus_inf . "<br>" : "") . "<b>Playtime: " . $totalplaytime . "</b><br>&nbsp;&nbsp;Coop: " . $playtime_coop . "<br>" . ($game_version != 1 ? "&nbsp;&nbsp;Realism: " . $playtime_realism . "<br>" : "") . "&nbsp;&nbsp;Survival: " . $playtime_survival . "<br>&nbsp;&nbsp;Versus: " . $playtime_versus . ($game_version != 1 ? "<br>&nbsp;&nbsp;Scavenge: " . $playtime_scavenge . "<br>&nbsp;&nbsp;Realism&nbsp;Versus: " . $playtime_realismversus . "<br>&nbsp;&nbsp;Mutations: " . $playtime_mutations : "") . "');\" onmouseout=\"hidetip();\"" . (($i & 1) ? ">" : " class=\"alt\">");
+  return "<tr>";
 }
 
 function parseplayersummary($profilexml)
@@ -364,12 +367,17 @@ function getplayeravatar($steamid, $avatarsize)
 */
 function getplayersteamprofilexml($steamid)
 {
+	global $xml_ply_profile;
+
 	if (!$steamid)
 	{
 		return;
 	}
 
+	if ($xml_ply_profile == true) {
 	return simplexml_load_file("http://steamcommunity.com/profiles/" . getfriendid($steamid) . "?xml=1");
+	}
+
 }
 
 /*
@@ -491,6 +499,10 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
+					   "l4d2_city17_0" => "City 17",
+					   "l4d2_motamap_m" => "A Dam Mission",
+					   "l4d_deathaboard0" => "Death A Board 2",
 					   "" => "Custom Maps");
 
 	$versus_campaigns = array("c1m" => "Dead Center",
@@ -506,6 +518,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 
 	$survival_campaigns = array("c1m" => "Dead Center",
@@ -521,6 +534,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 
 	$scavenge_campaigns = array("c1m" => "Dead Center",
@@ -536,6 +550,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 
 	$realism_campaigns = array("c1m" => "Dead Center",
@@ -551,6 +566,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 
 	$realismversus_campaigns = array("c1m" => "Dead Center",
@@ -566,6 +582,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 
 	$mutations_campaigns = array("c1m" => "Dead Center",
@@ -581,6 +598,7 @@ else if ($game_version == 2)
 					   "c11m" => "Dead Air",
 					   "c12m" => "Blood Harvest",
 					   "c13m" => "Cold Stream",
+					   "l4d_yama_" => "Yama",
 					   "" => "Custom Maps");
 }
 else
@@ -603,6 +621,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps");
 
 	$versus_campaigns = array("l4d_vs_hospital" => "No Mercy (L4D1)",
@@ -623,6 +642,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps");
 
 	$survival_campaigns = array("l4d_sv_lighthouse" => "Lighthouse (L4D1)",
@@ -648,6 +668,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps");
 
 	$scavenge_campaigns = array("c1m" => "Dead Center (L4D2)",
@@ -663,6 +684,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps (L4D2)");
 
 	$realism_campaigns = array("c1m" => "Dead Center (L4D2)",
@@ -678,6 +700,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps (L4D2)");
 
 	$realismversus_campaigns = array("c1m" => "Dead Center (L4D2)",
@@ -693,6 +716,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps (L4D2)");
 
 	$mutations_campaigns = array("c1m" => "Dead Center (L4D2)",
@@ -708,6 +732,7 @@ else
 					   "c11m" => "Dead Air (L4D2)",
 					   "c12m" => "Blood Harvest (L4D2)",
 					   "c13m" => "Cold Stream (L4D2)",
+					   "l4d_yama_" => "Yama (L4D2)",
 					   "" => "Custom Maps (L4D2)");
 }
 
@@ -931,7 +956,7 @@ if ($result && mysql_num_rows($result) > 0)
 			}
 		}
 
-		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;width:150px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td><td align=\"right\">&nbsp;&nbsp;" . gettotalpoints($row) . "&nbsp;Points</td></tr>";
+		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;width:150px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td></tr>";
 
 		if ($top10players_additional_info && $i == $top10players_additional_info)
 		{

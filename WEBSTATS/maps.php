@@ -14,6 +14,9 @@ Added support for custom maps.
 -- 8/23/09 Customized by muukis
 Fixed some lines that could cause errors in some
 PHP configurations.
+
+-- 10/12/13 Multilang support (for all PHP viewable pages)
+Added Multilang support for every viewable PHP page.
 ================================================
 */
 
@@ -22,6 +25,27 @@ include("./common.php");
 
 // Load outer template
 $tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+
+	// Multilang support
+		//-- BASE
+	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
+	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
+	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
+	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
+		//-- MENU
+	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
+	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
+	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
+	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
+	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
+	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
+	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
+	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
+		//-- SEARCH
+	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
+	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
+	
+	// End
 
 // Set GameType as var, and quit on hack attempt
 if (strstr($_GET['type'], "/")) exit;
@@ -33,8 +57,8 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 
 	setcommontemplatevariables($tpl);
 
-	$tpl->set("title", "Campaign Stats (" . $disptype . ")"); // Window title
-	$tpl->set("page_heading", "Campaign Stats (" . $disptype . ")"); // Page header
+	$tpl->set("title", $lang_tpl_maps_title . " (" . $disptype . ")"); // Window title
+	$tpl->set("page_heading", $lang_tpl_maps_title . " (" . $disptype . ")"); // Page header
 
 	$maparr = array();
 	$totals = array();
@@ -205,7 +229,8 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		$body = $maps->fetch("./templates/" . $templatefiles["maps_campaign_" . $type . ".tpl"]);
 		
 		$stats->set("page_body", $body);
-		$stats->set("page_link", "<a href=\"campaign.php?id=" . $prefix . "&type=" . $type . "\">View Full Stats for " . $title . "</a>");
+		$stats->set("page_link", "<a href=\"campaign.php?id=" . $prefix . "&type=" . $type . "\">");
+		$stats->set("page_link2", "</a>");
 		$output .= $stats->fetch("./templates/" . $templatefiles['page.tpl']);
 	}
 }

@@ -214,11 +214,13 @@ table.statsbox {
 	border: 1px solid #1f1f1f;
 	font-size: 11px;
 	text-align: left;
+	width: 100%;
 }
 
 table.statsbox th {
 	padding: 3px;
 	text-align: center;
+	background: none repeat scroll 0% 0% rgb(68, 68, 68);
 }
 
 table.statsbox td {

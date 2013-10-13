@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>SteamProfile Example</title>
+	<!--
+	The following tree lines are required for SteamProfile and must be included in <head>
+	
+	1st line: SteamProfile uses jQuery, so you need to include the framework.
+	          You can also use public URLs, e.g. http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js
+	2nd line: The SteamProfile itself, must be included after jQuery
+	-->
+	<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="steamprofile.js"></script>
+</head>
+<body>
+	<!--
+	Each <div> with the class "steamprofile" will be automatically extended
+	with the profile for the ID set in "title".
+	The ID can be a Steam-ID, a Steam Community number (Steam-ID 64) or the
+	profile alias.
+	-->
+	<div class="steamprofile" title="76561197965018417"></div>
+	<div class="steamprofile" title="robinwalker"></div>
+	<div class="steamprofile" title="STEAM_0:0:148902"></div>
+	<div class="steamprofile" title="STEAM_0:1:20343018"></div>
+	<div class="steamprofile" title="STEAM_0:1:10903138"></div>
+	<div class="steamprofile" title="STEAM_0:1:16651803"></div>
+	<!--
+	When other scripts insert a profile placeholder, you need to call the
+	"refresh"-method of the SteamProfile object to replace the placeholders.
+	-->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	function addGabe() {
+		// to avoid interferences, SteamProfile locks the loading of
+		// other profiles until the current query is finished
+		if(SteamProfile.isLocked()) {
+			return;
+		}
+		
+		$('#gabe_adder').replaceWith('<div class="steamprofile" title="gabelogannewell"></div>');
+		SteamProfile.refresh();
+	}
+	/* ]]> */
+	</script>
+	<div id="gabe_adder"><a href="javascript:addGabe()">Add Gabe!</a></div>
+
+	<!--
+	You can also load single profiles directly with Java-Script by calling
+	the "load"-method.
+	-->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	function addDF() {
+			if(SteamProfile.isLocked()) {
+				return;
+			}
+			$('#df_adder').replaceWith(SteamProfile.load('df'));
+	}
+	/* ]]> */
+	</script>
+	<div id="df_adder"><a href="javascript:addDF()">Add Drunken F00l!</a></div>
+</body>
+</html>
