@@ -19,8 +19,29 @@ $playercount = number_format(mysql_num_rows($result));
 
 setcommontemplatevariables($tpl);
 
-$tpl->set("title", "Players Online"); // Window title
-$tpl->set("page_heading", "Players Online - " . $playercount); // Page header
+	// Multilang support
+		//-- BASE
+	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
+	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
+	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
+	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
+		//-- MENU
+	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
+	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
+	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
+	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
+	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
+	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
+	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
+	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
+		//-- SEARCH
+	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
+	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
+	
+	// End
+
+$tpl->set("title", $lang_tpl_plyonline); // Window title
+$tpl->set("page_heading", $lang_tpl_plyonline . " - " . $playercount); // Page header
 if ($stats_refreshinterval > 0)
 	$tpl->set("statspagemeta", "<meta http-equiv=\"refresh\" content=\"" . $stats_refreshinterval . "\">\n");
 else
@@ -38,9 +59,9 @@ if (mysql_error()) {
 	$googlemaps_servers = 0;
 	$googlemaps_displayall = $googlemaps_showplayersonlinecount <= 0;
 
-	if ($showmap && $showplayerflags && $showplayercity)
+	if ($showplayerflags && $showplayercity && strlen($googlemaps_apikey) > 0)
 	{
-		$googlemaps = "http://maps.googleapis.com/maps/api/staticmap?";
+		$googlemaps = "http://maps.google.com/maps/api/staticmap?key=" . $googlemaps_apikey;
 
 		$locations = count($game_locations);
 		if ($locations == 1)
@@ -148,7 +169,7 @@ if (mysql_error()) {
     $i++;
   }
 
-  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">There are no players online</td</tr>\n";
+  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $lang_tpl_noplyonline . "</td</tr>\n";
 
 	$stats->set("online", $arr_online);
 	$output = $stats->fetch("./templates/" . $templatefiles['online.tpl']);
@@ -163,17 +184,17 @@ if (mysql_error()) {
 		$output .= "<br><br><img src=\"" . $googlemaps . "\">";
 	}
 	
-	/*
+	
 	// This part of the code adds a chatlog window in your "frontpage" (Players Online)
 	// Download Extended Chat Log from here: http://forums.alliedmods.net/showthread.php?t=91331
 	// Download Custom Player Stats modified Extended Chat Log PHP -page from here: http://forums.alliedmods.net/showthread.php?p=1365806#post1365806
 	$output .= "
 		<br><br>
-		<iframe src =\"../chatlog/index_stats.php\" width=\"600\" height=\"200\" scrolling=\"no\" style=\"border-width:1px; border-style:solid; border-color:#FFCC33;\">
+		<iframe src =\"../l4d2/chatlog.php\" width=\"700\" height=\"250\" scrolling=\"no\" style=\"border-width:1px; border-style:solid; border-color: darkgrey;position: relative;left: 100px;top: 50px;\">
 		  <p>Your browser does not support iframes.</p>
 		</iframe>
 	";
-	*/
+	
 }
 
 $tpl->set('body', trim($output));

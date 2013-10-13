@@ -46,6 +46,17 @@ $game_version = 2;
 // Usage: "mytemplate" (requires directory ./templates/mytemplate existence)
 $site_template = "";
 
+// Language settings
+// Default: en, se
+$lang = "en";
+
+// XML player profile
+// Leave empty or write false to disable it (disabled by default)
+// Usage:
+//		true - enabled
+//		null/false - disabled
+$xml_ply_profile = false;
+
 // Award definitions file
 $award_file = "awards.en.php";
 $award_l4d2_file = "awards.l4d2.en.php";

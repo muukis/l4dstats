@@ -1,0 +1,306 @@
+/* Profile Header */
+
+.profile_header_content {
+	padding-left: 12px;
+	padding-right: 286px;
+	padding-top: 8px;
+	color: rgb(137, 137, 137);
+	font-size: 13px;
+}
+
+.profile_header_content .profile_header_size {
+	position: absolute;
+}
+
+/* Profile Header - Information */
+
+.profile_header_base {
+	position: relative;
+	left: 140px;
+	font-family: 'Motiva Sans Thin',Arial,Helvetica,Verdana,sans-serif;
+}
+
+.profile_header_base .persona_name {
+	line-height: 40px;
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+}
+
+.profile_header_base h5 {
+	margin: 0;
+	padding: 0;
+	color: rgb(120,120,120);
+}
+
+/* Signature */
+
+.signature-box img {
+	position: absolute;
+	left: 105px;
+	top: 85px;
+}
+
+.signature-box .box_pre {
+	position: absolute;
+	left: 50px;
+	top: 175px;
+	width: 450px;
+	background: rgba(255,255,255,.2);
+	border-radius: 2px;
+	font-size: 10px;
+	color: black;
+}
+
+#sig_button {
+	position: absolute;
+	left: 2px;
+	top: 174px;
+	width: 50px;
+	font-size: 10px;
+	color: black;
+}
+
+/* Profile Header - Activity */
+
+.profile_header_base .activity {
+	float: right;
+	position: relative;
+	top: -65px;
+	right: -150px;
+}
+
+/* Profile Header - Information Boxes */
+
+.profile_header_base .information {
+	float: right;
+	position: absolute;
+	right: -190px;
+	top: 20px;
+	max-width: 250px;
+	z-index: 2;
+}
+
+.information .box h2 {
+	background-color: rgb(45,45,45);
+	border-radius: 5px 0px 0px 0px;
+	border: 1px solid rgb(25,25,25);
+	font-weight: bold;
+	font-size: 15px;
+	width: 250px;
+	text-align: center;
+}
+
+.information .box .dt {
+	background-color: rgb(45,45,45);
+	border: 1px solid rgb(25,25,25);
+	width: 250px;
+}
+
+.dt dt {
+	text-align: center;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.information .box .bottom {
+	background-color: rgb(15,15,15);
+	border-radius: 0px 0px 0px 5px;
+	border: 1px solid rgb(25,25,25);
+	width: 250px;
+	height: 5px;
+	margin-bottom: 25px;
+}
+
+/* Profile Header - Rank */
+
+.rank {
+	position: absolute;
+	left: 14px;
+	top: 45px;
+	font-size: 40px;
+	margin: 0;
+	text-align: center;
+	height: 38px;
+	border: 2px solid;
+	width: 38px;
+	line-height: 38px;
+	border-radius: 26px 26px 26px 26px;
+}
+/* Rank 1 */
+.rank.lvl1 {
+	border-color: gold;
+}
+/* Rank 2 */
+.rank.lvl2 {
+	border-color: silver;
+}
+/* Rank 3 */
+.rank.lvl3{
+	border-color: brown;
+}
+/* Rank 4-9 */
+.rank.lvl4-9{
+	border-color: bronze;
+}
+/* Rank 10-999 */
+.rank.lvl10-999{
+	border-color: bronze;
+	font-size: 20px;
+}
+
+/* Profile Content */
+
+.profile_content {
+    position: relative;
+    top: 200px;
+    min-height: 200px;
+}
+
+/* Profile Content - Award Boxes */
+
+.profile_content .awards-base {
+	max-width: 350px;
+	position: relative;
+	float: left;
+	left: -65px;
+	margin-left: 20px;
+}
+
+.awards-base .box h2 {
+	background-color: rgb(45,45,45);
+	border-radius: 5px 5px 0px 0px;
+	border: 1px solid rgb(25,25,25);
+	font-weight: bold;
+	font-size: 15px;
+	width: 350px;
+	text-align: center;
+}
+
+.awards-base .box .dt {
+	background-color: rgb(45,45,45);
+	border: 1px solid rgb(25,25,25);
+	width: 350px;
+}
+
+.awards-base .box .bottom {
+	background-color: rgb(15,15,15);
+	border-radius: 0px 0px 5px 5px;
+	border: 1px solid rgb(25,25,25);
+	width: 350px;
+	height: 5px;
+}
+
+/* Second Box */
+
+.profile_content .awards-base2 {
+	max-width: 350px;
+	position: relative;
+	float: left;
+	left: -65px;
+	top: -16px;
+	margin-left: 20px;
+}
+
+.awards-base2 .box h3 {
+	background-color: rgb(45,45,45);
+	border-radius: 5px 5px 0px 0px;
+	border: 1px solid rgb(25,25,25);
+	font-weight: bold;
+	font-size: 15px;
+	width: 350px;
+	text-align: center;
+}
+
+.awards-base2 .box .dt {
+	background-color: rgb(45,45,45);
+	border: 1px solid rgb(25,25,25);
+	width: 350px;
+}
+
+.awards-base2 .box .bottom {
+	background-color: rgb(15,15,15);
+	border-radius: 0px 0px 5px 5px;
+	border: 1px solid rgb(25,25,25);
+	width: 350px;
+	height: 5px;
+}
+
+/* Page */
+
+.map_img {
+	position: relative;
+	float: left;
+	left: 5px;
+	height: 100px;
+	width: 200px;
+	margin-right: 15px;
+	border-radius: 3px 3px 3px 3px;
+	padding: 3px;
+	background: linear-gradient(to bottom, rgb(123, 175, 214) 5%, rgb(80, 109, 146) 95%) repeat scroll 0% 0% transparent;
+	margin-top: 3px;
+}
+
+.map_img img {
+	height: 100px;
+	width: 200px;
+}
+
+.map_post {
+	position: relative;
+	float: left;
+	left: 135px;
+	background-color: rgb(45,45,45);
+	border: 1px solid rgb(25,25,25);
+	width: 600px;
+	min-height: 150px;
+	margin-bottom: 35px;
+	margin-top: 25px
+}
+
+.map_post h2 {
+	position: relative;
+	left: -185px;
+	top: 110px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.map_post .entry {
+	position: relative;
+	float: right;
+	right: 0px;
+	top: -105px;
+	width: 390px;
+	font-size: 10px;
+}
+
+.map_post2 {
+	position: relative;
+	float: left;
+	left: 135px;
+	background-color: rgb(45,45,45);
+	border: 1px solid rgb(25,25,25);
+	width: 600px;
+	min-height: 150px;
+	margin-bottom: 35px;
+	margin-top: 25px
+}
+
+.map_post2 h2 {
+	position: relative;
+	left: -185px;
+	top: 110px;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.map_post2 .entry {
+	position: relative;
+	float: right;
+	right: 0px;
+	top: -105px;
+	width: 390px;
+	font-size: 10px;
+}

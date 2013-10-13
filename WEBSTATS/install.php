@@ -1181,6 +1181,33 @@ if ($game_version != 1)
 	InsertDefaultMapAllL4D2GameModes("c13m2_southpinestream");
 	InsertDefaultMapAllL4D2GameModes("c13m3_memorialbridge");
 	InsertDefaultMapAllL4D2GameModes("c13m4_cutthroatcreek");
+	// Custom maps
+	/*
+	// Yama
+	InsertDefaultMapAllL4D2GameModes("l4d_yama_1");
+	InsertDefaultMapAllL4D2GameModes("l4d_yama_2");
+	InsertDefaultMapAllL4D2GameModes("l4d_yama_3");
+	InsertDefaultMapAllL4D2GameModes("l4d_yama_4");
+	InsertDefaultMapAllL4D2GameModes("l4d_yama_5");
+	// City 17
+	InsertDefaultMapAllL4D2GameModes("l4d2_city17_01");
+	InsertDefaultMapAllL4D2GameModes("l4d2_city17_02");
+	InsertDefaultMapAllL4D2GameModes("l4d2_city17_03");
+	InsertDefaultMapAllL4D2GameModes("l4d2_city17_04");
+	InsertDefaultMapAllL4D2GameModes("l4d2_city17_05");
+	// A Dam Mission
+	InsertDefaultMapAllL4D2GameModes("l4d2_motamap_m1");
+	InsertDefaultMapAllL4D2GameModes("l4d2_motamap_m2");
+	InsertDefaultMapAllL4D2GameModes("l4d2_motamap_m3");
+	InsertDefaultMapAllL4D2GameModes("l4d2_motamap_m4");
+	InsertDefaultMapAllL4D2GameModes("l4d2_motamap_m5");
+	// Death A Board 2
+	InsertDefaultMapAllL4D2GameModes("l4d_deathaboard01_prison");
+	InsertDefaultMapAllL4D2GameModes("l4d_deathaboard02_yard");
+	InsertDefaultMapAllL4D2GameModes("l4d_deathaboard03_docks");
+	InsertDefaultMapAllL4D2GameModes("l4d_deathaboard04_ship");
+	InsertDefaultMapAllL4D2GameModes("l4d_deathaboard05_light");
+	*/
 
 	// Convert specific custom maps to original
 	$insert_maps = "UPDATE " . $mysql_tableprefix . "maps SET custom = 0 WHERE LOWER(name) REGEXP '^c([0-9]+)m([0-9]+)_';";
