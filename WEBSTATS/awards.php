@@ -228,17 +228,16 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 		}
 	}
 	
-	// Multilang support
-		//-- BASE
-	$stats->set("lang_tpl_award_lastupdate", $lang_tpl_award_lastupdate);
-	
-	// End
-
 	$stats = new Template("./templates/" . $templatefiles['awards.tpl']);
 	$stats->set("awards_date", date($lastonlineformat, time()));
 	$stats->set("awards_body", $table_body);
+	
 	$award_output = $stats->fetch("./templates/" . $templatefiles['awards.tpl']);
 	file_put_contents("./templates/awards_cache.html", trim($award_output));
+	// Multilang support
+		//-- BASE
+	$stats->set("lang_tpl_award_lastupdate", $lang_tpl_award_lastupdate);
+	// End
 }
 
 setcommontemplatevariables($tpl);

@@ -1,18 +1,9 @@
 		<!-- player.pl -->
 			<div class="profile_header_content">
 				<?php /* A very simple converter for a few selected SteamIDs. */
-	if ($player_steamid == "STEAM_1:1:24323838") {
-		echo"<div class='steamprofile' title='jonnyboy0719'></div>";
-	} elseif ($player_steamid == "STEAM_1:1:43775360") {
-		echo"<div class='steamprofile' title='addeoftime55'></div>";
-	} elseif ($player_steamid == "STEAM_1:1:28344274") {
-		echo"<div class='steamprofile' title='rowdeyreiko'></div>";
-	} elseif ($player_steamid == "STEAM_1:0:28144880") {
-		echo"<div class='steamprofile' title='ticklemejimmies'></div>";
-	} elseif ($player_steamid == "STEAM_1:0:29426414") {
-		echo"<div class='steamprofile' title='likai'></div>";
-	} elseif ($player_steamid == "STEAM_1:0:43688072") {
-		echo"<div class='steamprofile' title='folfsky101'></div>";
+		//An automated converter will be made in the future
+	if ($player_steamid == "STEAM_1:1:24323838") { // Example STEAMID
+		echo"<div class='steamprofile' title='jonnyboy0719'></div>"; // Example Output.
 	} else {
 		echo"<div class='steamprofile' title=" . $player_steamid . "></div>";
 	}
