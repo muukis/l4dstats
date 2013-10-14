@@ -17,21 +17,9 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+interface Application {
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+    public function run();
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>

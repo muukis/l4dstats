@@ -17,21 +17,15 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+abstract class Config {
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+    abstract public function getString($sKey, $sDefault = '');
+
+    abstract public function getInteger($sKey, $iDefault = 0);
+
+    abstract public function getFloat($sKey, $fDefault = 0.0);
+
+    abstract public function getBoolean($sKey, $bDefault = false);
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>

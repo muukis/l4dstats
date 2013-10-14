@@ -10,6 +10,7 @@
 // This is the English language file. Here you can easily edit the languge(s) and/or add/make your own.
 // Available default languages: en, se
 	if($lang == "en"){
+	
 		/*==================================
 			Default -- Awards (Survivors)
 		==================================*/

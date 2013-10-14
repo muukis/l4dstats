@@ -18,20 +18,26 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+require_once 'lib/util/ArrayConfig.php';
+
+class FileConfig extends ArrayConfig {
+
+    private static $aInstances = array();
+
+    public static function getInstance($sConfigFile) {
+        $sKey = function_exists('hash') ? hash('md5', $sConfigFile) : md5($sConfigFile);
+
+        if (isset(self::$aInstances[$sKey])) {
+            return self::$aInstances[$sKey];
+        } else {
+            return self::$aInstances[$sKey] = new FileConfig($sConfigFile);
+        }
+    }
+
+    protected function __construct($sConfigFile) {
+        parent::__construct(parse_ini_file($sConfigFile));
+    }
+
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>

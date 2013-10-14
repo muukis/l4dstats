@@ -21,17 +21,15 @@
 try {
     require_once 'lib/main.php';
 } catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
+    // print plain text error
+    header('Content-Type: text/plain');
+    echo $e->getMessage();
     exit();
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
+require_once 'lib/steamprofile/image/SteamProfileImageApp.php';
 
 // start application
-$App = new SteamProfileXMLProxyApp();
+$App = new SteamProfileImageApp();
 $App->run();
 ?>

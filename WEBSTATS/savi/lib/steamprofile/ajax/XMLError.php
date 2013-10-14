@@ -18,20 +18,30 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
+require_once 'lib/net/HTTPHeader.php';
+
+/**
+ * XML error page generator
+ *
+ * @author Nico Bergemann <barracuda415 at yahoo.de>
+ */
+class XMLError {
+    private $sMessage;
     
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+    public function __construct($msg) {
+        if ($msg instanceof Exception) {
+            $this->sMessage = $msg->getMessage();
+        } else {
+            $this->sMessage = $msg;
+        }
+    }
+    
+    public function build() {
+        $oHeader = new HTTPHeader();
+        $oHeader->setResponse('Content-Type', 'application/xml');
+        echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+        echo '<response><error><![CDATA[' . $this->sMessage . ']]></error></response>';
+    }
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>

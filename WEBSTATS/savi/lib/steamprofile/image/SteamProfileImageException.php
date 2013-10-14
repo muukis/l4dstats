@@ -17,21 +17,29 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// a little hack to support the new exception class of PHP 5.3 with the pre-defined getPrevious() method
+if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+    class SteamProfileImageException extends Exception {
+        // PHP 5.3 supports getPrevious() out of the box
+    }
+
+} else {
+
+    class SteamProfileImageException extends Exception {
+
+        private $previous;
+
+        public function __construct($message = "", $code = 0, Exception $previous = null) {
+            parent::__construct($message, $code);
+            $this->previous = $previous;
+        }
+
+        public function getPrevious() {
+            return $this->previous;
+        }
+
+    }
+
 }
-
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>

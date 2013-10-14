@@ -8,10 +8,12 @@ Common PHP functions and code - "common.php"
 ================================================
 */
 
+error_reporting(E_ERROR);
+
 // Include configuration file
 include("./config.php");
 
-// Include Language file
+// Include default Language file
 include("./languages.php");
 
 // Include Template engine class
@@ -183,10 +185,12 @@ function getserversettingsvalue($name)
 
 function setcommontemplatevariables($template)
 {
-	global $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
+	global $lang, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
 
 	$template->set("header_extra", $header_extra); // Players served
 	$template->set("site_name", $site_name); // Site name
+	$template->set("language_selector", $language_selector); // Language selector
+	$template->set("current_language", $lang); // Current language
 
 	$template->set("realismlink", $realismlink); // Realism stats link
 	$template->set("realismversuslink", $realismversuslink); // Realism Versus stats link
@@ -892,6 +896,26 @@ if ($result && $row = mysql_fetch_array($result))
 {
 	$header_extra['Zombies Killed'] = $row['total_kills'];
 	$header_extra['Players Served'] = $row['players_served'];
+}
+
+$lang_file_prefix = 'lang/language.';
+$lang_file_prefix_len = strlen($lang_file_prefix);
+
+$lang_file_postfix = '.php';
+$lang_file_postfix_len = strlen($lang_file_prefix);
+
+foreach (glob('lang/language.*.php') as $language_filename)
+{
+	$lang_id = substr($language_filename, $lang_file_prefix_len);
+	$lang_id = substr($lang_id, 0, -4);
+	$lang_id = strtolower($lang_id);
+	
+	$language_flag_path = './images/flags/' . $lang_id . '.gif';
+
+	if (file_exists($language_flag_path))
+	{
+		$language_selector[$lang_id] = $language_flag_path;
+	}
 }
 
 $i = 1;

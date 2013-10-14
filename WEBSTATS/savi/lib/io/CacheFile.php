@@ -17,21 +17,27 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+class CacheFile extends File {
 
-try {
-    require_once 'lib/main.php';
-} catch (Exception $e) {
-    require_once 'lib/steamprofile/ajax/XMLError.php';
-    
-    // print XML-formatted error
-    $oError = new XMLError($e);
-    $oError->build();
-    exit();
+    private $iLifetime = -1;
+
+    public function __construct($path, $iLifetime = -1) {
+        parent::__construct($path);
+        $this->setLifetime($iLifetime);
+    }
+
+    public function getLifetime() {
+        return $this->iLifetime;
+    }
+
+    public function setLifetime($iLifetime = -1) {
+        $this->iLifetime = (int) $iLifetime;
+    }
+
+    public function isCached() {
+        return $this->exists() && ($this->iLifetime == -1 || time() - $this->lastModified() <= $this->iLifetime);
+    }
+
 }
 
-require_once 'lib/steamprofile/ajax/SteamProfileXMLProxyApp.php';
-
-// start application
-$App = new SteamProfileXMLProxyApp();
-$App->run();
 ?>
