@@ -34,6 +34,9 @@
 	</div>
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
+		<?php foreach ($language_selector as $language_id => $language_flag_path): ?>
+		<?php echo '<a href="?lang=' . $language_id . '" target="_self"><img src="' . $language_flag_path . '" border=' . ($current_language == $language_id ? 1 : 0) . '></a>' ?>
+		<?php endforeach; ?>
 	</div>
 	<!-- Zombies killed, Players Served -->
 	<div id="players_served" align="right">
@@ -98,7 +101,7 @@
 <!-- start footer -->
 <div id="footer">
 	<p id="legal">
-		<span id="legal1">Copyright &copy; 2010 <a href="http://forums.alliedmods.net/member.php?u=52082">muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965">SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524">JonnyBoy0719</a></span><br>
+		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082">muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965">SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524">JonnyBoy0719</a></span><br>
 	</p>
 </div>
 <!-- end footer -->
