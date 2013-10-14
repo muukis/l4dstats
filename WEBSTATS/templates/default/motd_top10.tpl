@@ -6,7 +6,6 @@
 <tr>
 	<td align="left" width="1"><b><?php echo $row['rank'] . '.&nbsp;';?></b></td>
 	<td align="left" class="player"><?php echo $row['flag'] . $row['name'];?></td>
-	<td align="right"><?php echo number_format($row['score']) . '&nbsp;Points';?></td>
 </tr>
 <?php endforeach; ?>
 </table>

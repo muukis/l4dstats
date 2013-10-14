@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<steamprofile-config>
+	<vars>
+		<!-- The Theme used by SteamProfile. Must be the name of a folder inside the "themes/" folder. -->
+		<var name="theme">default</var>
+		<!-- If set to true, the slider menu with icon links will be shown. -->
+		<var name="slidermenu">false</var>
+		<!-- If set to true, the banner of the currenty played game will be shown in the badge background. -->
+		<var name="gamebanner">false</var>
+	</vars>
+	<!-- The HTML templates for DOM manipulation. Change only if you know what you're doing. -->
+	<templates>
+		<profile>
+		<![CDATA[
+			<div class="sp-bg-game">
+			<div class="sp-bg-fade">
+			<div class="sp-badge">
+				<div class="sp-avatar">
+						<img src="" alt="" />
+				</div>
+			</div>
+			</div>
+			</div>
+		]]>
+		</profile>
+		<loading>
+		<![CDATA[
+			<div class="sp-loading">
+				<img src="loading.gif" width="32" height="32" alt="" />
+				Loading...
+			</div>
+		]]>
+		</loading>
+		<error>
+		<![CDATA[
+			<div class="sp-bg-game">
+			<div class="sp-bg-fade">
+			<div class="sp-badge">
+				<div class="sp-avatar">
+						<img src="error.jpg" alt="" />
+				</div>
+			</div>
+			</div>
+			</div>
+		]]>
+		</error>
+	</templates>
+</steamprofile-config>
