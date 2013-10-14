@@ -8,6 +8,8 @@ Common PHP functions and code - "common.php"
 ================================================
 */
 
+error_reporting(E_ERROR);
+
 // Include configuration file
 include("./config.php");
 

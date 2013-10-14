@@ -184,7 +184,7 @@ if (mysql_error()) {
 		$output .= "<br><br><img src=\"" . $googlemaps . "\">";
 	}
 	
-	
+	/*
 	// This part of the code adds a chatlog window in your "frontpage" (Players Online)
 	// Download Extended Chat Log from here: http://forums.alliedmods.net/showthread.php?t=91331
 	// Download Custom Player Stats modified Extended Chat Log PHP -page from here: http://forums.alliedmods.net/showthread.php?p=1365806#post1365806
@@ -194,7 +194,7 @@ if (mysql_error()) {
 		  <p>Your browser does not support iframes.</p>
 		</iframe>
 	";
-	
+	*/
 }
 
 $tpl->set('body', trim($output));
