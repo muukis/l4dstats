@@ -7,6 +7,10 @@
 #		   Mikko Andersson		   #
 ==================================*/
 
+// Always load the plugin default language in background
+include("./language.en.php");
+
+// Look for new set value
 if ($_GET["lang"])
 {
 	$lang = $_GET["lang"];
@@ -14,9 +18,11 @@ if ($_GET["lang"])
 }
 else
 {
+	// Find a cookie
 	$lang = $_COOKIE["lang"];
 }
 
+// User has not set the language preference
 if (!$lang)
 {
 	$lang = $default_lang;
@@ -29,6 +35,7 @@ if (!file_exists("./language." . $lang . ".php"))
 	$lang = strtolower($default_lang);
 }
 
+// Load user preferenced language on top
 include("./language." . $lang . ".php");
 
 ?>
