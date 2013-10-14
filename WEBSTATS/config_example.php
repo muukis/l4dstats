@@ -48,7 +48,7 @@ $site_template = "";
 
 // Language settings
 // Default: en, se
-$lang = "en";
+$default_lang = "en";
 
 // XML player profile
 // Leave empty or write false to disable it (disabled by default)
