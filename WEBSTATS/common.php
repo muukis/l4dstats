@@ -13,8 +13,11 @@ error_reporting(E_ERROR);
 // Include configuration file
 include("./config.php");
 
-// Include default Language file
+// Include language
 include("./languages.php");
+
+// Include template
+include("./templates.php");
 
 // Include Template engine class
 include("./class_template.php");
@@ -185,12 +188,16 @@ function getserversettingsvalue($name)
 
 function setcommontemplatevariables($template)
 {
-	global $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
+	global $template_name, $template_selector, $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
 
 	$template->set("header_extra", $header_extra); // Players served
 	$template->set("site_name", $site_name); // Site name
+
 	$template->set("language_selector", $language_selector); // Language selector
 	$template->set("current_language", $lang_name); // Current language
+
+	$template->set("template_selector", $template_selector); // Template selector
+	$template->set("current_template", $template_name); // Current template
 
 	$template->set("realismlink", $realismlink); // Realism stats link
 	$template->set("realismversuslink", $realismversuslink); // Realism Versus stats link
@@ -390,22 +397,6 @@ Database fields
 
 $TOTALPOINTS = "points + points_survivors + points_infected + points_survival" . ($game_version != 1 ? " + points_realism + points_scavenge_survivors + points_scavenge_infected + points_realism_survivors + points_realism_infected + points_mutations" : "");
 $TOTALPLAYTIME = "playtime + playtime_versus + playtime_survival" . ($game_version != 1 ? " + playtime_realism + playtime_scavenge + playtime_realismversus + playtime_mutations" : "");
-
-$templatesdir = "./templates";
-$templatesdir_default = $templatesdir . "/default";
-$imagesdir_default = $templatesdir_default . "/img";
-
-if (!file_exists($imagesdir_default) || !is_dir($imagesdir_default))
-{
-	echo "Webstats installation is incomplete. Download and install all the files again.<br />\n";
-	exit;
-}
-
-if ($site_template != "" && $site_template != "default" && (!file_exists($templatesdir . "/" . $site_template) || !is_dir($templatesdir . "/" . $site_template)))
-{
-	echo "Webstats \"" . $site_template . "\" template path not found. Reconfigurations required!<br />\n";
-	exit;
-}
 
 if (!function_exists('file_put_contents')) {
 	function file_put_contents($filename, $data) {
@@ -795,7 +786,7 @@ if (isset($game_addresses))
 				$game_lat = $ip2c->get_latitude($game_ip);
 				$game_lon = $ip2c->get_longitude($game_ip);
 
-				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./img/flags/" . $game_country_code . ".gif"))
+				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./images/flags/" . $game_country_code . ".gif"))
 				{
 					if (!$international && $game_country_code_last != "NULL" && $game_country_code != $game_country_code_last)
 						$international = true;
@@ -898,41 +889,6 @@ if ($result && $row = mysql_fetch_array($result))
 	$header_extra['Players Served'] = $row['players_served'];
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-$lang_file_prefix = 'language.';
-=======
-$lang_file_prefix = 'lang/language.';
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-$lang_file_prefix_len = strlen($lang_file_prefix);
-
-$lang_file_postfix = '.php';
-$lang_file_postfix_len = strlen($lang_file_prefix);
-
-<<<<<<< HEAD
-foreach (glob('language.*.php') as $language_filename)
-=======
-foreach (glob('lang/language.*.php') as $language_filename)
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-{
-	$lang_id = substr($language_filename, $lang_file_prefix_len);
-	$lang_id = substr($lang_id, 0, -4);
-	$lang_id = strtolower($lang_id);
-	
-	$language_flag_path = './images/flags/' . $lang_id . '.gif';
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-	if (file_exists($language_flag_path))
-	{
-		$language_selector[$lang_id] = $language_flag_path;
-	}
-}
-
-=======
->>>>>>> pr/12
 $i = 1;
 $top10 = array();
 
@@ -1006,52 +962,12 @@ if ($result && mysql_num_rows($result) > 0)
 	}
 }
 
-$arr_templatefiles = php4_scandir($templatesdir_default);
-$templatefiles = array();
-
-foreach ($arr_templatefiles as $file)
-{
-	$templatefiles[$file] = "default/" . $file;
-}
-
-$arr_templatefiles = php4_scandir($imagesdir_default);
-$imagefiles = array();
-
-foreach ($arr_templatefiles as $file)
-{
-	$imagefiles[$file] = "default/img/" . $file;
-}
-
-if ($site_template != "" && $site_template != "default")
-{
-	$arr_templatefiles = php4_scandir($templatesdir . "/" . $site_template);
-
-	foreach ($arr_templatefiles as $file)
-	{
-		if (!is_dir($file))
-			$templatefiles[$file] = $site_template . "/" . $file;
-	}
-
-	$imagespath = $templatesdir . "/" . $site_template . "/img";
-
-	if (file_exists($imagespath) && is_dir($imagespath))
-	{
-		$arr_templatefiles = php4_scandir($imagespath);
-
-		foreach ($arr_templatefiles as $file)
-		{
-			if (!is_dir($file))
-				$imagefiles[$file] = $site_template . "/img/" . $file;
-		}
-	}
-}
-
 $motd_message = htmlentities(getserversettingsvalue("motdmessage"), ENT_COMPAT, "UTF-8");
 $layout_motd = "";
 if ($show_motd && strlen($motd_message) > 0)
 {
-	$tpl_msg = new Template("./templates/" . $templatefiles['layout_motd.tpl']);
+	$tpl_msg = new Template($templatefiles['layout_motd.tpl']);
 	$tpl_msg->set("motd_message", $motd_message);
-	$layout_motd = $tpl_msg->fetch("./templates/" . $templatefiles['layout_motd.tpl']);
+	$layout_motd = $tpl_msg->fetch($templatefiles['layout_motd.tpl']);
 }
 ?>

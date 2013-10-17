@@ -19,7 +19,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	$lang_id = substr($lang_id, 0, -4);
 	$lang_id = strtolower($lang_id);
 	
-	$language_flag_path = './img/flags/' . $lang_id . '.gif';
+	$language_flag_path = './images/flags/' . $lang_id . '.gif';
 
 	if (file_exists($language_flag_path))
 	{
@@ -29,15 +29,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 }
 
 // Always load the plugin default language in background
-<<<<<<< HEAD
-<<<<<<< HEAD
-include("./language.en.php");
-=======
-include("./lang/language.en.php");
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-=======
 require($lang_file_prefix . 'en' . $lang_file_postfix);
->>>>>>> pr/12
 
 // Look for new set value
 if ($_GET["lang"])
@@ -59,28 +51,12 @@ if (!$lang)
 
 $lang = strtolower($lang);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-if (!file_exists("./language." . $lang . ".php"))
-=======
-if (!file_exists("./lang/language." . $lang . ".php"))
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-=======
 if (!file_exists($lang_file_prefix . $lang . $lang_file_postfix))
->>>>>>> pr/12
 {
 	$lang = strtolower($default_lang);
 }
 
 // Load user preferenced language on top
-<<<<<<< HEAD
-<<<<<<< HEAD
-include("./language." . $lang . ".php");
-=======
-include("./lang/language." . $lang . ".php");
->>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
-=======
 include($lang_file_prefix . $lang . $lang_file_postfix);
->>>>>>> pr/12
 
 ?>
