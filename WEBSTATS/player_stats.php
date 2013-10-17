@@ -12,7 +12,7 @@ Player achievement progress page - "player_awards.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -79,7 +79,7 @@ if (mysql_num_rows($result) > 0)
 	$tpl->set("title", $playername . " :: " . $lang_tpl_player_stats); // Window title
 	$tpl->set("page_heading","<a href='player.php?steamid=" . $row['steamid'] . "'>" . $playername2 . " :: " . $lang_tpl_player_stats . "</a>"); // Page header
 
-	$stats = new Template("./templates/" . $templatefiles['player_stats.tpl']);
+	$stats = new Template($templatefiles['player_stats.tpl']);
 
 	$stats->set("player_name", $playername);
 
@@ -771,7 +771,7 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("arr_achievements", $arr_achievements);
 	$stats->set("arr_achievements2", $arr_achievements2);
 
-	$output = $stats->fetch("./templates/" . $templatefiles['player_stats.tpl']);
+	$output = $stats->fetch($templatefiles['player_stats.tpl']);
 } else {
 	$tpl->set("title", "Viewing Player: INVALID"); // Window title
 	$tpl->set("page_heading", "Viewing Player: INVALID"); // Page header
@@ -788,5 +788,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

@@ -24,7 +24,7 @@ Added Multilang support for every viewable PHP page.
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -169,17 +169,17 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
 	$maparr[] = $line . "<td><b>SERVER TOTAL</b></td><td><b>" . formatage($totals['playtime'] * 60) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['infected_win']) . "</b></td><td><b>" . number_format($totals['points_infected']) . "</b></td>" : "") . "<td><b>" . number_format($totals['points']) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($totals['points'], $totals['playtime']), 2) . ")") . "</b></td><td><b>" . number_format($totals['kills']) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['kill_survivor']) . "</b></td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td><b>" . number_format($totals['restarts']) . "</b></td>" : "") . "</tr>\n";
 	
-	$stats = new Template("./templates/" . $templatefiles["maps_overview_" . $type . ".tpl"]);
+	$stats = new Template($templatefiles["maps_overview_" . $type . ".tpl"]);
 	$stats->set("icon_infected", $imagefiles['icon_infected.gif']); // Team infected icon
 	$stats->set("icon_survivors", $imagefiles['icon_survivors.png']); // Team survivors icon
 	$totalpop = getpopulation($totals['kills'], $population_file, False);
 	$stats->set("totalpop", $totalpop);
 	$stats->set("maps", $maparr);
-	$output = $stats->fetch("./templates/" . $templatefiles["maps_overview_" . $type . ".tpl"]);
+	$output = $stats->fetch($templatefiles["maps_overview_" . $type . ".tpl"]);
 	
 	foreach ($campaigns as $prefix => $title) {
 
-		$stats = new Template("./templates/" . $templatefiles['page.tpl']);
+		$stats = new Template($templatefiles['page.tpl']);
 		$stats->set("page_subject", $title);
 
 		$maps = new Template("./templates/maps_campaign_" . $type . ".tpl");
@@ -226,12 +226,12 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		}
 		
 		$maps->set("maps", $maparr);
-		$body = $maps->fetch("./templates/" . $templatefiles["maps_campaign_" . $type . ".tpl"]);
+		$body = $maps->fetch($templatefiles["maps_campaign_" . $type . ".tpl"]);
 		
 		$stats->set("page_body", $body);
 		$stats->set("page_link", "<a href=\"campaign.php?id=" . $prefix . "&type=" . $type . "\">");
 		$stats->set("page_link2", "</a>");
-		$output .= $stats->fetch("./templates/" . $templatefiles['page.tpl']);
+		$output .= $stats->fetch($templatefiles['page.tpl']);
 	}
 }
 else
@@ -246,5 +246,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

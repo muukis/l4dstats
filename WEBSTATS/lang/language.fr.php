@@ -8,7 +8,7 @@
 ==================================*/
 
 // This is the name of the file, and it will popup on the Dropdown list.
-$lang_name = "English";
+$lang_name = "French";
 
 // This is the English language file. By creating a similar file you can easily edit the languge(s) and/or add/make your own.
 

@@ -15,7 +15,7 @@ $motd_body = "";
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['motd.tpl']);
+$tpl = new Template($templatefiles['motd.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -52,9 +52,9 @@ else
 
 if (strlen($motd_message) > 0)
 {
-	$tpl_msg = new Template("./templates/" . $templatefiles['motd_message.tpl']);
+	$tpl_msg = new Template($templatefiles['motd_message.tpl']);
 	$tpl_msg->set("motd_message", $motd_message);
-	$tpl->set("motd_message", $tpl_msg->fetch("./templates/" . $templatefiles['motd_message.tpl']));
+	$tpl->set("motd_message", $tpl_msg->fetch($templatefiles['motd_message.tpl']));
 }
 
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
@@ -79,9 +79,9 @@ if ($result && mysql_num_rows($result) > 0)
 										 "score" => gettotalpointsraw($row));
 	}
 
-	$tpl_top10 = new Template("./templates/" . $templatefiles['motd_top10.tpl']);
+	$tpl_top10 = new Template($templatefiles['motd_top10.tpl']);
 	$tpl_top10->set("motd_top10", $top10);
-	$tpl->set("motd_top10", $tpl_top10->fetch("./templates/" . $templatefiles['motd_top10.tpl']));
+	$tpl->set("motd_top10", $tpl_top10->fetch($templatefiles['motd_top10.tpl']));
 }
 
 $real_playtime_sql = $TOTALPLAYTIME;
@@ -114,11 +114,11 @@ if ($result && mysql_num_rows($result) > 0)
 										 "score" => $row[$real_points] / $row[$real_playtime]);
 	}
 
-	$tpl_topppm = new Template("./templates/" . $templatefiles['motd_topppm.tpl']);
+	$tpl_topppm = new Template($templatefiles['motd_topppm.tpl']);
 	$tpl_topppm->set("motd_topppm", $topppm);
-	$tpl->set("motd_topppm", $tpl_topppm->fetch("./templates/" . $templatefiles['motd_topppm.tpl']));
+	$tpl->set("motd_topppm", $tpl_topppm->fetch($templatefiles['motd_topppm.tpl']));
 }
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['motd.tpl']);
+echo $tpl->fetch($templatefiles['motd.tpl']);
 ?>

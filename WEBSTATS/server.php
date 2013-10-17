@@ -12,7 +12,7 @@ Player stats page - "server.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -210,7 +210,7 @@ $playername = htmlentities($total['name'], ENT_COMPAT, "UTF-8");
 $tpl->set("title", "Server Stats"); // Window title
 $tpl->set("page_heading", "Server Stats"); // Page header
 
-$stats = new Template("./templates/" . $templatefiles['server.tpl']);
+$stats = new Template($templatefiles['server.tpl']);
 
 $stats->set("players", number_format($players));
 $stats->set("points", number_format($totalpoints));
@@ -455,7 +455,7 @@ $stats->set("arr_infected_awards", $arr_infected_awards);
 $stats->set("arr_demerits", $arr_demerits);
 $stats->set("arr_maps", $arr_maps);
 
-$output = $stats->fetch("./templates/" . $templatefiles['server.tpl']);
+$output = $stats->fetch($templatefiles['server.tpl']);
 
 $tpl->set('body', trim($output));
 
@@ -466,5 +466,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

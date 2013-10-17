@@ -12,7 +12,7 @@ Player stats page - "player.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -205,7 +205,7 @@ if (mysql_num_rows($result) > 0)
 	$tpl->set("title", $lang_tpl_player . " " . $playername); // Window title
 	$tpl->set("page_heading", $lang_tpl_player . " " . $playername2); // Page header
 
-	$stats = new Template("./templates/" . $templatefiles['player.tpl']);
+	$stats = new Template($templatefiles['player.tpl']);
 
 	$stats->set("player_name", $playername);
 	if ($showplayerflags)
@@ -446,7 +446,7 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("arr_achievements", $arr_achievements);
 	$stats->set("arr_rank", $arr_rank);
 
-	$output = $stats->fetch("./templates/" . $templatefiles['player.tpl']);
+	$output = $stats->fetch($templatefiles['player.tpl']);
 } else {
 	$tpl->set("title", $lang_tpl_player . " INVALID"); // Window title
 	$tpl->set("page_heading", $lang_tpl_player . " INVALID"); // Page header
@@ -463,5 +463,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>
