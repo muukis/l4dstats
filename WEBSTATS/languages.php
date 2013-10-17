@@ -13,6 +13,18 @@ $lang_file_prefix_len = strlen($lang_file_prefix);
 $lang_file_postfix = '.php';
 $lang_file_postfix_len = strlen($lang_file_prefix);
 
+$get_parameters = '?';
+
+foreach ($_GET as $key => $value)
+{
+	if ($key == 'lang')
+	{
+		continue;
+	}
+
+	$get_parameters .= $key . '=' . $value . '&';
+}
+
 foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filename)
 {
 	$lang_id = substr($language_filename, $lang_file_prefix_len);
@@ -24,7 +36,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	if (file_exists($language_flag_path))
 	{
 		require($lang_file_prefix . $lang_id . $lang_file_postfix);
-		$language_selector[$lang_id] = array($lang_name, $language_flag_path);
+		$language_selector[$lang_id] = array($lang_name, $language_flag_path, $get_parameters . 'lang=' . $lang_id);
 	}
 }
 

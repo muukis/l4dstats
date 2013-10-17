@@ -80,9 +80,10 @@
 	</div>
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
-		<?php foreach ($language_selector as $language_id => $language_flag_path): ?>
-		<?php echo '<a href="?lang=' . $language_id . '" target="_self"><img src="' . $language_flag_path . '" border=' . ($current_language == $language_id ? 1 : 0) . '></a>' ?>
+		<?php foreach ($template_selector as $template_info): ?>
+		<?php echo ' <a href="' . $template_info[1] . '" target="self">' . $template_info[0] . '</a>'; ?>
 		<?php endforeach; ?>
+		<?php echo 'Current template: ' . $current_template; ?>
 	</div>
 	<!-- Zombies killed, Players Served -->
 	<div id="players_served" align="right">
@@ -105,7 +106,7 @@
 <div id="page">
 	<!-- start content -->
 	<div id="content">
-                <div class="post">
+	<div class="post">
 			<h1 class="title" style="background: none; padding: 0; margin-top: -10px;"><?php echo $page_heading;?></h1>
 		</div>
 
@@ -152,8 +153,8 @@
 		<div class="lang-dropdown">
 		<span><?php echo $current_language;?></span>
 			<ul class="dropdown">
-				<?php foreach ($language_selector as $language_id => $language_info): ?>
-				<?php echo '<li><a href="?lang=' . $language_id . '" target="_self"><i class="icon-large"><img src="' . $language_info[1] . '"></i>'. $language_info[0] . '</a></li>' ?>
+				<?php foreach ($language_selector as $language_info): ?>
+				<?php echo '<li><a href="' . $language_info[2] . '" target="_self"><i class="icon-large"><img src="' . $language_info[1] . '"></i>'. $language_info[0] . '</a></li>' ?>
 				<?php endforeach; ?>
 			</ul>
 		</div>
