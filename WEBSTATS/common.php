@@ -13,7 +13,7 @@ error_reporting(E_ERROR);
 // Include configuration file
 include("./config.php");
 
-// Include Language file
+// Include default Language file
 include("./languages.php");
 
 // Include Template engine class
@@ -898,20 +898,32 @@ if ($result && $row = mysql_fetch_array($result))
 	$header_extra['Players Served'] = $row['players_served'];
 }
 
+<<<<<<< HEAD
 $lang_file_prefix = 'language.';
+=======
+$lang_file_prefix = 'lang/language.';
+>>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
 $lang_file_prefix_len = strlen($lang_file_prefix);
 
 $lang_file_postfix = '.php';
 $lang_file_postfix_len = strlen($lang_file_prefix);
 
+<<<<<<< HEAD
 foreach (glob('language.*.php') as $language_filename)
+=======
+foreach (glob('lang/language.*.php') as $language_filename)
+>>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
 {
 	$lang_id = substr($language_filename, $lang_file_prefix_len);
 	$lang_id = substr($lang_id, 0, -4);
 	$lang_id = strtolower($lang_id);
 	
 	$language_flag_path = './images/flags/' . $lang_id . '.gif';
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 31d87a4cb80c1b5f3c3583364533bcbcaf394d8d
 	if (file_exists($language_flag_path))
 	{
 		$language_selector[$lang_id] = $language_flag_path;

@@ -59,9 +59,9 @@ if (mysql_error()) {
 	$googlemaps_servers = 0;
 	$googlemaps_displayall = $googlemaps_showplayersonlinecount <= 0;
 
-	if ($showplayerflags && $showplayercity && strlen($googlemaps_apikey) > 0)
+	if ($showmap && $showplayerflags && $showplayercity)
 	{
-		$googlemaps = "http://maps.google.com/maps/api/staticmap?key=" . $googlemaps_apikey;
+		$googlemaps = "http://maps.googleapis.com/maps/api/staticmap?";
 
 		$locations = count($game_locations);
 		if ($locations == 1)
