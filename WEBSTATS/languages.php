@@ -19,7 +19,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	$lang_id = substr($lang_id, 0, -4);
 	$lang_id = strtolower($lang_id);
 	
-	$language_flag_path = './images/flags/' . $lang_id . '.gif';
+	$language_flag_path = './img/flags/' . $lang_id . '.gif';
 
 	if (file_exists($language_flag_path))
 	{
