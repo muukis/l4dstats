@@ -12,7 +12,7 @@ Player Ranking list page - "playerlist.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -134,7 +134,7 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		$row = mysql_fetch_array($result);
 
     $arr_players = array();
-    $stats = new Template("./templates/" . $templatefiles['ranking.tpl']);
+    $stats = new Template($templatefiles['ranking.tpl']);
 	
 		// Multilang support
 			//-- BASE
@@ -206,7 +206,7 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 
     $stats->set("players", $arr_players);
 
-    $output = $stats->fetch("./templates/" . $templatefiles['ranking.tpl']);
+    $output = $stats->fetch($templatefiles['ranking.tpl']);
 	}
 }
 else
@@ -221,5 +221,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

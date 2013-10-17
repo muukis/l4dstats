@@ -52,7 +52,7 @@ if (mysql_error()) {
 
 } else {
   $arr_online = array();
-  $stats = new Template("./templates/" . $templatefiles['online.tpl']);
+  $stats = new Template($templatefiles['online.tpl']);
 
 	$googlemaps = "";
 	$googlemaps_markercounter = 0;
@@ -172,7 +172,7 @@ if (mysql_error()) {
   if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $lang_tpl_noplyonline . "</td</tr>\n";
 
 	$stats->set("online", $arr_online);
-	$output = $stats->fetch("./templates/" . $templatefiles['online.tpl']);
+	$output = $stats->fetch($templatefiles['online.tpl']);
 
 	if (strlen($googlemaps) > 0 && ($googlemaps_markercounter > 0 || $googlemaps_servers > 0))
 	{
@@ -206,5 +206,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

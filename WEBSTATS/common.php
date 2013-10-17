@@ -188,7 +188,7 @@ function getserversettingsvalue($name)
 
 function setcommontemplatevariables($template)
 {
-	global $template_name, $template_selector, $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
+	global $site_template_path, $template_name, $template_selector, $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
 
 	$template->set("header_extra", $header_extra); // Players served
 	$template->set("site_name", $site_name); // Site name
@@ -198,6 +198,7 @@ function setcommontemplatevariables($template)
 
 	$template->set("template_selector", $template_selector); // Template selector
 	$template->set("current_template", $template_name); // Current template
+	$template->set("current_template_path", $site_template_path); // Current template path
 
 	$template->set("realismlink", $realismlink); // Realism stats link
 	$template->set("realismversuslink", $realismversuslink); // Realism Versus stats link

@@ -12,7 +12,7 @@ Index / Players Online page - "index.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -119,10 +119,10 @@ if (mysql_error()) {
 
 			$arr_maprunners = array();
 			
-			$stats = new Template("./templates/" . $templatefiles['tmap_page.tpl']);
+			$stats = new Template($templatefiles['tmap_page.tpl']);
 			$stats->set("page_subject", $title);
 
-			$maprun = new Template("./templates/" . $templatefiles['timedmaps.tpl']);
+			$maprun = new Template($templatefiles['timedmaps.tpl']);
 	
 			$query = "SELECT m1.*, p.name, p.ip FROM " . $mysql_tableprefix . "timedmaps AS m1 INNER JOIN " . $mysql_tableprefix . "players AS p ON m1.steamid = p.steamid INNER JOIN " . $mysql_tableprefix . "maps AS m2 ON m1.map = m2.name AND m1.gamemode = m2.gamemode";
 			if (strlen($prefix) > 0)
@@ -229,12 +229,12 @@ if (mysql_error()) {
 			if (mysql_num_rows($result) == 0) $arr_maprunners[] = "<tr><td colspan=\"3\" align=\"center\">There are no map timings!</td</tr>\n";
 		
 			$maprun->set("maprunners", $arr_maprunners);
-			$body = $maprun->fetch("./templates/" . $templatefiles['timedmaps.tpl']);
+			$body = $maprun->fetch($templatefiles['timedmaps.tpl']);
 			
 			$stats->set("page_body", $body);
 			$stats->set("page_link", "<a href=\"timedmaps.php?gamemode=" . $j . "&id=" . $prefix . "\">View Full Stats for " . $title . "</a>");
 
-			$fulloutput .= $stats->fetch("./templates/" . $templatefiles['tmap_page.tpl']);
+			$fulloutput .= $stats->fetch($templatefiles['tmap_page.tpl']);
 		}
 	}
 }
@@ -248,5 +248,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>
