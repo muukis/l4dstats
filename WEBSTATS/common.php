@@ -185,12 +185,12 @@ function getserversettingsvalue($name)
 
 function setcommontemplatevariables($template)
 {
-	global $lang, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
+	global $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
 
 	$template->set("header_extra", $header_extra); // Players served
 	$template->set("site_name", $site_name); // Site name
 	$template->set("language_selector", $language_selector); // Language selector
-	$template->set("current_language", $lang); // Current language
+	$template->set("current_language", $lang_name); // Current language
 
 	$template->set("realismlink", $realismlink); // Realism stats link
 	$template->set("realismversuslink", $realismversuslink); // Realism Versus stats link
@@ -393,7 +393,7 @@ $TOTALPLAYTIME = "playtime + playtime_versus + playtime_survival" . ($game_versi
 
 $templatesdir = "./templates";
 $templatesdir_default = $templatesdir . "/default";
-$imagesdir_default = $templatesdir_default . "/images";
+$imagesdir_default = $templatesdir_default . "/img";
 
 if (!file_exists($imagesdir_default) || !is_dir($imagesdir_default))
 {
@@ -795,7 +795,7 @@ if (isset($game_addresses))
 				$game_lat = $ip2c->get_latitude($game_ip);
 				$game_lon = $ip2c->get_longitude($game_ip);
 
-				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./images/flags/" . $game_country_code . ".gif"))
+				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./img/flags/" . $game_country_code . ".gif"))
 				{
 					if (!$international && $game_country_code_last != "NULL" && $game_country_code != $game_country_code_last)
 						$international = true;
@@ -899,6 +899,7 @@ if ($result && $row = mysql_fetch_array($result))
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $lang_file_prefix = 'language.';
 =======
 $lang_file_prefix = 'lang/language.';
@@ -930,6 +931,8 @@ foreach (glob('lang/language.*.php') as $language_filename)
 	}
 }
 
+=======
+>>>>>>> pr/12
 $i = 1;
 $top10 = array();
 
@@ -1016,7 +1019,7 @@ $imagefiles = array();
 
 foreach ($arr_templatefiles as $file)
 {
-	$imagefiles[$file] = "default/images/" . $file;
+	$imagefiles[$file] = "default/img/" . $file;
 }
 
 if ($site_template != "" && $site_template != "default")
@@ -1029,7 +1032,7 @@ if ($site_template != "" && $site_template != "default")
 			$templatefiles[$file] = $site_template . "/" . $file;
 	}
 
-	$imagespath = $templatesdir . "/" . $site_template . "/images";
+	$imagespath = $templatesdir . "/" . $site_template . "/img";
 
 	if (file_exists($imagespath) && is_dir($imagespath))
 	{
@@ -1038,7 +1041,7 @@ if ($site_template != "" && $site_template != "default")
 		foreach ($arr_templatefiles as $file)
 		{
 			if (!is_dir($file))
-				$imagefiles[$file] = $site_template . "/images/" . $file;
+				$imagefiles[$file] = $site_template . "/img/" . $file;
 		}
 	}
 }
