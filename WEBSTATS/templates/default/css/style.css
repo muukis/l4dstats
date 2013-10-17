@@ -1,7 +1,7 @@
 	body {
 		margin: 0;
 		padding: 0;
-		background: url(images/stats_bg.jpg)  no-repeat fixed center top transparent;
+		background: url(img/stats_bg.jpg)  no-repeat fixed center top transparent;
 		background-color: rgb(21,21,21);
 		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 		font-size: 13px;
@@ -326,7 +326,7 @@
 
 	.box1 {
 		padding: 20px;
-		background: url(images/img05.gif) no-repeat;
+		background: url(img/img05.gif) no-repeat;
 	}
 
 	.box2 {
@@ -335,7 +335,7 @@
 
 	.box2 h2 {
 		margin-bottom: 15px;
-		background: url(images/img10.gif) repeat-x left bottom;
+		background: url(img/img10.gif) repeat-x left bottom;
 		font-size: 16px;
 		color: #FFFFFF;
 	}
