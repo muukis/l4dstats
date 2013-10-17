@@ -787,7 +787,7 @@ if (isset($game_addresses))
 				$game_lat = $ip2c->get_latitude($game_ip);
 				$game_lon = $ip2c->get_longitude($game_ip);
 
-				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./images/flags/" . $game_country_code . ".gif"))
+				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./img/flags/" . $game_country_code . ".gif"))
 				{
 					if (!$international && $game_country_code_last != "NULL" && $game_country_code != $game_country_code_last)
 						$international = true;

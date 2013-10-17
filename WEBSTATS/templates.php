@@ -7,7 +7,7 @@
 $templates_path = './templates/';
 $templates_path_len = strlen($templates_path);
 $template_info_file = '/template.php';
-$template_images_path = '/images/';
+$template_images_path = '/img/';
 
 $default_site_template = "default";
 $default_site_template_path = $templates_path . $default_site_template;
