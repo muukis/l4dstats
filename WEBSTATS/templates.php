@@ -36,7 +36,7 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 if ($_GET["template"])
 {
 	$site_template = $_GET["template"];
-	setcookie("template", $template, time() + (10 * 365 * 24 * 60 * 60)); // Expires in 10 years
+	setcookie("template", $site_template, time() + (10 * 365 * 24 * 60 * 60)); // Expires in 10 years
 }
 else
 {
