@@ -166,7 +166,7 @@ class ip2country {
 
 	public function get_flag_path($code)
 	{
-		return "./images/flags/" . $code . ".gif";
+		return "./img/flags/" . $code . ".gif";
 	}
 
 	public function get_country_flag($ip_addr='',$postfix='&nbsp;')

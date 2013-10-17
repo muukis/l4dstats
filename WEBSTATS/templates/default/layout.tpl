@@ -17,7 +17,6 @@
 
 		<!-- jQuery if needed -->
 		<script type="text/javascript">
-			
 			function DropDown(el) {
 				this.dd = el;
 				this.placeholder = this.dd.children('span');
@@ -34,20 +33,6 @@
 						$(this).toggleClass('active');
 						return false;
 					});
-
-					obj.opts.on('click',function(){
-						var opt = $(this);
-						obj.val = opt.text();
-						obj.index = opt.index();
-						obj.placeholder.text(obj.val);
-						window.location = "?lang=" + obj.val;
-					});
-				},
-				getValue : function() {
-					return this.val;
-				},
-				getIndex : function() {
-					return this.index;
 				}
 			}
 
@@ -61,7 +46,17 @@
 				});
 
 			});
-
+			
+			function show_slct_show() {
+				document.getElementById('lang_slct_show').style.display = "block";
+				document.getElementById('lang_slct_show').style.opacity = "1";
+				document.getElementById('lang_slct_show').style.pointer-events = "yes";
+			} else {
+				document.getElementById('lang_slct_show').style.display = "none";
+				document.getElementById('lang_slct_show').style.opacity = "0";
+				document.getElementById('lang_slct_show').style.pointer-events = "none";
+			}
+		
 		</script>
 
 <!-- start tooltip control -->
@@ -74,6 +69,7 @@
 
 <!-- start header -->
 <div id="header">
+<a href="https://github.com/muukis/l4dstats"><img style="position: fixed; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
 	<!-- Serach Bar -->
 	<div id="search">
 		<?php echo $lang_tpl_layout_search; ?>
@@ -81,16 +77,6 @@
 			<input type="text" id="s" name="search" value="" />
 			<input type="submit" id="x" name="submit" value="<?php echo $lang_tpl_layout_search_btn; ?>" />
 		</form>
-		<br>
-		<div id="dd" class="lang-dropdown" tabindex="1">
-		<span class="icon-en" ><?php echo $current_language;?></span>
-			<ul class="dropdown">
-				<?php foreach ($language_selector as $language_id => $language_flag_path): ?>
-				<?php echo '<li><a href="?lang=' . $language_id . '" target="_self"><i class="icon-large"><img src="' . $language_flag_path . '"></i>'. $language_id . '</a></li>' ?>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-		<br>
 	</div>
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
@@ -158,8 +144,16 @@
 <!-- start footer -->
 <div id="footer">
 	<p id="legal">
-		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082">muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965">SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524">JonnyBoy0719</a></span><br>
+		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082" target="_blank" >muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965" target="_blank" >SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524" target="_blank" >JonnyBoy0719</a></span><br>
 	</p>
+		<div class="lang-dropdown">
+		<span><?php echo $current_language;?></span>
+			<ul class="dropdown">
+				<?php foreach ($language_selector as $language_id => $language_info): ?>
+				<?php echo '<li><a href="?lang=' . $language_id . '" target="_self"><i class="icon-large"><img src="' . $language_info[1] . '"></i>'. $language_info[0] . '</a></li>' ?>
+				<?php endforeach; ?>
+			</ul>
+		</div>
 </div>
 <!-- end footer -->
 </body>
