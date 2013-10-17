@@ -13,18 +13,6 @@ $default_site_template = "default";
 $default_site_template_path = $templates_path . $default_site_template;
 $default_site_template_images_path = $default_site_template_path . $template_images_path;
 
-$get_parameters = '?';
-
-foreach ($_GET as $key => $value)
-{
-	if ($key == 'template')
-	{
-		continue;
-	}
-
-	$get_parameters .= $key . '=' . $value . '&';
-}
-
 foreach (glob($templates_path . '*') as $template_path_entry)
 {
 	$template_path_entry_name = substr($template_path_entry, $templates_path_len);

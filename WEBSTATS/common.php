@@ -10,6 +10,18 @@ Common PHP functions and code - "common.php"
 
 error_reporting(E_ERROR);
 
+$get_parameters = '?';
+
+foreach ($_GET as $key => $value)
+{
+	if ($key == 'template' || $key == 'lang')
+	{
+		continue;
+	}
+
+	$get_parameters .= $key . '=' . $value . '&';
+}
+
 // Include configuration file
 include("./config.php");
 
