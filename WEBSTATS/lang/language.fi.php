@@ -8,7 +8,7 @@
 ==================================*/
 
 // This is the name of the file, and it will popup on the Dropdown list.
-$lang_name = "Soumi";
+$lang_name = "Suomi";
 
 /*==================================
 	Default -- Awards (Survivors)
@@ -227,8 +227,8 @@ $lang_tpl_tip_skill = "Survivors killed while playing infected";
 /* ---------------------------------------------------------- */
 
 // index.php
-$lang_tpl_plyonline = "Players Online";
-$lang_tpl_noplyonline = "There are no players online";
+$lang_tpl_plyonline = "Pelaajia Linjoilla";
+$lang_tpl_noplyonline = "Ei yht‰‰n pelaaja linjoilla";
 
 /* ---------------------------------------------------------- */
 

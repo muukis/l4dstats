@@ -85,8 +85,8 @@
 		<div id="dd" class="lang-dropdown" tabindex="1">
 		<span class="icon-en" ><?php echo $current_language;?></span>
 			<ul class="dropdown">
-				<?php foreach ($language_selector as $language_id => $language_flag_path): ?>
-				<?php echo '<li><a href="?lang=' . $language_id . '" target="_self"><i class="icon-large"><img src="' . $language_flag_path . '"></i>'. $language_id . '</a></li>' ?>
+				<?php foreach ($language_selector as $language_id => $language_info): ?>
+				<?php echo '<li><a href="?lang=' . $language_id . '" target="_self"><i class="icon-large"><img src="' . $language_info[1] . '"></i>'. $language_info[0] . '</a></li>' ?>
 				<?php endforeach; ?>
 			</ul>
 		</div>
@@ -94,9 +94,6 @@
 	</div>
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
-		<?php foreach ($language_selector as $language_id => $language_flag_path): ?>
-		<?php echo '<a href="?lang=' . $language_id . '" target="_self"><img src="' . $language_flag_path . '" border=' . ($current_language == $language_id ? 1 : 0) . '></a>' ?>
-		<?php endforeach; ?>
 	</div>
 	<!-- Zombies killed, Players Served -->
 	<div id="players_served" align="right">
