@@ -18,12 +18,12 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 	$template_path_entry_name = substr($template_path_entry, $templates_path_len);
 
 	if (!is_dir($template_path_entry) ||
-	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1 ||
-	    !file_exists($template_path_entry . $template_info_file))
+	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1)
 	{
 		continue;
 	}
 
+	$template_name = $template_path_entry_name;
 	include($template_path_entry . $template_info_file);
 
 	if (strlen($template_name) == 0)

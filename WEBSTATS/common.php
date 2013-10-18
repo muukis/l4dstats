@@ -23,19 +23,19 @@ foreach ($_GET as $key => $value)
 }
 
 // Include configuration file
-include("./config.php");
+require("./config.php");
 
 // Include language
-include("./languages.php");
+require("./languages.php");
 
 // Include template
-include("./templates.php");
+require("./templates.php");
 
 // Include Template engine class
-include("./class_template.php");
+require("./class_template.php");
 
 // IP to Country
-include("./ip2country.php");
+require("./ip2country.php");
 $ip2c = new ip2country();
 $ip2c->set_tableprefix($mysql_ip2c_tableprefix);
 

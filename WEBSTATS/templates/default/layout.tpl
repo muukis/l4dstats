@@ -81,7 +81,7 @@
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
 		<?php foreach ($template_selector as $template_info): ?>
-		<?php echo ' <a href="' . $template_info['getprm'] . '" target="self">' . $template_info['name'] . '</a>'; ?>
+		<?php echo ' <a href="' . $template_info['getprm'] . '" target="_self">' . $template_info['name'] . '</a>'; ?>
 		<?php endforeach; ?>
 		<?php echo 'Current template: ' . $current_template; ?>
 	</div>
