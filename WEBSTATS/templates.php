@@ -24,12 +24,14 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 		continue;
 	}
 
-	require($template_path_entry . $template_info_file);
+	include($template_path_entry . $template_info_file);
 
-	if (strlen($template_name) > 0)
+	if (strlen($template_name) == 0)
 	{
-		$template_selector[$template_path_entry] = array($template_name, $get_parameters . 'template=' . $template_path_entry_name);
+		$template_name = $template_path_entry_name;
 	}
+
+	$template_selector[$template_path_entry] = array('name' => $template_name, 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
 }
 
 // Look for new set value

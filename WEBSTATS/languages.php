@@ -24,7 +24,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	if (file_exists($language_flag_path))
 	{
 		require($lang_file_prefix . $lang_id . $lang_file_postfix);
-		$language_selector[$lang_id] = array($lang_name, $language_flag_path, $get_parameters . 'lang=' . $lang_id);
+		$language_selector[$lang_id] = array('name' => $lang_name, 'path' => $language_flag_path, 'getprms' => $get_parameters . 'lang=' . $lang_id);
 	}
 }
 

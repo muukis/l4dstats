@@ -81,7 +81,7 @@
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
 		<?php foreach ($template_selector as $template_info): ?>
-		<?php echo ' <a href="' . $template_info[1] . '" target="self">' . $template_info[0] . '</a>'; ?>
+		<?php echo ' <a href="' . $template_info['getprm'] . '" target="self">' . $template_info['name'] . '</a>'; ?>
 		<?php endforeach; ?>
 		<?php echo 'Current template: ' . $current_template; ?>
 	</div>
@@ -154,7 +154,7 @@
 		<span><?php echo $current_language;?></span>
 			<ul class="dropdown">
 				<?php foreach ($language_selector as $language_info): ?>
-				<?php echo '<li><a href="' . $language_info[2] . '" target="_self"><i class="icon-large"><img src="' . $language_info[1] . '"></i>'. $language_info[0] . '</a></li>' ?>
+				<?php echo '<li><a href="' . $language_info['getprm'] . '" target="_self"><i class="icon-large"><img src="' . $language_info['path'] . '"></i>'. $language_info['name'] . '</a></li>' ?>
 				<?php endforeach; ?>
 			</ul>
 		</div>
