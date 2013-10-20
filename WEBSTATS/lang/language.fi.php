@@ -8,7 +8,7 @@
 ==================================*/
 
 // This is the name of the file, and it will popup on the Dropdown list.
-$lang_name = "Soumi";
+$lang_name = "Suomi";
 
 /*==================================
 	Default -- Awards (Survivors)
@@ -227,16 +227,16 @@ $lang_tpl_tip_skill = "Survivors killed while playing infected";
 /* ---------------------------------------------------------- */
 
 // index.php
-$lang_tpl_plyonline = "Players Online";
-$lang_tpl_noplyonline = "There are no players online";
+$lang_tpl_plyonline = "Pelaajia Linjoilla";
+$lang_tpl_noplyonline = "Ei yht‰‰n pelaajaa linjoilla";
 
 /* ---------------------------------------------------------- */
 
 // search.php
 $lang_tpl_search_title = "Player Search";
 $lang_tpl_search_nomatch = "There are no players that matched!";
-$lang_tpl_search_ply = "Player";
-$lang_tpl_search_plypoints = "Points";
+$lang_tpl_search_ply = "Pelaaja";
+$lang_tpl_search_plypoints = "Pisteet";
 $lang_tpl_search_plytime = "Total Playtime";
 
 /* ---------------------------------------------------------- */
@@ -261,9 +261,9 @@ $lang_tpl_tmaps_title = "Timed Maps";
 // playerlist.php
 $lang_tpl_playerlist_title = "Player Rankings";
 
-$lang_tpl_playtime_ply = "Player";
+$lang_tpl_playtime_ply = "Pelaaja";
 $lang_tpl_playtime_plyrank = "Rank";
-$lang_tpl_playtime_plypoints = "Points";
+$lang_tpl_playtime_plypoints = "Pisteet";
 $lang_tpl_playtime_plytime = "Playtime";
 $lang_tpl_playtime_plyonline = "Last Online";
 
@@ -271,7 +271,7 @@ $lang_tpl_playtime_plyonline = "Last Online";
 
 // layout.tpl
 
-$lang_tpl_layout_ply = "Player";
+$lang_tpl_layout_ply = "Pelaaja";
 $lang_tpl_layout_points = "Points";
 $lang_tpl_layout_mode = "Gamemode";
 $lang_tpl_layout_playtime = "Total Playtime";

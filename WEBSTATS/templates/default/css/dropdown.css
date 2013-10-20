@@ -20,13 +20,16 @@
 
 .lang-dropdown {
     /* Size and position */
-    position: relative;
+    position: absolute;
     width: 200px;
+	bottom: 0px;
+	right: 5px;
+	float: right;
     margin: 0 auto;
     padding: 10px;
 
     /* Styles */
-    background: rgb(12, 12, 12);
+    background: rgba(12, 12, 12,.9);
     border-radius: 7px;
     border: 1px solid rgba(0,0,0,0.15);
     box-shadow: 0 1px 1px rgba(50,50,50,0.1);
@@ -46,7 +49,7 @@
     right: 15px;
     top: 50%;
     margin-top: -3px;
-    border-width: 6px 6px 0 6px;
+    border-width: 0 6px 6px 6px;
     border-style: solid;
     border-color: #8aa8bd transparent;
 }
@@ -54,14 +57,15 @@
 .lang-dropdown .dropdown {
   /* Size & position */
     position: absolute;
-    top: 140%;
+	display: block;
+    bottom: 10%;
     left: 0;
     right: 0;
 	
 	z-index: 5;
 
     /* Styles */
-    background: rgb(25, 25, 25);
+    background: rgba(25, 25, 25,.7);
     border-radius: inherit;
     border: 1px solid rgba(0,0,0,0.17);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -83,9 +87,9 @@
     width: 0;
     height: 0;
     position: absolute;
-    bottom: 100%;
+    top: 100%;
     right: 15px;
-    border-width: 0 6px 6px 6px;
+    border-width: 6px 6px 0 6px;
     border-style: solid;
     border-color: rgb(80, 80, 80) transparent;    
 }
@@ -95,9 +99,9 @@
     width: 0;
     height: 0;
     position: absolute;
-    bottom: 100%;
+    top: 100%;
     right: 13px;
-    border-width: 0 8px 8px 8px;
+    border-width: 8px 8px 0 8px;
     border-style: solid;
     border-color: rgb(80, 80, 80) transparent;    
 }
@@ -122,12 +126,12 @@
 }
 
 .lang-dropdown .dropdown li:first-of-type a {
-    border-radius: 7px 7px 0 0;
+	border: none;
+	border-radius: 7px 7px 0 0;
 }
 
 .lang-dropdown .dropdown li:last-of-type a {
-    border: none;
-    border-radius: 0 0 7px 7px;
+	border-radius: 0 0 7px 7px;
 }
 
 /* Hover state */
@@ -138,7 +142,7 @@
 
 /* Active state */
 
-.lang-dropdown.active .dropdown {
+.lang-dropdown:hover .dropdown {
     opacity: 1;
     pointer-events: auto;
 }
