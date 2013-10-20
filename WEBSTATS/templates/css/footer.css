@@ -1,0 +1,24 @@
+	/* Footer */
+
+	#footer {
+		margin-top: 15px;
+		position: fixed;
+		float: bottom;
+		width: 100%;
+		bottom: 0px;
+		height: 40px;
+	}
+
+	#legal {
+		clear: both;
+		padding-top: 10px;
+		text-align: center;
+	}
+
+	#legal1 {
+		color: #FFFFFF;
+	}
+
+	#legal1 a {
+		color: lightblue;
+	}

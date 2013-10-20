@@ -41,6 +41,11 @@ $site_name = "YOUR SITE NAME HERE";
 // 2 = Left 4 Dead 2
 $game_version = 2;
 
+// Template for the stats page.
+// Leave empty if the default template is used.
+// Usage: "mytemplate" (requires directory ./templates/mytemplate existence)
+$default_site_template = "";
+
 // Language settings
 // Default: en, se
 $default_lang = "en";

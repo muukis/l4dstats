@@ -1,0 +1,311 @@
+/* GLOBALS */
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+::selection {
+    background: transparent; 
+}
+
+::-moz-selection {
+    background: transparent; 
+}
+
+.lang-dropdown {
+    /* Size and position */
+    position: absolute;
+	/*width: 200px;*/
+	bottom: 0px;
+	left: 5px;
+	float: left;
+    margin: 0 auto;
+    padding: 10px;
+
+    /* Styles */
+    background: rgba(12, 12, 12,.9);
+    border-radius: 7px;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 1px 1px rgba(50,50,50,0.1);
+    cursor: pointer;
+    outline: none;
+
+    /* Font settings */
+    font-weight: bold;
+    color: #8AA8BD;
+}
+
+.lang-dropdown .dropdown {
+  /* Size & position */
+    position: absolute;
+	display: block;
+	width: 90px;
+    bottom: 10%;
+	float: right;
+    left: 0;
+    right: 0;
+	
+	z-index: 5;
+
+    /* Styles */
+    background: rgba(25, 25, 25,.7);
+    border-radius: inherit;
+    border: 1px solid rgba(0,0,0,0.17);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    font-weight: normal;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lang-dropdown .dropdown:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: rgb(80, 80, 80) transparent;    
+}
+
+.lang-dropdown .dropdown:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    left: 13px;
+    border-width: 8px 8px 0 8px;
+    border-style: solid;
+    border-color: rgb(80, 80, 80) transparent;    
+}
+
+.lang-dropdown .dropdown li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #8aa8bd;
+    border-bottom: 1px solid rgb(80, 80, 80);
+    box-shadow: inset 0 1px 0 rgba(80,80,80,1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.lang-dropdown .dropdown li i {
+    float: right;
+    color: inherit;
+}
+
+.lang-dropdown .dropdown li:first-of-type a {
+	border: none;
+	border-radius: 7px 7px 0 0;
+}
+
+.lang-dropdown .dropdown li:last-of-type a {
+	border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+
+.lang-dropdown .dropdown li:hover a {
+    background: rgb(70, 70, 70);
+}
+
+/* Active state */
+
+.lang-dropdown:hover .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* No CSS3 support */
+
+.no-opacity       .lang-dropdown .dropdown,
+.no-pointerevents .lang-dropdown .dropdown {
+    display: none;
+    opacity: 1; /* If opacity support but no pointer-events support */
+    pointer-events: auto; /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity       .lang-dropdown.active .dropdown,
+.no-pointerevents .lang-dropdown.active .dropdown {
+    display: block;
+}
+
+/* makes the font 33% larger relative to the icon container */
+.icon-large:before {
+  vertical-align: top;
+  font-size: 1.3333333333333333em;
+}
+
+li .icon-large[class^="icon-"], li .icon-large[class*=" icon-"] {
+  /* 1.5 increased font size for icon-large * 1.25 width */
+
+  width: 1.875em;
+}
+
+li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
+  text-indent: -1.3333333333333333em;
+}
+
+/* Submenus */
+
+.ddown .ddown_lang {
+  /* Size & position */
+    position: absolute;
+	display: block;
+	width: 200px;
+    bottom: 10%;
+	float: right;
+    left: 87px;
+    right: 0;
+	
+	z-index: 6;
+
+    /* Styles */
+    background: rgba(25, 25, 25,.7);
+    border-radius: inherit;
+    border: 1px solid rgba(0,0,0,0.17);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    font-weight: normal;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ddown .ddown_lang li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #8aa8bd;
+    border-bottom: 1px solid rgb(80, 80, 80);
+    box-shadow: inset 0 1px 0 rgba(80,80,80,1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.ddown .ddown_lang li i {
+    float: right;
+    color: inherit;
+}
+
+.ddown .ddown_lang li:first-of-type a {
+	border: none;
+	border-radius: 7px 7px 0 0;
+}
+
+.ddown .ddown_lang li:last-of-type a {
+	border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+
+.ddown .ddown_lang li:hover a {
+    background: rgb(70, 70, 70);
+}
+
+/* Active state */
+
+.ddown:hover .ddown_lang {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ddown2 .ddown_tpl {
+  /* Size & position */
+    position: absolute;
+	display: block;
+	width: 200px;
+    bottom: -30px;
+	float: right;
+    left: 87px;
+    right: 0;
+	
+	z-index: 6;
+
+    /* Styles */
+    background: rgba(25, 25, 25,.7);
+    border-radius: inherit;
+    border: 1px solid rgba(0,0,0,0.17);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    font-weight: normal;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ddown2 .ddown_tpl li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #8aa8bd;
+    border-bottom: 1px solid rgb(80, 80, 80);
+    box-shadow: inset 0 1px 0 rgba(80,80,80,1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.ddown2 .ddown_tpl li i {
+    float: right;
+    color: inherit;
+}
+
+.ddown2 .ddown_tpl li:first-of-type a {
+	border: none;
+	border-radius: 7px 7px 0 0;
+}
+
+.ddown2 .ddown_tpl li:last-of-type a {
+	border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+
+.ddown2 .ddown_tpl li:hover a {
+    background: rgb(70, 70, 70);
+}
+
+/* Active state */
+
+.ddown2:hover .ddown_tpl {
+    opacity: 1;
+    pointer-events: auto;
+}

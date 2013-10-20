@@ -9,7 +9,12 @@ $templates_path_len = strlen($templates_path);
 $template_info_file = '/template.php';
 $template_images_path = '/img/';
 
-$default_site_template = "default";
+if (!$default_site_template ||
+    strlen($default_site_template) <= 0 ||
+    !file_exists($templates_path . $default_site_template . $template_info_file))
+{
+	$default_site_template = "default";
+}
 $default_site_template_path = $templates_path . $default_site_template;
 $default_site_template_images_path = $default_site_template_path . $template_images_path;
 
@@ -18,7 +23,8 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 	$template_path_entry_name = substr($template_path_entry, $templates_path_len);
 
 	if (!is_dir($template_path_entry) ||
-	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1)
+	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1 ||
+	    !file_exists($template_path_entry . $template_info_file))
 	{
 		continue;
 	}

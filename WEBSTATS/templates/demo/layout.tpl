@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>DEMO TEMPLATE</title>
-<link href="./templates/<?php echo $stylesheet;?>" rel="stylesheet" type="text/css" />
+<link href="<?php $cssfile = 'style'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+<link href="<?php $cssfile = 'body'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+<link href="<?php $cssfile = 'player'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./savi/jquery.js"></script>
+<script type="text/javascript" src="./savi/steamprofile.js"></script>
 </head>
 <body>
 

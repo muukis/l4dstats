@@ -7,57 +7,13 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>  
 	
 	<title>Left 4 Dead 2 Player Stats :: <?php echo $title;?></title>
-	<link href="./templates/default/css/style.css" rel="stylesheet" type="text/css" />
-	<link href="./templates/default/css/player.css" rel="stylesheet" type="text/css" />
-	<link href="./templates/default/css/dropdown.css" rel="stylesheet" type="text/css" />
+	<link href="<?php $cssfile = 'style'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+	<link href="<?php $cssfile = 'body'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+	<link href="<?php $cssfile = 'player'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="./savi/jquery.js"></script>
 	<script type="text/javascript" src="./savi/steamprofile.js"></script>
 </head>
 <body>
-
-		<!-- jQuery if needed -->
-		<script type="text/javascript">
-			function DropDown(el) {
-				this.dd = el;
-				this.placeholder = this.dd.children('span');
-				this.opts = this.dd.find('ul.dropdown > li');
-				this.val = '';
-				this.index = -1;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-
-					obj.dd.on('click', function(event){
-						$(this).toggleClass('active');
-						return false;
-					});
-				}
-			}
-
-			$(function() {
-
-				var dd = new DropDown( $('#dd') );
-
-				$(document).click(function() {
-					// all dropdowns
-					$('.wrapper-dropdown-3').removeClass('active');
-				});
-
-			});
-			
-			function show_slct_show() {
-				document.getElementById('lang_slct_show').style.display = "block";
-				document.getElementById('lang_slct_show').style.opacity = "1";
-				document.getElementById('lang_slct_show').style.pointer-events = "yes";
-			} else {
-				document.getElementById('lang_slct_show').style.display = "none";
-				document.getElementById('lang_slct_show').style.opacity = "0";
-				document.getElementById('lang_slct_show').style.pointer-events = "none";
-			}
-		
-		</script>
 
 <!-- start tooltip control -->
 <script type="text/javascript" src="./templates/default/js/statstooltip.js"></script>
@@ -80,10 +36,6 @@
 	</div>
 	<div id="logo">
 		<h2><?php echo $site_name;?></h2>
-		<?php foreach ($template_selector as $template_info): ?>
-		<?php echo ' <a href="' . $template_info['getprm'] . '" target="_self">' . $template_info['name'] . '</a>'; ?>
-		<?php endforeach; ?>
-		<?php echo 'Current template: ' . $current_template; ?>
 	</div>
 	<!-- Zombies killed, Players Served -->
 	<div id="players_served" align="right">
@@ -142,6 +94,9 @@
 	</div>
 	<!-- end sidebar -->
 	<div style="clear: both;">&nbsp;</div>
+	<p id="legal">
+		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082" target="_blank" >muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965" target="_blank" >SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524" target="_blank" >JonnyBoy0719</a></span><br>
+	</p>
 </div>
 <!-- end page -->
 

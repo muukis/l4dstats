@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #222222 url(img/img01.jpg) repeat-x;
+	background: #222222 url(images/img01.jpg) repeat-x;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #D4D4D4;
@@ -280,7 +280,7 @@ table.awardbox td {
 
 .box1 {
 	padding: 20px;
-	background: url(img/img05.gif) no-repeat;
+	background: url(images/img05.gif) no-repeat;
 }
 
 .box2 {
@@ -289,7 +289,7 @@ table.awardbox td {
 
 .box2 h2 {
 	margin-bottom: 15px;
-	background: url(img/img10.gif) repeat-x left bottom;
+	background: url(images/img10.gif) repeat-x left bottom;
 	font-size: 16px;
 	color: #FFFFFF;
 }
@@ -310,7 +310,7 @@ table.awardbox td {
 	height: 60px;
 	min-height: 60px;
 	padding: 10px 0 0 0;
-	background: #666159 url(img/img02.jpg) repeat-x left top;
+	background: #666159 url(images/img02.jpg) repeat-x left top;
 }
 
 html>body #footer {

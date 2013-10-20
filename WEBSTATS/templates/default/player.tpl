@@ -1,13 +1,6 @@
 		<!-- player.pl -->
 			<div class="profile_header_content">
-				<?php /* A very simple converter for a few selected SteamIDs. */
-		//An automated converter will be made in the future
-	if ($player_steamid == "STEAM_1:1:24323838") { // Example STEAMID
-		echo"<div class='steamprofile' title='jonnyboy0719'></div>"; // Example Output.
-	} else {
-		echo"<div class='steamprofile' title=" . $player_steamid . "></div>";
-	}
-				?>
+				<?php echo"<div class='steamprofile' title=" . $player_steamid . "></div>";	?>
 				<div class="profile_header_base">
 					<div class="persona_name" style="font-size: 24px;">
 						<a href="http://steamcommunity.com/profiles/<?php echo $player_url;?>" target="_blank"><?php echo $player_name;?></a>
