@@ -12,7 +12,7 @@ Campaign detailed stats - "campaign.php"
 include("./common.php");
 
 // Load outer template
-$tpl = new Template("./templates/" . $templatefiles['layout.tpl']);
+$tpl = new Template($templatefiles['layout.tpl']);
 
 	// Multilang support
 		//-- BASE
@@ -96,7 +96,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	    $tpl->set("top10", $top10);
 	
 	    // Print out the page!
-	    echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+	    echo $tpl->fetch($templatefiles['layout.tpl']);
 	
 	    exit;
 	}
@@ -120,7 +120,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 			$playtime = array($row['playtime_nor'], $row['playtime_adv'], $row['playtime_exp'], $row['playtime_nor'] + $row['playtime_adv'] + $row['playtime_exp']);
 			$points = array($row['points_nor'], $row['points_adv'], $row['points_exp'], $row['points_nor'] + $row['points_adv'] + $row['points_exp']);
 			
-	    $stats = new Template("./templates/" . $templatefiles['page.tpl']);
+	    $stats = new Template($templatefiles['page.tpl']);
 	    $stats->set("page_subject", $row['name']);
 
 	$stats->set("page_mapname", $page_mapname);
@@ -144,7 +144,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		$page_mapname[] = $row['name'];
 	}
 
-	    $map = new Template("./templates/" . $templatefiles["maps_detailed_" . $type . ".tpl"]);
+	    $map = new Template($templatefiles["maps_detailed_" . $type . ".tpl"]);
 			$map->set("icon_infected", $imagefiles['icon_infected.gif']); // Team infected icon
 			$map->set("icon_survivors", $imagefiles['icon_survivors.png']); // Team survivors icon
 	    $playtime_arr = array(formatage($playtime[0] * 60),
@@ -197,10 +197,10 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	    $map->set("kills", $kills_arr);
 	    $map->set("survivor_kills", $survivor_kills_arr);
 	    $map->set("restarts", $restarts_arr);
-	    $body = $map->fetch("./templates/" . $templatefiles["maps_detailed_" . $type . ".tpl"]);
+	    $body = $map->fetch($templatefiles["maps_detailed_" . $type . ".tpl"]);
 	
 	    $stats->set("page_body", $body);
-	    $output .= $stats->fetch("./templates/" . $templatefiles['page.tpl']);
+	    $output .= $stats->fetch($templatefiles['page.tpl']);
 	}
 	
 	$campaignpop = getpopulation($totalkills, $population_file, False);
@@ -220,5 +220,5 @@ $tpl->set("top10", $top10);
 $tpl->set("motd_message", $layout_motd);
 
 // Print out the page!
-echo $tpl->fetch("./templates/" . $templatefiles['layout.tpl']);
+echo $tpl->fetch($templatefiles['layout.tpl']);
 ?>

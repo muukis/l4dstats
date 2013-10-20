@@ -3,7 +3,10 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>DEMO TEMPLATE</title>
-<link href="./templates/<?php echo $stylesheet;?>" rel="stylesheet" type="text/css" />
+<link href="./templates/default/css/style.css" rel="stylesheet" type="text/css" />
+<link href="./templates/default/css/player.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./savi/jquery.js"></script>
+<script type="text/javascript" src="./savi/steamprofile.js"></script>
 </head>
 <body>
 

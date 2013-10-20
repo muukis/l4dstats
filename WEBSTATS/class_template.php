@@ -36,6 +36,14 @@ class Template {
         $contents = ob_get_contents(); // Get the contents of the buffer
         ob_end_clean();                // End buffering and discard
 
+        if (preg_match('/<\/body>/i', $contents))
+        {
+            global $templates_path;
+            $footerTpl = new Template($templates_path . 'footer.tpl');
+            setcommontemplatevariables($footerTpl);
+            $contents = preg_replace('/<\/body>/i', $footerTpl->fetch($templates_path . 'footer.tpl') . '</body>', $contents);
+        }
+
         return $contents;              // Return the contents
     }
 }

@@ -1,7 +1,7 @@
 	body {
 		margin: 0;
 		padding: 0;
-		background: url(images/stats_bg.jpg)  no-repeat fixed center top transparent;
+		background: url(img/stats_bg.jpg)  no-repeat fixed center top transparent;
 		background-color: rgb(21,21,21);
 		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 		font-size: 13px;
@@ -241,6 +241,7 @@
 		width: 100%;
 		text-align: left;
 		border: 0;
+		margin-bottom: 50px;
 	}
 
 	table.stats th {
@@ -348,32 +349,6 @@
 
 	.box2 a:link, .box2 a:hover, .box2 a:active, .box2 a:visited  {
 		color: #EDEDED;
-	}
-
-	/* Footer */
-
-	#footer {
-		margin-top: 15px;
-		position: fixed;
-		float: bottom;
-		width: 100%;
-		bottom: 0px;
-		height: 40px;
-		background: rgba(0,0,0,.5);
-	}
-
-	#legal {
-		clear: both;
-		padding-top: 10px;
-		text-align: center;
-	}
-
-	#legal1 {
-		color: #FFFFFF;
-	}
-
-	#legal1 a {
-		color: lightblue;
 	}
 
 	a.special:link {
