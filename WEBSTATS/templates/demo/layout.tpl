@@ -3,11 +3,22 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>DEMO TEMPLATE</title>
-<link href="<?php $cssfile = 'style'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
-<link href="<?php $cssfile = 'body'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
-<link href="<?php $cssfile = 'player'; echo file_exists($current_template_path . '/css/' . $cssfile . '.css') ? $current_template_path . '/css/' . $cssfile . '.css' : './templates/default/css/' . $cssfile . '.css';?>" rel="stylesheet" type="text/css" />
+<link href="css.php?file=style" rel="stylesheet" type="text/css" />
+<link href="css.php?file=player" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="./savi/jquery.js"></script>
 <script type="text/javascript" src="./savi/steamprofile.js"></script>
+
+<style type="text/css">
+	body {
+		margin: 0;
+		padding: 0;
+		background: url(<?php $filepath = '/css/img/stats_bg.jpg'; echo file_exists($current_template_path . $filepath) ? $current_template_path . $filepath : './templates/default' . $filepath;?>)  no-repeat fixed center top transparent;
+		background-color: rgb(21,21,21);
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		font-size: 13px;
+		color: #D4D4D4;
+	}
+</style>
 </head>
 <body>
 

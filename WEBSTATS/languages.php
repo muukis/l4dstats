@@ -24,7 +24,7 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	if (file_exists($language_flag_path))
 	{
 		require($lang_file_prefix . $lang_id . $lang_file_postfix);
-		$language_selector[$lang_id] = array('name' => $lang_name, 'path' => $language_flag_path, 'getprm' => $get_parameters . 'lang=' . $lang_id);
+		$language_selector[$lang_id] = array('name' => htmlentities($lang_name), 'path' => $language_flag_path, 'getprm' => $get_parameters . 'lang=' . $lang_id);
 	}
 }
 
@@ -58,5 +58,7 @@ if (!file_exists($lang_file_prefix . $lang . $lang_file_postfix))
 
 // Load user preferenced language on top
 include($lang_file_prefix . $lang . $lang_file_postfix);
+
+$lang_name = htmlentities($lang_name);
 
 ?>

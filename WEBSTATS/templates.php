@@ -38,7 +38,7 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 		$template_name = $template_path_entry_name;
 	}
 
-	$template_selector[$template_path_entry] = array('name' => $template_name, 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
+	$template_selector[$template_path_entry] = array('name' => htmlentities($template_name), 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
 }
 
 // Look for new set value
@@ -65,6 +65,8 @@ $site_template = strtolower($site_template);
 $site_template_path = $templates_path . $site_template;
 
 require($site_template_path . $template_info_file);
+
+$template_name = htmlentities($template_name);
 
 $load_path = $default_site_template_path;
 $load_path .= '/';
