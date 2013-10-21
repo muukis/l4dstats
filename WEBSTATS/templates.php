@@ -15,6 +15,7 @@ if (!$default_site_template ||
 {
 	$default_site_template = "default";
 }
+
 $default_site_template_path = $templates_path . $default_site_template;
 $default_site_template_images_path = $default_site_template_path . $template_images_path;
 
