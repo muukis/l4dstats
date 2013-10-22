@@ -1,61 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<?php echo $statspagemeta;?>
-<title><?php echo $motd_header;?> :: <?php echo $title;?></title>
 <link href="./templates/default/css/achivement.css" rel="stylesheet" type="text/css" />
-<link href="./templates/<?php echo $stylesheet;?>" rel="stylesheet" type="text/css" />
-<style type="text/css">
-h1.header {
-	margin-left: -2px;
-	margin-top: -5px;
-	letter-spacing: -1px;
-	font-size: 36px;
-	font-weight: bold;
-	color: #FFFFFF;
-}
-
-h2.header_secondary {
-	margin-top: -10px;
-	font-size: 14px;
-	font-weight: bold;
-	color: #FFCC33;
-}
-
-h2.header_extra {
-	margin-top: -3px;
-	font-size: 12px;
-	font-weight: bold;
-	color: #888;
-}
-
-.player {
-	font-size: 12px;
-	font-weight: bold;
-	color: #FFCC33;
-}
-
-h1.header_normal {
-	margin-top: 15px;
-	font-size: 24px;
-	font-weight: bold;
-	color: #FFFFFF;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #FFCC33;
-}
-
-.motd_message {
-	font-size: 14px;
-	font-weight: normal;
-	color: #888;
-}
-</style>
-</head>
-<body>
-
-<div id="page">
-<div class="awards-base">
+					<div class="awards-base">
 						<div class="box" style="margin-left: 25px;width:250px;float:left;">
 							<div class="dt" style="width:250px;">
 								<dt onmouseover="showtip('<?php echo $lang_tpl_tip_rank; ?>');" onmouseout="hidetip();">
@@ -114,27 +58,22 @@ h1.header_normal {
 							<div class="bottom" style="width:250px;"></div>
 						</div>
 						<div style="width:100%;height:150px;" clear="left"></div>
-</div>
-<br>
-<h1><?php echo $lang_tpl_title_sub;?></h1>
-<table cellspacing="0" cellpaddin="0" border="0" style="margin-left:auto;margin-right:auto;">
-<tr>
-<td valign="top" id="center_ach">
-	<?php foreach ($arr_achievements as $achievement): ?>
-	<tr><?php echo $achievement;?></tr>
-	<?php endforeach;?>
-<br></br>
-	<?php foreach ($arr_achievements2 as $achievement2): ?>
-	<tr><?php echo $achievement2;?></tr>
-	<?php endforeach;?>
-<br></br>
-</td>
-</tr>
-</table>
-</div>
-
-<br />
-<br />
-
-</body>
-</html>
+					</div>
+					
+					<br>
+					
+					<h1><?php echo $lang_tpl_title_sub;?></h1>
+						<table cellspacing="0" cellpaddin="0" border="0" style="margin-left:auto;margin-right:auto;">
+							<tr>
+								<td valign="top" id="center_ach">
+									<?php foreach ($arr_achievements as $achievement): ?>
+									<tr><?php echo $achievement;?></tr>
+									<?php endforeach;?>
+								<br></br>
+									<?php foreach ($arr_achievements2 as $achievement2): ?>
+									<tr><?php echo $achievement2;?></tr>
+									<?php endforeach;?>
+								<br></br>
+								</td>
+							</tr>
+						</table>

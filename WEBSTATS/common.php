@@ -869,10 +869,10 @@ $mutationscmblink = "";
 
 if ($game_version != 1)
 {
-	$realismlink = "<a href=\"maps.php?type=realism\">Realism Stats</a>";
-	$scavengelink = "<a href=\"maps.php?type=scavenge\">Scavenge Stats</a>";
-	$realismversuslink = "<a href=\"maps.php?type=realismversus\">Realism&nbsp;Versus Stats</a>";
-	$mutationslink = "<a href=\"maps.php?type=mutations\">Mutations</a>";
+	$realismlink = "<a href='maps.php?type=realism'>Realism Stats</a>";
+	$scavengelink = "<a href='maps.php?type=scavenge'>Scavenge Stats</a>";
+	$realismversuslink = "<a href='maps.php?type=realismversus'>Realism&nbsp;Versus Stats</a>";
+	$mutationslink = "<a href='maps.php?type=mutations'>Mutations</a>";
 
 	$realismcmblink = str_replace("\"", "&quot;", $realismlink) . "<br>";
 	$scavengecmblink = str_replace("\"", "&quot;", $scavengelink) . "<br>";
@@ -964,7 +964,7 @@ if ($result && mysql_num_rows($result) > 0)
 			}
 		}
 
-		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;width:150px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td></tr>";
+		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;min-width:150px;max-width:200px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td></tr>";
 
 		if ($top10players_additional_info && $i == $top10players_additional_info)
 		{

@@ -1,0 +1,72 @@
+/* Submenus */
+
+.menu_stats .ddown_stats {
+  /* Size & position */
+    position: absolute;
+	display: block;
+    top: 29%;
+	float: top;
+    left: 0;
+	
+	z-index: 6;
+
+    /* Styles */
+    font-weight: normal;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu_stats .ddown_stats li a {
+    display: block;
+	background: black;
+    padding: 5px;
+    text-decoration: none;
+    color: #8aa8bd;
+    border-left: 1px solid #FFCC33;
+    border-right: 1px solid #FFCC33;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.menu_stats .ddown_stats li i {
+    float: right;
+    color: inherit;
+}
+
+.menu_stats .ddown_stats li br {
+    display: none;
+}
+
+.menu_stats .ddown_stats li:first-of-type a {
+	border-radius: 7px 7px 0 0;
+	border-top: 1px solid #FFCC33;
+}
+
+.menu_stats .ddown_stats li:last-of-type a {
+	border-radius: 0 0 7px 7px;
+	border-bottom: 1px solid #FFCC33;
+}
+
+/* Hover state */
+
+.menu_stats .ddown_stats li:hover a {
+    background: rgb(70, 70, 70);
+}
+
+/* Active state */
+
+.menu_stats:hover .ddown_stats {
+    opacity: 1;
+    pointer-events: auto;
+}
