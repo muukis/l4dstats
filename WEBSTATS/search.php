@@ -14,35 +14,12 @@ include("./common.php");
 // Load outer template
 $tpl = new Template($templatefiles['layout.tpl']);
 
-	// Multilang support
-		//-- BASE
-	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
-	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
-	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
-	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
-		//-- MENU
-	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
-	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
-	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
-	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
-	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
-	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
-	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
-	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
-		//-- SEARCH
-	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
-	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
-	
-	// End
-
 // Set Steam ID as var, and quit on hack attempt
 $searchstring = mysql_real_escape_string($_POST['search']);
 if ($searchstring."" == "") $searchstring = md5("nostring");
 
-setcommontemplatevariables($tpl);
-
-$tpl->set("title", $lang_tpl_search_title); // Window title
-$tpl->set("page_heading", $lang_tpl_search_title); // Page header
+$tpl->set("title", $language_pack['tpl_search_title']); // Window title
+$tpl->set("page_heading", $language_pack['tpl_search_title']); // Page header
 
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE name LIKE '%" . $searchstring . "%' OR steamid LIKE '%" . $searchstring . "%' ORDER BY points + points_survivors + points_infected DESC LIMIT 100");
 if (mysql_error()) {
@@ -50,12 +27,6 @@ if (mysql_error()) {
 } else {
   $arr_online = array();
   $stats = new Template($templatefiles['search.tpl']);
-  
-  // Multilang support
-  	$stats->set("lang_tpl_search_ply", $lang_tpl_search_ply);
-	$stats->set("lang_tpl_search_plypoints", $lang_tpl_search_plypoints);
-	$stats->set("lang_tpl_search_plytime", $lang_tpl_search_plytime);
-  // End
 
   $i = 1;
   while ($row = mysql_fetch_array($result))
@@ -68,7 +39,7 @@ if (mysql_error()) {
     $arr_online[] = $line;
   }
 
-  if (mysql_num_rows($result) == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $lang_tpl_search_nomatch . "</td</tr>\n";
+  if (mysql_num_rows($result) == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $language_pack['tpl_search_nomatch'] . "</td</tr>\n";
   $stats->set("online", $arr_online);
   $output = $stats->fetch($templatefiles['search.tpl']);
 }

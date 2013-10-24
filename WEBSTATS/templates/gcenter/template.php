@@ -1,7 +1,7 @@
 <?php
 
 // Template display name
-$template_name = "Demostration Template";
+$template_name = "G-Center";
 
 // Append HTML headers
 $extra_headers = '';

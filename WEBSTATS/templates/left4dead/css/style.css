@@ -279,18 +279,19 @@
 
 	#sidebar {
 		position: fixed;
-		_background: rgba(121,112,121,.2);
+		background: rgba(0,0,0,.7);
 		float: right;
-		top: 30px;
-		right: 10px;
+		right: 0px;
 		border-radius: 5px 0px 0px 5px;
-		width: 170px;
+		min-width: 190px;
+		max-width: 205px;
 		min-height: 400px;
 	}
 
 	#sidebar ul {
 		margin: 0;
 		margin-left: 5px;
+		margin-right: 5px;
 		padding: 0;
 		list-style: none;
 		text-align: left;
@@ -318,7 +319,7 @@
 
 	.box1 {
 		padding: 20px;
-		background: url(img/img05.gif) no-repeat;
+		background: url(images/img05.gif) no-repeat;
 	}
 
 	.box2 {
@@ -327,7 +328,7 @@
 
 	.box2 h2 {
 		margin-bottom: 15px;
-		background: url(img/img10.gif) repeat-x left bottom;
+		background: url(images/img10.gif) repeat-x left bottom;
 		font-size: 16px;
 		color: #FFFFFF;
 	}

@@ -8,13 +8,18 @@ Common PHP functions and code - "common.php"
 ================================================
 */
 
+// Allow debug parameter set from URL
+$allow_debug = 1;
+
 error_reporting(E_ERROR);
+
+$debug = ($allow_debug && isset($_GET['debug']) && $_GET['debug']);
 
 $get_parameters = '?';
 
 foreach ($_GET as $key => $value)
 {
-	if ($key == 'template' || $key == 'lang')
+	if ($key == 'template' || $key == 'lang' || $key == 'debug')
 	{
 		continue;
 	}
@@ -22,14 +27,13 @@ foreach ($_GET as $key => $value)
 	$get_parameters .= $key . '=' . $value . '&';
 }
 
+$template_properties['get_parameters'] = $get_parameters;
+
 // Include configuration file
 require("./config.php");
 
 // Include language
 require("./languages.php");
-
-// Include template
-require("./templates.php");
 
 // Include Template engine class
 require("./class_template.php");
@@ -38,6 +42,9 @@ require("./class_template.php");
 require("./ip2country.php");
 $ip2c = new ip2country();
 $ip2c->set_tableprefix($mysql_ip2c_tableprefix);
+
+// Include template
+require("./templates.php");
 
 function php4_scandir($dir, $listDirectories=false, $skipDots=true)
 {
@@ -196,37 +203,6 @@ function getserversettingsvalue($name)
 		return $r['svalue'];
 
 	return "";
-}
-
-function setcommontemplatevariables($template)
-{
-	global $site_template_path, $template_name, $template_selector, $lang_name, $language_selector, $header_extra, $site_name, $playercount, $realismlink, $realismversuslink, $mutationslink, $scavengelink, $realismcmblink, $realismversuscmblink, $mutationscmblink, $scavengecmblink, $timedmapslink, $templatefiles;
-
-	$template->set("header_extra", $header_extra); // Players served
-	$template->set("site_name", $site_name); // Site name
-
-	$template->set("language_selector", $language_selector); // Language selector
-	$template->set("current_language", $lang_name); // Current language
-
-	$template->set("template_selector", $template_selector); // Template selector
-	$template->set("current_template", $template_name); // Current template
-	$template->set("current_template_path", $site_template_path); // Current template path
-
-	$template->set("realismlink", $realismlink); // Realism stats link
-	$template->set("realismversuslink", $realismversuslink); // Realism Versus stats link
-	$template->set("mutationslink", $mutationslink); // Mutations stats link
-	$template->set("scavengelink", $scavengelink); // Scavenge stats link
-
-	$template->set("realismcmblink", $realismcmblink); // Realism stats link
-	$template->set("realismversuscmblink", $realismversuscmblink); // Realism Versus stats link
-	$template->set("mutationscmblink", $mutationscmblink); // Mutations stats link
-	$template->set("scavengecmblink", $scavengecmblink); // Scavenge stats link
-
-	$template->set("stylesheet", $templatefiles['style.css']); // Stylesheet for the page
-	$template->set("statstooltip", $templatefiles['statstooltip.js']); // Tooltip javascript file
-	$template->set("statscombobox", $templatefiles['statscombobox.js']); // Combobox javascript file
-
-	$template->set("timedmapslink", $timedmapslink); // Timed maps stats link
 }
 
 function createtablerowtooltip($row, $i)
@@ -869,10 +845,10 @@ $mutationscmblink = "";
 
 if ($game_version != 1)
 {
-	$realismlink = "<a href=\"maps.php?type=realism\">Realism Stats</a>";
-	$scavengelink = "<a href=\"maps.php?type=scavenge\">Scavenge Stats</a>";
-	$realismversuslink = "<a href=\"maps.php?type=realismversus\">Realism&nbsp;Versus Stats</a>";
-	$mutationslink = "<a href=\"maps.php?type=mutations\">Mutations</a>";
+	$realismlink = "<a href='maps.php?type=realism'>Realism Stats</a>";
+	$scavengelink = "<a href='maps.php?type=scavenge'>Scavenge Stats</a>";
+	$realismversuslink = "<a href='maps.php?type=realismversus'>Realism&nbsp;Versus Stats</a>";
+	$mutationslink = "<a href='maps.php?type=mutations'>Mutations</a>";
 
 	$realismcmblink = str_replace("\"", "&quot;", $realismlink) . "<br>";
 	$scavengecmblink = str_replace("\"", "&quot;", $scavengelink) . "<br>";
@@ -964,7 +940,7 @@ if ($result && mysql_num_rows($result) > 0)
 			}
 		}
 
-		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;width:150px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td></tr>";
+		$top10[] = createtablerowtooltip($row, $i) . "<td><b>" . $i . ".</b></td><td><div style=\"position:relative;min-width:150px;max-width:200px;overflow:hidden;white-space:nowrap;\">" . $playername . "</div></td></tr>";
 
 		if ($top10players_additional_info && $i == $top10players_additional_info)
 		{

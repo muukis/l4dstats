@@ -41,6 +41,8 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 	$template_selector[$template_path_entry] = array('name' => htmlentities($template_name), 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
 }
 
+$template_properties['template_selector'] = $template_selector;
+
 // Look for new set value
 if ($_GET["template"])
 {
@@ -63,10 +65,16 @@ if (!$site_template ||
 
 $site_template = strtolower($site_template);
 $site_template_path = $templates_path . $site_template;
+$extra_headers = '';
 
 require($site_template_path . $template_info_file);
 
 $template_name = htmlentities($template_name);
+
+$template_properties['current_template'] = $site_template;
+$template_properties['current_template_path'] = $site_template_path;
+$template_properties['current_template_name'] = $template_name;
+$template_properties['extra_headers'] = $extra_headers;
 
 $load_path = $default_site_template_path;
 $load_path .= '/';

@@ -30,27 +30,6 @@ include("./common.php");
 // Load outer template
 $tpl = new Template($templatefiles['layout.tpl']);
 
-	// Multilang support
-		//-- BASE
-	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
-	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
-	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
-	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
-		//-- MENU
-	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
-	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
-	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
-	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
-	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
-	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
-	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
-	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
-		//-- SEARCH
-	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
-	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
-	
-	// End
-
 // Include award file
 include("./" . $award_file);
 
@@ -236,14 +215,12 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	file_put_contents("./templates/awards_cache.html", trim($award_output));
 	// Multilang support
 		//-- BASE
-	$stats->set("lang_tpl_award_lastupdate", $lang_tpl_award_lastupdate);
+	$stats->set("lang_tpl_award_lastupdate", $language_pack['tpl_award_lastupdate']);
 	// End
 }
 
-setcommontemplatevariables($tpl);
-
-$tpl->set("title", $lang_tpl_award_title); // Window title
-$tpl->set("page_heading", $lang_tpl_award_title); // Page header
+$tpl->set("title", $language_pack['tpl_award_title']); // Window title
+$tpl->set("page_heading", $language_pack['tpl_award_title']); // Page header
 
 $output = file_get_contents("./templates/awards_cache.html");
 

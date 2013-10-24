@@ -28,6 +28,8 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	}
 }
 
+$template_properties['language_selector'] = $language_selector;
+
 // Always load the plugin default language in background
 require($lang_file_prefix . 'en' . $lang_file_postfix);
 
@@ -60,5 +62,8 @@ if (!file_exists($lang_file_prefix . $lang . $lang_file_postfix))
 include($lang_file_prefix . $lang . $lang_file_postfix);
 
 $lang_name = htmlentities($lang_name);
+
+$template_properties['current_language'] = $lang_name;
+$template_properties['current_language_id'] = $lang;
 
 ?>

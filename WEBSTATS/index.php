@@ -17,31 +17,8 @@ $tpl = new Template($templatefiles['layout.tpl']);
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE lastontime >= '" . intval(time() - 300) . "' ORDER BY " . $TOTALPOINTS . " DESC");
 $playercount = number_format(mysql_num_rows($result));
 
-setcommontemplatevariables($tpl);
-
-	// Multilang support
-		//-- BASE
-	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
-	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
-	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
-	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
-		//-- MENU
-	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
-	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
-	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
-	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
-	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
-	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
-	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
-	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
-		//-- SEARCH
-	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
-	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
-	
-	// End
-
-$tpl->set("title", $lang_tpl_plyonline); // Window title
-$tpl->set("page_heading", $lang_tpl_plyonline . " - " . $playercount); // Page header
+$tpl->set("title", $language_pack['tpl_plyonline']); // Window title
+$tpl->set("page_heading", $language_pack['tpl_plyonline'] . " - " . $playercount); // Page header
 if ($stats_refreshinterval > 0)
 	$tpl->set("statspagemeta", "<meta http-equiv=\"refresh\" content=\"" . $stats_refreshinterval . "\">\n");
 else
@@ -169,7 +146,7 @@ if (mysql_error()) {
     $i++;
   }
 
-  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $lang_tpl_noplyonline . "</td</tr>\n";
+  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $language_pack['tpl_noplyonline'] . "</td</tr>\n";
 
 	$stats->set("online", $arr_online);
 	$output = $stats->fetch($templatefiles['online.tpl']);
