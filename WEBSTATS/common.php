@@ -845,19 +845,19 @@ $mutationscmblink = "";
 
 if ($game_version != 1)
 {
-	$realismlink = "<a href='maps.php?type=realism'>Realism Stats</a>";
-	$scavengelink = "<a href='maps.php?type=scavenge'>Scavenge Stats</a>";
-	$realismversuslink = "<a href='maps.php?type=realismversus'>Realism&nbsp;Versus Stats</a>";
-	$mutationslink = "<a href='maps.php?type=mutations'>Mutations</a>";
+	$realismlink = "<a href='maps.php?type=realism'>" . $language_pack['tpl_layout_realismstats'] . "</a>";
+	$scavengelink = "<a href='maps.php?type=scavenge'>" . $language_pack['tpl_layout_scavengestats'] . "</a>";
+	$realismversuslink = "<a href='maps.php?type=realismversus'>" . $language_pack['tpl_layout_realismversusstats'] . "</a>";
+	$mutationslink = "<a href='maps.php?type=mutations'>" . $language_pack['tpl_layout_mutationsstats'] . "</a>";
 
-	$realismcmblink = str_replace("\"", "&quot;", $realismlink) . "<br>";
-	$scavengecmblink = str_replace("\"", "&quot;", $scavengelink) . "<br>";
-	$realismversuscmblink = str_replace("\"", "&quot;", $realismversuslink) . "<br>";
-	$mutationscmblink = str_replace("\"", "&quot;", $mutationslink) . "<br>";
+	$realismcmblink = str_replace("'", "&quot;", $realismlink) . "<br>";
+	$scavengecmblink = str_replace("'", "&quot;", $scavengelink) . "<br>";
+	$realismversuscmblink = str_replace("'", "&quot;", $realismversuslink) . "<br>";
+	$mutationscmblink = str_replace("'", "&quot;", $mutationslink) . "<br>";
 
 	$realismlink = "<li>" . $realismlink . "</li>";
 	$scavengelink = "<li>" . $scavengelink . "</li>";
-	$scavengelink = "<li>" . $scavengelink . "</li>";
+	$realismversuslink = "<li>" . $realismversuslink . "</li>";
 	$mutationslink = "<li>" . $mutationslink . "</li>";
 }
 

@@ -287,7 +287,13 @@ $language_pack['tpl_layout_plysearch'] = "Pelaajahaku";
 $language_pack['tpl_layout_plyaward'] = "Tilastojen ansiot";
 $language_pack['tpl_layout_modestats'] = "Pelimoodi tilastot";
 $language_pack['tpl_layout_servstats'] = "Palvelimen tilastot";
-
+$language_pack['tpl_layout_coopstats'] = "Coop Stats";
+$language_pack['tpl_layout_realismstats'] = "Realism Stats";
+$language_pack['tpl_layout_versusstats'] = "Versus Stats";
+$language_pack['tpl_layout_scavengestats'] = "Scavenge Stats";
+$language_pack['tpl_layout_survivalstats'] = "Survival Stats";
+$language_pack['tpl_layout_realismversusstats'] = "Realism Versus Stats";
+$language_pack['tpl_layout_mutationsstats'] = "Mutations Stats";
 
 /* ---------------------------------------------------------- */
 

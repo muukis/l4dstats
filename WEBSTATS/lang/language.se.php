@@ -287,7 +287,13 @@ $language_pack['tpl_layout_plysearch'] = "Player Search";
 $language_pack['tpl_layout_plyaward'] = "Rank Awards";
 $language_pack['tpl_layout_modestats'] = "Gamemode Stats";
 $language_pack['tpl_layout_servstats'] = "Server Stats";
-
+$language_pack['tpl_layout_coopstats'] = "Coop Stats";
+$language_pack['tpl_layout_realismstats'] = "Realism Stats";
+$language_pack['tpl_layout_versusstats'] = "Versus Stats";
+$language_pack['tpl_layout_scavengestats'] = "Scavenge Stats";
+$language_pack['tpl_layout_survivalstats'] = "Survival Stats";
+$language_pack['tpl_layout_realismversusstats'] = "Realism Versus Stats";
+$language_pack['tpl_layout_mutationsstats'] = "Mutations Stats";
 
 /* ---------------------------------------------------------- */
 

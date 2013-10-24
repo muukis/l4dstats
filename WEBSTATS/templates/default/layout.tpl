@@ -9,6 +9,7 @@
 	<title>Left 4 Dead 2 Player Stats :: <?php echo $title;?></title>
 	<link href="css.php?file=style" rel="stylesheet" type="text/css" />
 	<link href="css.php?file=player" rel="stylesheet" type="text/css" />
+	<link href="css.php?file=stats" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="./savi/jquery.js"></script>
 	<script type="text/javascript" src="./savi/steamprofile.js"></script>
 
@@ -88,7 +89,18 @@
 					<li><a href="playerlist.php"><?php echo $language_pack['tpl_layout_plyrank']; ?></a></li>
 					<li><a href="search.php"><?php echo $language_pack['tpl_layout_plysearch']; ?></a></li>
 					<li><a href="awards.php"><?php echo $language_pack['tpl_layout_plyaward']; ?></a></li>
-					<li><a href="javascript:void();" class="special" onmouseover="showcmb(this, '<a href=&quot;maps.php?type=coop&quot;>Coop Stats</a><br><?php echo $realismcmblink;?><a href=&quot;maps.php?type=versus&quot;>Versus Stats</a><br><?php echo $scavengecmblink;?><a href=&quot;maps.php?type=survival&quot;>Survival Stats</a><br><?php echo $realismversuscmblink;?><?php echo $mutationscmblink;?>');" onmouseout="hidecmb();"><?php echo $language_pack['tpl_layout_modestats']; ?> &raquo;</a></li>
+					<span class="menu_stats">
+					<li><a href="#stats"><?php echo $language_pack['tpl_layout_modestats']; ?> &raquo;</a></li>
+						<ol class="ddown_stats">
+							<li><a href="maps.php?type=coop"><?php echo $language_pack['tpl_layout_coopstats']; ?></a></li>
+							<?php echo $realismlink;?>
+							<li><a href="maps.php?type=versus"><?php echo $language_pack['tpl_layout_versusstats']; ?></a></li>
+							<?php echo $scavengelink;?>
+							<li><a href="maps.php?type=survival"><?php echo $language_pack['tpl_layout_survivalstats']; ?></a></li>
+							<?php echo $realismversuslink;?>
+							<?php echo $mutationslink;?>
+						</ol>
+					</span>
 					<?php echo $timedmapslink;?>
 					<li><a href="server.php" class="special"><?php echo $language_pack['tpl_layout_servstats']; ?></a></li>
 				</ul>
