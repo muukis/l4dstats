@@ -1,5 +1,5 @@
 <table class="stats">
-<tr><th>Player</th><th>Points</th><th>Gamemode</th><th width="40%">Total Playtime</th></tr>
+<tr><th><?php echo $language_pack['player']; ?></th><th><?php echo $language_pack['points']; ?></th><th><?php echo $language_pack['gamemode']; ?></th><th width="40%"><?php echo $language_pack['totalplaytime']; ?></th></tr>
 <?php foreach ($online as $player): ?><?php echo $player; ?><?php endforeach; ?>
 </table>
 

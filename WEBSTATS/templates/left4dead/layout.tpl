@@ -23,7 +23,28 @@
 			font-size: 13px;
 			color: #D4D4D4;
 		}
+
+		#sidebar .flickr {
+			color: transparent;
+			text-shadow: white 0 0 1px;
+
+			-webkit-transition: text-shadow 0.2s ease-in-out;
+			-moz-transition: text-shadow 0.2s ease-in-out;
+			transition: text-shadow 0.2s ease-in-out;
+		}
 	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setInterval(function() {
+				var val = 1;
+				if (Math.random() > 0.5) {
+					val = Math.floor((Math.random()*10)+1);
+				}
+				$(".flickr").css("text-shadow", "white 0 0 " + val + "px");
+			}, 200);
+		});
+	</script>
 <?php echo $template_properties['extra_headers']; ?>
 
 </head>
@@ -83,7 +104,7 @@
 	<div id="sidebar">
 		<ul>
 			<li>
-				<h2><?php echo $language_pack['tpl_layout_menutitle']; ?></h2>
+				<h2><span class="flickr"><?php echo $language_pack['tpl_layout_menutitle']; ?></span></h2>
 				<ul>
 					<li><a href="index.php"><?php echo $language_pack['playersonline']; ?></a></li>
 					<li><a href="playerlist.php"><?php echo $language_pack['tpl_layout_plyrank']; ?></a></li>
@@ -107,7 +128,7 @@
 			</li>
 
 			<li>
-				<h2><b><?php echo $language_pack['tpl_layout_top10']; ?></b></h2>
+				<h2><span class="flickr"><?php echo $language_pack['tpl_layout_top10']; ?></span></h2>
 				<table cellspacing="0" cellpadding="0" border="0" width="100%">
 					<?php foreach ($top10 as $text): ?>
 					<?php echo $text;?>

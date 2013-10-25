@@ -17,8 +17,8 @@ $tpl = new Template($templatefiles['layout.tpl']);
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE lastontime >= '" . intval(time() - 300) . "' ORDER BY " . $TOTALPOINTS . " DESC");
 $playercount = number_format(mysql_num_rows($result));
 
-$tpl->set("title", $language_pack['tpl_plyonline']); // Window title
-$tpl->set("page_heading", $language_pack['tpl_plyonline'] . " - " . $playercount); // Page header
+$tpl->set("title", $language_pack['playersonline']); // Window title
+$tpl->set("page_heading", $language_pack['playersonline'] . " - " . $playercount); // Page header
 if ($stats_refreshinterval > 0)
 	$tpl->set("statspagemeta", "<meta http-equiv=\"refresh\" content=\"" . $stats_refreshinterval . "\">\n");
 else

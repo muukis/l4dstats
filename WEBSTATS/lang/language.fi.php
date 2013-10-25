@@ -271,7 +271,7 @@ $language_pack['tpl_playtime_plyonline'] = "Viimeksi linjoilla";
 
 // layout.tpl
 
-$language_pack['tpl_layout_ply'] = "Pelaaja";
+$language_pack['player'] = "Pelaaja";
 $language_pack['tpl_layout_points'] = "Pisteet";
 $language_pack['tpl_layout_mode'] = "Pelimoodi";
 $language_pack['tpl_layout_playtime'] = "Peliaika";

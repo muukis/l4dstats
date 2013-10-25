@@ -3,19 +3,19 @@
 						<div class="box" style="margin-left: 25px;width:250px;float:left;">
 							<div class="dt" style="width:250px;">
 								<dt onmouseover="showtip('<?php echo $language_pack['tpl_tip_rank']; ?>');" onmouseout="hidetip();">
-									<tr><?php echo $language_pack['tpl_rank'];?></tr>
+									<tr><?php echo $language_pack['rank'];?></tr>
 									<tr><b><?php echo $player_rank;?></b></tr>
 								</dt>
 								<dt onmouseover="showtip('<?php echo $language_pack['tpl_tip_points']; ?><br><b>Coop: <?php echo $player_points_coop;?><br><?php echo $player_points_realism;?>Survival: <?php echo $player_points_survival;?><br>Versus: <?php echo $player_points_versus;?></b><br>&nbsp;&nbsp;Survivors: <?php echo $player_points_versus_sur;?><br>&nbsp;&nbsp;Infected: <?php echo $player_points_versus_inf;?><?php echo $player_points_scavenge;?>');" onmouseout="hidetip();">
-									<tr><?php echo $language_pack['tpl_points'];?></tr>
+									<tr><?php echo $language_pack['points'];?></tr>
 									<tr><b><?php echo $player_points;?></b></tr>
 								</dt>
 								<dt onmouseover="showtip('<?php echo $language_pack['tpl_tip_ikill']; ?><br>&nbsp;&nbsp;melee: <?php echo $melee_kills;?>');" onmouseout="hidetip();">
-									<tr><?php echo $language_pack['tpl_ikill'];?></tr>
+									<tr><?php echo $language_pack['infectedkilled'];?></tr>
 									<tr><b><?php echo $infected_killed;?></b></tr>
 								</dt>
 								<dt onmouseover="showtip('<?php echo $language_pack['tpl_tip_skill']; ?><br><b>Versus: <?php echo $survivors_killed_versus;?><?php echo $survivors_killed_scavenge;?></b>');" onmouseout="hidetip();">
-									<tr><?php echo $language_pack['tpl_skill'];?></tr>
+									<tr><?php echo $language_pack['survivorskilled'];?></tr>
 									<tr><b><?php echo $survivors_killed;?></b></tr>
 								</dt>
 								<dt onmouseover="showtip('Infected killed with a headshot');" onmouseout="hidetip();">

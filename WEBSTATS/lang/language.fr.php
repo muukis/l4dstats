@@ -271,7 +271,7 @@ $language_pack['tpl_playtime_plyonline'] = "Last Online";
 
 // layout.tpl
 
-$language_pack['tpl_layout_ply'] = "Player";
+$language_pack['player'] = "Player";
 $language_pack['tpl_layout_points'] = "Points";
 $language_pack['tpl_layout_mode'] = "Gamemode";
 $language_pack['tpl_layout_playtime'] = "Total Playtime";

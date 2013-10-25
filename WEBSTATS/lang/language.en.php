@@ -206,6 +206,13 @@ $language_pack['award_inf_8_desc'] = "Charged a Scattering Ram at a group of sur
 
 /*==============================================================================*/
 
+$language_pack['playersonline'] = "Players Online";
+$language_pack['player']        = "Player";
+$language_pack['points']        = "Points";
+$language_pack['gamemode']      = "Gamemode";
+$language_pack['totalplaytime'] = "Total Playtime";
+$language_pack['rank']          = "Rank";
+
 /*==================================
 	Default -- Templates
 ==================================*/
@@ -229,7 +236,6 @@ $language_pack['tpl_tip_skill'] = "Survivors killed while playing infected";
 /* ---------------------------------------------------------- */
 
 // index.php
-$language_pack['tpl_plyonline'] = "Players Online";
 $language_pack['tpl_noplyonline'] = "There are no players online";
 
 /* ---------------------------------------------------------- */
@@ -237,9 +243,6 @@ $language_pack['tpl_noplyonline'] = "There are no players online";
 // search.php
 $language_pack['tpl_search_title'] = "Player Search";
 $language_pack['tpl_search_nomatch'] = "There are no players that matched!";
-$language_pack['tpl_search_ply'] = "Player";
-$language_pack['tpl_search_plypoints'] = "Points";
-$language_pack['tpl_search_plytime'] = "Total Playtime";
 
 /* ---------------------------------------------------------- */
 
@@ -263,7 +266,6 @@ $language_pack['tpl_tmaps_title'] = "Timed Maps";
 // playerlist.php
 $language_pack['tpl_playerlist_title'] = "Player Rankings";
 
-$language_pack['tpl_playtime_ply'] = "Player";
 $language_pack['tpl_playtime_plyrank'] = "Rank";
 $language_pack['tpl_playtime_plypoints'] = "Points";
 $language_pack['tpl_playtime_plytime'] = "Playtime";
@@ -273,8 +275,6 @@ $language_pack['tpl_playtime_plyonline'] = "Last Online";
 
 // layout.tpl
 
-$language_pack['tpl_layout_ply'] = "Player";
-$language_pack['tpl_layout_points'] = "Points";
 $language_pack['tpl_layout_mode'] = "Gamemode";
 $language_pack['tpl_layout_playtime'] = "Total Playtime";
 
@@ -283,7 +283,6 @@ $language_pack['tpl_layout_top10'] = "Top 10 Players";
 $language_pack['tpl_layout_search'] = "Search for a <b>Player's Name</b> or <b>Steam ID</b>";
 $language_pack['tpl_layout_search_btn'] = "Search";
 
-$language_pack['tpl_layout_plyonline'] = "Players Online";
 $language_pack['tpl_layout_plyrank'] = "Player Rankings";
 $language_pack['tpl_layout_plysearch'] = "Player Search";
 $language_pack['tpl_layout_plyaward'] = "Rank Awards";
