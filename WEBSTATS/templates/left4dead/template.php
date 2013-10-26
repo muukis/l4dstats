@@ -21,7 +21,7 @@ $extra_headers = <<<EOD
 			setInterval(function() {
 				var val = 1;
 				if (Math.random() > 0.5) {
-					val = Math.floor((Math.random()*10)+1);
+					val = Math.floor((Math.random()*5)+1);
 				}
 				$(".flicker").css("text-shadow", "white 0 0 " + val + "px");
 			}, 200);
