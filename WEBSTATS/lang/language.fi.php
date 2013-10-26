@@ -37,30 +37,30 @@ $language_pack['kills_chargers_title'] = "Chargereita tapettu";
 
 // Jockeys
 $language_pack['kills_jockeys'] = "Jockeys";
-$language_pack['kills_jockeys_title'] = "Jockeyt‰ tapettu";
+$language_pack['kills_jockeys_title'] = "Jockeyt√§ tapettu";
 
 // Spitters
 $language_pack['kills_spitters'] = "Spitters";
-$language_pack['kills_spitters_title'] = "Spittereit‰ tapettu";
+$language_pack['kills_spitters_title'] = "Spittereit√§ tapettu";
 
 /* ---------------------------------------------------------- */
 
 	// L4D/L4D2 -- Accidents
 // Friendly Fire Incidents
 $language_pack['kills_dem_1'] = "Ampunut omia tovereita";
-$language_pack['kills_dem_1_title'] = "Selviytyji‰ vahingoitettu";
+$language_pack['kills_dem_1_title'] = "Selviytyji√§ vahingoitettu";
 
 // Incapacitated Friendlies
-$language_pack['kills_dem_2'] = "Saattanut toimintakyvyttˆm‰ksi omia";
-$language_pack['kills_dem_2_title'] = "Selviytyji‰ saatettu toimintakyvyttˆm‰ksi";
+$language_pack['kills_dem_2'] = "Saattanut toimintakyvytt√∂m√§ksi omia";
+$language_pack['kills_dem_2_title'] = "Selviytyji√§ saatettu toimintakyvytt√∂m√§ksi";
 
 // Teammates Killed
 $language_pack['kills_dem_3'] = "Tappanut omia";
-$language_pack['kills_dem_3_title'] = "Selviytyji‰ tapettu";
+$language_pack['kills_dem_3_title'] = "Selviytyji√§ tapettu";
 
 // Friendlies Left For Dead
-$language_pack['kills_dem_4'] = "J‰tt‰nyt omia kuolemaan";
-$language_pack['kills_dem_4_title'] = "Selviytyji‰ j‰tetty kuolemaan";
+$language_pack['kills_dem_4'] = "J√§tt√§nyt omia kuolemaan";
+$language_pack['kills_dem_4_title'] = "Selviytyji√§ j√§tetty kuolemaan";
 
 // Infected Let In Safe Room
 $language_pack['kills_dem_5'] = "Infected Let In Safe Room";
@@ -228,13 +228,13 @@ $language_pack['tpl_tip_skill'] = "Survivors killed while playing infected";
 
 // index.php
 $language_pack['tpl_plyonline'] = "Pelaajia linjoilla";
-$language_pack['tpl_noplyonline'] = "Ei yht‰‰n pelaajaa linjoilla";
+$language_pack['tpl_noplyonline'] = "Ei yht√§√§n pelaajaa linjoilla";
 
 /* ---------------------------------------------------------- */
 
 // search.php
 $language_pack['tpl_search_title'] = "Pelaajahaku";
-$language_pack['tpl_search_nomatch'] = "Ei yht‰‰n pelaajaa lˆytynyt!";
+$language_pack['tpl_search_nomatch'] = "Ei yht√§√§n pelaajaa l√∂ytynyt!";
 $language_pack['tpl_search_ply'] = "Pelaaja";
 $language_pack['tpl_search_plypoints'] = "Pisteet";
 $language_pack['tpl_search_plytime'] = "Peliaika";
@@ -244,7 +244,7 @@ $language_pack['tpl_search_plytime'] = "Peliaika";
 // award.php
 $language_pack['tpl_award_title'] = "Rank Awards";
 
-$language_pack['tpl_award_lastupdate'] = "Ansiot p‰ivitetty viimeksi";
+$language_pack['tpl_award_lastupdate'] = "Ansiot p√§ivitetty viimeksi";
 
 /* ---------------------------------------------------------- */
 
@@ -271,14 +271,14 @@ $language_pack['tpl_playtime_plyonline'] = "Viimeksi linjoilla";
 
 // layout.tpl
 
-$language_pack['tpl_layout_ply'] = "Pelaaja";
+$language_pack['player'] = "Pelaaja";
 $language_pack['tpl_layout_points'] = "Pisteet";
 $language_pack['tpl_layout_mode'] = "Pelimoodi";
 $language_pack['tpl_layout_playtime'] = "Peliaika";
 
 $language_pack['tpl_layout_menutitle'] = "Left 4 Dead tilastot";
-$language_pack['tpl_layout_top10'] = "K‰rki-10 pelaajat";
-$language_pack['tpl_layout_search'] = "Etsi <b>pelaajan nime‰</b> tai <b>Steam ID:t‰</b>";
+$language_pack['tpl_layout_top10'] = "K√§rki-10 pelaajat";
+$language_pack['tpl_layout_search'] = "Etsi <b>pelaajan nime√§</b> tai <b>Steam ID:t√§</b>";
 $language_pack['tpl_layout_search_btn'] = "Hae";
 
 $language_pack['tpl_layout_plyonline'] = "Pelaajia linjoilla";
@@ -287,7 +287,13 @@ $language_pack['tpl_layout_plysearch'] = "Pelaajahaku";
 $language_pack['tpl_layout_plyaward'] = "Tilastojen ansiot";
 $language_pack['tpl_layout_modestats'] = "Pelimoodi tilastot";
 $language_pack['tpl_layout_servstats'] = "Palvelimen tilastot";
-
+$language_pack['tpl_layout_coopstats'] = "Coop Stats";
+$language_pack['tpl_layout_realismstats'] = "Realism Stats";
+$language_pack['tpl_layout_versusstats'] = "Versus Stats";
+$language_pack['tpl_layout_scavengestats'] = "Scavenge Stats";
+$language_pack['tpl_layout_survivalstats'] = "Survival Stats";
+$language_pack['tpl_layout_realismversusstats'] = "Realism Versus Stats";
+$language_pack['tpl_layout_mutationsstats'] = "Mutations Stats";
 
 /* ---------------------------------------------------------- */
 
@@ -295,7 +301,7 @@ $language_pack['tpl_layout_servstats'] = "Palvelimen tilastot";
 $language_pack['tpl_player'] = "Katsotaan pelaajaa:";
 
 // players.tpl
-$language_pack['tpl_player_surv'] = "Selviytyj‰n ansiot";
+$language_pack['tpl_player_surv'] = "Selviytyj√§n ansiot";
 $language_pack['tpl_player_infe'] = "Zombien ansiot";
 $language_pack['tpl_player_id1'] = "Saavutuksia ansaittu:";
 $language_pack['tpl_player_id2'] = "Steam ID:";
@@ -330,7 +336,7 @@ $language_pack['xml_ply_sum'] = "Ei annettuja tietoja.";
 $language_pack['xml_ply_nam'] = "Nykyinen nimi:";
 
 	// Profile Private
-$language_pack['xml_ply_private'] = "T‰m‰ profiili on yksityinen.";
+$language_pack['xml_ply_private'] = "T√§m√§ profiili on yksityinen.";
 
 	// Steam Rating
 $language_pack['xml_ply_steam_rating'] = "Steam Rating:";
