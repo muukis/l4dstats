@@ -205,41 +205,50 @@ function getserversettingsvalue($name)
 	return "";
 }
 
-function createtablerowtooltip($row, $i)
+function getplayerinfo($row)
 {
-	$points = $row['points'];
-	$totalpoints = gettotalpoints($row);
-	$points_coop = number_format($points);
-	$points_realism = number_format($row['points_realism']);
-	$points_versus = number_format($row['points_survivors'] + $row['points_infected']);
-	$points_versus_sur = number_format($row['points_survivors']);
-	$points_versus_inf = number_format($row['points_infected']);
-	$points_survival = number_format($row['points_survival']);
-	$points_scavenge = number_format($row['points_scavenge_survivors'] + $row['points_scavenge_infected']);
-	$points_scavenge_sur = number_format($row['points_scavenge_survivors']);
-	$points_scavenge_inf = number_format($row['points_scavenge_infected']);
-	$points_realismversus = number_format($row['points_realism_survivors'] + $row['points_realism_infected']);
-	$points_realismversus_sur = number_format($row['points_realism_survivors']);
-	$points_realismversus_inf = number_format($row['points_realism_infected']);
-	$points_mutations = number_format($row['points_mutations']);
-	$totalplaytime = gettotalplaytime($row);
-	$playtime_coop = getplaytime($row['playtime']);
-	$playtime_realism = getplaytime($row['playtime_realism']);
-	$playtime_versus = getplaytime($row['playtime_versus']);
-	$playtime_survival = getplaytime($row['playtime_survival']);
-	$playtime_scavenge = getplaytime($row['playtime_scavenge']);
-	$playtime_realismversus = getplaytime($row['playtime_realismversus']);
-	$playtime_mutations = getplaytime($row['playtime_mutations']);
+	global $showplayerflags, $ip2c;
 
-	$ppm_coop = number_format(getppm($points, $row['playtime']), 2);
-	$ppm_versus = number_format(getppm($row['points_survivors'] + $row['points_infected'], $row['playtime_versus']), 2);
-	$ppm_survival = number_format(getppm($row['points_survival'], $row['playtime_survival']), 2);
-	$ppm_realism = number_format(getppm($row['points_realism'], $row['playtime_realism']), 2);
-	$ppm_scavenge = number_format(getppm($row['points_scavenge_survivors'] + $row['points_scavenge_infected'], $row['playtime_scavenge']), 2);
-	$ppm_realismversus = number_format(getppm($row['points_realism_survivors'] + $row['points_realism_infected'], $row['playtime_realismversus']), 2);
-	$ppm_mutations = number_format(getppm($row['points_mutations'], $row['playtime_mutations']), 2);
+	$retval['name'] = htmlentities($row['name'], ENT_COMPAT, "UTF-8");
+	$retval['ip'] = $row['ip'];
+	$retval['flag'] = ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "");
+	$retval['steamid'] = $row['steamid'];
 
-  return "<tr>";
+	$retval['points'] = $row['points'];
+	$retval['totalpoints'] = gettotalpointsraw($row);
+	$retval['points_coop'] = $row['points_coop'];
+	$retval['points_realism'] = $row['points_realism'];
+	$retval['points_versus'] = $row['points_survivors'] + $row['points_infected'];
+	$retval['points_versus_sur'] = $row['points_survivors'];
+	$retval['points_versus_inf'] = $row['points_infected'];
+	$retval['points_survival'] = $row['points_survival'];
+	$retval['points_scavenge'] = $row['points_scavenge_survivors'] + $row['points_scavenge_infected'];
+	$retval['points_scavenge_sur'] = $row['points_scavenge_survivors'];
+	$retval['points_scavenge_inf'] = $row['points_scavenge_infected'];
+	$retval['points_realismversus'] = $row['points_realism_survivors'] + $row['points_realism_infected'];
+	$retval['points_realismversus_sur'] = $row['points_realism_survivors'];
+	$retval['points_realismversus_inf'] = $row['points_realism_infected'];
+	$retval['points_mutations'] = $row['points_mutations'];
+	$retval['points_mutations'] = $row['points_mutations'];
+
+	$retval['totalplaytime'] = gettotalplaytime($row);
+	$retval['playtime_coop'] = getplaytime($row['playtime']);
+	$retval['playtime_realism'] = getplaytime($row['playtime_realism']);
+	$retval['playtime_versus'] = getplaytime($row['playtime_versus']);
+	$retval['playtime_survival'] = getplaytime($row['playtime_survival']);
+	$retval['playtime_scavenge'] = getplaytime($row['playtime_scavenge']);
+	$retval['playtime_realismversus'] = getplaytime($row['playtime_realismversus']);
+	$retval['playtime_mutations'] = getplaytime($row['playtime_mutations']);
+
+	$retval['ppm_coop'] = getppm($row['points'], $row['playtime']);
+	$retval['ppm_versus'] = getppm($row['points_survivors'] + $row['points_infected'], $row['playtime_versus']);
+	$retval['ppm_survival'] = getppm($row['points_survival'], $row['playtime_survival']);
+	$retval['ppm_realism'] = getppm($row['points_realism'], $row['playtime_realism']);
+	$retval['ppm_scavenge'] = getppm($row['points_scavenge_survivors'] + $row['points_scavenge_infected'], $row['playtime_scavenge']);
+	$retval['ppm_realismversus'] = getppm($row['points_realism_survivors'] + $row['points_realism_infected'], $row['playtime_realismversus']);
+	$retval['ppm_mutations'] = getppm($row['points_mutations'], $row['playtime_mutations']);
+
+	return $retval;
 }
 
 function parseplayersummary($profilexml)
@@ -855,10 +864,23 @@ if ($game_version != 1)
 	$realismversuscmblink = str_replace("'", "&quot;", $realismversuslink) . "<br>";
 	$mutationscmblink = str_replace("'", "&quot;", $mutationslink) . "<br>";
 
-	$realismlink = "<li>" . $realismlink . "</li>";
-	$scavengelink = "<li>" . $scavengelink . "</li>";
-	$realismversuslink = "<li>" . $realismversuslink . "</li>";
-	$mutationslink = "<li>" . $mutationslink . "</li>";
+	$tpl = new Template($templatefiles['navigation_gamemodelink.tpl']);
+
+	$tpl->set("gamemodelink", $realismlink);
+	$realismlink = $tpl->fetch($templatefiles['navigation_gamemodelink.tpl']);
+
+	$tpl->set("gamemodelink", $scavengelink);
+	$scavengelink = $tpl->fetch($templatefiles['navigation_gamemodelink.tpl']);
+
+	$tpl->set("gamemodelink", $realismversuslink);
+	$realismversuslink = $tpl->fetch($templatefiles['navigation_gamemodelink.tpl']);
+
+	$tpl->set("gamemodelink", $mutationslink);
+	$mutationslink = $tpl->fetch($templatefiles['navigation_gamemodelink.tpl']);
+	// $realismlink = "<li>" . $realismlink . "</li>";
+	// $scavengelink = "<li>" . $scavengelink . "</li>";
+	// $realismversuslink = "<li>" . $realismversuslink . "</li>";
+	// $mutationslink = "<li>" . $mutationslink . "</li>";
 }
 
 $timedmapslink = "";
@@ -869,17 +891,16 @@ if ($timedmaps_show_all)
 }
 
 $header_extra = array();
-$header_extra['Zombies Killed'] = 0;
-$header_extra['Players Served'] = 0;
+$header_extra[$language_pack['zombieskilled']] = 0;
+$header_extra[$language_pack['playersserved']] = 0;
 $result = mysql_query("SELECT COUNT(*) AS players_served, sum(kills) AS total_kills FROM " . $mysql_tableprefix . "players");
 if ($result && $row = mysql_fetch_array($result))
 {
-	$header_extra['Zombies Killed'] = $row['total_kills'];
-	$header_extra['Players Served'] = $row['players_served'];
+	$header_extra[$language_pack['zombieskilled']] = $row['total_kills'];
+	$header_extra[$language_pack['playersserved']] = $row['players_served'];
 }
 
 $i = 1;
-$top10 = array();
 
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
 if ($result && mysql_num_rows($result) > 0)
@@ -888,7 +909,10 @@ if ($result && mysql_num_rows($result) > 0)
 		// This character is A PAIN... Find out how to convert it in to a HTML entity!
 		// http://www.fileformat.info/info/unicode/char/06d5/index.htm
 		// Maybe it's the same with all Arabic characters???? From right to left type of writing.
+
+		$top10players[$i++] = getplayerinfo($row);
 		
+		/*
 		$name = htmlentities($row['name'], ENT_COMPAT, "UTF-8");
 		//$name = str_replace("" , "&#1749;", $name);
 		//$titlename = str_replace("\"" , "\\\"", $name);
@@ -948,8 +972,11 @@ if ($result && mysql_num_rows($result) > 0)
 		}
 
 		$i++;
+		*/
 	}
 }
+
+$template_properties['top10players'] = $top10players;
 
 $motd_message = htmlentities(getserversettingsvalue("motdmessage"), ENT_COMPAT, "UTF-8");
 $layout_motd = "";
@@ -959,4 +986,13 @@ if ($show_motd && strlen($motd_message) > 0)
 	$tpl_msg->set("motd_message", $motd_message);
 	$layout_motd = $tpl_msg->fetch($templatefiles['layout_motd.tpl']);
 }
+
+// Load top10 template
+$tpl = new Template($templatefiles['top10.tpl']);
+$template_properties['top10'] = $tpl->fetch($templatefiles['top10.tpl']);
+
+// Load page navigation template
+$tpl = new Template($templatefiles['navigation.tpl']);
+$template_properties['navigation'] = $tpl->fetch($templatefiles['navigation.tpl']);
+
 ?>

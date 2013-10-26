@@ -206,12 +206,14 @@ $language_pack['award_inf_8_desc'] = "Charged a Scattering Ram at a group of sur
 
 /*==============================================================================*/
 
-$language_pack['playersonline'] = "Players Online";
-$language_pack['player']        = "Player";
-$language_pack['points']        = "Points";
-$language_pack['gamemode']      = "Gamemode";
-$language_pack['totalplaytime'] = "Total Playtime";
-$language_pack['rank']          = "Rank";
+$language_pack['playersonline']   = "Players Online";
+$language_pack['player']          = "Player";
+$language_pack['points']          = "Points";
+$language_pack['gamemode']        = "Gamemode";
+$language_pack['totalplaytime']   = "Total Playtime";
+$language_pack['rank']            = "Rank";
+$language_pack['zombieskilled']   = "Zombies Killed";
+$language_pack['playersserved']   = "Players Served";
 
 /*==================================
 	Default -- Templates

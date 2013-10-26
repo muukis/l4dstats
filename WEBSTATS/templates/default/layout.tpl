@@ -78,45 +78,8 @@
 		<?php echo $body;?>
 	</div>
 	<!-- end content -->
+<?php echo $template_properties['navigation']; ?>
 
-	<!-- start sidebar -->
-	<div id="sidebar">
-		<ul>
-			<li>
-				<h2><?php echo $language_pack['tpl_layout_menutitle']; ?></h2>
-				<ul>
-					<li><a href="index.php"><?php echo $language_pack['playersonline']; ?></a></li>
-					<li><a href="playerlist.php"><?php echo $language_pack['tpl_layout_plyrank']; ?></a></li>
-					<li><a href="search.php"><?php echo $language_pack['tpl_layout_plysearch']; ?></a></li>
-					<li><a href="awards.php"><?php echo $language_pack['tpl_layout_plyaward']; ?></a></li>
-					<span class="menu_stats">
-					<li><a href="#stats"><?php echo $language_pack['tpl_layout_modestats']; ?> &raquo;</a></li>
-						<ol class="ddown_stats">
-							<li><a href="maps.php?type=coop"><?php echo $language_pack['tpl_layout_coopstats']; ?></a></li>
-							<?php echo $realismlink;?>
-							<li><a href="maps.php?type=versus"><?php echo $language_pack['tpl_layout_versusstats']; ?></a></li>
-							<?php echo $scavengelink;?>
-							<li><a href="maps.php?type=survival"><?php echo $language_pack['tpl_layout_survivalstats']; ?></a></li>
-							<?php echo $realismversuslink;?>
-							<?php echo $mutationslink;?>
-						</ol>
-					</span>
-					<?php echo $timedmapslink;?>
-					<li><a href="server.php" class="special"><?php echo $language_pack['tpl_layout_servstats']; ?></a></li>
-				</ul>
-			</li>
-
-			<li>
-				<h2><b><?php echo $language_pack['tpl_layout_top10']; ?></b></h2>
-				<table cellspacing="0" cellpadding="0" border="0" width="100%">
-					<?php foreach ($top10 as $text): ?>
-					<?php echo $text;?>
-					<?php endforeach; ?>
-				</table>
-			</li>
-		</ul>
-	</div>
-	<!-- end sidebar -->
 	<div style="clear: both;">&nbsp;</div>
 	<p id="legal">
 		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082" target="_blank" >muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965" target="_blank" >SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524" target="_blank" >JonnyBoy0719</a></span><br>
