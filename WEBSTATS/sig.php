@@ -14,7 +14,7 @@
 	
 	// Lets load the configs from config.php
 	$dbhandle = mysql_connect($mysql_server, $mysql_user, $mysql_password)
-	or die($str_error_1);
+	or die($language_pack['str_error_1']);
 	
 	$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE steamid = '" . $id . "'");
 	$row = mysql_fetch_array($result);
@@ -105,7 +105,7 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 		// End Rank IMG
 		
 		// Name
-		imagettftext($res_image_main,$nam_font_size,0,7,18,$res_font_color_lblue,$str_res_dir.$str_font_bold,$str_name . " " . $row['name']);
+		imagettftext($res_image_main,$nam_font_size,0,7,18,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_name'] . " " . $row['name']);
 		
 		// Achivements
 		$arr_achievements = array();
@@ -138,13 +138,13 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 		
 		// End List
 		
-		imagettftext($res_image_main,$nam_font_size,0,7,30,$res_font_color_lblue,$str_res_dir.$str_font_bold,$str_ach . " " . count($arr_achievements));
+		imagettftext($res_image_main,$nam_font_size,0,7,30,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_ach'] . " " . count($arr_achievements));
 		
 		// Rank
 		imagettftext($res_image_main,$rank_font_size,0,330,20,$res_rank_color_choose,$str_res_dir.$str_font_bold,$rank);
 		
 		// Points
-		imagettftext($res_image_main,$nam_font_size,0,7,42,$res_font_color_lblue,$str_res_dir.$str_font_bold,$str_points . " " . number_format($totalpoints));
+		imagettftext($res_image_main,$nam_font_size,0,7,42,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_points'] . " " . number_format($totalpoints));
 		
 		// Achivement borders
 		$ach_border = 'img/ach.png';
@@ -219,26 +219,26 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 	// Normal Error - Wrong ID, or null
 	} else {
 		
-		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$str_error);
-		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$str_error_id);
+		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$language_pack['str_error']);
+		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_id']);
 		
 	}
 	// Error Code 2 - Table can't be loaded, did the install.php work, or did you run it?
 	} else {
-		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$str_error);
-		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$str_error_2);
+		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$language_pack['str_error']);
+		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_2']);
 	}
 	// Error Code 1 - MySQL not loading correctly/Loading, but not connected to database
 	} else {
-		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$str_error);
-		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$str_error_1);
+		imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$language_pack['str_error']);
+		imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_1']);
 		
 	}
 // Error code 3 - Can't load SteamID
 } else {
-	imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$str_error);
-	imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$str_error_3);
-	imagettftext($res_image_main,$error2_font_size,0,37,62,$res_font_color_white,$str_res_dir.$str_font_reg,$str_error_3b);
+	imagettftext($res_image_main,$error_font_size,0,37,42,$res_font_color_white,$str_res_dir.$str_font_bold,$language_pack['str_error']);
+	imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_3']);
+	imagettftext($res_image_main,$error2_font_size,0,37,62,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_3b']);
 }
 	imagepng($res_image_main,NULL,9);
 	imagedestroy($res_image_main);

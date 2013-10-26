@@ -14,32 +14,9 @@ include("./common.php");
 // Load outer template
 $tpl = new Template($templatefiles['layout.tpl']);
 
-	// Multilang support
-		//-- BASE
-	$tpl->set("lang_tpl_layout_ply", $lang_tpl_layout_ply);
-	$tpl->set("lang_tpl_layout_points", $lang_tpl_layout_points);
-	$tpl->set("lang_tpl_layout_mode", $lang_tpl_layout_mode);
-	$tpl->set("lang_tpl_layout_playtime", $lang_tpl_layout_playtime);
-		//-- MENU
-	$tpl->set("lang_tpl_layout_menutitle", $lang_tpl_layout_menutitle);
-	$tpl->set("lang_tpl_layout_top10", $lang_tpl_layout_top10);
-	$tpl->set("lang_tpl_layout_plyonline", $lang_tpl_layout_plyonline);
-	$tpl->set("lang_tpl_layout_plyrank", $lang_tpl_layout_plyrank);
-	$tpl->set("lang_tpl_layout_plysearch", $lang_tpl_layout_plysearch);
-	$tpl->set("lang_tpl_layout_plyaward", $lang_tpl_layout_plyaward);
-	$tpl->set("lang_tpl_layout_modestats", $lang_tpl_layout_modestats);
-	$tpl->set("lang_tpl_layout_servstats", $lang_tpl_layout_servstats);
-		//-- SEARCH
-	$tpl->set("lang_tpl_layout_search", $lang_tpl_layout_search);
-	$tpl->set("lang_tpl_layout_search_btn", $lang_tpl_layout_search_btn);
-	
-	// End
-
 // Set Steam ID as var, and quit on hack attempt
 if (strstr($_GET['steamid'], "/")) exit;
 $id = mysql_real_escape_string($_GET['steamid']);
-
-setcommontemplatevariables($tpl);
 
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE steamid = '" . $id . "'");
 $row = mysql_fetch_array($result);
@@ -48,25 +25,25 @@ $rankrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS rank FROM " . $mysq
 $rank = $rankrow['rank'];
 
 $arr_kills = array();
-$arr_kills[$lang_kills_commons] = array($row['kill_infected'], $lang_kills_commons_title);
-$arr_kills[$lang_kills_hunters] = array($row['kill_hunter'], $lang_kills_hunters_title);
-$arr_kills[$lang_kills_smokers] = array($row['kill_smoker'], $lang_kills_smokers_title);
-$arr_kills[$lang_kills_boomers] = array($row['kill_boomer'], $lang_kills_boomers_title);
+$arr_kills[$language_pack['kills_commons']] = array($row['kill_infected'], $language_pack['kills_commons_title']);
+$arr_kills[$language_pack['kills_hunters']] = array($row['kill_hunter'], $language_pack['kills_hunters_title']);
+$arr_kills[$language_pack['kills_smokers']] = array($row['kill_smoker'], $language_pack['kills_smokers_title']);
+$arr_kills[$language_pack['kills_boomers']] = array($row['kill_boomer'], $language_pack['kills_boomers_title']);
 
 if ($game_version != 1)
 {
-	$arr_kills[$lang_kills_spitters] = array($row['kill_spitter'], $lang_kills_spitters_title);
-	$arr_kills[$lang_kills_jockeys] = array($row['kill_jockey'], $lang_kills_jockeys_title);
-	$arr_kills[$lang_kills_chargers] = array($row['kill_charger'], $lang_kills_chargers_title);
+	$arr_kills[$language_pack['kills_spitters']] = array($row['kill_spitter'], $language_pack['kills_spitters_title']);
+	$arr_kills[$language_pack['kills_jockeys']] = array($row['kill_jockey'], $language_pack['kills_jockeys_title']);
+	$arr_kills[$language_pack['kills_chargers']] = array($row['kill_charger'], $language_pack['kills_chargers_title']);
 }
 
 $arr_demerits = array();
-$arr_demerits[$lang_kills_dem_1] = array($row['award_friendlyfire'], $lang_kills_dem_1_title);
-$arr_demerits[$lang_kills_dem_2] = array($row['award_fincap'], $lang_kills_dem_2_title);
-$arr_demerits[$lang_kills_dem_3] = array($row['award_teamkill'], $lang_kills_dem_3_title);
-$arr_demerits[$lang_kills_dem_4] = array($row['award_left4dead'], $lang_kills_dem_4_title);
-$arr_demerits[$lang_kills_dem_5] = array($row['award_letinsafehouse'], $lang_kills_dem_5_title);
-$arr_demerits[$lang_kills_dem_6] = array($row['award_witchdisturb'], $lang_kills_dem_6_title);
+$arr_demerits[$language_pack['kills_dem_1']] = array($row['award_friendlyfire'], $language_pack['kills_dem_1_title']);
+$arr_demerits[$language_pack['kills_dem_2']] = array($row['award_fincap'], $language_pack['kills_dem_2_title']);
+$arr_demerits[$language_pack['kills_dem_3']] = array($row['award_teamkill'], $language_pack['kills_dem_3_title']);
+$arr_demerits[$language_pack['kills_dem_4']] = array($row['award_left4dead'], $language_pack['kills_dem_4_title']);
+$arr_demerits[$language_pack['kills_dem_5']] = array($row['award_letinsafehouse'], $language_pack['kills_dem_5_title']);
+$arr_demerits[$language_pack['kills_dem_6']] = array($row['award_witchdisturb'], $language_pack['kills_dem_6_title']);
 
 if (mysql_num_rows($result) > 0)
 {
@@ -76,16 +53,15 @@ if (mysql_num_rows($result) > 0)
 	$timesrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS times FROM " . $mysql_tableprefix . "timedmaps WHERE steamid = '" . $id . "'"));
 	$times = $timesrow['times'];
 
-	$tpl->set("title", $playername . " :: " . $lang_tpl_player_stats); // Window title
-	$tpl->set("page_heading","<a href='player.php?steamid=" . $row['steamid'] . "'>" . $playername2 . " :: " . $lang_tpl_player_stats . "</a>"); // Page header
+	$tpl->set("title", $playername . " :: " . $language_pack['tpl_player_stats']); // Window title
+	$tpl->set("page_heading","<a href='player.php?steamid=" . $row['steamid'] . "'>" . $playername2 . " :: " . $language_pack['tpl_player_stats'] . "</a>"); // Page header
 
 	$stats = new Template($templatefiles['player_stats.tpl']);
 
 	$stats->set("player_name", $playername);
-
 	$stats->set("player_steamid", $row['steamid']);
-
 	$stats->set("player_playtime", gettotalplaytime($row));
+
 	if ($game_version != 1)
 	{
 		$stats->set("player_playtime_realism", "&nbsp;&nbsp;Realism: " . getplaytime($row['playtime_realism']) . "<br>&nbsp;&nbsp;Mutations: " . getplaytime($row['playtime_mutations']) . "<br>");
@@ -96,6 +72,7 @@ if (mysql_num_rows($result) > 0)
 		$stats->set("player_playtime_realism", "");
 		$stats->set("player_playtime_scavenge", "");
 	}
+
 	$stats->set("player_playtime_coop", getplaytime($row['playtime']));
 	$stats->set("player_playtime_versus", getplaytime($row['playtime_versus']));
 	$stats->set("player_playtime_survival", getplaytime($row['playtime_survival']));
@@ -104,6 +81,7 @@ if (mysql_num_rows($result) > 0)
 	// Points
 	$stats->set("player_points", number_format($totalpoints));
 	$stats->set("player_points_coop", number_format($row['points']));
+
 	if ($game_version != 1)
 	{
 		$stats->set("player_points_realism", "Realism: " . number_format($row['points_realism']) . "<br>Mutations: " . number_format($row['points_mutations']) . "<br>");
@@ -114,6 +92,7 @@ if (mysql_num_rows($result) > 0)
 		$stats->set("player_points_realism", "");
 		$stats->set("player_points_scavenge", "");
 	}
+
 	$stats->set("player_points_versus", number_format($row['points_infected'] + $row['points_survivors']));
 	$stats->set("player_points_versus_sur", number_format($row['points_survivors']));
 	$stats->set("player_points_versus_inf", number_format($row['points_infected']));
@@ -176,6 +155,7 @@ if (mysql_num_rows($result) > 0)
 	$totalplaytime = gettotalplaytimecalc($row);
 	$stats->set("player_ppm", number_format(getppm($totalpoints, $totalplaytime), 2));
 	$stats->set("player_ppm_coop", number_format(getppm($row['points'], $row['playtime']), 2));
+
 	if ($game_version != 1)
 	{
 		$stats->set("player_ppm_realism", "Realism: " . number_format(getppm($row['points_realism'], $row['playtime_realism']), 2) . "<br>Mutations: " . number_format(getppm($row['points_mutations'], $row['playtime_mutations']), 2) . "<br>");
@@ -186,6 +166,7 @@ if (mysql_num_rows($result) > 0)
 		$stats->set("player_ppm_realism", "");
 		$stats->set("player_ppm_scavenge", "");
 	}
+
 	$stats->set("player_ppm_versus", number_format(getppm($row['points_infected'] + $row['points_survivors'], $row['playtime_versus']), 2));
 	$stats->set("player_ppm_survival", number_format(getppm($row['points_survival'], $row['playtime_survival']), 2));
 
@@ -193,32 +174,20 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("melee_kills", number_format($row['melee_kills']));
 	$stats->set("survivors_killed", number_format($row['versus_kills_survivors'] + $row['scavenge_kills_survivors'] + $row['realism_kills_survivors'] + $row['mutations_kills_survivors']));
 	$stats->set("survivors_killed_versus", number_format($row['versus_kills_survivors']));
+
 	if ($game_version != 1)
 		$stats->set("survivors_killed_scavenge", "<br>Scavenge: " . number_format($row['scavenge_kills_survivors']) . "<br>Realism&nbsp;Versus: " . number_format($row['realism_kills_survivors']) . "<br>Mutations: " . number_format($row['mutations_kills_survivors']));
 	else
 		$stats->set("survivors_killed_scavenge", "");
-	$stats->set("player_headshots", number_format($row['headshots']));
-	
-	// Multilang support
-	$stats->set("lang_tpl_title_sub", $lang_tpl_player_stats_sub);
-	$stats->set("lang_tpl_rank", $lang_tpl_rank);
-	$stats->set("lang_tpl_points", $lang_tpl_points);
-	$stats->set("lang_tpl_ikill", $lang_tpl_ikill);
-	$stats->set("lang_tpl_skill", $lang_tpl_skill);
-	$stats->set("lang_tpl_headshot", $lang_tpl_headshot);
-	$stats->set("lang_tpl_headratio", $lang_tpl_headratio);
-	$stats->set("lang_tpl_ppm", $lang_tpl_ppm);
-	$stats->set("lang_tpl_tip_rank", $lang_tpl_tip_rank);
-	$stats->set("lang_tpl_tip_points", $lang_tpl_tip_points);
-	$stats->set("lang_tpl_tip_ikill", $lang_tpl_tip_ikill);
-	$stats->set("lang_tpl_tip_skill", $lang_tpl_tip_skill);
 
+	$stats->set("player_headshots", number_format($row['headshots']));
 
 	$arr_achievements = array();
 	$arr_achievements2 = array();
+
 	// Achivement 1
-	if ($row[$ach01_award] > $population_minkills) {
-		$popkills = getpopulation($row[$ach01_award], $population_file, $population_cities);
+	if ($row[$language_pack['ach01_award']] > $population_minkills) {
+		$popkills = getpopulation($row[$language_pack['ach01_award']], $population_file, $population_cities);
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -227,7 +196,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach01 . "<h3>
+				<h3>" . $language_pack['ach01'] . "<h3>
 				<h5>
 					Killed more zombies than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $popkills[0] . "&btnI=1\">" . $popkills[0] . "</a>, population <b>" . number_format($popkills[1]) . "</b>.<br />
 						That is almost more than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $popkills[2] . "&btnI=1\">" . $popkills[2] . "</a>, population <b>" . number_format($popkills[3]) . "</b>.
@@ -238,8 +207,9 @@ if (mysql_num_rows($result) > 0)
 		<br clear='left'></br>
 		";
 	}
+
 	// Achivement 2
-	if ($row[$ach02_award] >= $ach02_progress) {
+	if ($row[$language_pack['ach02_award']] >= $language_pack['ach02_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -248,11 +218,11 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach02 . "<h3>
+				<h3>" . $language_pack['ach02'] . "<h3>
 				<h5>
-					" . $ach02_desc . "
+					" . $language_pack['ach02_desc'] . "
 				</h5>
-				<div class='achievement-progress-text'> " . $ach02_progress . " / " . $ach02_progress . "</div>
+				<div class='achievement-progress-text'> " . $language_pack['ach02_progress'] . " / " . $language_pack['ach02_progress'] . "</div>
 				<div class='achievement-progress-bar'>
 					<img src='img/misc/ach_bar.gif' height='14' width='100%'> 
 				</div>
@@ -262,8 +232,9 @@ if (mysql_num_rows($result) > 0)
 		<br clear='left'></br>
 		";
 	}
+
 	// Achivement 3
-	if ($row[$ach03_award] >= $ach03_progress) {
+	if ($row[$language_pack['ach03_award']] >= $language_pack['ach03_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -272,17 +243,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach03 . "<h3>
+				<h3>" . $language_pack['ach03'] . "<h3>
 				<h5>
-					" . $ach03_desc . "
+					" . $language_pack['ach03_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 4
-	if ($row[$ach04a_award] >= $ach04a_progress && $row[$ach04a_award] < $ach04b_progress) {
+	if ($row[$language_pack['ach04a_award']] >= $language_pack['ach04a_progress'] && $row[$language_pack['ach04a_award']] < $language_pack['ach04b_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -291,9 +263,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach04a . "<h3>
+				<h3>" . $language_pack['ach04a'] . "<h3>
 				<h5>
-					" . $ach04a_desc . "
+					" . $language_pack['ach04a_desc'] . "
 				</h5>
 				<div class='achievement-progress-text'> " . $row['playtime'] . " / 1500</div>
 				<div class='achievement-progress-bar'>
@@ -303,7 +275,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	} elseif ($row[$ach04b_progress] >= $ach04b_progress && $row[$ach04b_progress] > $ach04a_progress) { 
+	} elseif ($row[$language_pack['ach04b_progress']] >= $language_pack['ach04b_progress'] && $row[$language_pack['ach04b_progress']] > $language_pack['ach04a_progress']) { 
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -312,17 +284,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach04b . "<h3>
+				<h3>" . $language_pack['ach04b'] . "<h3>
 				<h5>
-					" . $ach04b_desc . "
+					" . $language_pack['ach04b_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 5
-	if ($row[$ach05_award] >= $ach05_progress) {
+	if ($row[$language_pack['ach05_award']] >= $language_pack['ach05_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -331,17 +304,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach05 . "<h3>
+				<h3>" . $language_pack['ach05'] . "<h3>
 				<h5>
-					" . $ach05_desc . "
+					" . $language_pack['ach05_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 6
-	if ($row[$ach06_award] >= $ach06_progress) {
+	if ($row[$language_pack['ach06_award']] >= $language_pack['ach06_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -350,9 +324,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach06 . "<h3>
+				<h3>" . $language_pack['ach06'] . "<h3>
 				<h5>
-					" . $ach06_desc . "
+					" . $language_pack['ach06_desc'] . "
 				</h5>
 				<h4 onmouseover=\"showtip('". $badachivement_desc ."');\" onmouseout=\"hidetip();\">
 					<span style='color:red;'>" . $badachivement . "</span>
@@ -362,8 +336,9 @@ if (mysql_num_rows($result) > 0)
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 7
-	if ($row[$ach07_award] >= $ach07_progress) {
+	if ($row[$language_pack['ach07_award']] >= $language_pack['ach07_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -372,9 +347,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach07 . "<h3>
+				<h3>" . $language_pack['ach07'] . "<h3>
 				<h5>
-					" . $ach07_desc . "
+					" . $language_pack['ach07_desc'] . "
 				</h5>
 				<h4 onmouseover=\"showtip('". $badachivement_desc ."');\" onmouseout=\"hidetip();\">
 					<span style='color:red;'>" . $badachivement . "</span>
@@ -384,8 +359,9 @@ if (mysql_num_rows($result) > 0)
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 8
-	if ($row[$ach08_award] >= $ach09_progress) {
+	if ($row[$language_pack['ach08_award']] >= $language_pack['ach09_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -394,9 +370,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach08 . "<h3>
+				<h3>" . $language_pack['ach08'] . "<h3>
 				<h5>
-					" . $ach08_desc . "
+					" . $language_pack['ach08_desc'] . "
 				</h5>
 				<h4 onmouseover=\"showtip('". $devtest_desc ."');\" onmouseout=\"hidetip();\">
 					<span style='color:lightgreen;'>" . $devtest . "</span>
@@ -406,8 +382,9 @@ if (mysql_num_rows($result) > 0)
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 9
-	if ($row[$ach09_award] >= $ach09_progress) {
+	if ($row[$language_pack['ach09_award']] >= $language_pack['ach09_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -416,17 +393,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach09 ."<h3>
+				<h3>" . $language_pack['ach09'] ."<h3>
 				<h5>
-					" . $ach09_desc . "
+					" . $language_pack['ach09_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
+
 	// Achivement 10
-	if ($row[$ach10_award] >= $ach10_progress) {
+	if ($row[$language_pack['ach10_award']] >= $language_pack['ach10_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -435,18 +413,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach10 . "<h3>
+				<h3>" . $language_pack['ach10'] . "<h3>
 				<h5>
-					" . $ach10_desc . "
+					" . $language_pack['ach10_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-	
+
 	// Achivement 11
-	if ($row[$ach11_award] >= $ach11_progress) {
+	if ($row[$language_pack['ach11_award']] >= $language_pack['ach11_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -455,11 +433,11 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach11 . "<h3>
+				<h3>" . $language_pack['ach11'] . "<h3>
 				<h5>
-					" . $ach11_desc . "<br>
+					" . $language_pack['ach11_desc'] . "<br>
 				</h5>
-				<div class='achievement-progress-text'> ". $ach11_progress ." / ". $ach11_progress ."</div>
+				<div class='achievement-progress-text'> ". $language_pack['ach11_progress'] ." / ". $language_pack['ach11_progress'] ."</div>
 				<div class='achievement-progress-bar'>
 					<img src='img/misc/ach_bar.gif' height='14' width='100%'> 
 				</div>
@@ -486,11 +464,11 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	
+
 	// If they haven't been earned yet
-	
+
 		// Achivement 2
-	if ($row[$ach02_award] <= $ach02_progress-1) {
+	if ($row[$language_pack['ach02_award']] <= $language_pack['ach02_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -499,21 +477,22 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach02 . "<h3>
+				<h3>" . $language_pack['ach02'] . "<h3>
 				<h5>
-					" . $ach02_desc . "
+					" . $language_pack['ach02_desc'] . "
 				</h5>
-				<div class='achievement-progress-text'> " . $row[$ach02_award] . " / " . $ach02_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach02_award']] . " / " . $language_pack['ach02_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach02_award] / 15 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach02_award']] / 15 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 3
-	if ($row[$ach03_award] <= $ach03_progress-1) {
+
+	// Achivement 3
+	if ($row[$language_pack['ach03_award']] <= $language_pack['ach03_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -522,21 +501,22 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach03 . "<h3>
+				<h3>" . $language_pack['ach03'] . "<h3>
 				<h5>
-					" . $ach03_desc . "
+					" . $language_pack['ach03_desc'] . "
 				</h5>
-				<div class='achievement-progress-text'> " . $row[$ach03_award] . " / " . $ach03_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach03_award']] . " / " . $language_pack['ach03_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach03_award] / 5 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach03_award']] / 5 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 4
-	if ($row[$ach04a_award] <= $ach04a_progress-1) {
+
+	// Achivement 4
+	if ($row[$language_pack['ach04a_award']] <= $language_pack['ach04a_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -545,21 +525,22 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach04a . "<h3>
+				<h3>" . $language_pack['ach04a'] . "<h3>
 				<h5>
-					" . $ach04a_desc . "
+					" . $language_pack['ach04a_desc'] . "
 				</h5>
-				<div class='achievement-progress-text'> " . $row[$ach04a_award] . " / " . $ach04a_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach04a_award']] . " / " . $language_pack['ach04a_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach04a_award] / 5 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach04a_award']] / 5 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 5
-	if ($row[$ach05_award] <= $ach05_progress-1) {
+
+	// Achivement 5
+	if ($row[$language_pack['ach05_award']] <= $language_pack['ach05_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -568,21 +549,22 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach05 . "<h3>
+				<h3>" . $language_pack['ach05'] . "<h3>
 				<h5>
-					" . $ach05_desc . "
+					" . $language_pack['ach05_desc'] . "
 				</h5>
-				<div class='achievement-progress-text'> " . $row[$ach05_award] . " / " . $ach05_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach05_award']] . " / " . $language_pack['ach05_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach05_award] * 6.6 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach05_award']] * 6.6 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 6
-	if ($row[$ach06_award] >= 0 && $row[$ach06_award] <= $ach06_progress-1) {
+
+	// Achivement 6
+	if ($row[$language_pack['ach06_award']] >= 0 && $row[$language_pack['ach06_award']] <= $language_pack['ach06_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -591,24 +573,25 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach06 . "<h3>
+				<h3>" . $language_pack['ach06'] . "<h3>
 				<h5>
-					" . $ach06_desc . "
+					" . $language_pack['ach06_desc'] . "
 				</h5>
 				<h4 onmouseover=\"showtip('". $badachivement_desc ."');\" onmouseout=\"hidetip();\">
 					<span style='color:red;'>" . $badachivement . "</span>
 				</h4>
-				<div class='achievement-progress-text'> " . $row[$ach06_award] . " / " . $ach06_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach06_award']] . " / " . $language_pack['ach06_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach06_award] * 6.6 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach06_award']] * 6.6 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 7
-	if ($row[$ach07_award] >= 0 && $row[$ach07_award] <= $ach07_progress-1) {
+
+	// Achivement 7
+	if ($row[$language_pack['ach07_award']] >= 0 && $row[$language_pack['ach07_award']] <= $language_pack['ach07_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -617,24 +600,25 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach07 . "<h3>
+				<h3>" . $language_pack['ach07'] . "<h3>
 				<h5>
-					" . $ach07_desc . "
+					" . $language_pack['ach07_desc'] . "
 				</h5>
 				<h4 onmouseover=\"showtip('". $badachivement_desc ."');\" onmouseout=\"hidetip();\">
 					<span style='color:red;'>" . $badachivement . "</span>
 				</h4>
-				<div class='achievement-progress-text'> " . $row[$ach07_award] . " / " . $ach07_progress . "</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach07_award']] . " / " . $language_pack['ach07_progress'] . "</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach07_award] * 3.3 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach07_award']] * 3.3 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 9
-	if ($row[$ach09_award] == 0) {
+
+	// Achivement 9
+	if ($row[$language_pack['ach09_award']] == 0) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -643,17 +627,18 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach09 . "<h3>
+				<h3>" . $language_pack['ach09'] . "<h3>
 				<h5>
-					" . $ach09_desc . "
+					" . $language_pack['ach09_desc'] . "
 				</h5>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 10
-	if ($row[$ach10_award] <= $ach10_progress-1) {
+
+	// Achivement 10
+	if ($row[$language_pack['ach10_award']] <= $language_pack['ach10_progress']-1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -662,22 +647,23 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach10 . "<h3>
+				<h3>" . $language_pack['ach10'] . "<h3>
 				<h5>
-					" . $ach10_desc ."
+					" . $language_pack['ach10_desc'] ."
 				</h5>
-				<div class='achievement-progress-text'> " . $row[$ach10_award] . " / ". $ach10_progress ."</div>
+				<div class='achievement-progress-text'> " . $row[$language_pack['ach10_award']] . " / ". $language_pack['ach10_progress'] ."</div>
 				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$ach10_award] * 10 . "%' > 
+					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach10_award']] * 10 . "%' > 
 				</div>
 				</div>
 			</div>
 		</div>
 		<br clear='left'></br>";
 	}
-		// Achivement 11
-			// The first achievement progress code (old, but works)
-	if ($row[$ach11_award] == 3) {
+
+	// Achivement 11
+	// The first achievement progress code (old, but works)
+	if ($row[$language_pack['ach11_award']] == 3) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -686,9 +672,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach11 . "<h3>
+				<h3>" . $language_pack['ach11'] . "<h3>
 				<h5>
-					" . $ach11_desc . "
+					" . $language_pack['ach11_desc'] . "
 				</h5>
 				<div class='achievement-progress-text'> 3 / 4</div>
 				<div class='achievement-progress-bar'>
@@ -698,7 +684,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	} elseif ($row[$ach11_award] == 2) {
+	} elseif ($row[$language_pack['ach11_award']] == 2) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -707,9 +693,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach11 . "<h3>
+				<h3>" . $language_pack['ach11'] . "<h3>
 				<h5>
-					" . $ach11_desc . "
+					" . $language_pack['ach11_desc'] . "
 				</h5>
 				<div class='achievement-progress-text'> 2 / 4</div>
 				<div class='achievement-progress-bar'>
@@ -719,7 +705,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	} elseif ($row[$ach11_award] == 1) {
+	} elseif ($row[$language_pack['ach11_award']] == 1) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -728,9 +714,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach11 . "<h3>
+				<h3>" . $language_pack['ach11'] . "<h3>
 				<h5>
-					" . $ach11_desc . "
+					" . $language_pack['ach11_desc'] . "
 				</h5>
 				<div class='achievement-progress-text'> 1 / 4</div>
 				<div class='achievement-progress-bar'>
@@ -740,7 +726,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	} elseif ($row[$ach11_award] == 0) {
+	} elseif ($row[$language_pack['ach11_award']] == 0) {
 		$arr_achievements2[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -749,9 +735,9 @@ if (mysql_num_rows($result) > 0)
 			</div>
 			<div class='achievement-desc-base'>
 				<div class='achievement-desc'>
-				<h3>" . $ach11 . "<h3>
+				<h3>" . $language_pack['ach11'] . "<h3>
 				<h5>
-					" . $ach11_desc . "
+					" . $language_pack['ach11_desc'] . "
 				</h5>
 				<div class='achievement-progress-text'> 0 / 4</div>
 				<div class='achievement-progress-bar'>

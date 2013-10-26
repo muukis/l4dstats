@@ -9,7 +9,13 @@ $templates_path_len = strlen($templates_path);
 $template_info_file = '/template.php';
 $template_images_path = '/img/';
 
-$default_site_template = "default";
+if (!$default_site_template ||
+    strlen($default_site_template) <= 0 ||
+    !file_exists($templates_path . $default_site_template . $template_info_file))
+{
+	$default_site_template = "default";
+}
+
 $default_site_template_path = $templates_path . $default_site_template;
 $default_site_template_images_path = $default_site_template_path . $template_images_path;
 
@@ -18,14 +24,10 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 	$template_path_entry_name = substr($template_path_entry, $templates_path_len);
 
 	if (!is_dir($template_path_entry) ||
-	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1)
+	    preg_match("/^[a-zA-Z0-9]+$/", $template_path_entry_name) != 1 ||
+	    !file_exists($template_path_entry . $template_info_file))
 	{
 		continue;
-	}
-	
-	if ($template_path_entry_name == "css" or $template_path_entry_name == "img" or $template_path_entry_name == "images")
-	{
-		// TODO: Make it hide css, img and/or images folder from templates.
 	}
 
 	$template_name = $template_path_entry_name;
@@ -36,8 +38,10 @@ foreach (glob($templates_path . '*') as $template_path_entry)
 		$template_name = $template_path_entry_name;
 	}
 
-	$template_selector[$template_path_entry] = array('name' => $template_name, 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
+	$template_selector[$template_path_entry] = array('name' => htmlentities($template_name), 'getprm' => $get_parameters . 'template=' . $template_path_entry_name, 'templateid' => $template_path_entry_name);
 }
+
+$template_properties['template_selector'] = $template_selector;
 
 // Look for new set value
 if ($_GET["template"])
@@ -61,8 +65,16 @@ if (!$site_template ||
 
 $site_template = strtolower($site_template);
 $site_template_path = $templates_path . $site_template;
+$extra_headers = '';
 
 require($site_template_path . $template_info_file);
+
+$template_name = htmlentities($template_name);
+
+$template_properties['current_template'] = $site_template;
+$template_properties['current_template_path'] = $site_template_path;
+$template_properties['current_template_name'] = $template_name;
+$template_properties['extra_headers'] = $extra_headers;
 
 $load_path = $default_site_template_path;
 $load_path .= '/';

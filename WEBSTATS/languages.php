@@ -24,9 +24,11 @@ foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filenam
 	if (file_exists($language_flag_path))
 	{
 		require($lang_file_prefix . $lang_id . $lang_file_postfix);
-		$language_selector[$lang_id] = array('name' => $lang_name, 'path' => $language_flag_path, 'getprm' => $get_parameters . 'lang=' . $lang_id);
+		$language_selector[$lang_id] = array('name' => htmlentities($lang_name), 'path' => $language_flag_path, 'getprm' => $get_parameters . 'lang=' . $lang_id);
 	}
 }
+
+$template_properties['language_selector'] = $language_selector;
 
 // Always load the plugin default language in background
 require($lang_file_prefix . 'en' . $lang_file_postfix);
@@ -58,5 +60,10 @@ if (!file_exists($lang_file_prefix . $lang . $lang_file_postfix))
 
 // Load user preferenced language on top
 include($lang_file_prefix . $lang . $lang_file_postfix);
+
+$lang_name = htmlentities($lang_name);
+
+$template_properties['current_language'] = $lang_name;
+$template_properties['current_language_id'] = $lang;
 
 ?>
