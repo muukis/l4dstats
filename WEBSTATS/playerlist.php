@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -47,8 +47,8 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 	else if ($type == "mutations" && $team == "") $typelabel = " (Mutations)";
 	else $team = "";
 
-	$tpl->set("title", $language_pack['tpl_playerlist_title'] . $typelabel); // Window title
-	$tpl->set("page_heading", $language_pack['tpl_playerlist_title'] . $typelabel); // Page header
+	$tpl->set("title", $language_pack['playerrankings'] . $typelabel); // Window title
+	$tpl->set("page_heading", $language_pack['playerrankings'] . $typelabel); // Page header
 
 	$sort = "";
 	$playtime = "";
@@ -111,17 +111,6 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		$row = mysql_fetch_array($result);
 
     $arr_players = array();
-    $stats = new Template($templatefiles['ranking.tpl']);
-	
-		// Multilang support
-			//-- BASE
-		$stats->set("lang_tpl_playtime_ply", $language_pack['tpl_playtime_ply']);
-		$stats->set("lang_tpl_playtime_plyrank", $language_pack['tpl_playtime_plyrank']);
-		$stats->set("lang_tpl_playtime_plypoints", $language_pack['tpl_playtime_plypoints']);
-		$stats->set("lang_tpl_playtime_plytime", $language_pack['tpl_playtime_plytime']);
-		$stats->set("lang_tpl_playtime_plyonline", $language_pack['tpl_playtime_plyonline']);
-		
-		// End
 
     $page_current = intval($page);
     $page_perpage = 100;

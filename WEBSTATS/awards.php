@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -215,12 +215,12 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	file_put_contents("./templates/awards_cache.html", trim($award_output));
 	// Multilang support
 		//-- BASE
-	$stats->set("lang_tpl_award_lastupdate", $language_pack['tpl_award_lastupdate']);
+	$stats->set("lang_tpl_award_lastupdate", $language_pack['awardslastupdated']);
 	// End
 }
 
-$tpl->set("title", $language_pack['tpl_award_title']); // Window title
-$tpl->set("page_heading", $language_pack['tpl_award_title']); // Page header
+$tpl->set("title", $language_pack['rankawards']); // Window title
+$tpl->set("page_heading", $language_pack['rankawards']); // Page header
 
 $output = file_get_contents("./templates/awards_cache.html");
 

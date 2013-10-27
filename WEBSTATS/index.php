@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -146,7 +146,7 @@ if (mysql_error()) {
     $i++;
   }
 
-  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $language_pack['tpl_noplyonline'] . "</td</tr>\n";
+  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $language_pack['noplayersonline'] . "</td</tr>\n";
 
 	$stats->set("online", $arr_online);
 	$output = $stats->fetch($templatefiles['online.tpl']);

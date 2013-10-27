@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -18,8 +18,8 @@ $tpl = new Template($templatefiles['layout.tpl']);
 $searchstring = mysql_real_escape_string($_POST['search']);
 if ($searchstring."" == "") $searchstring = md5("nostring");
 
-$tpl->set("title", $language_pack['tpl_search_title']); // Window title
-$tpl->set("page_heading", $language_pack['tpl_search_title']); // Page header
+$tpl->set("title", $language_pack['playersearch']); // Window title
+$tpl->set("page_heading", $language_pack['playersearch']); // Page header
 
 $result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE name LIKE '%" . $searchstring . "%' OR steamid LIKE '%" . $searchstring . "%' ORDER BY points + points_survivors + points_infected DESC LIMIT 100");
 if (mysql_error()) {
@@ -39,7 +39,7 @@ if (mysql_error()) {
     $arr_online[] = $line;
   }
 
-  if (mysql_num_rows($result) == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $language_pack['tpl_search_nomatch'] . "</td</tr>\n";
+  if (mysql_num_rows($result) == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $language_pack['noplayersfound'] . "</td</tr>\n";
   $stats->set("online", $arr_online);
   $output = $stats->fetch($templatefiles['search.tpl']);
 }

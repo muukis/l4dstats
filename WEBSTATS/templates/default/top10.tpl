@@ -1,6 +1,6 @@
-
+﻿
 			<li>
-				<h2><?php echo $language_pack['tpl_layout_top10']; ?></h2>
+				<h2><?php echo $language_pack['top10players']; ?></h2>
 				<ul>
 <?php foreach ($template_properties['top10players'] as $rank => $top10player): ?>
 					<li>

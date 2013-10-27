@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -26,8 +26,8 @@ $mapprefix = trim(mysql_real_escape_string($_GET['id']));
 if (strstr($_GET['gamemode'], "/")) exit;
 $gamemode = trim(mysql_real_escape_string($_GET['gamemode']));
 
-$tpl->set("title", $language_pack['tpl_tmaps_title']); // Window title
-$tpl->set("page_heading", $language_pack['tpl_tmaps_title']); // Page header
+$tpl->set("title", $language_pack['timedmaps']); // Window title
+$tpl->set("page_heading", $language_pack['timedmaps']); // Page header
 
 $fulloutput = "";
 $campaigns = array();

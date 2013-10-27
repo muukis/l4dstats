@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -34,8 +34,8 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 {
 	$disptype = ucfirst($type);
 
-	$tpl->set("title", $language_pack['tpl_maps_title'] . " (" . $disptype . ")"); // Window title
-	$tpl->set("page_heading", $language_pack['tpl_maps_title'] . " (" . $disptype . ")"); // Page header
+	$tpl->set("title", $language_pack['campaignstats'] . " (" . $disptype . ")"); // Window title
+	$tpl->set("page_heading", $language_pack['campaignstats'] . " (" . $disptype . ")"); // Page header
 
 	$maparr = array();
 	$totals = array();

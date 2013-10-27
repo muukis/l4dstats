@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -854,10 +854,10 @@ $mutationscmblink = "";
 
 if ($game_version != 1)
 {
-	$realismlink = "<a href='maps.php?type=realism'>" . $language_pack['tpl_layout_realismstats'] . "</a>";
-	$scavengelink = "<a href='maps.php?type=scavenge'>" . $language_pack['tpl_layout_scavengestats'] . "</a>";
-	$realismversuslink = "<a href='maps.php?type=realismversus'>" . $language_pack['tpl_layout_realismversusstats'] . "</a>";
-	$mutationslink = "<a href='maps.php?type=mutations'>" . $language_pack['tpl_layout_mutationsstats'] . "</a>";
+	$realismlink = "<a href='maps.php?type=realism'>" . $language_pack['realismstats'] . "</a>";
+	$scavengelink = "<a href='maps.php?type=scavenge'>" . $language_pack['scavengestats'] . "</a>";
+	$realismversuslink = "<a href='maps.php?type=realismversus'>" . $language_pack['realismversusstats'] . "</a>";
+	$mutationslink = "<a href='maps.php?type=mutations'>" . $language_pack['mutationsstats'] . "</a>";
 
 	$realismcmblink = str_replace("'", "&quot;", $realismlink) . "<br>";
 	$scavengecmblink = str_replace("'", "&quot;", $scavengelink) . "<br>";

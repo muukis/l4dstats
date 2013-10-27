@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -25,25 +25,25 @@ $rankrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS rank FROM " . $mysq
 $rank = $rankrow['rank'];
 
 $arr_kills = array();
-$arr_kills[$language_pack['kills_commons']] = array($row['kill_infected'], $language_pack['kills_commons_title']);
-$arr_kills[$language_pack['kills_hunters']] = array($row['kill_hunter'], $language_pack['kills_hunters_title']);
-$arr_kills[$language_pack['kills_smokers']] = array($row['kill_smoker'], $language_pack['kills_smokers_title']);
-$arr_kills[$language_pack['kills_boomers']] = array($row['kill_boomer'], $language_pack['kills_boomers_title']);
+$arr_kills[$language_pack['commoninfected']] = array($row['kill_infected'], $language_pack['commonsinfectedkilled']);
+$arr_kills[$language_pack['hunters']] = array($row['kill_hunter'], $language_pack['hunterskilled']);
+$arr_kills[$language_pack['smokers']] = array($row['kill_smoker'], $language_pack['smokerskilled']);
+$arr_kills[$language_pack['boomers']] = array($row['kill_boomer'], $language_pack['boomerskilled']);
 
 if ($game_version != 1)
 {
-	$arr_kills[$language_pack['kills_spitters']] = array($row['kill_spitter'], $language_pack['kills_spitters_title']);
-	$arr_kills[$language_pack['kills_jockeys']] = array($row['kill_jockey'], $language_pack['kills_jockeys_title']);
-	$arr_kills[$language_pack['kills_chargers']] = array($row['kill_charger'], $language_pack['kills_chargers_title']);
+	$arr_kills[$language_pack['spitters']] = array($row['kill_spitter'], $language_pack['spitterskilled']);
+	$arr_kills[$language_pack['jockeys']] = array($row['kill_jockey'], $language_pack['jockeyskilled']);
+	$arr_kills[$language_pack['chargers']] = array($row['kill_charger'], $language_pack['chargerskilled']);
 }
 
 $arr_demerits = array();
-$arr_demerits[$language_pack['kills_dem_1']] = array($row['award_friendlyfire'], $language_pack['kills_dem_1_title']);
-$arr_demerits[$language_pack['kills_dem_2']] = array($row['award_fincap'], $language_pack['kills_dem_2_title']);
-$arr_demerits[$language_pack['kills_dem_3']] = array($row['award_teamkill'], $language_pack['kills_dem_3_title']);
-$arr_demerits[$language_pack['kills_dem_4']] = array($row['award_left4dead'], $language_pack['kills_dem_4_title']);
-$arr_demerits[$language_pack['kills_dem_5']] = array($row['award_letinsafehouse'], $language_pack['kills_dem_5_title']);
-$arr_demerits[$language_pack['kills_dem_6']] = array($row['award_witchdisturb'], $language_pack['kills_dem_6_title']);
+$arr_demerits[$language_pack['friendlyfireincidents']] = array($row['award_friendlyfire'], $language_pack['friendlyfireincidentstitle']);
+$arr_demerits[$language_pack['incapacitatedfriendlies']] = array($row['award_fincap'], $language_pack['incapacitatedincapacitatedtitle']);
+$arr_demerits[$language_pack['teammateskilled']] = array($row['award_teamkill'], $language_pack['teammateskilledtitle']);
+$arr_demerits[$language_pack['friendliesleftfordead']] = array($row['award_left4dead'], $language_pack['friendliesleftfordeadtitle']);
+$arr_demerits[$language_pack['infectedletinsaferoom']] = array($row['award_letinsafehouse'], $language_pack['infectedletinsaferoomtitle']);
+$arr_demerits[$language_pack['witchesdisturbed']] = array($row['award_witchdisturb'], $language_pack['witchesdisturbedtitle']);
 
 if (mysql_num_rows($result) > 0)
 {
@@ -53,8 +53,8 @@ if (mysql_num_rows($result) > 0)
 	$timesrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS times FROM " . $mysql_tableprefix . "timedmaps WHERE steamid = '" . $id . "'"));
 	$times = $timesrow['times'];
 
-	$tpl->set("title", $playername . " :: " . $language_pack['tpl_player_stats']); // Window title
-	$tpl->set("page_heading","<a href='player.php?steamid=" . $row['steamid'] . "'>" . $playername2 . " :: " . $language_pack['tpl_player_stats'] . "</a>"); // Page header
+	$tpl->set("title", $playername . " :: " . $language_pack['playerstats']); // Window title
+	$tpl->set("page_heading","<a href='player.php?steamid=" . $row['steamid'] . "'>" . $playername2 . " :: " . $language_pack['playerstats'] . "</a>"); // Page header
 
 	$stats = new Template($templatefiles['player_stats.tpl']);
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -41,10 +41,10 @@
 <div id="header">
 	<!-- Serach Bar -->
 	<div id="search">
-		<?php echo $language_pack['tpl_layout_search']; ?>
+		<?php echo $language_pack['searchfor']; ?>
 		<form method="post" action="search.php">
 			<input type="text" id="s" name="search" value="" />
-			<input type="submit" id="x" name="submit" value="<?php echo $language_pack['tpl_layout_search_btn']; ?>" />
+			<input type="submit" id="x" name="submit" value="<?php echo $language_pack['search']; ?>" />
 		</form>
 	</div>
 	<div id="logo">

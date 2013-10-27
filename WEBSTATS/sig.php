@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	header('content-type: image/png');
 	
 /*
@@ -105,7 +105,7 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 		// End Rank IMG
 		
 		// Name
-		imagettftext($res_image_main,$nam_font_size,0,7,18,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_name'] . " " . $row['name']);
+		imagettftext($res_image_main,$nam_font_size,0,7,18,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_name'] . ": " . $row['name']);
 		
 		// Achivements
 		$arr_achievements = array();
@@ -138,13 +138,13 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 		
 		// End List
 		
-		imagettftext($res_image_main,$nam_font_size,0,7,30,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_ach'] . " " . count($arr_achievements));
+		imagettftext($res_image_main,$nam_font_size,0,7,30,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_ach'] . ": " . count($arr_achievements));
 		
 		// Rank
 		imagettftext($res_image_main,$rank_font_size,0,330,20,$res_rank_color_choose,$str_res_dir.$str_font_bold,$rank);
 		
 		// Points
-		imagettftext($res_image_main,$nam_font_size,0,7,42,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_points'] . " " . number_format($totalpoints));
+		imagettftext($res_image_main,$nam_font_size,0,7,42,$res_font_color_lblue,$str_res_dir.$str_font_bold,$language_pack['str_points'] . ": " . number_format($totalpoints));
 		
 		// Achivement borders
 		$ach_border = 'img/ach.png';
