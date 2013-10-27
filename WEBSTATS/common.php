@@ -991,6 +991,10 @@ if ($show_motd && strlen($motd_message) > 0)
 $tpl = new Template($templatefiles['top10.tpl']);
 $template_properties['top10'] = $tpl->fetch($templatefiles['top10.tpl']);
 
+// Load page main navigation template
+$tpl = new Template($templatefiles['navigation_main.tpl']);
+$template_properties['navigation_main'] = $tpl->fetch($templatefiles['navigation_main.tpl']);
+
 // Load page navigation template
 $tpl = new Template($templatefiles['navigation.tpl']);
 $template_properties['navigation'] = $tpl->fetch($templatefiles['navigation.tpl']);

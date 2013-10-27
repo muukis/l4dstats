@@ -1,9 +1,6 @@
 
-	<!-- start sidebar -->
-	<div id="sidebar">
-		<ul>
 			<li>
-				<h2><span class="flicker"><?php echo $language_pack['tpl_layout_menutitle']; ?></span></h2>
+				<h2><?php echo $language_pack['tpl_layout_menutitle']; ?></h2>
 				<ul>
 					<li><a href="index.php"><?php echo $language_pack['playersonline']; ?></a></li>
 					<li><a href="playerlist.php"><?php echo $language_pack['tpl_layout_plyrank']; ?></a></li>
@@ -25,7 +22,3 @@
 					<li><a href="server.php" class="special"><?php echo $language_pack['tpl_layout_servstats']; ?></a></li>
 				</ul>
 			</li>
-<?php echo $template_properties['top10']; ?>
-		</ul>
-	</div>
-	<!-- end sidebar -->
