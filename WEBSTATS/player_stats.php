@@ -39,7 +39,7 @@ if ($game_version != 1)
 
 $arr_demerits = array();
 $arr_demerits[$language_pack['friendlyfireincidents']] = array($row['award_friendlyfire'], $language_pack['friendlyfireincidentstitle']);
-$arr_demerits[$language_pack['incapacitatedfriendlies']] = array($row['award_fincap'], $language_pack['incapacitatedincapacitatedtitle']);
+$arr_demerits[$language_pack['incapacitatedfriendlies']] = array($row['award_fincap'], $language_pack['incapacitatedfriendliestitle']);
 $arr_demerits[$language_pack['teammateskilled']] = array($row['award_teamkill'], $language_pack['teammateskilledtitle']);
 $arr_demerits[$language_pack['friendliesleftfordead']] = array($row['award_left4dead'], $language_pack['friendliesleftfordeadtitle']);
 $arr_demerits[$language_pack['infectedletinsaferoom']] = array($row['award_letinsafehouse'], $language_pack['infectedletinsaferoomtitle']);

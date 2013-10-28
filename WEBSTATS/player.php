@@ -27,13 +27,13 @@ $rank = $rankrow['rank'];
 $arr_survivor_awards = array();
 $arr_survivor_awards[$language_pack['awardpillsgiven']] = array($row['award_pills'], $language_pack['awardpillsgivendesc']);
 $arr_survivor_awards[$language_pack['awardmedkitsgiven']] = array($row['award_medkit'], $language_pack['awardmedkitsgivendesc']);
-$arr_survivor_awards[$language_pack['awardsavedfriendliesfromhunters']] = array($row['award_hunter'], $language_pack['awardsavedasurvivorfromhuntersdesc']);
+$arr_survivor_awards[$language_pack['awardsavedfriendliesfromhunters']] = array($row['award_hunter'], $language_pack['awardsavedfriendliesfromhuntersdesc']);
 $arr_survivor_awards[$language_pack['awardsavedfriendliesfromsmokers']] = array($row['award_smoker'], $language_pack['awardsavedfriendliesfromsmokersdesc']);
 if ($game_version != 1)
 {
 	$arr_survivor_awards[$language_pack['awarddefibrillatorsused']] = array($row['award_defib'], $language_pack['awarddefibrillatorsuseddesc']);
 	$arr_survivor_awards[$language_pack['awardadrenalinesgiven']] = array($row['award_adrenaline'], $language_pack['awardadrenalinesgivendesc']);
-	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromjockeys']] = array($row['award_jockey'], $language_pack['awardsavedasurvivorfromjockeysdesc']);
+	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromjockeys']] = array($row['award_jockey'], $language_pack['awardsavedfriendliesfromjockeysdesc']);
 	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromchargers']] = array($row['award_charger'], $language_pack['awardsavedfriendliesfromchargers']);
 	$arr_survivor_awards[$language_pack['awardleveledcharges']] = array($row['award_matador'], $language_pack['awardleveledchargesdesc']);
 	$arr_survivor_awards[$language_pack['awardgascanisterspoured']] = array($row['award_gascans_poured'], $language_pack['awardgascanisterspoureddesc']);
@@ -207,7 +207,7 @@ if (mysql_num_rows($result) > 0)
 			$link_stop = "</a>";
 		}
 
-		$stats->set("player_country", "<tr><td>" . $language_pack['location'] . "</td><td>" . $ip2c->get_country_flag($row['ip']) . $link_start . $city_name . $country_name . $link_stop . "</td></tr>");
+		$stats->set("player_country", "<tr><td>" . $language_pack['location'] . ":</td><td>" . $ip2c->get_country_flag($row['ip']) . $link_start . $city_name . $country_name . $link_stop . "</td></tr>");
 	}
 
 	$stats->set("player_steamid", $row['steamid']);
