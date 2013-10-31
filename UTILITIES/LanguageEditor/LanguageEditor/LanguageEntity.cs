@@ -158,11 +158,11 @@ namespace LanguageEditor
                 sb.AppendLine(string.Format("{0} = \"{1}\";", langVarRow[0].PadRight(langVarNameMaxLen), langVarRow[1]));
             }
 
-            emptyLanguage.Replace("%LANGPACKROWS%", sb.ToString());
+            emptyLanguage = emptyLanguage.Replace("%LANGPACKROWS%", sb.ToString());
 
             using (StreamWriter sw = new StreamWriter(Filename, false, Encoding.UTF8))
             {
-                sw.Write(sb);
+                sw.Write(emptyLanguage);
             }
 
             Edited = false;

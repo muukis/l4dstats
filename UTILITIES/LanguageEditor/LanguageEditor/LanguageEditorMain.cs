@@ -154,7 +154,7 @@ namespace LanguageEditor
             using (StreamWriter sr = new StreamWriter(languageFilename, false, Encoding.UTF8))
             {
                 string emptyLanguage = LanguageEntity.EmptyLanguagePhp.Replace("%LANGNAME%", lanquageName);
-                emptyLanguage.Replace("%LANGPACKROWS%", string.Empty);
+                emptyLanguage = emptyLanguage.Replace("%LANGPACKROWS%", string.Empty);
                 sr.Write(emptyLanguage);
             }
 
