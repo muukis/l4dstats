@@ -130,6 +130,7 @@
             this.lvLanguageEditor.UseCompatibleStateImageBehavior = false;
             this.lvLanguageEditor.View = System.Windows.Forms.View.Details;
             this.lvLanguageEditor.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lvLanguageEditor_AfterLabelEdit);
+            this.lvLanguageEditor.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvLanguageEditor_MouseDoubleClick);
             // 
             // chEditLang
             // 
@@ -192,10 +193,8 @@
             // 
             // LanguageEditorMain
             // 
-            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(781, 479);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
@@ -203,11 +202,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lvLanguageEditor);
             this.Controls.Add(this.gbCreate);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "LanguageEditorMain";
             this.Text = "Custom Player Stats for Left 4 Dead - Language file editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LanguageEditorMain_FormClosing);
             this.Load += new System.EventHandler(this.LanguageEditorMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LanguageEditorMain_KeyDown);
             this.gbCreate.ResumeLayout(false);
             this.gbCreate.PerformLayout();
             this.ResumeLayout(false);

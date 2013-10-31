@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -97,8 +98,11 @@ namespace LanguageEditor
 
             TranslationEntity translationEntity = lvLanguageEditor.Items[e.Item] as TranslationEntity;
 
-            translationEntity.Edited = true;
-            translationEntity.Language.Edited = true;
+            if (e.Label != null && string.Compare(e.Label.Trim(), translationEntity.Translation, StringComparison.InvariantCulture) != 0)
+            {
+                translationEntity.Edited = true;
+                translationEntity.Language.Edited = true;
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -168,6 +172,30 @@ namespace LanguageEditor
 
             tbNewLanguageName.Text = string.Empty;
             tbNewLanguageId.Text = string.Empty;
+        }
+
+        private void lvLanguageEditor_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            OpenLabelEditor();
+        }
+
+        private void OpenLabelEditor()
+        {
+            if (lvLanguageEditor.SelectedItems.Count != 1)
+            {
+                return;
+            }
+
+            lvLanguageEditor.SelectedItems[0].BeginEdit();
+        }
+
+        private void LanguageEditorMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (lvLanguageEditor.Focused && (e.KeyData == Keys.Enter || e.KeyData == Keys.Space))
+            {
+                OpenLabelEditor();
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }
