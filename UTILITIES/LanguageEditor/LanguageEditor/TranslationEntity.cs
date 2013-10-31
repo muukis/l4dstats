@@ -12,7 +12,6 @@ namespace LanguageEditor
             : base(translation)
         {
             Language = language;
-            TranslationId = translationId;
             SubItems.Add(english);
             SubItems.Add(translationId);
         }
@@ -27,11 +26,13 @@ namespace LanguageEditor
 
         public string English
         {
-            get { return Text.Trim(); }
-            set { Text = value; }
+            get { return SubItems[1].Text; }
         }
 
-        public string TranslationId { get; private set; }
+        public string TranslationId
+        {
+            get { return SubItems[2].Text; }
+        }
 
         public bool Edited { get; set; }
     }
