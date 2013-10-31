@@ -50,6 +50,7 @@
     <Compile Include="LanguageEditorMain.Designer.cs">
       <DependentUpon>LanguageEditorMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="LanguageEditViewSorter.cs" />
     <Compile Include="LanguageEntity.cs" />
     <Compile Include="TranslationEntity.cs" />
     <Compile Include="Program.cs" />

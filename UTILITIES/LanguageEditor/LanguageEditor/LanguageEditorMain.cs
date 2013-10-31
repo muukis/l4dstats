@@ -14,11 +14,13 @@ namespace LanguageEditor
 {
     public partial class LanguageEditorMain : Form
     {
-        List<LanguageEntity> languageEntities = new List<LanguageEntity>();
+        private List<LanguageEntity> languageEntities = new List<LanguageEntity>();
+        private LanguageEditViewSorter sorter = new LanguageEditViewSorter();
 
         public LanguageEditorMain()
         {
             InitializeComponent();
+            lvLanguageEditor.ListViewItemSorter = sorter;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -196,6 +198,28 @@ namespace LanguageEditor
                 OpenLabelEditor();
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void lvLanguageEditor_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == sorter.SortColumn)
+            {
+                if (sorter.Order == SortOrder.Ascending)
+                {
+                    sorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    sorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                sorter.SortColumn = e.Column;
+                sorter.Order = SortOrder.Ascending;
+            }
+
+            lvLanguageEditor.Sort();
         }
     }
 }

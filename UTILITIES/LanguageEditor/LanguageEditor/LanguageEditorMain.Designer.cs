@@ -130,6 +130,7 @@
             this.lvLanguageEditor.UseCompatibleStateImageBehavior = false;
             this.lvLanguageEditor.View = System.Windows.Forms.View.Details;
             this.lvLanguageEditor.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lvLanguageEditor_AfterLabelEdit);
+            this.lvLanguageEditor.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvLanguageEditor_ColumnClick);
             this.lvLanguageEditor.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvLanguageEditor_MouseDoubleClick);
             // 
             // chEditLang
