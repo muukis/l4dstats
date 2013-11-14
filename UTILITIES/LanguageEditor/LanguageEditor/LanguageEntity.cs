@@ -60,11 +60,12 @@ namespace LanguageEditor
 
                 if (matches.Count > 0 && matches[0].Groups.Count == 5)
                 {
-                    Name = string.Format("{0} ({1})", languageFilename, matches[0].Groups[3].Value);
+                    Name = matches[0].Groups[3].Value;
+                    HeaderTitle = string.Format("{0} ({1})", languageFilename, Name);
                 }
                 else
                 {
-                    Name = languageFilename;
+                    HeaderTitle = Name = languageFilename;
                 }
 
                 matches = Regex.Matches(content, @"\$language_pack( *?)\[( *?)'(.*?)'( *?)\]( *?)=( *?)""(.*?)""( *?);");
@@ -120,7 +121,7 @@ namespace LanguageEditor
 
         public override string ToString()
         {
-            return Name;
+            return HeaderTitle;
         }
 
         public void Save()
@@ -178,6 +179,8 @@ namespace LanguageEditor
         public string Filename { get; private set; }
 
         public string Name { get; private set; }
+
+        public string HeaderTitle { get; private set; }
 
         public string Id { get; private set; }
 
