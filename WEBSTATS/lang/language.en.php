@@ -20,6 +20,7 @@ $lang_name = "English";
 
 $language_pack['achievements']                                  = "Achievements";
 $language_pack['achievementsearned']                            = "Achievements Earned";
+$language_pack['ago']                                           = "ago";
 $language_pack['awardadrenalinesgiven']                         = "Adrenalines Given";
 $language_pack['awardadrenalinesgivendesc']                     = "Adrenalines given to another Survivor";
 $language_pack['awardallsurvivorsdead']                         = "All Survivors Dead";
@@ -77,7 +78,10 @@ $language_pack['awardtankskilledwithteam']                      = "Tanks Killed 
 $language_pack['awardtankskilledwithteamdesc']                  = "Killed Tanks";
 $language_pack['boomers']                                       = "Boomers";
 $language_pack['boomerskilled']                                 = "Boomers Killed";
+$language_pack['campaignname']                                  = "Campaign Name";
 $language_pack['campaignstats']                                 = "Campaign Stats";
+$language_pack['campaignstatsdesc']                             = "More zombies have been killed on this server than the entire population of %s, population %s.<br>That is almost more than the entire population of %s, population %s!";
+$language_pack['campaignstatsdesclink']                         = "<a href=\"http://google.com/search?q=site:en.wikipedia.org+%s&btnI=1\">%s</a>";
 $language_pack['chargers']                                      = "Chargers";
 $language_pack['chargerskilled']                                = "Chargers Killed";
 $language_pack['commoninfected']                                = "Common Infected";
@@ -86,6 +90,7 @@ $language_pack['coop']                                          = "Coop";
 $language_pack['coopstats']                                     = "Coop Stats";
 $language_pack['currentname']                                   = "Current name";
 $language_pack['days']                                          = "days";
+$language_pack['entersearchstr']                                = "Enter a search string.";
 $language_pack['friendliesleftfordead']                         = "Friendlies Left For Dead";
 $language_pack['friendliesleftfordeadtitle']                    = "Survivors left to die";
 $language_pack['friendlyfireincidents']                         = "Friendly Fire Incidents";
@@ -114,9 +119,13 @@ $language_pack['minutes']                                       = "minutes";
 $language_pack['months']                                        = "months";
 $language_pack['mutations']                                     = "Mutations";
 $language_pack['mutationsstats']                                = "Mutations Stats";
+$language_pack['next']                                          = "Next";
 $language_pack['noinformationgiven']                            = "No information given.";
 $language_pack['noplayersfound']                                = "There are no players that matched!";
 $language_pack['noplayersonline']                               = "There are no players online";
+$language_pack['norankedplayersfound']                          = "No players found!";
+$language_pack['overall']                                       = "Overall";
+$language_pack['page']                                          = "Page";
 $language_pack['player']                                        = "Player";
 $language_pack['playerinformation']                             = "Player Information";
 $language_pack['playerrankings']                                = "Player Rankings";
@@ -127,6 +136,7 @@ $language_pack['playerstats']                                   = "Player Stats"
 $language_pack['playtime']                                      = "Playtime";
 $language_pack['points']                                        = "Points";
 $language_pack['pointsperminute']                               = "Points per Minute";
+$language_pack['prev']                                          = "Prev";
 $language_pack['rank']                                          = "Rank";
 $language_pack['rankawards']                                    = "Rank Awards";
 $language_pack['realism']                                       = "Realism";
@@ -139,7 +149,9 @@ $language_pack['scavengestats']                                 = "Scavenge Stat
 $language_pack['seconds']                                       = "seconds";
 $language_pack['search']                                        = "Search";
 $language_pack['searchfor']                                     = "Search for a <b>Player's Name</b> or <b>Steam ID</b>";
+$language_pack['searchresult']                                  = "Search results for player name containing: <b>%s</b>";
 $language_pack['serverstats']                                   = "Server Stats";
+$language_pack['sertvertotal']                                  = "Server Total";
 $language_pack['smokers']                                       = "Smokers";
 $language_pack['smokerskilled']                                 = "Smokers Killed";
 $language_pack['spitters']                                      = "Spitters";
@@ -163,7 +175,14 @@ $language_pack['tipsurvivorskilled']                            = "Survivors kil
 $language_pack['tiptotalpointsearned']                          = "Total points earned from the server";
 $language_pack['title']                                         = "L4Dstats";
 $language_pack['top10players']                                  = "Top 10 Players";
+$language_pack['totalall4dead']                                 = "Total All&nbsp;4&nbsp;Dead";
+$language_pack['totalkills']                                    = "Total Kills";
+$language_pack['totalinfectedpoints']                           = "Infected Total Points";
 $language_pack['totalplaytime']                                 = "Total Playtime";
+$language_pack['totalpoints']                                   = "Total Points";
+$language_pack['totalpointsppm']                                = "Total Points (PPM)";
+$language_pack['totalrestarts']                                 = "Total Restarts";
+$language_pack['totalsurvivorpoints']                           = "Survivor Total Points";
 $language_pack['versus']                                        = "Versus";
 $language_pack['versusstats']                                   = "Versus Stats";
 $language_pack['viewingplayer']                                 = "Viewing Player";
@@ -250,5 +269,76 @@ $language_pack['infectedvar']                                   = "I"; // Stands
 $language_pack['infectedvar_desc']                              = "<b>VERSUS:</b> This achievement only specify for Team Infected)</b>"; // The description when you hover.
 $language_pack['survivorvar']                                   = "S"; // Stands for 'Survivor (TEAM)'
 $language_pack['survivorvar_desc']                              = "<b>VERSUS:</b> This achievement only specify for Team Survivor</b>"; // The description when you hover.
+
+/*==================================
+	Rank awards (L4D and L4D2)
+==================================*/
+
+$language_pack['award_ppm'] = "is The Most Efficient Player with <b>%s Points Per Minute</b>.";
+$language_pack['award_time'] = "has the most total playtime with <b>%s of Play</b>.";
+$language_pack['award_second'] = "came in %s with <b>%s</b>.";
+
+$language_pack['award_kills'] = "is The Real Chicago Ted with <b>%s Total Kills</b>.";
+$language_pack['award_headshots'] = "can Aim For The Top with <b>%s Headshots</b>.";
+$language_pack['award_ratio'] = "is The Headshot King with a <b>%s&#37; Headshot Ratio</b>.";
+$language_pack['award_melee_kills'] = "is The Martial Artist with <b>%s Total Melee Kills</b>.";
+
+$language_pack['award_killsurvivor'] = "Masters The Life Of The Undead with <b>%s Survivor</b> kills.";
+$language_pack['award_killinfected'] = "can Kill Anyone He Wants with <b>%s Common Infected</b> kills.";
+$language_pack['award_killhunter'] = "Moves Like They Do with <b>%s Hunter</b> kills.";
+$language_pack['award_killsmoker'] = "is In The Non-Smoking Section with <b>%s Smoker</b> kills.";
+$language_pack['award_killboomer'] = "is a Weight Loss Trainer with <b>%s Boomer</b> kills.";
+$language_pack['award_killspitter'] = "Don't Like Zombies Without Manners with <b>%s Spitter</b> kills.";
+$language_pack['award_killjockey'] = "Likes To Be On Top with <b>%s Jockey</b> kills.";
+$language_pack['award_killcharger'] = "Don't Like To Be Pushed Around with <b>%s Charger</b> kills.";
+
+$language_pack['award_pills'] = "says The First Hit Is Free with <b>%s Pain Pills Given</b>.";
+$language_pack['award_medkit'] = "is Wishing He Had A Medigun with <b>%s Medkits Used on Teammates</b>.";
+$language_pack['award_hunter'] = "is Johnny On The Spot by <b>Saving %s Pounced Teammates From Hunters</b>.";
+$language_pack['award_smoker'] = "is Into Anime, But Not Like That by <b>Saving %s Teammates From Smokers</b>.";
+$language_pack['award_jockey'] = "is The Freedom Fighter by <b>Saving %s Teammates From Jockeys</b>.";
+$language_pack['award_charger'] = "is Giving Hell To Bullies <b>Saving %s Teammates From Chargers</b>.";
+$language_pack['award_protect'] = "is Saving Your Ass with <b>%s Teammates Protected</b>.";
+$language_pack['award_revive'] = "is There When You Need Him by <b>Reviving %s Teammates</b>.";
+$language_pack['award_rescue'] = "is Checking All The Closets with <b>%s Teammates Rescued</b>.";
+$language_pack['award_campaigns'] = "is Getting Rescued... Again! with <b>%s Campaigns Completed</b>.";
+$language_pack['award_tankkill'] = "is Bringing Down The House by <b>Team Assisting %s Tank Kills</b>.";
+$language_pack['award_tankkillnodeaths'] = "is Bringing Superior Firepower by <b>Team Assisting %s Tank Kills, With No Deaths</b>.";
+$language_pack['award_allinsafehouse'] = "is Leaving No Man Behind with <b>%s Safe Houses Reached With All Survivors</b>.";
+
+$language_pack['award_friendlyfire'] = "is A Terrible Friend with <b>%s Friendly Fire Incidents</b>.";
+$language_pack['award_teamkill'] = "is Going To Be Banned, BRB with <b>%s Team Kills</b>.";
+$language_pack['award_fincap'] = "is Not Very Friendly with <b>%s Team Incapacitations</b>.";
+$language_pack['award_left4dead'] = "will Leave You For Dead by <b>Allowing %s Teammates To Die In Sight</b>.";
+$language_pack['award_letinsafehouse'] = "is Turning Into One Of Them with <b>%s Infected Let In The Safe Room</b>.";
+$language_pack['award_witchdisturb'] = "is Not A Lady Pleaser by <b>Disturbing %s Witches</b>.";
+
+$language_pack['award_pounce_nice'] = "is Pain From Above with <b>%s Hunter Nice Pounces</b>.";
+$language_pack['award_pounce_perfect'] = "is Death From Above with <b>%s Hunter Perfect Pounces</b>.";
+$language_pack['award_perfect_blindness'] = "is A Pain Painter causing <b>%s Times Perfect Blindness With A Boomer</b>.";
+$language_pack['award_infected_win'] = "is Driving Survivors In To Extinction with <b>%s Infected Victories</b>.";
+$language_pack['award_bulldozer'] = "is A Tank Bulldozer inflicting <b>Massive Damage %s Times To The Survivors</b>.";
+$language_pack['award_survivor_down'] = "puts Survivors On Their Knees with <b>%s Incapacitations</b>.";
+$language_pack['award_ledgegrab'] = "wants Survivors Of The Map causing <b>%s Survivors Grabbing On The Ledge</b>.";
+$language_pack['award_matador'] = "is The Matador with <b>%s Leveled Charges</b>.";
+$language_pack['award_witchcrowned'] = "Knows How To Handle Women with <b>%s Crowned Witches</b>.";
+
+$language_pack['award_tanksniper'] = "is A Tank Sniper hitting <b>%s Survivors With A Rock</b>.";
+
+/*==================================
+	Rank awards (only L4D2)
+==================================*/
+
+$language_pack['award_killspitter'] = "Don't Like Zombies Without Manners with <b>%s Spitter</b> kills.";
+$language_pack['award_killjockey'] = "Likes To Be On Top with <b>%s Jockey</b> kills.";
+$language_pack['award_killcharger'] = "Don't Like To Be Pushed Around with <b>%s Charger</b> kills.";
+
+$language_pack['award_adrenaline'] = "Needs The Teammates To Stay In Top Speed with <b>%s Adrenalines Given</b>.";
+$language_pack['award_defib'] = "is A Life Giver with <b>%s Defibrillators Used on Teammates</b>.";
+$language_pack['award_jockey'] = "is The Freedom Fighter by <b>Saving %s Teammates From Jockeys</b>.";
+$language_pack['award_charger'] = "is Giving Hell To Bullies <b>Saving %s Teammates From Chargers</b>.";
+
+$language_pack['award_matador'] = "is The Matador with <b>%s Leveled Charges</b>.";
+$language_pack['award_scatteringram'] = "is a Crowd Breaker with <b>%s Scattering Rams</b>.";
 
 ?>

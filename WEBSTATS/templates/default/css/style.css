@@ -243,6 +243,11 @@
 		background: #444444;
 	}
 
+	table.stats tr.total {
+		font-weight: bold;
+		background: #666666;
+	}
+
 	table.statsbox {
 		background-color: #313131;
 		border: 1px solid #1f1f1f;

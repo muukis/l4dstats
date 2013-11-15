@@ -98,7 +98,6 @@ if ($default_template_path != $default_site_template_path)
 	}
 
 	$load_path = $default_template_images_path;
-	$load_path .= '/';
 	$load_path_len = strlen($load_path);
 
 	foreach (glob($load_path . '*') as $image_file)
@@ -130,7 +129,6 @@ foreach (glob($load_path . '*') as $template_file)
 }
 
 $load_path = $default_site_template_images_path;
-$load_path .= '/';
 $load_path_len = strlen($load_path);
 
 foreach (glob($load_path . '*') as $image_file)
@@ -163,7 +161,6 @@ if ($site_template != $default_site_template)
 	}
 
 	$load_path = $site_template_images_path;
-	$load_path .= '/';
 	$load_path_len = strlen($load_path);
 
 	foreach (glob($load_path . '*') as $image_file)

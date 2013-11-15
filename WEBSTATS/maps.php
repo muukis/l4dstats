@@ -79,7 +79,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	foreach ($campaigns as $prefix => $title) {
 		$query = "SELECT playtime_nor + playtime_adv + playtime_exp as playtime,
 																		points_nor + points_adv + points_exp as points,
-																	kills_nor + kills_adv + kills_exp as kills";
+																		kills_nor + kills_adv + kills_exp as kills";
 
 		if ($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations")
 			$query .= ", restarts_nor + restarts_adv + restarts_exp as restarts";
@@ -126,10 +126,11 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 					$infected_win += $row['infected_win'];
 				}
 			}
-			
+
 			$totals['playtime'] += $playtime;
 			$totals['points'] += $points;
 			$totals['kills'] += $kills;
+
 			if ($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations")
 				$totals['restarts'] += $restarts;
 			else if ($type == "versus" || $type == "scavenge" || $type == "realismversus")
@@ -138,14 +139,37 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 				$totals['kill_survivor'] += $kill_survivor;
 				$totals['infected_win'] += $infected_win;
 			}
-			$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
-			$maparr[] = $line . "<td>" . $title . "</td><td>" . formatage($playtime * 60) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($infected_win) . "</td><td>" . number_format($points_infected) . "</td>" : "") . "<td>" . number_format($points) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($points, $playtime), 2) . ")") . "</td><td>" . number_format($kills) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($kill_survivor) . "</td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td>" . number_format($restarts) . "</td>" : "") . "</tr>\n";
-			$i++;
+
+			$maparr[$i++] = array("title" => $title,
+														"playtime" => $playtime,
+														"type" => $type,
+														"infected_win" => $infected_win,
+														"points_infected" => $points_infected,
+														"points" => $points,
+														"ppm" => getppm($points, $playtime),
+														"kills" => $kills,
+														"kill_survivor" => $kill_survivor,
+														"restarts" => $restarts,
+														"totalrow" => false);
+			//$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
+			//$maparr[] = $line . "<td>" . $title . "</td><td>" . formatage($playtime * 60) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($infected_win) . "</td><td>" . number_format($points_infected) . "</td>" : "") . "<td>" . number_format($points) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($points, $playtime), 2) . ")") . "</td><td>" . number_format($kills) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($kill_survivor) . "</td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td>" . number_format($restarts) . "</td>" : "") . "</tr>\n";
+			//$i++;
 	}
 	
-	$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
-	$maparr[] = $line . "<td><b>SERVER TOTAL</b></td><td><b>" . formatage($totals['playtime'] * 60) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['infected_win']) . "</b></td><td><b>" . number_format($totals['points_infected']) . "</b></td>" : "") . "<td><b>" . number_format($totals['points']) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($totals['points'], $totals['playtime']), 2) . ")") . "</b></td><td><b>" . number_format($totals['kills']) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['kill_survivor']) . "</b></td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td><b>" . number_format($totals['restarts']) . "</b></td>" : "") . "</tr>\n";
-	
+	$maparr[$i++] = array("title" => $language_pack['sertvertotal'],
+												"playtime" => $totals['playtime'],
+												"type" => $type,
+												"infected_win" => $totals['infected_win'],
+												"points_infected" => $totals['points_infected'],
+												"points" => $totals['points'],
+												"ppm" => getppm($totals['points'], $totals['playtime']),
+												"kills" => $totals['kills'],
+												"kill_survivor" => $totals['kill_survivor'],
+												"restarts" => $totals['restarts'],
+												"totalrow" => true);
+	//$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
+	//$maparr[] = $line . "<td><b>SERVER TOTAL</b></td><td><b>" . formatage($totals['playtime'] * 60) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['infected_win']) . "</b></td><td><b>" . number_format($totals['points_infected']) . "</b></td>" : "") . "<td><b>" . number_format($totals['points']) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($totals['points'], $totals['playtime']), 2) . ")") . "</b></td><td><b>" . number_format($totals['kills']) . "</b></td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td><b>" . number_format($totals['kill_survivor']) . "</b></td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td><b>" . number_format($totals['restarts']) . "</b></td>" : "") . "</tr>\n";
+
 	$stats = new Template($templatefiles["maps_overview_" . $type . ".tpl"]);
 	$stats->set("icon_infected", $imagefiles['icon_infected.gif']); // Team infected icon
 	$stats->set("icon_survivors", $imagefiles['icon_survivors.png']); // Team survivors icon

@@ -27,73 +27,76 @@ function addordinalnumbersuffix($num)
 // Include the primary PHP functions file
 include("./common.php");
 
+$awards_file = "./templates/awards_cache_" . $template_properties['current_language_id'] . ".html";
+
 // Load outer template
 $tpl = new Template($templatefiles['layout.tpl']);
 
 // Include award file
-include("./" . $award_file);
+//include("./" . $award_file);
 
-if ($game_version != 1)
-	include("./" . $award_l4d2_file);
+//if ($game_version != 1)
+//	include("./" . $award_l4d2_file);
 
-$awardarr = array("kills" => $award_kills,
-				  "headshots" => $award_headshots,
+$prefix = "<a href=\"%s\">%s</a> ";
+$awardarr = array("kills" => $prefix . $language_pack['award_kills'],
+				  "headshots" => $prefix . $language_pack['award_headshots'],
 
-				  "versus_kills_survivors + scavenge_kills_survivors + realism_kills_survivors" => $award_killsurvivor,
-				  "kill_infected" => $award_killinfected,
-				  "melee_kills" => $award_melee_kills,
-				  "kill_hunter" => $award_killhunter,
-				  "kill_smoker" => $award_killsmoker,
-				  "kill_boomer" => $award_killboomer,
+				  "versus_kills_survivors + scavenge_kills_survivors + realism_kills_survivors" => $prefix . $language_pack['award_killsurvivor'],
+				  "kill_infected" => $prefix . $language_pack['award_killinfected'],
+				  "melee_kills" => $prefix . $language_pack['award_melee_kills'],
+				  "kill_hunter" => $prefix . $language_pack['award_killhunter'],
+				  "kill_smoker" => $prefix . $language_pack['award_killsmoker'],
+				  "kill_boomer" => $prefix . $language_pack['award_killboomer'],
 
-				  "award_pills" => $award_pills,
-				  "award_medkit" => $award_medkit,
-				  "award_hunter" => $award_hunter,
-				  "award_smoker" => $award_smoker,
-				  "award_protect" => $award_protect,
-				  "award_revive" => $award_revive,
-				  "award_rescue" => $award_rescue,
-				  "award_campaigns" => $award_campaigns,
-				  "award_tankkill" => $award_tankkill,
-				  "award_tankkillnodeaths" => $award_tankkillnodeaths,
-				  "award_allinsafehouse" => $award_allinsafehouse,
+				  "award_pills" => $prefix . $language_pack['award_pills'],
+				  "award_medkit" => $prefix . $language_pack['award_medkit'],
+				  "award_hunter" => $prefix . $language_pack['award_hunter'],
+				  "award_smoker" => $prefix . $language_pack['award_smoker'],
+				  "award_protect" => $prefix . $language_pack['award_protect'],
+				  "award_revive" => $prefix . $language_pack['award_revive'],
+				  "award_rescue" => $prefix . $language_pack['award_rescue'],
+				  "award_campaigns" => $prefix . $language_pack['award_campaigns'],
+				  "award_tankkill" => $prefix . $language_pack['award_tankkill'],
+				  "award_tankkillnodeaths" => $prefix . $language_pack['award_tankkillnodeaths'],
+				  "award_allinsafehouse" => $prefix . $language_pack['award_allinsafehouse'],
 
-				  "award_friendlyfire" => $award_friendlyfire,
-				  "award_teamkill" => $award_teamkill,
-				  "award_fincap" => $award_fincap,
-				  "award_left4dead" => $award_left4dead,
-				  "award_letinsafehouse" => $award_letinsafehouse,
-				  "award_witchdisturb" => $award_witchdisturb,
+				  "award_friendlyfire" => $prefix . $language_pack['award_friendlyfire'],
+				  "award_teamkill" => $prefix . $language_pack['award_teamkill'],
+				  "award_fincap" => $prefix . $language_pack['award_fincap'],
+				  "award_left4dead" => $prefix . $language_pack['award_left4dead'],
+				  "award_letinsafehouse" => $prefix . $language_pack['award_letinsafehouse'],
+				  "award_witchdisturb" => $prefix . $language_pack['award_witchdisturb'],
 
-				  "award_pounce_nice" => $award_pounce_nice,
-				  "award_pounce_perfect" => $award_pounce_perfect,
-				  "award_perfect_blindness" => $award_perfect_blindness,
-				  "award_infected_win" => $award_infected_win,
-				  "award_bulldozer" => $award_bulldozer,
-				  "award_survivor_down" => $award_survivor_down,
-				  "award_ledgegrab" => $award_ledgegrab,
-				  "award_witchcrowned" => $award_witchcrowned,
+				  "award_pounce_nice" => $prefix . $language_pack['award_pounce_nice'],
+				  "award_pounce_perfect" => $prefix . $language_pack['award_pounce_perfect'],
+				  "award_perfect_blindness" => $prefix . $language_pack['award_perfect_blindness'],
+				  "award_infected_win" => $prefix . $language_pack['award_infected_win'],
+				  "award_bulldozer" => $prefix . $language_pack['award_bulldozer'],
+				  "award_survivor_down" => $prefix . $language_pack['award_survivor_down'],
+				  "award_ledgegrab" => $prefix . $language_pack['award_ledgegrab'],
+				  "award_witchcrowned" => $prefix . $language_pack['award_witchcrowned'],
 
-				  "infected_tanksniper" => $infected_tanksniper
+				  "infected_tanksniper" => $prefix . $language_pack['award_tanksniper']
 				  );
 
 // L4D2 awards
 if ($game_version != 1)
 {
-	$awardarr["kill_spitter"] = $award_killspitter;
-	$awardarr["kill_jockey"] = $award_killjockey;
-	$awardarr["kill_charger"] = $award_killcharger;
+	$awardarr["kill_spitter"] = $prefix . $language_pack['award_killspitter'];
+	$awardarr["kill_jockey"] = $prefix . $language_pack['award_killjockey'];
+	$awardarr["kill_charger"] = $prefix . $language_pack['award_killcharger'];
 
-	$awardarr["award_adrenaline"] = $award_adrenaline;
-	$awardarr["award_defib"] = $award_defib;
-	$awardarr["award_jockey"] = $award_jockey;
-	$awardarr["award_charger"] = $award_charger;
+	$awardarr["award_adrenaline"] = $prefix . $language_pack['award_adrenaline'];
+	$awardarr["award_defib"] = $prefix . $language_pack['award_defib'];
+	$awardarr["award_jockey"] = $prefix . $language_pack['award_jockey'];
+	$awardarr["award_charger"] = $prefix . $language_pack['award_charger'];
 
-	$awardarr["award_matador"] = $award_matador;
-	$awardarr["award_scatteringram"] = $award_scatteringram;
+	$awardarr["award_matador"] = $prefix . $language_pack['award_matador'];
+	$awardarr["award_scatteringram"] = $prefix . $language_pack['award_scatteringram'];
 }
 
-$cachedate = filemtime("./templates/awards_cache.html");
+$cachedate = filemtime($awards_file);
 if ($cachedate < time() - (60*$award_cache_refresh)) {
 	$real_playtime_sql = $TOTALPLAYTIME;
 	$real_playtime = "real_playtime";
@@ -117,11 +120,11 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 		{
 			if ($i++ == 0)
 			{
-				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_ppm, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), number_format($row[$real_points] / $row[$real_playtime], 2));
+				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_ppm'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), number_format($row[$real_points] / $row[$real_playtime], 2));
 			}
 			else
 			{
-				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_second, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), number_format($row[$real_points] / $row[$real_playtime], 2)) . "</i>";
+				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_second'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), number_format($row[$real_points] / $row[$real_playtime], 2)) . "</i>";
 			}
 		}
 
@@ -139,11 +142,11 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 		{
 			if ($i++ == 0)
 			{
-				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_time, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), formatage($row[$real_playtime] * 60));
+				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_time'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), formatage($row[$real_playtime] * 60));
 			}
 			else
 			{
-				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_second, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), formatage($row[$real_playtime] * 60)) . "</i>";
+				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_second'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), formatage($row[$real_playtime] * 60)) . "</i>";
 			}
 		}
 
@@ -168,11 +171,11 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 
 			if ($i++ == 0)
 			{
-				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_ratio, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), number_format($row['headshots'] / $row['kills'], 4) * 100);
+				$table_body .= "<tr><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_ratio'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), number_format($row['headshots'] / $row['kills'], 4) * 100);
 			}
 			else
 			{
-				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_second, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), (number_format($row['headshots'] / $row['kills'], 4) * 100) . "&#37;") . "</i>";
+				$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_second'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), (number_format($row['headshots'] / $row['kills'], 4) * 100) . "&#37;") . "</i>";
 			}
 		}
 
@@ -199,7 +202,7 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 				}
 				else
 				{
-					$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($award_second, "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), number_format($row['queryvalue'])) . "</i>";
+					$table_body .= "<br />\n<i style=\"font-size: 12px;\">" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . sprintf($prefix . $language_pack['award_second'], "player.php?steamid=" . $row['steamid'], htmlentities($row['name'], ENT_COMPAT, "UTF-8"), addordinalnumbersuffix($i), number_format($row['queryvalue'])) . "</i>";
 				}
 			}
 
@@ -212,7 +215,7 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	$stats->set("awards_body", $table_body);
 	
 	$award_output = $stats->fetch($templatefiles['awards.tpl']);
-	file_put_contents("./templates/awards_cache.html", trim($award_output));
+	file_put_contents($awards_file, trim($award_output));
 	// Multilang support
 		//-- BASE
 	$stats->set("lang_tpl_award_lastupdate", $language_pack['awardslastupdated']);
@@ -222,7 +225,7 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 $tpl->set("title", $language_pack['rankawards']); // Window title
 $tpl->set("page_heading", $language_pack['rankawards']); // Page header
 
-$output = file_get_contents("./templates/awards_cache.html");
+$output = file_get_contents($awards_file);
 
 $tpl->set('body', trim($output));
 

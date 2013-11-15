@@ -101,7 +101,8 @@ function getfriendid($pszAuthID)
 }
 
 function formatage($date) {
-	$nametable = array(" seconds", " minutes", " hours", " days", " weeks", " months", " years");
+	global $language_pack;
+	$nametable = array(" " . $language_pack['seconds'], " " . $language_pack['minutes'], " " . $language_pack['hours'], " " . $language_pack['days'], " " . $language_pack['weeks'], " " . $language_pack['months'], " " . $language_pack['years']);
 	$agetable = array("60", "60", "24", "7", "4", "12", "10");
 	$ndx = 0;
 
@@ -179,7 +180,8 @@ function gettotalplaytime($row)
 
 function getplaytime($minutes)
 {
-	return formatage($minutes * 60) . " (" . number_format($minutes) . " min)";
+	global $language_pack;
+	return formatage($minutes * 60) . " (" . number_format($minutes) . " " . $language_pack['minutes'] . ")";
 }
 
 function getppm($__points, $__playtime)
@@ -247,6 +249,8 @@ function getplayerinfo($row)
 	$retval['ppm_scavenge'] = getppm($row['points_scavenge_survivors'] + $row['points_scavenge_infected'], $row['playtime_scavenge']);
 	$retval['ppm_realismversus'] = getppm($row['points_realism_survivors'] + $row['points_realism_infected'], $row['playtime_realismversus']);
 	$retval['ppm_mutations'] = getppm($row['points_mutations'], $row['playtime_mutations']);
+
+	$retval['row'] = $row;
 
 	return $retval;
 }

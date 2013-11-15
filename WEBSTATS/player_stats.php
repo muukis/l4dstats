@@ -64,8 +64,8 @@ if (mysql_num_rows($result) > 0)
 
 	if ($game_version != 1)
 	{
-		$stats->set("player_playtime_realism", "&nbsp;&nbsp;Realism: " . getplaytime($row['playtime_realism']) . "<br>&nbsp;&nbsp;Mutations: " . getplaytime($row['playtime_mutations']) . "<br>");
-		$stats->set("player_playtime_scavenge", "<br>&nbsp;&nbsp;Scavenge: " . getplaytime($row['playtime_scavenge']) . "<br>&nbsp;&nbsp;Realism&nbsp;Versus: " . getplaytime($row['playtime_realismversus']));
+		$stats->set("player_playtime_realism", "&nbsp;&nbsp;" . $language_pack['realism'] . ": " . getplaytime($row['playtime_realism']) . "<br>&nbsp;&nbsp;" . $language_pack['mutations'] . ": " . getplaytime($row['playtime_mutations']) . "<br>");
+		$stats->set("player_playtime_scavenge", "<br>&nbsp;&nbsp;" . $language_pack['scavenge'] . ": " . getplaytime($row['playtime_scavenge']) . "<br>&nbsp;&nbsp;" . $language_pack['realismversus'] . ": " . getplaytime($row['playtime_realismversus']));
 	}
 	else
 	{
@@ -84,8 +84,8 @@ if (mysql_num_rows($result) > 0)
 
 	if ($game_version != 1)
 	{
-		$stats->set("player_points_realism", "Realism: " . number_format($row['points_realism']) . "<br>Mutations: " . number_format($row['points_mutations']) . "<br>");
-		$stats->set("player_points_scavenge", "<br><b>Scavenge: " . number_format($row['points_scavenge_infected'] + $row['points_scavenge_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_scavenge_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_scavenge_infected']) . "<br><b>Realism&nbsp;Versus: " . number_format($row['points_realism_infected'] + $row['points_realism_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_realism_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_realism_infected']));
+		$stats->set("player_points_realism", $language_pack['realism'] . ": " . number_format($row['points_realism']) . "<br>" . $language_pack['mutations'] . ": " . number_format($row['points_mutations']) . "<br>");
+		$stats->set("player_points_scavenge", "<br><b>" . $language_pack['scavenge'] . ": " . number_format($row['points_scavenge_infected'] + $row['points_scavenge_survivors']) . "</b><br>&nbsp;&nbsp;" . $language_pack['survivors'] . ": " . number_format($row['points_scavenge_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_scavenge_infected']) . "<br><b>Realism&nbsp;Versus: " . number_format($row['points_realism_infected'] + $row['points_realism_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_realism_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_realism_infected']));
 	}
 	else
 	{
