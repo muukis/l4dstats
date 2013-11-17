@@ -8,7 +8,7 @@
 
 		<table class="stats">
 		<tr><th rowspan=2><?php echo $language_pack['campaignname'];?></th><th rowspan=2><?php echo $language_pack['totalplaytime'];?></th><th rowspan=2>Total<br />All&nbsp;4&nbsp;Dead</th><th colspan=2>Total Points</th><th colspan=2>Total Kills</th></tr>
-		<tr><th><img src="./templates/<?php echo $icon_infected;?>" alt="Infected Total Points"></th><th><img src="./templates/<?php echo $icon_survivors;?>" alt="Survivor Total Points"></th><th><img src="./templates/<?php echo $icon_infected;?>" alt="Infected Total Kills"></th><th><img src="./templates/<?php echo $icon_survivors;?>" alt="Survivor Total Kills"></th></tr>
+		<tr><th><img src="<?php echo $icon_infected;?>" alt="Infected Total Points"></th><th><img src="<?php echo $icon_survivors;?>" alt="Survivor Total Points"></th><th><img src="<?php echo $icon_infected;?>" alt="Infected Total Kills"></th><th><img src="<?php echo $icon_survivors;?>" alt="Survivor Total Kills"></th></tr>
 <?php
   foreach ($maps as $map_index => $map_info)
   {

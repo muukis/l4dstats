@@ -124,62 +124,62 @@ if ($game_version != 1)
 $player_totalpoints = $totalpoints;
 
 $arr_kills = array();
-$arr_kills['Common Infected'] = $total['kill_infected'];
-$arr_kills['Hunters'] = $total['kill_hunter'];
-$arr_kills['Smokers'] = $total['kill_smoker'];
-$arr_kills['Boomers'] = $total['kill_boomer'];
+$arr_kills[$language_pack['commoninfected']] = $total['kill_infected'];
+$arr_kills[$language_pack['hunters']] = $total['kill_hunter'];
+$arr_kills[$language_pack['smokers']] = $total['kill_smoker'];
+$arr_kills[$language_pack['boomers']] = $total['kill_boomer'];
 
 if ($game_version != 1)
 {
-	$arr_kills['Spitters'] = $total['kill_spitter'];
-	$arr_kills['Jockeys'] = $total['kill_jockey'];
-	$arr_kills['Chargers'] = $total['kill_charger'];
+	$arr_kills[$language_pack['spitters']] = $total['kill_spitter'];
+	$arr_kills[$language_pack['jockeys']] = $total['kill_jockey'];
+	$arr_kills[$language_pack['chargers']] = $total['kill_charger'];
 }
 
 $arr_survivor_awards = array();
-$arr_survivor_awards['Pills Given'] = $total['award_pills'];
+$arr_survivor_awards[$language_pack['awardpillsgiven']] = $total['award_pills'];
 if ($game_version != 1)
-	$arr_survivor_awards['Adrenalines Given'] = $total['award_adrenaline'];
-$arr_survivor_awards['Medkits Given'] = $total['award_medkit'];
-$arr_survivor_awards['Saved Friendlies from Hunters'] = $total['award_hunter'];
-$arr_survivor_awards['Saved Friendlies from Smokers'] = $total['award_smoker'];
+	$arr_survivor_awards[$language_pack['awardadrenalinesgiven']] = $total['award_adrenaline'];
+$arr_survivor_awards[$language_pack['awardmedkitsgiven']] = $total['award_medkit'];
+$arr_survivor_awards[$language_pack['awardsavedfriendliesfromhunters']] = $total['award_hunter'];
+$arr_survivor_awards[$language_pack['awardsavedfriendliesfromsmokers']] = $total['award_smoker'];
 if ($game_version != 1)
 {
-	$arr_survivor_awards['Saved Friendlies from Jockeys'] = $total['award_jockey'];
-	$arr_survivor_awards['Saved Friendlies from Chargers'] = $total['award_charger'];
-	$arr_survivor_awards['Leveled Charges'] = $total['award_matador'];
-	$arr_survivor_awards['Gas Canisters Poured'] = $total['award_gascans_poured'];
-	$arr_survivor_awards['Ammo Upgrades Deployed'] = $total['award_upgrades_added'];
+	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromjockeys']] = $total['award_jockey'];
+	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromchargers']] = $total['award_charger'];
+	$arr_survivor_awards[$language_pack['awardleveledcharges']] = $total['award_matador'];
+	$arr_survivor_awards[$language_pack['awardgascanisterspoured']] = $total['award_gascans_poured'];
+	$arr_survivor_awards[$language_pack['awardammoupgradesdeployed']] = $total['award_upgrades_added'];
 }
-$arr_survivor_awards['Crowned Witches'] = $total['award_witchcrowned'];
-$arr_survivor_awards['Protected Friendlies'] = $total['award_protect'];
-$arr_survivor_awards['Revived Friendlies'] = $total['award_revive'];
-$arr_survivor_awards['Rescued Friendlies'] = $total['award_rescue'];
-$arr_survivor_awards['Tanks Killed with Team'] = $total['award_tankkill'];
-$arr_survivor_awards['Tanks Killed with No Deaths'] = $total['award_tankkillnodeaths'];
-$arr_survivor_awards['Safe Houses Reached with All Survivors'] = $total['award_allinsafehouse'];
-$arr_survivor_awards['Campaigns Completed'] = $total['award_campaigns'];
+$arr_survivor_awards[$language_pack['awardcrownedwitches']] = $total['award_witchcrowned'];
+$arr_survivor_awards[$language_pack['awardprotectedfriendlies']] = $total['award_protect'];
+$arr_survivor_awards[$language_pack['awardrevivedfriendlies']] = $total['award_revive'];
+$arr_survivor_awards[$language_pack['awardrescuedfriendlies']] = $total['award_rescue'];
+$arr_survivor_awards[$language_pack['awardtankskilledwithteam']] = $total['award_tankkill'];
+$arr_survivor_awards[$language_pack['awardtankskilledwithnodeaths']] = $total['award_tankkillnodeaths'];
+$arr_survivor_awards[$language_pack['awardsafehousesreachedwithallsurvivors']] = $total['award_allinsafehouse'];
+$arr_survivor_awards[$language_pack['awardcampaignscompleted']] = $total['award_campaigns'];
 
 $arr_infected_awards = array();
-$arr_infected_awards['All Survivors Dead'] = $total['award_infected_win'];
-$arr_infected_awards['Perfect Blindness'] = $total['award_perfect_blindness'];
-$arr_infected_awards['Hunter Perfect Pounce'] = $total['award_pounce_perfect'];
-$arr_infected_awards['Hunter Nice Pounce'] = $total['award_pounce_nice'];
-$arr_infected_awards['Bulldozer'] = $total['award_bulldozer'];
-$arr_infected_awards['Survivors Incapacitated'] = $total['award_survivor_down'];
-$arr_infected_awards['Caused Ledge Grab'] = $total['award_ledgegrab'];
+$arr_infected_awards[$language_pack['awardallsurvivorsdead']] = $total['award_infected_win'];
+$arr_infected_awards[$language_pack['awardperfectblindness']] = $total['award_perfect_blindness'];
+$arr_infected_awards[$language_pack['awarddeathfromabove']] = $total['award_pounce_perfect'];
+$arr_infected_awards[$language_pack['awardpainfromabove']] = $total['award_pounce_nice'];
+$arr_infected_awards[$language_pack['awardbulldozer']] = $total['award_bulldozer'];
+$arr_infected_awards[$language_pack['awardsurvivorsincapacitated']] = $total['award_survivor_down'];
+$arr_infected_awards[$language_pack['awardcausedledgegrab']] = $total['award_ledgegrab'];
 if ($game_version != 1)
 {
-	$arr_infected_awards['Scattering Ram'] = $total['award_scatteringram'];
+	$arr_infected_awards[$language_pack['awardscatteringram']] = $total['award_scatteringram'];
 }
 
 $arr_demerits = array();
-$arr_demerits['Friendly Fire Incidents'] = $total['award_friendlyfire'];
-$arr_demerits['Incapacitated Friendlies'] = $total['award_fincap'];
-$arr_demerits['Teammates Killed'] = $total['award_teamkill'];
-$arr_demerits['Friendlies Left For Dead'] = $total['award_left4dead'];
-$arr_demerits['Infected Let In Safe Room'] = $total['award_letinsafehouse'];
-$arr_demerits['Witches Disturbed'] = $total['award_witchdisturb'];
+$arr_demerits[$language_pack['friendlyfireincidents']] = $total['award_friendlyfire'];
+$arr_demerits[$language_pack['incapacitatedfriendlies']] = $total['award_fincap'];
+$arr_demerits[$language_pack['teammateskilled']] = $total['award_teamkill'];
+$arr_demerits[$language_pack['friendliesleftfordead']] = $total['award_left4dead'];
+$arr_demerits[$language_pack['infectedletinsaferoom']] = $total['award_letinsafehouse'];
+$arr_demerits[$language_pack['witchesdisturbed']] = $total['award_witchdisturb'];
 
 
 $playername = htmlentities($total['name'], ENT_COMPAT, "UTF-8");
@@ -189,6 +189,7 @@ $tpl->set("page_heading", "Server Stats"); // Page header
 
 $stats = new Template($templatefiles['server.tpl']);
 
+$stats->set("total", $total);
 $stats->set("players", number_format($players));
 $stats->set("points", number_format($totalpoints));
 //$stats->set("playtime", formatage(($total['playtime'] + $total['playtime_versus'] + $total['playtime_survival'] + $total['playtime_versus'] + $total['playtime_scavenge']) * 60));
@@ -247,15 +248,20 @@ if ($game_version != 1)
 	if ($total['infected_spawn_6'] > 0 && $total['infected_charger_damage'] > 0)
 		$avg_charger = number_format($total['infected_charger_damage'] / $total['infected_spawn_6'], 2);
 
-	$l4d2_special_infected = "";
+	$l4d2_special_infected = array();
+	$l4d2_special_infected[$language_pack['spitteraverage']] = $avg_spitter;
+	$l4d2_special_infected[$language_pack['jockeyaverage']] = $avg_jockey;
+	$l4d2_special_infected[$language_pack['chargeraverage']] = $avg_charger;
+	/*
 	$l4d2_special_infected .= "<tr align=\"left\" onmouseover=\"showtip('Spitter damage average per spawn<br>&nbsp;&nbsp;damage: " . number_format($total['infected_spitter_damage']) . "<br>&nbsp;&nbsp;spawns: " . number_format($total['infected_spawn_4']) . "');\" onmouseout=\"hidetip();\"><td>Spitter Average:</td><td>" . $avg_spitter . "</td></tr>\n";
 	$l4d2_special_infected .= "<tr align=\"left\" onmouseover=\"showtip('Jockey damage average per spawn<br>&nbsp;&nbsp;damage: " . number_format($total['infected_jockey_damage']) . "<br>&nbsp;&nbsp;spawns: " . number_format($total['infected_spawn_5']) . "<br>&nbsp;&nbsp;rides: " . number_format($total['jockey_rides']) . "<br>&nbsp;&nbsp;ride length: " . formatage($total['infected_jockey_ridetime']) . "');\" onmouseout=\"hidetip();\"><td>Jockey Average:</td><td>" . $avg_jockey . "</td></tr>\n";
 	$l4d2_special_infected .= "<tr align=\"left\" onmouseover=\"showtip('Charger damage average per spawn<br>&nbsp;&nbsp;impacts: " . number_format($total['charger_impacts']) . "<br>&nbsp;&nbsp;damage: " . number_format($total['infected_charger_damage']) . "<br>&nbsp;&nbsp;spawns: " . number_format($total['infected_spawn_6']) . "');\" onmouseout=\"hidetip();\"><td>Charger Average:</td><td>" . $avg_charger . "</td></tr>";
+	*/
 
 	$stats->set("l4d2_special_infected", $l4d2_special_infected);
 }
 else
-	$stats->set("l4d2_special_infected", "");
+	$stats->set("l4d2_special_infected", null);
 
 if ($total['kills'] == 0 || $total['headshots'] == 0) $stats->set("ratio", "0");
 else $stats->set("ratio", number_format($total['headshots'] / $total['kills'], 4) * 100);
@@ -306,29 +312,29 @@ while ($row = mysql_fetch_array($result))
 	switch ($row['gamemode'])
 	{
 		case 0:
-			$gamemodename = "Coop";
+		$gamemodename = $language_pack['coop'];
 			break;
 		case 1:
-			$gamemodename = "Versus";
+			$gamemodename = $language_pack['versus'];
 			break;
 		case 2:
 			if ($game_version == 1) continue;
-			$gamemodename = "Realism";
+			$gamemodename = $language_pack['realism'];
 			break;
 		case 3:
-			$gamemodename = "Survival";
+			$gamemodename = $language_pack['survival'];
 			break;
 		case 4:
 			if ($game_version == 1) continue;
-			$gamemodename = "Scavenge";
+			$gamemodename = $language_pack['scavenge'];
 			break;
 		case 5:
 			if ($game_version == 1) continue;
-			$gamemodename = "Realism&nbsp;Versus";
+			$gamemodename = $language_pack['realismversus'];
 			break;
 		case 6:
 			if ($game_version == 1) continue;
-			$gamemodename = "Mutations";
+			$gamemodename = $language_pack['mutations'];
 			break;
 	}
 
@@ -382,10 +388,10 @@ $stats->set("player_ppm", number_format(getppm($player_totalpoints, $totalplayti
 $stats->set("player_ppm_coop", number_format(getppm($total['points'], $arr_ppm_playtime['coop']), 2));
 if ($game_version != 1)
 {
-	$stats->set("player_ppm_realism", "Realism: " . number_format(getppm($total['points_realism'], $arr_ppm_playtime['realism']), 2) . "<br>");
-	$stats->set("player_ppm_scavenge", "<br>Scavenge: " . number_format(getppm($total['points_scavenge_infected'] + $total['points_scavenge_survivors'], $arr_ppm_playtime['scavenge']), 2) .
-																		 "<br>Realism&nbsp;Versus: " . number_format(getppm($total['points_realism_infected'] + $total['points_realism_survivors'], $arr_ppm_playtime['realism&nbsp;versus']), 2) .
-																		 "<br>Mutations: " . number_format(getppm($total['points_mutations'], $arr_ppm_playtime['mutations']), 2));
+	$stats->set("player_ppm_realism", $language_pack['realism'] . ": " . number_format(getppm($total['points_realism'], $arr_ppm_playtime['realism']), 2) . "<br>");
+	$stats->set("player_ppm_scavenge", "<br>" . $language_pack['realism'] . ": " . number_format(getppm($total['points_scavenge_infected'] + $total['points_scavenge_survivors'], $arr_ppm_playtime['scavenge']), 2) .
+																		 "<br>" . $language_pack['realismversus'] . ": " . number_format(getppm($total['points_realism_infected'] + $total['points_realism_survivors'], $arr_ppm_playtime['realism&nbsp;versus']), 2) .
+																		 "<br>" . $language_pack['mutations'] . ": " . number_format(getppm($total['points_mutations'], $arr_ppm_playtime['mutations']), 2));
 }
 else
 {
@@ -431,6 +437,11 @@ $stats->set("arr_survivor_awards", $arr_survivor_awards);
 $stats->set("arr_infected_awards", $arr_infected_awards);
 $stats->set("arr_demerits", $arr_demerits);
 $stats->set("arr_maps", $arr_maps);
+
+$link1 = sprintf($language_pack['campaignstatsdesclink'], urlencode($totalpop[0]), $totalpop[0]);
+$link2 = sprintf($language_pack['campaignstatsdesclink'], urlencode($totalpop[2]), $totalpop[2]);
+$servermsg = sprintf($language_pack['campaignstatsdetaildesc'], $title, $link1, number_format($totalpop[1]), $link2, number_format($totalpop[3])) . "\n";
+$stats->set("servermsg", $servermsg);
 
 $output = $stats->fetch($templatefiles['server.tpl']);
 

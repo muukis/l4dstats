@@ -217,7 +217,7 @@ if (mysql_num_rows($result) > 0)
 	if (function_exists(bcadd)) $stats->set("player_url", getfriendid($row['steamid']) );
 	else $stats->set("player_url", "<b>ERROR</b>");
 
-	$stats->set("player_lastonline", date($lastonlineformat, $row['lastontime'] + ($dbtimemod * 3600)) . " (" . formatage(time() - $row['lastontime'] + ($dbtimemod * 3600)) . " ago)");
+	$stats->set("player_lastonline", date($lastonlineformat, $row['lastontime'] + ($dbtimemod * 3600)) . " (" . formatage(time() - $row['lastontime'] + ($dbtimemod * 3600)) . " " . $language_pack['ago'] . ")");
 	$stats->set("player_playtime", gettotalplaytime($row));
 	if ($game_version != 1)
 	{

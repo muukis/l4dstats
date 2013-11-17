@@ -5,6 +5,8 @@ $template_name = "Left 4 Dead";
 
 // Append HTML headers
 $extra_headers = <<<EOD
+	<link href="css.php?file=l4dstyle" rel="stylesheet" type="text/css" />
+
 	<style type="text/css">
 		#sidebar .flicker {
 			color: transparent;

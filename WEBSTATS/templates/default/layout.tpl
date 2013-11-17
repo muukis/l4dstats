@@ -6,7 +6,7 @@
 	
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>  
 	
-	<title>Left 4 Dead 2 Player Stats :: <?php echo $title;?></title>
+	<title><?php echo $language_pack['title'];?> :: <?php echo $title;?></title>
 	<link href="css.php?file=style" rel="stylesheet" type="text/css" />
 	<link href="css.php?file=player" rel="stylesheet" type="text/css" />
 	<link href="css.php?file=stats" rel="stylesheet" type="text/css" />
@@ -30,11 +30,11 @@
 <body>
 
 <!-- start tooltip control -->
-<script type="text/javascript" src="./templates/default/js/statstooltip.js"></script>
+<script type="text/javascript" src="js.php?file=statstooltip"></script>
 <!-- end tooltip control -->
 
 <!-- start combobox control -->
-<script type="text/javascript" src="./templates/default/js/statscombobox.js"></script>
+<script type="text/javascript" src="js.php?file=statscombobox"></script>
 <!-- end combobox control -->
 
 <!-- start header -->

@@ -181,12 +181,15 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	}
 	
 	$campaignpop = getpopulation($totalkills, $population_file, False);
-	$campaigninfo = "<p>More zombies have been killed in <b>" . $title . "</b> than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $campaignpop[0] . "&btnI=1\">" . $campaignpop[0] . "</a>, population <b>" . number_format($campaignpop[1]) . "</b>.<br />That is almost more than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $campaignpop[2] . "&btnI=1\">" . $campaignpop[2] . "</a>, population <b>" . number_format($campaignpop[3]) . "</b>!</p>\n";
+  $link1 = sprintf($language_pack['campaignstatsdesclink'], $campaignpop[0], $campaignpop[0]);
+  $link2 = sprintf($language_pack['campaignstatsdesclink'], $campaignpop[2], $campaignpop[2]);
+	$campaigninfo = sprintf($language_pack['campaignstatsdetaildesc'], $title, $link1, number_format($campaignpop[1]), $link2, number_format($campaignpop[3])) . "\n";
+	//$campaigninfo = "<p>More zombies have been killed in <b>" . $title . "</b> than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $campaignpop[0] . "&btnI=1\">" . $campaignpop[0] . "</a>, population <b>" . number_format($campaignpop[1]) . "</b>.<br />That is almost more than the entire population of <a href=\"http://google.com/search?q=site:en.wikipedia.org+" . $campaignpop[2] . "&btnI=1\">" . $campaignpop[2] . "</a>, population <b>" . number_format($campaignpop[3]) . "</b>!</p>\n";
 
 	$output = trim($campaigninfo . $output);
 }
 else
-	$output = "<h1>Illegal gamemode</h1>";
+	$output = $language_pack['illegalgamemode'];
 	
 $tpl->set("body", $output);
 

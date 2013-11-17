@@ -38,7 +38,7 @@ $tpl = new Template($templatefiles['layout.tpl']);
 //if ($game_version != 1)
 //	include("./" . $award_l4d2_file);
 
-$prefix = "<a href=\"%s\">%s</a> ";
+$prefix = $language_pack['awardsprefix'] . " ";
 $awardarr = array("kills" => $prefix . $language_pack['award_kills'],
 				  "headshots" => $prefix . $language_pack['award_headshots'],
 

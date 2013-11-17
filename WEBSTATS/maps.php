@@ -156,7 +156,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 			//$i++;
 	}
 	
-	$maparr[$i++] = array("title" => $language_pack['sertvertotal'],
+	$maparr[$i++] = array("title" => $language_pack['servertotal'],
 												"playtime" => $totals['playtime'],
 												"type" => $type,
 												"infected_win" => $totals['infected_win'],
@@ -220,12 +220,11 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		//$maparr[] = "<tr><td>" . $query . "</td></tr>";
 
 		$i = 1;
-		while ($row = mysql_fetch_array($result)) {
-				$line = ($i & 1) ? "<tr>" : "<tr class=\"alt\">";
-				$maparr[] = $line . "<td>" . $row['name'] . "</td><td>" . formatage($row['playtime'] * 60) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($row['infected_win']) . "</td><td>" . number_format($row['points_infected']) . "</td>" : "") . "<td>" . number_format($row['points']) . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "" : " (" . number_format(getppm($row['points'], $row['playtime']), 2) . ")") . "</td><td>" . number_format($row['kills']) . "</td>" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") ? "<td>" . number_format($row['kill_survivor']) . "</td>" : "") . (($type == "coop" || $type == "realism" || $type == "survival" || $type == "mutations") ? "<td>" . number_format($row['restarts']) . "</td>" : "") . "</tr>\n";
-				$i++;
+		while ($row = mysql_fetch_array($result)) {  
+			$maparr[$i++] = $row;
 		}
 		
+		$maps->set("type", $type);
 		$maps->set("maps", $maparr);
 		$body = $maps->fetch($templatefiles["maps_campaign_" . $type . ".tpl"]);
 		

@@ -1,0 +1,10 @@
+	#sidebar {
+		position: fixed;
+		background: rgba(0,0,0,.7);
+		min-width: 190px;
+		max-width: 205px;
+	}
+
+	#sidebar ul {
+		margin-right: 5px;
+	}

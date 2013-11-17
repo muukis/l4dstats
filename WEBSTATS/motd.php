@@ -17,17 +17,16 @@ include("./common.php");
 // Load outer template
 $tpl = new Template($templatefiles['motd.tpl']);
 
-$tpl->set("stylesheet", $templatefiles['style.css']); // Stylesheet for the page
 $tpl->set("header_extra", $header_extra); // Players served
 $tpl->set("site_name", $site_name); // Site name
 $tpl->set("site_logo", $imagefiles['logo.png']); // Site logo
-$tpl->set("title", "Message Of The Day"); // Window title
+$tpl->set("title", $language_pack['messageoftheday']); // Window title
 
 $motd_header = getserversettingsvalue("motdheader");
 if (strlen($motd_header) > 0)
 	$tpl->set("motd_header", $motd_header);
 else
-	$tpl->set("motd_header", "Left 4 Dead Player Stats");
+	$tpl->set("motd_header", $language_pack['title']);
 
 if (strlen($motd_message) > 0)
 {
