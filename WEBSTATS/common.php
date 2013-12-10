@@ -207,6 +207,11 @@ function getserversettingsvalue($name)
 	return "";
 }
 
+function createtablerowtooltip($row, $i)
+{
+	return "<tr>";
+}
+
 function getplayerinfo($row)
 {
 	global $showplayerflags, $ip2c;
@@ -388,7 +393,7 @@ function getplayersteamprofilexml($steamid)
 	}
 
 	if ($xml_ply_profile == true) {
-	return simplexml_load_file("http://steamcommunity.com/profiles/" . getfriendid($steamid) . "?xml=1");
+		return simplexml_load_file("http://steamcommunity.com/profiles/" . getfriendid($steamid) . "?xml=1");
 	}
 
 }
@@ -474,7 +479,7 @@ if ($game_version == 1)
 					   "l4d_airport" => "Dead Air - Co-op",
 					   "l4d_smalltown" => "Death Toll - Co-op",
 					   "l4d_farm" => "Blood Harvest - Co-op",
-						 "l4d_vs_hospital" => "No Mercy - Versus",
+					   "l4d_vs_hospital" => "No Mercy - Versus",
 					   "l4d_vs_airport" => "Dead Air - Versus",
 					   "l4d_vs_smalltown" => "Death Toll - Versus",
 					   "l4d_vs_farm" => "Blood Harvest - Versus",
@@ -605,7 +610,7 @@ else
 					   "l4d_smalltown" => "Death Toll (L4D1)",
 					   "l4d_farm" => "Blood Harvest (L4D1)",
 					   "l4d_garage" => "Crash Course (L4D1)",
-						 "c1m" => "Dead Center (L4D2)",
+					   "c1m" => "Dead Center (L4D2)",
 					   "c2m" => "Dark Carnival (L4D2)",
 					   "c3m" => "Swamp Fever (L4D2)",
 					   "c4m" => "Hard Rain (L4D2)",
@@ -647,7 +652,7 @@ else
 					   "l4d_airport" => "Dead Air - Co-op (L4D1)",
 					   "l4d_smalltown" => "Death Toll - Co-op (L4D1)",
 					   "l4d_farm" => "Blood Harvest - Co-op (L4D1)",
-						 "l4d_vs_hospital" => "No Mercy - Versus (L4D1)",
+					   "l4d_vs_hospital" => "No Mercy - Versus (L4D1)",
 					   "l4d_vs_airport" => "Dead Air - Versus (L4D1)",
 					   "l4d_vs_smalltown" => "Death Toll - Versus (L4D1)",
 					   "l4d_vs_farm" => "Blood Harvest - Versus (L4D1)",
@@ -771,16 +776,22 @@ if (isset($game_addresses))
 					$all_numeric = true;
 
 					foreach ($ip_classes as $ip_class)
+					{
 						if (!is_numeric($ip_class) || $ip_class < 0 || $ip_class > 255)
 						{
 							$all_numeric = false;
 							break;
 						}
+					}
 
 					if ($all_numeric)
+					{
 						$game_ip = $game_adderss_split[0];
+					}
 					else
+					{
 						$game_ip = gethostbyname($game_adderss_split[0]);
+					}
 				}
 
 				$game_country_code = strtolower($ip2c->get_country_code($game_ip));
@@ -791,17 +802,23 @@ if (isset($game_addresses))
 				if ($game_country_code != "" && $game_country_code != "xx" && $game_country_code != "int" && file_exists("./img/flags/" . $game_country_code . ".gif"))
 				{
 					if (!$international && $game_country_code_last != "NULL" && $game_country_code != $game_country_code_last)
+					{
 						$international = true;
+					}
 
 					$game_country_code_last = $game_country_code;
 
 					$game_flag = $ip2c->get_country_flag($game_ip);
 				}
 				else
+				{
 					$international = true;
+				}
 			}
 			else
+			{
 				$international = true;
+			}
 
 			if (!isset($motd_page))
 			{
@@ -824,9 +841,13 @@ $locations = count($game_locations);
 if ($locations == 1 || isset($motd_page))
 {
 	if (!isset($motd_page))
+	{
 		$site_name = (!$international ? $game_locations[0]["flag"] : "") . "<a href=\"" . $game_locations[0]["link"] . "\">" . $site_name . "</a>";
+	}
 	else
+	{
 		$site_name = (!$international ? $game_locations[0]["flag"] : "") . $site_name;
+	}
 }
 else if ($locations > 1)
 {
@@ -835,7 +856,9 @@ else if ($locations > 1)
 	foreach ($game_locations as $game_location)
 	{
 		if (strlen($game_locations_html))
+		{
 			$game_locations_html .= "<br />";
+		}
 		$game_locations_html .= $game_location["title"];
 	}
 

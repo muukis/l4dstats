@@ -74,31 +74,32 @@ if (mysql_error()) {
 
   $i = 1;
   while ($row = mysql_fetch_array($result)) {
+  	/*
     if ($row['lastontime'] > time()) $row['lastontime'] = time();
 
 		$lastgamemode = "Unknown";
 		switch ($row['lastgamemode'])
 		{
 			case 0:
-				$lastgamemode = "Coop";
+				$lastgamemode = $language_pack['coop'];
 				break;
 			case 1:
-				$lastgamemode = "Versus";
+				$lastgamemode = $language_pack['versus'];
 				break;
 			case 2:
-				$lastgamemode = "Realism";
+				$lastgamemode = $language_pack['realism'];
 				break;
 			case 3:
-				$lastgamemode = "Survival";
+				$lastgamemode = $language_pack['survival'];
 				break;
 			case 4:
-				$lastgamemode = "Scavenge";
+				$lastgamemode = $language_pack['scavenge'];
 				break;
 			case 5:
-				$lastgamemode = "Realism&nbsp;Versus";
+				$lastgamemode = $language_pack['realismversus'];
 				break;
 			case 6:
-				$lastgamemode = "Mutation";
+				$lastgamemode = $language_pack['mutation'];
 				break;
 		}
 
@@ -126,8 +127,9 @@ if (mysql_error()) {
     $line = createtablerowtooltip($row, $i);
     $line .= "<td>" . $playername . "</td>";
     $line .= "<td>" . gettotalpoints($row) . "</td><td>" . $lastgamemode . "</td><td>" . gettotalplaytime($row) . "</td></tr>\n";
+    */
 
-    $arr_online[] = $line;
+    $arr_online[$i] = getplayerinfo($row);
 
 		if (strlen($googlemaps) > 0 && ($googlemaps_displayall || $googlemaps_markercounter < $googlemaps_showplayersonlinecount))
 		{
@@ -146,7 +148,7 @@ if (mysql_error()) {
     $i++;
   }
 
-  if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $language_pack['noplayersonline'] . "</td</tr>\n";
+  //if (count($arr_online) == 0) $arr_online[] = "<tr><td colspan=\"4\" align=\"center\">" . $language_pack['noplayersonline'] . "</td</tr>\n";
 
 	$stats->set("online", $arr_online);
 	$output = $stats->fetch($templatefiles['online.tpl']);
