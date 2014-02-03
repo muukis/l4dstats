@@ -1,22 +1,29 @@
 ﻿<?php
 
-/*==================================
-#	Language File created by:	   #
-#			JonnyBoy0719		   #
-#	============================   #
-#	L4D/L4D2 Stats created by:     #
-#		   Mikko Andersson		   #
-==================================*/
+/*=================================#
+# THIS IS THE BASE LANGUAGE FILE   #
+# FOR ALL TRANSLATION FILES.       #
+# YOU ARE WELCOME TO MODIFY THIS   #
+# FILE AS WELL. PLEASE CONSIDER    #
+# SENDING YOUR MODIFICATIONS AND   #
+# TRANSLATIONS TO THE AUTHOR OF    #
+# THE STATS. THANK YOU! :-)        #
+#=================================*/
 
-/*==================================
-	Language Display Name
-==================================*/
+/*=================================#
+# Language File created by:        #
+# Muukis                           #
+#=================================*/
+
+/*=================================#
+# Language Display Name            #
+#=================================*/
 
 $lang_name = "English";
 
-/*==================================
-	Language Pack
-==================================*/
+/*=================================#
+# Language Pack                    #
+#=================================*/
 
 $language_pack['achievements']                                  = "Achievements";
 $language_pack['achievementsearned']                            = "Achievements Earned";
