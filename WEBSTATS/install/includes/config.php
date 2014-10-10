@@ -11,7 +11,7 @@ $config = array(
 	'show_steps' => true,
 	'show_back_button' => true,
 
-	'view' => 'default',
+	'view' => 'new',
 	'language' => 'en',
 
 	'db_type' => 'mysql',

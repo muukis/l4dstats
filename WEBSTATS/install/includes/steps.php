@@ -8,7 +8,7 @@
 
 $steps = array(
 
-	// Step 2
+	// Step 1
 	array(
 		// Step name
 		'name' => 'Server requirements',
@@ -49,7 +49,7 @@ $steps = array(
 		),
 	),
 
-	// Step 3
+	// Step 2
 	array(
 		// Step name
 		'name' => 'Database settings',
@@ -98,14 +98,6 @@ $steps = array(
 
 			// Text box
 			array(
-				'label' => 'Database prefix',
-				'name' => 'db_prefix',
-				'type' => 'text',
-				'default' => '',
-			),
-
-			// Text box
-			array(
 				'label' => '<span style="color:red">*</span>Database name',
 				'name' => 'db_name',
 				'type' => 'text',
@@ -116,9 +108,32 @@ $steps = array(
 				),
 			),
 
+			// Text box
+			array(
+				'label' => 'Database prefix',
+				'name' => 'db_prefix',
+				'type' => 'text',
+				'default' => '',
+			),
+
+			// Select box
+			array(
+				'label' => '<span style="color:red">*</span>Database Engine',
+				'name' => 'db_engine',
+				'type' => 'select',
+				'default' => 'InnoDB',
+				'items' => array(
+					'InnoDB' => 'InnoDB',
+					'MyISAM' => 'MyISAM',
+				),
+				'validate' => array(
+					array('rule' => 'required'), // make it "required"
+				),
+			),
+
 			// Simple text
 			array(
-				'type' => 'info',
+				'type' => 'header',
 				'value' => 'L4Dstats information',
 			),
 
@@ -263,6 +278,15 @@ $steps = array(
 
 			// Select box
 			array(
+				'label' => '',
+				'name' => 'webstats_ver',
+				'type' => 'text_hidden',
+				'default' => '1.2',
+				'value' => '1.2',
+			),
+
+			// Select box
+			array(
 				'label' => '<span style="color:red">*</span>XML player profile',
 				'name' => 'serv_xmlply',
 				'type' => 'select',
@@ -287,19 +311,28 @@ $steps = array(
 							'serv_xpl' => 'serv_xmlply',
 							'language' => 'language',
 							'game_ver' => 'game_ver',
+							'web_ver' => 'webstats_ver',
 							'db_host' => 'db_hostname',
 							'db_user' => 'db_username',
 							'db_pass' => 'db_password',
 							'db_prefix' => 'db_prefix',
+							'db_engine' => 'db_engine',
 							'db_name' => 'db_name'
 						)
 					),
 				),
 			),
 		),
+		'callbacks' => array(
+			array(
+				'name' => 'is_installed',
+				'execute' => 'before',
+				'params' => array('webstats_ver' => '1.2')
+			),
+		),
 	),
 
-	// Step 4
+	// Step 3
 	array(
 		// Step name
 		'name' => 'Ready to install',
@@ -320,7 +353,7 @@ $steps = array(
 		),
 	),
 
-	// Step 5
+	// Step 4
 	array(
 		// Step name
 		'name' => 'Completed',
@@ -332,6 +365,12 @@ $steps = array(
 			array(
 				'type' => 'info',
 				'value' => 'Installation complete!',
+			),
+
+			// Simple text
+			array(
+				'type' => 'info',
+				'value' => 'If something went wrong under installation, and you want to re-install L4D2Stats, be sure to remove the file installation_setup.txt that got created.',
 			),
 		),
 	),

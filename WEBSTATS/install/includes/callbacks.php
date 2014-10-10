@@ -5,6 +5,16 @@
 */
 class Callbacks extends Callbacks_Core
 {
+	function is_installed($params = array())
+	{
+		$webstats_version = $_SESSION['params']['webstats_ver']; // fetch the current script version
+		if ( is_file(BASE_PATH . '../installation_setup.txt') ) {
+
+			$this->error = 'Webstats already appears to be installed.';
+			return false;
+		}
+		return true;
+	} 
 	function install($params = array())
 	{
 		$dbconf = array(
@@ -14,6 +24,7 @@ class Callbacks extends Callbacks_Core
 			'db_pass' => $_SESSION['params']['db_password'],
 			'db_prefix' => $_SESSION['params']['db_prefix'],
 			'db_name' => $_SESSION['params']['db_name'],
+			'db_engine' => $_SESSION['params']['db_engine'],
 			'db_encoding' => 'utf8',
 			// Web Configs
 			'serv_sn' => $_SESSION['params']['serv_sitename'],
@@ -27,6 +38,8 @@ class Callbacks extends Callbacks_Core
 			// Misc
 			'language' => $_SESSION['params']['language'],
 			'game_ver' => $_SESSION['params']['game_ver'],
+			// WebStats Version
+			'web_ver' => $_SESSION['params']['webstats_ver'],
 		);
 		if ( !$this->db_init($dbconf) ) {
 			return false;
@@ -34,7 +47,7 @@ class Callbacks extends Callbacks_Core
 
 		$replace = array(
 			'{:db_prefix}' => $_SESSION['params']['db_prefix'],
-			'{:db_engine}' => in_array('innodb', $this->db_engines) ? 'InnoDB' : 'MyISAM',
+			'{:db_engine}' => $_SESSION['params']['db_engine'],
 			'{:db_charset}' => $this->db_version >= '4.1' ? 'DEFAULT CHARSET=utf8' : '',
 			'{:website}' => $_SESSION['params']['virtual_path']
 		);
@@ -64,11 +77,6 @@ class Callbacks extends Callbacks_Core
 				return false;
 			}
 		}
-
-		// you can also manually run a query
-		$this->db_query("INSERT INTO `my_table`(`name`,`val`) VALUES ('manual', 'Another value')", true);
-
-		$this->db_close();
 
 		$config_file = '<?php'."\n";;
 		$config_file .= '/*'."\n";
@@ -113,6 +121,10 @@ class Callbacks extends Callbacks_Core
 		$config_file .= '// 1 = Left 4 Dead 1 (default)'."\n";
 		$config_file .= '// 2 = Left 4 Dead 2'."\n";
 		$config_file .= '$game_version = ' . addslashes($_SESSION['params']['game_ver']) . ';'."\n\n";
+
+		$config_file .= '// WebStats Version'."\n";
+		$config_file .= '// Do not edit!'."\n";
+		$config_file .= '$webstats_version = ' . addslashes($_SESSION['params']['webstats_ver']) . ';'."\n\n";
 
 		$config_file .= '// Template for the stats page.'."\n";
 		$config_file .= '// Leave empty if the default template is used.'."\n";
@@ -257,7 +269,16 @@ class Callbacks extends Callbacks_Core
 		$config_file .= '$show_motd = ' . addslashes($_SESSION['params']['serv_motd']) . ';'."\n";
 		$config_file .= '?>';
 
+		$installation_file = '================================================='."\n";;
+		$installation_file .= 'This is an automated file.'."\n";
+		$installation_file .= 'NOTE: Delete this file to re-install L4DStats.'."\n";
+		$installation_file .= '================================================='."\n\n";
+
+		$installation_file .= 'WebStats Version: ' . addslashes($_SESSION['params']['webstats_ver']) . ''."\n";
+
 		@file_put_contents(rtrim($_SESSION['params']['system_path'], '/').'/config.php', $config_file);
+
+		@file_put_contents(rtrim($_SESSION['params']['system_path'], '/').'/installation_setup.txt', $installation_file);
 
 		return true;
 	}
