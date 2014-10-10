@@ -8,13 +8,6 @@ Common PHP functions and code - "common.php"
 ================================================
 */
 
-// If its not installed, then head into install.php
-if (!$l4dstats_web_installed)
-{
-	header("Location: install/index.php");
-	die();
-}
-
 // Allow debug parameter set from URL
 $allow_debug = 1;
 
@@ -38,6 +31,13 @@ $template_properties['get_parameters'] = $get_parameters;
 
 // Include configuration file
 require("./config.php");
+
+// If its not installed, then head into install.php
+if (!$l4dstats_web_installed)
+{
+	header("Location: install/index.php");
+	die();
+}
 
 // Include language
 require("./languages.php");
