@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -25,40 +25,40 @@ $rankrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS rank FROM " . $mysq
 $rank = $rankrow['rank'];
 
 $arr_survivor_awards = array();
-$arr_survivor_awards[$language_pack['award_pills']] = array($row['award_pills'], $language_pack['award_pills_desc']);
-$arr_survivor_awards[$language_pack['award_medkit']] = array($row['award_medkit'], $language_pack['award_medkit_desc']);
-$arr_survivor_awards[$language_pack['award_shunt']] = array($row['award_hunter'], $language_pack['award_shunt_desc']);
-$arr_survivor_awards[$language_pack['award_ssmoke']] = array($row['award_smoker'], $language_pack['award_ssmoke_desc']);
+$arr_survivor_awards[$language_pack['awardpillsgiven']] = array($row['award_pills'], $language_pack['awardpillsgivendesc']);
+$arr_survivor_awards[$language_pack['awardmedkitsgiven']] = array($row['award_medkit'], $language_pack['awardmedkitsgivendesc']);
+$arr_survivor_awards[$language_pack['awardsavedfriendliesfromhunters']] = array($row['award_hunter'], $language_pack['awardsavedfriendliesfromhuntersdesc']);
+$arr_survivor_awards[$language_pack['awardsavedfriendliesfromsmokers']] = array($row['award_smoker'], $language_pack['awardsavedfriendliesfromsmokersdesc']);
 if ($game_version != 1)
 {
-	$arr_survivor_awards[$language_pack['award_defib']] = array($row['award_defib'], $language_pack['award_defib_desc']);
-	$arr_survivor_awards[$language_pack['award_andren']] = array($row['award_adrenaline'], $language_pack['award_andren_desc']);
-	$arr_survivor_awards[$language_pack['award_jockey_save']] = array($row['award_jockey'], $language_pack['award_jockey_save_desc']);
-	$arr_survivor_awards[$language_pack['award_charger']] = array($row['award_charger'], $language_pack['award_charger']);
-	$arr_survivor_awards[$language_pack['award_charger_lvld']] = array($row['award_matador'], $language_pack['award_charger_lvld_desc']);
-	$arr_survivor_awards[$language_pack['award_canister']] = array($row['award_gascans_poured'], $language_pack['award_canister_desc']);
-	$arr_survivor_awards[$language_pack['award_ammoup']] = array($row['award_upgrades_added'], $language_pack['award_ammoup_desc']);
+	$arr_survivor_awards[$language_pack['awarddefibrillatorsused']] = array($row['award_defib'], $language_pack['awarddefibrillatorsuseddesc']);
+	$arr_survivor_awards[$language_pack['awardadrenalinesgiven']] = array($row['award_adrenaline'], $language_pack['awardadrenalinesgivendesc']);
+	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromjockeys']] = array($row['award_jockey'], $language_pack['awardsavedfriendliesfromjockeysdesc']);
+	$arr_survivor_awards[$language_pack['awardsavedfriendliesfromchargers']] = array($row['award_charger'], $language_pack['awardsavedfriendliesfromchargers']);
+	$arr_survivor_awards[$language_pack['awardleveledcharges']] = array($row['award_matador'], $language_pack['awardleveledchargesdesc']);
+	$arr_survivor_awards[$language_pack['awardgascanisterspoured']] = array($row['award_gascans_poured'], $language_pack['awardgascanisterspoureddesc']);
+	$arr_survivor_awards[$language_pack['awardammoupgradesdeployed']] = array($row['award_upgrades_added'], $language_pack['awardammoupgradesdeployeddesc']);
 }
-$arr_survivor_awards[$language_pack['award_witch_crowned']] = array($row['award_witchcrowned'], $language_pack['award_witch_crowned_desc']);
-$arr_survivor_awards[$language_pack['award_rescue_1']] = array($row['award_protect'], $language_pack['award_rescue_1_desc']);
-$arr_survivor_awards[$language_pack['award_rescue_2']] = array($row['award_revive'], $language_pack['award_rescue_2_desc']);
-$arr_survivor_awards[$language_pack['award_rescue_3']] = array($row['award_rescue'], $language_pack['award_rescue_3_desc']);
-$arr_survivor_awards[$language_pack['award_misc_3']] = array($row['award_tankkill'], $language_pack['award_misc_3_desc']);
-$arr_survivor_awards[$language_pack['award_misc_4']] = array($row['award_tankkillnodeaths'], $language_pack['award_misc_4_desc']);
-$arr_survivor_awards[$language_pack['award_misc_2']] = array($row['award_allinsafehouse'], $language_pack['award_misc_2_desc']);
-$arr_survivor_awards[$language_pack['award_misc_1']] = array($row['award_campaigns'], $language_pack['award_misc_1_desc']);
+$arr_survivor_awards[$language_pack['awardcrownedwitches']] = array($row['award_witchcrowned'], $language_pack['awardcrownedwitchesdesc']);
+$arr_survivor_awards[$language_pack['awardprotectedfriendlies']] = array($row['award_protect'], $language_pack['awardprotectedfriendliesdesc']);
+$arr_survivor_awards[$language_pack['awardrevivedfriendlies']] = array($row['award_revive'], $language_pack['awardrevivedfriendliesdesc']);
+$arr_survivor_awards[$language_pack['awardrescuedfriendlies']] = array($row['award_rescue'], $language_pack['awardrescuedfriendliesdesc']);
+$arr_survivor_awards[$language_pack['awardtankskilledwithteam']] = array($row['award_tankkill'], $language_pack['awardtankskilledwithteamdesc']);
+$arr_survivor_awards[$language_pack['awardtankskilledwithnodeaths']] = array($row['award_tankkillnodeaths'], $language_pack['awardtankskilledwithnodeathsdesc']);
+$arr_survivor_awards[$language_pack['awardsafehousesreachedwithallsurvivors']] = array($row['award_allinsafehouse'], $language_pack['awardsafehousesreachedwithallsurvivorsdesc']);
+$arr_survivor_awards[$language_pack['awardcampaignscompleted']] = array($row['award_campaigns'], $language_pack['awardcampaignscompleteddesc']);
 
 $arr_infected_awards = array();
-$arr_infected_awards[$language_pack['award_inf_1']] = array($row['award_infected_win'], $language_pack['award_inf_1_desc']);
-$arr_infected_awards[$language_pack['award_inf_2']] = array($row['award_perfect_blindness'], $language_pack['award_inf_2_desc']);
-$arr_infected_awards[$language_pack['award_inf_3']] = array($row['award_pounce_perfect'], $language_pack['award_inf_3_desc']);
-$arr_infected_awards[$language_pack['award_inf_4']] = array($row['award_pounce_nice'], $language_pack['award_inf_4_desc']);
-$arr_infected_awards[$language_pack['award_inf_5']] = array($row['award_bulldozer'], $language_pack['award_inf_5_desc']);
-$arr_infected_awards[$language_pack['award_inf_6']] = array($row['award_survivor_down'], $language_pack['award_inf_6_desc']);
-$arr_infected_awards[$language_pack['award_inf_7']] = array($row['award_ledgegrab'], $language_pack['award_inf_7_desc']);
+$arr_infected_awards[$language_pack['awardallsurvivorsdead']] = array($row['award_infected_win'], $language_pack['awardallsurvivorsdeaddesc']);
+$arr_infected_awards[$language_pack['awardperfectblindness']] = array($row['award_perfect_blindness'], $language_pack['awardperfectblindnessdesc']);
+$arr_infected_awards[$language_pack['awarddeathfromabove']] = array($row['award_pounce_perfect'], $language_pack['awarddeathfromabovedesc']);
+$arr_infected_awards[$language_pack['awardpainfromabove']] = array($row['award_pounce_nice'], $language_pack['awardpainfromabovedesc']);
+$arr_infected_awards[$language_pack['awardbulldozer']] = array($row['award_bulldozer'], $language_pack['awardbulldozerdesc']);
+$arr_infected_awards[$language_pack['awardsurvivorsincapacitated']] = array($row['award_survivor_down'], $language_pack['awardsurvivorsincapacitateddesc']);
+$arr_infected_awards[$language_pack['awardcausedledgegrab']] = array($row['award_ledgegrab'], $language_pack['awardcausedledgegrabdesc']);
 if ($game_version != 1)
 {
-	$arr_infected_awards[$language_pack['award_inf_8']] = array($row['award_scatteringram'], $language_pack['award_inf_8_desc']);
+	$arr_infected_awards[$language_pack['awardscatteringram']] = array($row['award_scatteringram'], $language_pack['awardscatteringramdesc']);
 }
 
 if (mysql_num_rows($result) > 0)
@@ -111,7 +111,7 @@ if (mysql_num_rows($result) > 0)
 			
 			$isplayerprofileprivate = ($playerprivacystate != "public");
 			
-			if ($playersummary == $language_pack['xml_ply_sum'])
+			if ($playersummary == $language_pack['noinformationgiven'])
 			{
 				$playersummary = "";
 			}
@@ -120,7 +120,7 @@ if (mysql_num_rows($result) > 0)
 			
 			if ($playercurrentname != $playername2)
 			{
-				$playercurrentname = "<tr><td><i>" . $language_pack['xml_ply_nam'] . "</i></td><td width='20px'>&nbsp;</td><td width='100%'><i><b>" . $playercurrentname . "</b></i></td></tr>";
+				$playercurrentname = "<tr><td><i>" . $language_pack['currentname'] . ":</i></td><td width='20px'>&nbsp;</td><td width='100%'><i><b>" . $playercurrentname . "</b></i></td></tr>";
 			}
 			else
 			{
@@ -146,23 +146,23 @@ if (mysql_num_rows($result) > 0)
 			if ($isplayerprofileprivate)
 			{
 				$playerprofileinfo .= "<tr><td colspan='3' style='font-size:6px;'>&nbsp;</td></tr>";
-				$playerprofileinfo .= "<tr><td colspan='3' style='font-size:12px;font-weight:bold;color:#FFCC33;'>" . $language_pack['xml_ply_private'] . "</td></tr>";
+				$playerprofileinfo .= "<tr><td colspan='3' style='font-size:12px;font-weight:bold;color:#FFCC33;'>" . $language_pack['thisprofileisprivate'] . "</td></tr>";
 			}
 			else
 			{
 				if ($playersteamrating)
 				{
-					$playerprofileinfo .= "<tr><td>" . $language_pack['xml_ply_steam_rating'] . "</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playersteamrating . "</b></td></tr>";
+					$playerprofileinfo .= "<tr><td>" . $language_pack['steamrating'] . ":</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playersteamrating . "</b></td></tr>";
 				}
 				
 				if ($playermembersince)
 				{
-					$playerprofileinfo .= "<tr><td>" . $language_pack['xml_ply_steam_member'] . "</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playermembersince . "</b></td></tr>";
+					$playerprofileinfo .= "<tr><td>" . $language_pack['steammembersince'] . ":</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playermembersince . "</b></td></tr>";
 				}
 				
 				if ($playerhoursplayed2wk)
 				{
-					$playerprofileinfo .= "<tr><td>" . $language_pack['xml_ply_steam_playing'] . "</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playerhoursplayed2wk . " hrs past 2 weeks</b></td></tr>";
+					$playerprofileinfo .= "<tr><td>" . $language_pack['steamplayingtime'] . ":</td><td width='20px'>&nbsp;</td><td width='100%'><b>" . $playerhoursplayed2wk . " hrs past 2 weeks</b></td></tr>";
 				}
 			}
 			
@@ -179,8 +179,8 @@ if (mysql_num_rows($result) > 0)
 	$timesrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS times FROM " . $mysql_tableprefix . "timedmaps WHERE steamid = '" . $id . "'"));
 	$times = $timesrow['times'];
 
-	$tpl->set("title", $language_pack['tpl_player'] . " " . $playername); // Window title
-	$tpl->set("page_heading", $language_pack['tpl_player'] . " " . $playername2); // Page header
+	$tpl->set("title", $language_pack['viewingplayer'] . ": " . $playername); // Window title
+	$tpl->set("page_heading", $language_pack['viewingplayer'] . ": " . $playername2); // Page header
 
 	$stats = new Template($templatefiles['player.tpl']);
 
@@ -207,44 +207,22 @@ if (mysql_num_rows($result) > 0)
 			$link_stop = "</a>";
 		}
 
-		$stats->set("player_country", "<tr><td>" . $language_pack['tpl_location'] . "</td><td>" . $ip2c->get_country_flag($row['ip']) . $link_start . $city_name . $country_name . $link_stop . "</td></tr>");
+		$stats->set("player_country", "<tr><td>" . $language_pack['location'] . ":</td><td>" . $ip2c->get_country_flag($row['ip']) . $link_start . $city_name . $country_name . $link_stop . "</td></tr>");
 	}
+
 	$stats->set("player_steamid", $row['steamid']);
 	$stats->set("player_steamid2", $row['steamid']);
-	
-	// Multilang support
-	
-	$stats->set("lang_tpl_player_surv", $language_pack['tpl_player_surv']);
-	$stats->set("lang_tpl_player_infe", $language_pack['tpl_player_infe']);
-	$stats->set("lang_tpl_player_id1", $language_pack['tpl_player_id1']);
-	$stats->set("lang_tpl_player_id2", $language_pack['tpl_player_id2']);
-	$stats->set("lang_tpl_player_id3", $language_pack['tpl_player_id3']);
-	$stats->set("lang_tpl_player_id4", $language_pack['tpl_player_id4']);
-	$stats->set("lang_tpl_player_id_title1", $language_pack['tpl_player_id_title1']);
-	$stats->set("lang_tpl_player_id_title2", $language_pack['tpl_player_id_title2']);
-	// Tip
-	$stats->set("lang_tpl_player_id3_tip", $language_pack['tpl_player_id3_tip']);
-		// Shared
-		$stats->set("lang_tpl_points", $language_pack['tpl_points']);
-		$stats->set("lang_tpl_ikill", $language_pack['tpl_ikill']);
-		$stats->set("lang_tpl_skill", $language_pack['tpl_skill']);
-		$stats->set("lang_tpl_tip_points", $language_pack['tpl_tip_points']);
-		$stats->set("lang_tpl_tip_ikill", $language_pack['tpl_tip_ikill']);
-		$stats->set("lang_tpl_tip_skill", $language_pack['tpl_tip_skill']);
-	
-	// End
-
-	$stats->set("player_timedmaps", $times . " runs");
+	$stats->set("player_timedmaps", $times . " " . $language_pack['runs']);
 
 	if (function_exists(bcadd)) $stats->set("player_url", getfriendid($row['steamid']) );
 	else $stats->set("player_url", "<b>ERROR</b>");
 
-	$stats->set("player_lastonline", date($lastonlineformat, $row['lastontime'] + ($dbtimemod * 3600)) . " (" . formatage(time() - $row['lastontime'] + ($dbtimemod * 3600)) . " ago)");
+	$stats->set("player_lastonline", date($lastonlineformat, $row['lastontime'] + ($dbtimemod * 3600)) . " (" . formatage(time() - $row['lastontime'] + ($dbtimemod * 3600)) . " " . $language_pack['ago'] . ")");
 	$stats->set("player_playtime", gettotalplaytime($row));
 	if ($game_version != 1)
 	{
-		$stats->set("player_playtime_realism", "&nbsp;&nbsp;Realism: " . getplaytime($row['playtime_realism']) . "<br>&nbsp;&nbsp;Mutations: " . getplaytime($row['playtime_mutations']) . "<br>");
-		$stats->set("player_playtime_scavenge", "<br>&nbsp;&nbsp;Scavenge: " . getplaytime($row['playtime_scavenge']) . "<br>&nbsp;&nbsp;Realism&nbsp;Versus: " . getplaytime($row['playtime_realismversus']));
+		$stats->set("player_playtime_realism", "&nbsp;&nbsp;" . $language_pack['realism'] . ": " . getplaytime($row['playtime_realism']) . "<br>&nbsp;&nbsp;" . $language_pack['mutations'] . ": " . getplaytime($row['playtime_mutations']) . "<br>");
+		$stats->set("player_playtime_scavenge", "<br>&nbsp;&nbsp;" . $language_pack['scavenge'] . ": " . getplaytime($row['playtime_scavenge']) . "<br>&nbsp;&nbsp;" . $language_pack['realismversus'] . ": " . getplaytime($row['playtime_realismversus']));
 	}
 	else
 	{
@@ -261,8 +239,8 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("player_points_coop", number_format($row['points']));
 	if ($game_version != 1)
 	{
-		$stats->set("player_points_realism", "Realism: " . number_format($row['points_realism']) . "<br>Mutations: " . number_format($row['points_mutations']) . "<br>");
-		$stats->set("player_points_scavenge", "<br><b>Scavenge: " . number_format($row['points_scavenge_infected'] + $row['points_scavenge_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_scavenge_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_scavenge_infected']) . "<br><b>Realism&nbsp;Versus: " . number_format($row['points_realism_infected'] + $row['points_realism_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_realism_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_realism_infected']));
+		$stats->set("player_points_realism", $language_pack['realism'] . ": " . number_format($row['points_realism']) . "<br>" . $language_pack['mutations'] . ": " . number_format($row['points_mutations']) . "<br>");
+		$stats->set("player_points_scavenge", "<br><b>" . $language_pack['scavenge'] . ": " . number_format($row['points_scavenge_infected'] + $row['points_scavenge_survivors']) . "</b><br>&nbsp;&nbsp;" . $language_pack['survivors'] . ": " . number_format($row['points_scavenge_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_scavenge_infected']) . "<br><b>Realism&nbsp;Versus: " . number_format($row['points_realism_infected'] + $row['points_realism_survivors']) . "</b><br>&nbsp;&nbsp;Survivors: " . number_format($row['points_realism_survivors']) . "<br>&nbsp;&nbsp;Infected: " . number_format($row['points_realism_infected']));
 	}
 	else
 	{
@@ -333,8 +311,8 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("player_ppm_coop", number_format(getppm($row['points'], $row['playtime']), 2));
 	if ($game_version != 1)
 	{
-		$stats->set("player_ppm_realism", "Realism: " . number_format(getppm($row['points_realism'], $row['playtime_realism']), 2) . "<br>Mutations: " . number_format(getppm($row['points_mutations'], $row['playtime_mutations']), 2) . "<br>");
-		$stats->set("player_ppm_scavenge", "<br>Scavenge: " . number_format(getppm($row['points_scavenge_infected'] + $row['points_scavenge_survivors'], $row['playtime_scavenge']), 2) . "<br>Realism&nbsp;Versus: " . number_format(getppm($row['points_realism_infected'] + $row['points_realism_survivors'], $row['playtime_realismversus']), 2));
+		$stats->set("player_ppm_realism", $language_pack['realism'] . ": " . number_format(getppm($row['points_realism'], $row['playtime_realism']), 2) . "<br>" . $language_pack['mutations'] . ": " . number_format(getppm($row['points_mutations'], $row['playtime_mutations']), 2) . "<br>");
+		$stats->set("player_ppm_scavenge", "<br>" . $language_pack['scavenge'] . ": " . number_format(getppm($row['points_scavenge_infected'] + $row['points_scavenge_survivors'], $row['playtime_scavenge']), 2) . "<br>" . $language_pack['realismversus'] . ": " . number_format(getppm($row['points_realism_infected'] + $row['points_realism_survivors'], $row['playtime_realismversus']), 2));
 	}
 	else
 	{
@@ -349,7 +327,7 @@ if (mysql_num_rows($result) > 0)
 	$stats->set("survivors_killed", number_format($row['versus_kills_survivors'] + $row['scavenge_kills_survivors'] + $row['realism_kills_survivors'] + $row['mutations_kills_survivors']));
 	$stats->set("survivors_killed_versus", number_format($row['versus_kills_survivors']));
 	if ($game_version != 1)
-		$stats->set("survivors_killed_scavenge", "<br>Scavenge: " . number_format($row['scavenge_kills_survivors']) . "<br>Realism&nbsp;Versus: " . number_format($row['realism_kills_survivors']) . "<br>Mutations: " . number_format($row['mutations_kills_survivors']));
+		$stats->set("survivors_killed_scavenge", "<br>" . $language_pack['scavenge'] . ": " . number_format($row['scavenge_kills_survivors']) . "<br>" . $language_pack['realismversus'] . ": " . number_format($row['realism_kills_survivors']) . "<br>" . $language_pack['mutations'] . ": " . number_format($row['mutations_kills_survivors']));
 	else
 		$stats->set("survivors_killed_scavenge", "");
 	$stats->set("player_headshots", number_format($row['headshots']));
@@ -425,8 +403,8 @@ if (mysql_num_rows($result) > 0)
 
 	$output = $stats->fetch($templatefiles['player.tpl']);
 } else {
-	$tpl->set("title", $language_pack['tpl_player'] . " INVALID"); // Window title
-	$tpl->set("page_heading", $language_pack['tpl_player'] . " INVALID"); // Page header
+	$tpl->set("title", $language_pack['viewingplayer'] . ": INVALID"); // Window title
+	$tpl->set("page_heading", $language_pack['viewingplayer'] . ": INVALID"); // Page header
 
 	$output = "This player is no longer in our stats system. If this was a valid player before, it is likely they were removed due to inactivity.";
 }

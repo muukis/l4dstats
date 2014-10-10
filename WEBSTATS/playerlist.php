@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 ================================================
 LEFT 4 DEAD AND LEFT 4 DEAD 2 PLAYER RANK
@@ -33,22 +33,22 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 	$typelabel = "";
 	
 	if ($type == "coop") $typelabel = " (Coop)";
-	else if ($type == "versus" && $team == "") $typelabel = " (Versus)";
-	else if ($type == "scavenge" && $team == "") $typelabel = " (Scavenge)";
-	else if ($type == "realism" && $team == "") $typelabel = " (Realism)";
-	else if ($type == "survival" && $team == "") $typelabel = " (Survival)";
-	else if ($type == "realismversus" && $team == "") $typelabel = " (Realism&nbsp;Versus)";
-	else if ($type == "versus" && $team == "survivors") $typelabel = " (Versus : Survivors)";
-	else if ($type == "versus" && $team == "infected") $typelabel = " (Versus : Infected)";
-	else if ($type == "scavenge" && $team == "survivors") $typelabel = " (Scavenge : Survivors)";
-	else if ($type == "scavenge" && $team == "infected") $typelabel = " (Scavenge : Infected)";
-	else if ($type == "realismversus" && $team == "survivors") $typelabel = " (Realism&nbsp;Versus : Survivors)";
-	else if ($type == "realismversus" && $team == "infected") $typelabel = " (Realism&nbsp;Versus : Infected)";
-	else if ($type == "mutations" && $team == "") $typelabel = " (Mutations)";
+	else if ($type == "versus" && $team == "") $typelabel = " (" . $language_pack['versus'] . ")";
+	else if ($type == "scavenge" && $team == "") $typelabel = " (" . $language_pack['scavenge'] . ")";
+	else if ($type == "realism" && $team == "") $typelabel = " (" . $language_pack['realism'] . ")";
+	else if ($type == "survival" && $team == "") $typelabel = " (" . $language_pack['survival'] . ")";
+	else if ($type == "realismversus" && $team == "") $typelabel = " (" . $language_pack['realismversus'] . ")";
+	else if ($type == "versus" && $team == "survivors") $typelabel = " (" . $language_pack['versus'] . " : " . $language_pack['survivors'] . ")";
+	else if ($type == "versus" && $team == "infected") $typelabel = " (" . $language_pack['versus'] . " : " . $language_pack['infected'] . ")";
+	else if ($type == "scavenge" && $team == "survivors") $typelabel = " (" . $language_pack['scavenge'] . " : " . $language_pack['survivors'] . ")";
+	else if ($type == "scavenge" && $team == "infected") $typelabel = " (" . $language_pack['scavenge'] . " : " . $language_pack['infected'] . ")";
+	else if ($type == "realismversus" && $team == "survivors") $typelabel = " (" . $language_pack['realismversus'] . " : " . $language_pack['survivors'] . ")";
+	else if ($type == "realismversus" && $team == "infected") $typelabel = " (" . $language_pack['realismversus'] . " : " . $language_pack['infected'] . ")";
+	else if ($type == "mutations" && $team == "") $typelabel = " (" . $language_pack['mutations'] . ")";
 	else $team = "";
 
-	$tpl->set("title", $language_pack['tpl_playerlist_title'] . $typelabel); // Window title
-	$tpl->set("page_heading", $language_pack['tpl_playerlist_title'] . $typelabel); // Page header
+	$tpl->set("title", $language_pack['playerrankings'] . $typelabel); // Window title
+	$tpl->set("page_heading", $language_pack['playerrankings'] . $typelabel); // Page header
 
 	$sort = "";
 	$playtime = "";
@@ -111,17 +111,6 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		$row = mysql_fetch_array($result);
 
     $arr_players = array();
-    $stats = new Template($templatefiles['ranking.tpl']);
-	
-		// Multilang support
-			//-- BASE
-		$stats->set("lang_tpl_playtime_ply", $language_pack['tpl_playtime_ply']);
-		$stats->set("lang_tpl_playtime_plyrank", $language_pack['tpl_playtime_plyrank']);
-		$stats->set("lang_tpl_playtime_plypoints", $language_pack['tpl_playtime_plypoints']);
-		$stats->set("lang_tpl_playtime_plytime", $language_pack['tpl_playtime_plytime']);
-		$stats->set("lang_tpl_playtime_plyonline", $language_pack['tpl_playtime_plyonline']);
-		
-		// End
 
     $page_current = intval($page);
     $page_perpage = 100;
@@ -133,6 +122,8 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
     if ($page_prevpage < 1) $page_prevpage = 0;
 
 		$extra = ($type != "" ? "type=" . $type . "&" . (($type == "versus" || $type == "scavenge" || $type == "realismversus") && $team != "" ? "team=" . $team . "&" : "") : "");
+
+    $stats = new Template($templatefiles['ranking.tpl']);
     $stats->set("page_prev", "playerlist.php?" . $extra . "page=" . $page_prevpage);
     $stats->set("page_current", $page_current + 1);
     $stats->set("page_total", $page_maxpages + 1);
@@ -141,9 +132,9 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		if ($game_version != 1)
 		{
 			$stats->set("teammode_separator", "<br />\n");
-			$stats->set("realism_link", " | <a href=\"?type=realism\">Realism</a> | <a href=\"?type=mutations\">Mutations</a>");
-			$stats->set("scavenge_link", " | <a href=\"?type=scavenge\">Scavenge</a> (<a href=\"?type=scavenge&team=survivors\">Survivors</a> / <a href=\"?type=scavenge&team=infected\">Infected</a>)<br>\n" .
-																	 "<a href=\"?type=realismversus\">Realism&nbsp;Versus</a> (<a href=\"?type=realismversus&team=survivors\">Survivors</a> / <a href=\"?type=realismversus&team=infected\">Infected</a>)");
+			$stats->set("realism_link", " | <a href=\"?type=realism\">" . $language_pack['realism'] . "</a> | <a href=\"?type=mutations\">" . $language_pack['mutations'] . "</a>");
+			$stats->set("scavenge_link", " | <a href=\"?type=scavenge\">" . $language_pack['scavenge'] . "</a> (<a href=\"?type=scavenge&team=survivors\">" . $language_pack['survivors'] . "</a> / <a href=\"?type=scavenge&team=infected\">" . $language_pack['infected'] . "</a>)<br>\n" .
+																	 "<a href=\"?type=realismversus\">" . $language_pack['realismversus'] . "</a> (<a href=\"?type=realismversus&team=survivors\">" . $language_pack['survivors'] . "</a> / <a href=\"?type=realismversus&team=infected\">" . $language_pack['infected'] . "</a>)");
 		}
 		else
 		{
@@ -167,6 +158,8 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		    $i = ($page_current !== 0) ? 1 + intval($page_current * 100) : 1;
 		    while ($row = mysql_fetch_array($result))
 		    {
+			    $arr_players[$i++] = getplayerinfo($row);
+/*
 			    $line = createtablerowtooltip($row, $i);
 	        $line .= "<td align=\"center\">" . number_format($i) . "</td><td>" . ($showplayerflags ? $ip2c->get_country_flag($row['ip']) : "") . "<a href=\"player.php?steamid=" . $row['steamid']. "\">" . htmlentities($row['name'], ENT_COMPAT, "UTF-8") . "</a></td>";
 	        $line .= "<td>" . number_format($row['real_points']) . "</td>";
@@ -175,13 +168,14 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 	        //$line .= "<td>" . $query . "</td></tr>\n";
 	        $arr_players[] = $line;
 	        $i++;
+*/
 		    }
 	  	}
+	
+	    $stats->set("players", $arr_players);
     }
     else
-	  	$arr_players[] = "<tr><td align=\"center\" colspan=\"5\">No players found!</td></tr>";
-
-    $stats->set("players", $arr_players);
+	    $stats->set("players", null);
 
     $output = $stats->fetch($templatefiles['ranking.tpl']);
 	}

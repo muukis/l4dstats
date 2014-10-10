@@ -8,12 +8,15 @@ $templates_path = './templates/';
 $templates_path_len = strlen($templates_path);
 $template_info_file = '/template.php';
 $template_images_path = '/img/';
+$default_template = 'default';
+$default_template_path = $templates_path . $default_template;
+$default_template_images_path = $default_template_path . $template_images_path;
 
 if (!$default_site_template ||
     strlen($default_site_template) <= 0 ||
     !file_exists($templates_path . $default_site_template . $template_info_file))
 {
-	$default_site_template = "default";
+	$default_site_template = $default_template;
 }
 
 $default_site_template_path = $templates_path . $default_site_template;
@@ -76,6 +79,39 @@ $template_properties['current_template_path'] = $site_template_path;
 $template_properties['current_template_name'] = $template_name;
 $template_properties['extra_headers'] = $extra_headers;
 
+// Always load the default template as the base template
+if ($default_template_path != $default_site_template_path)
+{
+	$load_path = $default_template_path;
+	$load_path .= '/';
+	$load_path_len = strlen($load_path);
+	
+	foreach (glob($load_path . '*') as $template_file)
+	{
+		if (is_dir($template_file))
+		{
+			continue;
+		}
+
+		$file = substr($template_file, $load_path_len);
+		$templatefiles[$file] = $template_file;
+	}
+
+	$load_path = $default_template_images_path;
+	$load_path_len = strlen($load_path);
+
+	foreach (glob($load_path . '*') as $image_file)
+	{
+		if (is_dir($image_file))
+		{
+			continue;
+		}
+
+		$file = substr($image_file, $load_path_len);
+		$imagefiles[$file] = $image_file;
+	}
+}
+
 $load_path = $default_site_template_path;
 $load_path .= '/';
 $load_path_len = strlen($load_path);
@@ -93,7 +129,6 @@ foreach (glob($load_path . '*') as $template_file)
 }
 
 $load_path = $default_site_template_images_path;
-$load_path .= '/';
 $load_path_len = strlen($load_path);
 
 foreach (glob($load_path . '*') as $image_file)
@@ -126,7 +161,6 @@ if ($site_template != $default_site_template)
 	}
 
 	$load_path = $site_template_images_path;
-	$load_path .= '/';
 	$load_path_len = strlen($load_path);
 
 	foreach (glob($load_path . '*') as $image_file)

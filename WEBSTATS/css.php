@@ -17,8 +17,21 @@ require("./config.php");
 // Include template
 require("./templates.php");
 
-$cssfile_path = $site_template_path . '/css/' . $cssfile . '.css';
+$cssfilename_path = $site_template_path . '/css/' . $cssfile;
+$cssfile_path = $cssfilename_path . '.css';
+$csstemplatefile_path = $cssfilename_path . '.tpl';
 
+// First priority for the template file
+if (file_exists($csstemplatefile_path) && !is_dir($csstemplatefile_path))
+{
+	$tpl = new Template($csstemplatefile_path);
+	echo '/* This CSS template file is located at ' . $csstemplatefile_path . ' */
+
+' . $tpl->fetch($csstemplatefile_path);;
+	exit;
+}
+
+// Second priority for the CSS file
 if (file_exists($cssfile_path) && !is_dir($cssfile_path))
 {
 	echo '/* This CSS file is located at ' . $cssfile_path . ' */
@@ -28,8 +41,21 @@ if (file_exists($cssfile_path) && !is_dir($cssfile_path))
 	exit;
 }
 
-$cssfile_path = $default_site_template_path . '/css/' . $cssfile . '.css';
+$cssfilename_path = $default_site_template_path . '/css/' . $cssfile;
+$cssfile_path = $cssfilename_path . '.css';
+$csstemplatefile_path = $cssfilename_path . '.tpl';
 
+// First priority for the template file
+if (file_exists($csstemplatefile_path) && !is_dir($csstemplatefile_path))
+{
+	$tpl = new Template($csstemplatefile_path);
+	echo '/* This CSS template file is located at ' . $csstemplatefile_path . ' */
+
+' . $tpl->fetch($csstemplatefile_path);;
+	exit;
+}
+
+// Second priority for the CSS file
 if (file_exists($cssfile_path) && !is_dir($cssfile_path))
 {
 	echo '/* This CSS file is located at ' . $cssfile_path . ' */

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -6,9 +6,10 @@
 	
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>  
 	
-	<title>Left 4 Dead 2 Player Stats :: <?php echo $title;?></title>
+	<title><?php echo $language_pack['title'];?> :: <?php echo $title;?></title>
 	<link href="css.php?file=style" rel="stylesheet" type="text/css" />
 	<link href="css.php?file=player" rel="stylesheet" type="text/css" />
+	<link href="css.php?file=stats" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="./savi/jquery.js"></script>
 	<script type="text/javascript" src="./savi/steamprofile.js"></script>
 
@@ -29,21 +30,21 @@
 <body>
 
 <!-- start tooltip control -->
-<script type="text/javascript" src="./templates/default/js/statstooltip.js"></script>
+<script type="text/javascript" src="js.php?file=statstooltip"></script>
 <!-- end tooltip control -->
 
 <!-- start combobox control -->
-<script type="text/javascript" src="./templates/default/js/statscombobox.js"></script>
+<script type="text/javascript" src="js.php?file=statscombobox"></script>
 <!-- end combobox control -->
 
 <!-- start header -->
 <div id="header">
 	<!-- Serach Bar -->
 	<div id="search">
-		<?php echo $language_pack['tpl_layout_search']; ?>
+		<?php echo $language_pack['searchfor']; ?>
 		<form method="post" action="search.php">
 			<input type="text" id="s" name="search" value="" />
-			<input type="submit" id="x" name="submit" value="<?php echo $language_pack['tpl_layout_search_btn']; ?>" />
+			<input type="submit" id="x" name="submit" value="<?php echo $language_pack['search']; ?>" />
 		</form>
 	</div>
 	<div id="logo">
@@ -77,34 +78,8 @@
 		<?php echo $body;?>
 	</div>
 	<!-- end content -->
+<?php echo $template_properties['navigation']; ?>
 
-	<!-- start sidebar -->
-	<div id="sidebar">
-		<ul>
-			<li>
-				<h2><?php echo $language_pack['tpl_layout_menutitle']; ?></h2>
-				<ul>
-					<li><a href="index.php"><?php echo $language_pack['tpl_layout_plyonline']; ?></a></li>
-					<li><a href="playerlist.php"><?php echo $language_pack['tpl_layout_plyrank']; ?></a></li>
-					<li><a href="search.php"><?php echo $language_pack['tpl_layout_plysearch']; ?></a></li>
-					<li><a href="awards.php"><?php echo $language_pack['tpl_layout_plyaward']; ?></a></li>
-					<li><a href="javascript:void();" class="special" onmouseover="showcmb(this, '<a href=&quot;maps.php?type=coop&quot;>Coop Stats</a><br><?php echo $realismcmblink;?><a href=&quot;maps.php?type=versus&quot;>Versus Stats</a><br><?php echo $scavengecmblink;?><a href=&quot;maps.php?type=survival&quot;>Survival Stats</a><br><?php echo $realismversuscmblink;?><?php echo $mutationscmblink;?>');" onmouseout="hidecmb();"><?php echo $language_pack['tpl_layout_modestats']; ?> &raquo;</a></li>
-					<?php echo $timedmapslink;?>
-					<li><a href="server.php" class="special"><?php echo $language_pack['tpl_layout_servstats']; ?></a></li>
-				</ul>
-			</li>
-
-			<li>
-				<h2><b><?php echo $language_pack['tpl_layout_top10']; ?></b></h2>
-				<table cellspacing="0" cellpadding="0" border="0" width="100%">
-					<?php foreach ($top10 as $text): ?>
-					<?php echo $text;?>
-					<?php endforeach; ?>
-				</table>
-			</li>
-		</ul>
-	</div>
-	<!-- end sidebar -->
 	<div style="clear: both;">&nbsp;</div>
 	<p id="legal">
 		<span id="legal1">Copyright &copy; 2013 <a href="http://forums.alliedmods.net/member.php?u=52082" target="_blank" >muukis</a> | Left 4 Dead Stats written for <a href="http://forums.alliedmods.net/showthread.php?t=115965" target="_blank" >SourceMod</a> | Designed by <a href="http://forums.alliedmods.net/member.php?u=178524" target="_blank" >JonnyBoy0719</a></span><br>

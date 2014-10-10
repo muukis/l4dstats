@@ -4,8 +4,13 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <?php echo $statspagemeta;?>
 <title><?php echo $motd_header;?> :: <?php echo $title;?></title>
-<link href="./templates/<?php echo $stylesheet;?>" rel="stylesheet" type="text/css" />
+<link href="css.php?file=style" rel="stylesheet" type="text/css" />
 <style type="text/css">
+body {
+	background: #000;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
 h1.header {
 	margin-left: -2px;
 	margin-top: -5px;
@@ -57,7 +62,7 @@ h1.header_normal {
 <div id="header">
 <table width="700" align="center" cellpaddin="0" cellspacing="0">
 <tr>
-	<td align="center" valign="middle" width="70"><img src="./templates/<?php echo $site_logo;?>"></td>
+	<td align="center" valign="middle" width="70"><img src="<?php echo $site_logo;?>"></td>
 	<td align="left" valign="top">
 		<h1 class="header"><?php echo $motd_header;?></h1>
 		<h2 class="header_secondary"><?php echo $site_name;?></h2>

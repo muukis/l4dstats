@@ -1,0 +1,57 @@
+Copyright (c) 2005 - 2011, VLD Interactive. All rights reserved.
+
+This agreement expresses the terms and conditions on which you may use PHP Setup Wizard software and associated documentation that VLD Interactive (hereinafter referred to as "the author") is furnishing or making available to you with this agreement (collectively, the "software"). A copy of this license agreement must be included with the software distribution.
+
+By viewing the license details in the Customer System, installing, copying or otherwise using the software, you and/or your company (collectively, "you") are accepting and agreeing with the terms of this licence agreement. If you are not willing to be bound by this agreement, do not view the license details in the Customer System, install or use the software.
+
+Various copyrights and other intellectual property rights protect the software. This agreement is a licence agreement that gives you limited rights to use the software and not an agreement for sale or for transfer of title. The author retains all rights not expressly granted by this agreement. The author forbids, under any circumstances, the unauthorised reproduction of the software or use of illegally obtained software. Making illegal copies of the software is prohibited. Individuals who violate copyright law and software licensing agreements may be subject to criminal or civil action by the owner of the copyright.
+
+1. License Grant
+Pursuant to this License Agreement ("agreement") VLD Interactive grants you ("licensee"), a non-exclusive, perpetual (under the terms of the specific license type purchased) license to use the licensed program ("the software") provided that such use does not violate the terms of this Agreement.
+
+2. Software Usage
+Licensee may download, install, setup and use the software. Any person or entity who obtains or uses a copy of the software under or through this agreement agrees to be bound thereby. The Software is licensed only to the Licensee. Licensee may not rent, lease, sub-license, sell, assign, pledge, transfer or otherwise dispose of the Software in any form, on a temporary or permanent basis, without the prior written consent of VLD Interactive.
+
+The Software may not be used for anything that would represent or is associated with an Intellectual Property violation, including, but not limited to, engaging in any activity that infringes or misappropriates the intellectual property rights of others, including copyrights, trademarks, service marks, trade secrets, software piracy, and patents held by individuals, corporations, or other entities.
+
+3. Ownership
+The software and related user documentation are protected under Canadian, European and International copyright laws. All rights, title, and interest in and to the software, including associated intellectual property rights, are and shall remain with VLD Interactive. This agreement does not convey to the licensee an interest in or to the software, but only a limited right to use the software, revocable in accordance with the terms of this agreement.
+
+4. Restrictions
+Licensee may not sell or resell the software or software license (electronically or otherwise), or any copy, adaptation, transcription, or merged portion thereof, except as expressly authorized by this agreement (see 6. Modification below) or through prior, written consent. Licensees of the Software may not alter, remove, or make less visible, in any way, the copyright notice(s) embedded in the software, including but not limited to, HTML generated pages and the source code files unless approved in writing or by purchasing the relevant service to allow removal.
+
+5. Distribution
+Distribution of the software on its own as a stand alone item from any location other than an official Software site or an authorized mirror, in modified or non-modified form, is strictly prohibited and in violation of this agreement unless through prior, written consent or as part of the terms set out in 6.3 below. However licensees are allowed to distribute the Software as part of their application for the whole purpose of providing the features offered by the Software. A copy of this license agreement must be included with the distribution.
+
+6. Modification
+You are granted permission to make modifications to the software for your own use or the use of others, under the following conditions:
+
+1. All ownership rights of original source code are retained by VLD Interactive. All ownership rights of modified source code are retained by the author of the modifications. Should you provide VLD Interactive with your modifications (whether via e-mail, forums or other means) VLD Interactive reserve the right to redistribute the modifications and/or implement the modifications into the original product.
+2. You do not modify or make less visible, in any way, the copyright notice as noted in the Restrictions section of this license agreement.
+3. You may only distribute modified files in complete form so long as modifications released do not alter, remove, or make less visible, in any way, the copyright notice(s) embedded in the software, including but not limited to, HTML generated pages and the source code files or break any of the terms set out in this agreement.
+
+7. Warranties, disclaimers and exclusive remedies
+The software is being provided AS IS and VLD Interactive makes no warranty as to its use or performance. VLD Interactive and its associates do not and cannot warrant the performance or results licensee may obtain by using the software. VLD Interactive and its associates make no warranties, express or implied, as to non-infringement of third-party rights, merchantability, or fitness for any particular purpose. In no event will VLD Interactive or its associates be liable to licensee for any consequential, incidental, or special damages, including any lost profits or lost savings, even if a VLD Interactive representative has been advised of the possibility of such damages, or for any claim by any third party.
+
+We endeavour to make all the information on our websites, and especially that relating to our products, as accurate as possible. However, VLD Interactive does not warrant that product descriptions or other content of this site is accurate, complete, reliable, current, or error-free.
+
+Some jurisdictions do not allow the exclusion or limitation of incidental, consequential, or special damages, or the exclusion of implied warranties or limitations on how long an implied warranty may last, so that all or some of the above limitations may not apply to all licensees.
+
+8. Limitation of liability
+Neither party shall be liable for any indirect, incidental, special, punitive, or consequential damages, or any loss of profits, revenue, data, or data use. Our maximum liability for any damages whether in contract or tort will not exceed the fees which you have paid to us or are payable to us for this order, and if such damages result from your use of the software or technical support, the liability shall be limited to the fees paid or payable for the software or technical support.
+
+If you use this site and relevant services/products, you are responsible for maintaining the confidentiality of your account and password and you agree to accept responsibility for all activities that occur under your account or password. VLD Interactive reserves the right to refuse service, terminate accounts, remove or edit content, or cancel orders in their sole discretion.
+
+9. Term and Termination
+This agreement is effective upon licensee's purchase of the Software, and shall continue until terminated. You may terminate it at any other time by deleting the Software together with all copies, modifications and merged portions in any form. It will also terminate upon conditions set forth elsewhere in this agreement or if you fail to comply with any term or condition of this agreement. This includes the cancellation of payment if required for the software. You agree upon such termination to delete the software together with all copies, modifications and merged portions in any form.
+
+VLD Interactive may terminate this agreement at any time for any reason. Upon such termination by VLD Interactive, licensee agrees to destroy all copies or portions of the software under its control.
+
+10. General
+You may not sell, sublicense, assign or transfer the licence or the software except as expressly provided in this agreement. Any attempt to otherwise sublicense, assign or transfer any of the rights, duties or obligations hereunder is null and void.
+
+If any provision of this agreement is declared void or unenforceable by any judicial authority, this shall not nullify the remaining provisions of the agreement which shall remain in full force and effect. Any dispute arising out or in connection with this agreement including any question regarding its existence, validity or termination, shall be referred to and finally resolved by arbitration under Canadian law.
+
+Acceptance of this agreement as indicated above confirms your acceptance of the sale/user of the software and therefore cancels your right to refund under the standard Refund Policy.
+
+VLD Interactive reserves the right to alter this agreement at any time, for any reason, without notice. You may find the up to date version of it at http://www.phpsetupwizard.com/license
