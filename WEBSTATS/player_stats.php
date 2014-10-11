@@ -254,7 +254,7 @@ if (mysql_num_rows($result) > 0)
 	}
 
 	// Achivement 4
-	if ($row[$language_pack['ach04a_award']] >= $language_pack['ach04a_progress'] && $row[$language_pack['ach04a_award']] < $language_pack['ach04b_progress']) {
+	if ($row['playtime'] <	$language_pack['ach04a_progress']) {
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -275,7 +275,7 @@ if (mysql_num_rows($result) > 0)
 			</div>
 		</div>
 		<br clear='left'></br>";
-	} elseif ($row[$language_pack['ach04b_progress']] >= $language_pack['ach04b_progress'] && $row[$language_pack['ach04b_progress']] > $language_pack['ach04a_progress']) { 
+	} else { 
 		$arr_achievements[] = "
 		<div class='achievement-base'>
 			<div class='achievement-img'>
@@ -508,30 +508,6 @@ if (mysql_num_rows($result) > 0)
 				<div class='achievement-progress-text'> " . $row[$language_pack['ach03_award']] . " / " . $language_pack['ach03_progress'] . "</div>
 				<div class='achievement-progress-bar'>
 					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach03_award']] / 5 . "%' > 
-				</div>
-				</div>
-			</div>
-		</div>
-		<br clear='left'></br>";
-	}
-
-	// Achivement 4
-	if ($row[$language_pack['ach04a_award']] <= $language_pack['ach04a_progress']-1) {
-		$arr_achievements2[] = "
-		<div class='achievement-base'>
-			<div class='achievement-img'>
-				<div class='notachieved'></div>
-				<img src='img/ach/ach04a.jpg' />
-			</div>
-			<div class='achievement-desc-base'>
-				<div class='achievement-desc'>
-				<h3>" . $language_pack['ach04a'] . "<h3>
-				<h5>
-					" . $language_pack['ach04a_desc'] . "
-				</h5>
-				<div class='achievement-progress-text'> " . $row[$language_pack['ach04a_award']] . " / " . $language_pack['ach04a_progress'] . "</div>
-				<div class='achievement-progress-bar'>
-					<img src='img/misc/ach_bar.gif' height='14' width='" . $row[$language_pack['ach04a_award']] / 5 . "%' > 
 				</div>
 				</div>
 			</div>

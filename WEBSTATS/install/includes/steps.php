@@ -253,7 +253,7 @@ $steps = array(
 					'fi' => 'Finnish',
 				//	'no' => 'Norwegian',
 					'ru' => 'Russian',
-				//	'se' => 'Swedish',
+					'se' => 'Swedish',
 				),
 				'validate' => array(
 					array('rule' => 'required'), // make it "required"
