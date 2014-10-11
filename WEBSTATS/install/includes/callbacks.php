@@ -7,7 +7,6 @@ class Callbacks extends Callbacks_Core
 {
 	function is_installed($params = array())
 	{
-		$webstats_version = $_SESSION['params']['webstats_ver']; // fetch the current script version
 		if ( is_file(BASE_PATH . '../installation_setup.txt') ) {
 
 			$this->error = 'Webstats already appears to be installed.';

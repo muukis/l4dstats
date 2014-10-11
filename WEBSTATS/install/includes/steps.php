@@ -262,6 +262,15 @@ $steps = array(
 
 			// Select box
 			array(
+				'label' => '',
+				'name' => 'webstats_ver',
+				'type' => 'text_hidden',
+				'default' => '1.2',
+				'value' => '1.2',
+			),
+
+			// Select box
+			array(
 				'label' => '<span style="color:red">*</span>Game Version',
 				'name' => 'game_ver',
 				'type' => 'select',
@@ -274,15 +283,6 @@ $steps = array(
 				'validate' => array(
 					array('rule' => 'required'), // make it "required"
 				),
-			),
-
-			// Select box
-			array(
-				'label' => '',
-				'name' => 'webstats_ver',
-				'type' => 'text_hidden',
-				'default' => '1.2',
-				'value' => '1.2',
 			),
 
 			// Select box
