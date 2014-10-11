@@ -275,9 +275,9 @@ class Callbacks extends Callbacks_Core
 
 		$installation_file .= 'WebStats Version: ' . addslashes($_SESSION['params']['webstats_ver']) . ''."\n";
 
-		@file_put_contents(rtrim($_SESSION['params']['system_path'], '/').'/config.php', $config_file);
+		@file_put_contents('../config.php', $config_file);
 
-		@file_put_contents(rtrim($_SESSION['params']['system_path'], '/').'/installation_setup.txt', $installation_file);
+		@file_put_contents('../installation_setup.txt', $installation_file);
 
 		return true;
 	}
