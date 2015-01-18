@@ -9,7 +9,7 @@ Common PHP functions and code - "common.php"
 */
 
 // Allow debug parameter set from URL
-$allow_debug = 1;
+$allow_debug = 0;
 
 error_reporting(E_ERROR);
 
@@ -31,6 +31,13 @@ $template_properties['get_parameters'] = $get_parameters;
 
 // Include configuration file
 require("./config.php");
+
+// If its not installed, then head into install.php
+if (!$l4dstats_web_installed)
+{
+	header("Location: install/index.php");
+	die();
+}
 
 // Include language
 require("./languages.php");
@@ -415,21 +422,6 @@ if (!function_exists('file_put_contents')) {
 			fclose($f);
 			return $bytes;
 		}
-	}
-}
-
-if (basename($_SERVER['PHP_SELF']) !== "createtable.php" && basename($_SERVER['PHP_SELF']) !== "updatetable.php" && basename($_SERVER['PHP_SELF']) !== "install.php") {
-	if (file_exists("./install.php")) {
-		echo "Delete the file <b>install.php</b> before running webstats!<br />\n";
-		exit;
-	}
-	if (file_exists("./createtable.php")) {
-		echo "Delete the file <b>createtable.php</b> before running webstats!<br />\n";
-		exit;
-	}
-	if (file_exists("./updatetable.php")) {
-		echo "Delete the file <b>updatetable.php</b> before running webstats!<br />\n";
-		exit;
 	}
 }
 

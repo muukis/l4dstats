@@ -16,7 +16,7 @@ $lang_file_postfix_len = strlen($lang_file_prefix);
 foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filename)
 {
 	$lang_id = substr($language_filename, $lang_file_prefix_len);
-	$lang_id = substr($lang_id, 0, -4);
+	$lang_id = substr($lang_id, 0, $lang_file_postfix_len * -1);
 	$lang_id = strtolower($lang_id);
 	
 	$language_flag_path = './img/flags/' . $lang_id . '.gif';

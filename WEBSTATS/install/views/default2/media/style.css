@@ -1,0 +1,196 @@
+@import url("reset.css");
+
+html, body {
+	background: #ecf5ff;
+	color: #000000;
+	font: 12px arial, sans-serif; }
+
+a {
+	color: #004FD2;
+	outline: none;
+	text-decoration: none; }
+
+	a:hover {
+		text-decoration: underline; }
+
+div#container {
+	background: #f3f3f3;
+	border: 1px solid #a7a7a7;
+	margin: 15px auto 0 auto;
+	width: 800px; }
+
+div#page {
+	background: #ffffff;
+	margin: 10px;
+	padding: 15px 20px 10px 20px; }
+
+div#header {
+	background: url('logo.png') no-repeat;
+	border-bottom: 1px solid #7db0e3;
+	height: 48px;
+	padding: 0 10px 10px 50px; }
+
+	div#header h1 {
+		color: #c80000;
+		font-size: 16px;
+		padding-top: 6px; }
+
+	div#header p {
+		color: #222222;
+		font-size: 11px; }
+
+div#content {
+	background: #ffffff;
+	padding: 20px 0 10px 0; }
+
+	div#content div.progress {
+		background: #f0f0f0;
+		margin-bottom: 10px;
+		padding: 10px; }
+
+	div#content div.error {
+		background: url('error.png') no-repeat;
+		color: #D70000;
+		line-height: 16px;
+		margin-bottom: 10px;
+		padding-left: 20px; }
+
+	div#content div.info {
+		line-height: 18px;
+		padding-bottom: 10px; }
+
+	div#content div.sections {
+		padding-bottom: 10px; }
+
+		div#content div.sections h2 {
+			font-weight: bold;
+			padding-bottom: 10px; }
+
+div#footer {
+	color: #2060a0;
+	margin: 0 auto;
+	padding: 10px 0;
+	text-align: center;
+	width: 800px; }
+
+	div#footer a {
+		color: #2060a0; }
+
+div.grid {
+	border-bottom: 1px solid #eeeeee;
+	clear: both;
+	margin-bottom: 10px; }
+
+	div.grid div.even {
+		border-top: 1px solid #eeeeee; }
+
+	div.grid div.odd {
+		background: #fffff4;
+		border-top: 1px solid #eeeeee; }
+
+	div.grid div.first { }
+
+		div.grid label {
+			display: block;
+			float: left;
+			line-height: 24px;
+			width: 160px; }
+
+			div.widegrid label {
+				width: 160px; }
+
+		div.grid div.value {
+			line-height: 24px;
+			margin-left: 160px; }
+
+				div.widegrid div.value {
+					margin-left: 160px; }
+
+			div.grid div.value span.pass {
+				color: #008000; }
+
+			div.grid div.value span.fail {
+				color: #C80000; }
+
+div.row {
+	clear: both;
+	padding-bottom: 6px; }
+
+	div.row label {
+		display: block;
+		float: left;
+		line-height: 24px;
+		width: 160px; }
+
+		div.row label.error {
+			color: #c80000; }
+
+	div.row div.field {
+		margin-left: 160px; }
+
+	div.row div.field ul.items { }
+
+		div.row div.field ul.items li { }
+
+			div.row div.field ul.items li label {
+				float: none;
+				line-height: 18px;
+				width: auto; }
+
+
+input.text {
+	border: 1px solid #999999;
+	padding: 4px;
+	width: 250px; }
+
+	input.xsmall {
+		width: 70px; }
+
+	input.small {
+		width: 120px; }
+
+	input.medium {
+		width: 250px; }
+
+	input.large {
+		width: 400px; }
+
+	input.xlarge {
+		width: 570px; }
+
+textarea.textarea {
+	border: 1px solid #999999;
+	height: 100px;
+	padding: 4px;
+	width: 400px; }
+
+	textarea.xsmall {
+		height: 40px;
+		width: 120px; }
+
+	textarea.small {
+		height: 60px;
+		width: 180px; }
+
+	textarea.medium {
+		height: 80px;
+		width: 250px; }
+
+	textarea.large {
+		height: 100px;
+		width: 400px; }
+
+	textarea.xlarge {
+		height: 120px;
+		width: 570px; }
+
+select.select {
+	border: 1px solid #999999;
+	margin: 0;
+	padding: 1px; }
+
+input.button {
+	padding: 3px 6px; }
+
+div.clear {
+	clear: both; }
