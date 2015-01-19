@@ -29,11 +29,27 @@ foreach ($_GET as $key => $value)
 
 $template_properties['get_parameters'] = $get_parameters;
 
+$config_file_path = './config.php';
+$new_config_file_path = './config.install.php';
+
+if (file_exists($new_config_file_path))
+{
+	if (file_exists($config_file_path))
+	{
+		unlink($config_file_path);
+	}
+	
+	rename($new_config_file_path, $config_file_path);
+}
+
 // Include configuration file
-require("./config.php");
+if (file_exists($config_file_path))
+{
+	require($config_file_path);
+}
 
 // If its not installed, then head into install.php
-if (!$l4dstats_web_installed)
+if (!isset($l4dstats_web_installed) || !$l4dstats_web_installed)
 {
 	header("Location: install/index.php");
 	die();

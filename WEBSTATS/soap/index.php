@@ -225,34 +225,10 @@
 		
 		$g_link = false;
   }
-
-	function GetPlayer($steamId)
+	
+	function ParsePlayer($row)
 	{
-		global $l4dstats_web_installed, $mysql_tableprefix, $enable_soap;
-		
-		if (!$enable_soap || !$l4dstats_web_installed)
-		{
-			return NULL;
-		}
-
-		GetDbConnection();
-		
-		$query = "select * from " . $mysql_tableprefix . "players where steamid = '" . mysql_real_escape_string($steamId) . "'";
-  	$result = mysql_query($query);
-	
-		if (!$result)
-		{
-			CleanUpDb();
-			return NULL;
-		}
-	
-		if (!($row = mysql_fetch_array($result)))
-		{
-			CleanUpDb();
-			return NULL;
-		}
-	
-		$retval = array(
+		return array(
 			'steamid' => $row["steamid"],
 			'name' => $row["name"],
 			'lastontime' => $row["lastontime"],
@@ -344,10 +320,52 @@
 			'playtime_mutations' => $row["playtime_mutations"],
 			'points_mutations' => $row["points_mutations"]
 		);
+	}
+
+	function GetPlayer($steamId)
+	{
+		global $l4dstats_web_installed, $mysql_tableprefix, $enable_soap;
+		
+		if (!$enable_soap || !$l4dstats_web_installed)
+		{
+			return NULL;
+		}
+
+		GetDbConnection();
+		
+		$query = "select * from " . $mysql_tableprefix . "players where steamid = '" . mysql_real_escape_string($steamId) . "'";
+  	$result = mysql_query($query);
+	
+		if (!$result)
+		{
+			CleanUpDb();
+			return NULL;
+		}
+	
+		if (!($row = mysql_fetch_array($result)))
+		{
+			CleanUpDb();
+			return NULL;
+		}
+	
+		$retval = ParsePlayer($row);
 		
 		CleanUpDb();
 		
 		return $retval;
+	}
+	
+	function ParsePlayerCompact($row)
+	{
+		return array(
+			'steamid' => $row["steamid"],
+			'name' => $row["name"],
+			'lastontime' => $row["lastontime"],
+			'playtime' => $row["playtime"],
+			'points' => $row["points"],
+			'kills' => $row["kills"],
+			'kill_infected' => $row["kill_infected"]
+		);
 	}
 
 	function GetPlayerCompact($steamId)
@@ -376,17 +394,93 @@
 			return NULL;
 		}
 	
-		$retval = array(
-			'steamid' => $row["steamid"],
-			'name' => $row["name"],
-			'lastontime' => $row["lastontime"],
-			'playtime' => $row["playtime"],
-			'points' => $row["points"],
-			'kills' => $row["kills"],
-			'kill_infected' => $row["kill_infected"]
-		);
+		$retval = ParsePlayerCompact($row);
 		
 		CleanUpDb();
+		
+		return $retval;
+	}
+
+	function GetPlayersCompact($commaSeparatedSteamId)
+	{
+		global $l4dstats_web_installed, $mysql_tableprefix, $enable_soap;
+		
+		if (!$enable_soap || !$l4dstats_web_installed)
+		{
+			return NULL;
+		}
+
+		$steamIds = explode(',', $commaSeparatedSteamId);
+		
+		foreach ($steamIds as $steamId)
+		{
+			$securedSteamIds[] = "steamid = '" . mysql_real_escape_string($steamId) . "'";
+		}
+		
+		if (!isset($securedSteamIds))
+		{
+			return NULL;
+		}
+		
+		$where = "where " . implode(' or ', $securedSteamIds);
+		
+		GetDbConnection();
+		
+		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players " . $where;
+  	$result = mysql_query($query);
+	
+		if (!$result)
+		{
+			CleanUpDb();
+			return NULL;
+		}
+
+		while ($row = mysql_fetch_array($result))
+		{
+			$retval[] = ParsePlayerCompact($row);
+		}	
+		
+		CleanUpDb();
+		
+		if (!isset($retval))
+		{
+			return NULL;
+		}
+		
+		return $retval;
+	}
+
+	function GetTopPlayersCompact($startIndex, $pageSize)
+	{
+		global $l4dstats_web_installed, $mysql_tableprefix, $enable_soap;
+		
+		if (!$enable_soap || !$l4dstats_web_installed || !is_int($startIndex) || !is_int($pageSize))
+		{
+			return NULL;
+		}
+
+		GetDbConnection();
+		
+		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players order by points desc limit " . $startIndex . ", " . ($startIndex + $pageSize);
+  	$result = mysql_query($query);
+	
+		if (!$result)
+		{
+			CleanUpDb();
+			return NULL;
+		}
+
+		while ($row = mysql_fetch_array($result))
+		{
+			$retval[] = ParsePlayerCompact($row);
+		}	
+		
+		CleanUpDb();
+		
+		if (!isset($retval))
+		{
+			return NULL;
+		}
 		
 		return $retval;
 	}
