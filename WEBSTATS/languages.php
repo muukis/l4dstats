@@ -11,7 +11,7 @@ $lang_file_prefix = './lang/language.';
 $lang_file_prefix_len = strlen($lang_file_prefix);
 
 $lang_file_postfix = '.php';
-$lang_file_postfix_len = strlen($lang_file_prefix);
+$lang_file_postfix_len = strlen($lang_file_postfix);
 
 foreach (glob($lang_file_prefix . '*' . $lang_file_postfix) as $language_filename)
 {

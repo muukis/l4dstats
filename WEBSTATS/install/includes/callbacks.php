@@ -29,7 +29,7 @@ class Callbacks extends Callbacks_Core
 			'game_ver' => $_SESSION['params']['game_ver'],
 		);
 
-		if (!$_SESSION['params']['db_skip_install'])
+		if ($_SESSION['params']['db_skip_install'] != 'true')
 		{
 			if (!$this->db_init($dbconf))
 			{

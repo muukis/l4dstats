@@ -14,54 +14,55 @@ if (!$cssfile || strlen($cssfile) <= 0 || preg_match("/^[a-zA-Z0-9]+$/", $cssfil
 // Include configuration file
 require("./config.php");
 
-// Include template
+// Include templates
 require("./templates.php");
 
-$cssfilename_path = $site_template_path . '/css/' . $cssfile;
-$cssfile_path = $cssfilename_path . '.css';
-$csstemplatefile_path = $cssfilename_path . '.tpl';
+// Include template
+require("./class_template.php");
 
-// First priority for the template file
-if (file_exists($csstemplatefile_path) && !is_dir($csstemplatefile_path))
+function LoadCss($_path)
 {
-	$tpl = new Template($csstemplatefile_path);
-	echo '/* This CSS template file is located at ' . $csstemplatefile_path . ' */
+	global $cssfile;
+
+	$cssfilename_path = $_path . '/css/' . $cssfile;
+	$cssfile_path = $cssfilename_path . '.css';
+	$csstemplatefile_path = $cssfilename_path . '.tpl';
+	
+	// First priority for the template file
+	if (file_exists($csstemplatefile_path) && !is_dir($csstemplatefile_path))
+	{
+		$tpl = new Template($csstemplatefile_path);
+		echo '/* This CSS template file is located at ' . $csstemplatefile_path . ' */
 
 ' . $tpl->fetch($csstemplatefile_path);;
-	exit;
-}
-
-// Second priority for the CSS file
-if (file_exists($cssfile_path) && !is_dir($cssfile_path))
-{
-	echo '/* This CSS file is located at ' . $cssfile_path . ' */
-
-';
-	echo file_get_contents($cssfile_path);
-	exit;
-}
-
-$cssfilename_path = $default_site_template_path . '/css/' . $cssfile;
-$cssfile_path = $cssfilename_path . '.css';
-$csstemplatefile_path = $cssfilename_path . '.tpl';
-
-// First priority for the template file
-if (file_exists($csstemplatefile_path) && !is_dir($csstemplatefile_path))
-{
-	$tpl = new Template($csstemplatefile_path);
-	echo '/* This CSS template file is located at ' . $csstemplatefile_path . ' */
-
-' . $tpl->fetch($csstemplatefile_path);;
-	exit;
-}
-
-// Second priority for the CSS file
-if (file_exists($cssfile_path) && !is_dir($cssfile_path))
-{
-	echo '/* This CSS file is located at ' . $cssfile_path . ' */
+		return true;
+	}
+	
+	// Second priority for the CSS file
+	if (file_exists($cssfile_path) && !is_dir($cssfile_path))
+	{
+		echo '/* This CSS file is located at ' . $cssfile_path . ' */
 
 ';
-	echo file_get_contents($cssfile_path);
+		echo file_get_contents($cssfile_path);
+		return true;
+	}
+	
+	return false;
+}
+
+if (LoadCss($site_template_path))
+{
+	exit;
+}
+
+if (LoadCss($default_site_template_path))
+{
+	exit;
+}
+
+if (LoadCss($default_template_path))
+{
 	exit;
 }
 
