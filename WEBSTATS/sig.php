@@ -93,12 +93,9 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 			$rank_img = 'img/3.png';
 			$res_rank_color_choose = $res_font_color_rank3;
 		} else {
-			$rank_img = null;
+			$rank_img = 'img/0.png';
 			$res_rank_color_choose = $res_font_color_rank;
 		}
-		
-		if ($rank_img == null)
-			$rank_img = 'img/0.png';
 		
 		$res_rank=imagecreatefrompng($str_res_dir.$rank_img);
 		imagecopy($res_image_main,$res_rank,316.7,-2,0,0,34,34);
@@ -211,7 +208,10 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 		;}
 
 		// STEAMID
-		imagettftext($res_image_main,$sid_font_size,0,245,70,$res_font_color_sid,$str_res_dir.$str_font_bold,$row['steamid']);
+		$dimensions = imagettfbbox($sid_font_size,0,$str_res_dir.$str_font_bold,$row['steamid']);
+		$textWidth = abs($dimensions[4] - $dimensions[0]) + 7;
+		$x = imagesx($res_image_main) - $textWidth;
+		imagettftext($res_image_main,$sid_font_size,0,$x,70,$res_font_color_sid,$str_res_dir.$str_font_bold,$row['steamid']);
 		
 		// L4Dstats LOGO
 		imagettftext($res_image_main,$num_font_size,0,2,73,$res_font_color_white,$str_res_dir.$str_font_bold,$title);
@@ -240,6 +240,6 @@ if (mysql_select_db($mysql_db,$dbhandle)) {
 	imagettftext($res_image_main,$error2_font_size,0,37,52,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_3']);
 	imagettftext($res_image_main,$error2_font_size,0,37,62,$res_font_color_white,$str_res_dir.$str_font_reg,$language_pack['str_error_3b']);
 }
-	imagepng($res_image_main,NULL,9);
+	imagepng($res_image_main,NULL,9); 
 	imagedestroy($res_image_main);
 ?>

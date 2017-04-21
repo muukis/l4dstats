@@ -19,9 +19,9 @@
 					</script>
 					<div class="signature-box">
 					<?php echo "
-						<img src='http://servers.gamefurs.net/l4d2stats/sig.php?steamid=" . $player_steamid . "' />";
+						<img src='sig.php?steamid=" . $player_steamid . "' />";
 						 echo '
-						<input class="box_pre" type="text" id="sig_select" readonly value="[URL=http://servers.gamefurs.net/l4d2stats/player.php?steamid=' . $player_steamid . '][IMG]http://servers.gamefurs.net/l4d2stats/sig.php?steamid=' . $player_steamid . '[/IMG][/URL]">
+						<input class="box_pre" type="text" id="sig_select" readonly value="[URL=player.php?steamid=' . $player_steamid . '][IMG]sig.php?steamid=' . $player_steamid . '[/IMG][/URL]">
 						<button type="button" id="sig_button" onclick="Signature_l4dstats()">Select</button>';
 					?>
 					</div>
