@@ -207,9 +207,8 @@
     	return $g_link;
     }
     
-    //$g_link = mysql_connect($mysql_server, $mysql_user, $mysql_password) or die('Could not connect to server.');
-    $g_link = mysql_connect("localhost", "l4d", "l4d") or die('Could not connect to server.');
-    mysql_select_db("l4d2stats", $g_link) or die('Could not select database.');
+    $g_link = mysql_connect($mysql_server, $mysql_user, $mysql_password) or die('Could not connect to server.');
+    mysql_select_db($mysql_db, $g_link) or die('Could not select database.');
     
     return $g_link;
   }
