@@ -37,27 +37,27 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	}
 	else if ($type == "realism")
 	{
-		$campaigns = $versus_campaigns;
+		$campaigns = $realism_campaigns;
 		$query_where = " and gamemode = 2";
 	}
 	else if ($type == "survival")
 	{
-		$campaigns = $versus_campaigns;
+		$campaigns = $survival_campaigns;
 		$query_where = " and gamemode = 3";
 	}
 	else if ($type == "scavenge")
 	{
-		$campaigns = $versus_campaigns;
+		$campaigns = $scavenge_campaigns;
 		$query_where = " and gamemode = 4";
 	}
 	else if ($type == "realismversus")
 	{
-		$campaigns = $versus_campaigns;
+		$campaigns = $realismversus_campaigns;
 		$query_where = " and gamemode = 5";
 	}
 	else if ($type == "mutations")
 	{
-		$campaigns = $versus_campaigns;
+		$campaigns = $mutations_campaigns;
 		$query_where = " and gamemode = 6";
 	}
 
