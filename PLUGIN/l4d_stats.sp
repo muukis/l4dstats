@@ -279,6 +279,30 @@ Version History
 #define RANKVOTE_NO 0
 #define RANKVOTE_YES 1
 
+/**
+ * Get client PPM (points per minute) in custom players stats.
+ *
+ * @param clientId    An integer.
+ * @return            The float value of the PPM.
+ */
+native float StatsGetClientPpm(int clientId);
+
+/**
+ * Get client rank in custom players stats.
+ *
+ * @param clientId    An integer.
+ * @return            The int value of the rank.
+ */
+native int StatsGetClientRank(int clientId);
+
+/**
+ * Get client points in custom players stats.
+ *
+ * @param clientId    An integer.
+ * @return            The int value of the points.
+ */
+native int StatsGetClientPoints(int clientId);
+
 new String:TM_MENU_CURRENT[4] = " <<";
 
 new String:DB_PLAYERS_TOTALPOINTS[1024] = "points + points_survivors + points_infected + points_realism + points_survival + points_scavenge_survivors + points_scavenge_infected + points_realism_survivors + points_realism_infected + points_mutations";
@@ -11622,4 +11646,66 @@ public ReadDbMotdCallback(Handle:owner, Handle:hndl, const String:error[], any:d
 	{
 		SQL_FetchString(hndl, 0, MessageOfTheDay, sizeof(MessageOfTheDay));
 	}
+}
+
+public int Native_StatsGetClientPpm(Handle plugin, int numParams)
+{
+  int clientId = GetNativeCell(1);
+  
+	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+
+	decl String:query[1024];
+	decl String:SteamID[MAX_LINE_WIDTH];
+	
+	GetClientRankAuthString(clientId, SteamID, sizeof(SteamID));
+	Format(query, sizeof(query), "SELECT (%s) / (%s) AS ppm FROM %splayers WHERE steamid = '%s'", DB_PLAYERS_TOTALPOINTS, DB_PLAYERS_TOTALPLAYTIME, DbPrefix, SteamID);
+
+	decl Handle:hndl = SQL_Query(db, query);
+
+	if (hndl == INVALID_HANDLE)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Database connection failure");
+	}
+
+	if (!SQL_FetchRow(hndl))
+  {
+  	return 0;
+  }
+
+  return view_as<int>(SQL_FetchFloat(hndl, 0));
+}
+
+public int Native_StatsGetClientRank(Handle plugin, int numParams)
+{
+  int clientId = GetNativeCell(1);
+  
+	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+
+  return 0;
+}
+
+public int Native_StatsGetClientPoints(Handle plugin, int numParams)
+{
+  int clientId = GetNativeCell(1);
+  
+	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+
+  return 0;
+}
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+   CreateNative("StatsGetClientPpm", Native_StatsGetClientPpm);
+   CreateNative("StatsGetClientRank", Native_StatsGetClientRank);
+   CreateNative("StatsGetClientPoints", Native_StatsGetClientPoints);
+   return APLRes_Success;
 }
