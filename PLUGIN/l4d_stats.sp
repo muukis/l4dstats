@@ -2026,7 +2026,7 @@ QueryClientRank(Client, SQLTCallback:callback=INVALID_FUNCTION)
 
 	decl String:query[256];
 
-	Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE %s >= %i", DbPrefix, DB_PLAYERS_TOTALPOINTS, ClientPoints[Client]);
+	Format(query, sizeof(query), "SELECT COUNT(*) + 1 FROM %splayers WHERE (%s) >= %i", DbPrefix, DB_PLAYERS_TOTALPOINTS, ClientPoints[Client]);
 
 	SQL_TQuery(db, callback, query, Client);
 }
@@ -2039,7 +2039,7 @@ QueryClientRankDP(Handle:dp, SQLTCallback:callback)
 
 	new Client = ReadPackCell(dp);
 
-	Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers WHERE %s >= %i", DbPrefix, DB_PLAYERS_TOTALPOINTS, ClientPoints[Client]);
+	Format(query, sizeof(query), "SELECT COUNT(*) + 1 FROM %splayers WHERE (%s) >= %i", DbPrefix, DB_PLAYERS_TOTALPOINTS, ClientPoints[Client]);
 
 	SQL_TQuery(db, callback, query, dp);
 }
@@ -11663,12 +11663,11 @@ public int Native_StatsGetClientPpm(Handle plugin, int numParams)
 	GetClientRankAuthString(client, SteamID, sizeof(SteamID));
 	Format(query, sizeof(query), "SELECT (%s) / (%s) AS ppm FROM %splayers WHERE steamid = '%s'", DB_PLAYERS_TOTALPOINTS, DB_PLAYERS_TOTALPLAYTIME, DbPrefix, SteamID);
 
-	decl Handle:hndl;
-	hndl = SQL_Query(db, query);
+	decl Handle:hndl = SQL_Query(db, query);
 
 	if (hndl == INVALID_HANDLE)
 	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Database connection failure");
+		return ThrowNativeError(SP_ERROR_NATIVE, "Database connection failure!");
 	}
 
 	if (!SQL_FetchRow(hndl))
@@ -11685,10 +11684,10 @@ public int Native_StatsGetClientRank(Handle plugin, int numParams)
   
 	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
 	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected!", client);
 	}
 
-	return 0;
+	return ClientRank[client];
 }
 
 public int Native_StatsGetClientPoints(Handle plugin, int numParams)
@@ -11697,10 +11696,10 @@ public int Native_StatsGetClientPoints(Handle plugin, int numParams)
   
 	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
 	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected!", client);
 	}
 
-	return 0;
+	return ClientPoints[client];
 }
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
