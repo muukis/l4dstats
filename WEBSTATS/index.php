@@ -14,8 +14,8 @@ include("./common.php");
 // Load outer template
 $tpl = new Template($templatefiles['layout.tpl']);
 
-$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE lastontime >= '" . intval(time() - 300) . "' ORDER BY " . $TOTALPOINTS . " DESC");
-$playercount = number_format(mysql_num_rows($result));
+$result = $con_main->query("SELECT * FROM " . $mysql_tableprefix . "players WHERE lastontime >= '" . intval(time() - 300) . "' ORDER BY " . $TOTALPOINTS . " DESC");
+$playercount = number_format($result->num_rows);
 
 $tpl->set("title", $language_pack['playersonline']); // Window title
 $tpl->set("page_heading", $language_pack['playersonline'] . " - " . $playercount); // Page header
@@ -24,8 +24,8 @@ if ($stats_refreshinterval > 0)
 else
 	$tpl->set("statspagemeta", "");
 
-if (mysql_error()) {
-  $output = "<p><b>MySQL Error:</b> " . mysql_error() . "</p>\n";
+if (mysqli_error()) {
+  $output = "<p><b>MySQL Error:</b> " . mysqli_error() . "</p>\n";
 
 } else {
   $arr_online = array();
@@ -73,7 +73,7 @@ if (mysql_error()) {
 	}
 
   $i = 1;
-  while ($row = mysql_fetch_array($result)) {
+  while ($row = $result->fetch_assoc()) {
   	/*
     if ($row['lastontime'] > time()) $row['lastontime'] = time();
 

@@ -99,9 +99,9 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		
 		$query .= $query_where;
 
-			$result = mysql_query($query) or die(mysql_error());
+			$result = $con_main->query($query) or die(mysqli_error());
 	
-			if (mysql_num_rows($result) <= 0)
+			if ($result->num_rows <= 0)
 				continue;
 		
 			$playtime = 0;
@@ -112,7 +112,7 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 			$restarts = 0;
 			$infected_win = 0;
 	
-			while ($row = mysql_fetch_array($result))
+			while ($row = $result->fetch_assoc())
 			{
 				$playtime += $row['playtime'];
 				$points += $row['points'];
@@ -211,16 +211,16 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 		$query .= $query_where;
 		$query .= " ORDER BY name ASC";
 
-		$result = mysql_query($query) or die(mysql_error());
+		$result = $con_main->query($query) or die(mysqli_error());
 
-		if (mysql_num_rows($result) <= 0)
+		if ($result->num_rows <= 0)
 			continue;
 
 		// DEBUG
 		//$maparr[] = "<tr><td>" . $query . "</td></tr>";
 
 		$i = 1;
-		while ($row = mysql_fetch_array($result)) {  
+		while ($row = $result->fetch_assoc()) {  
 			$maparr[$i++] = $row;
 		}
 		

@@ -22,9 +22,9 @@ $min_playtime_minutes = 30;
 
 function getplayerscount()
 {
-	$result = mysql_query("SELECT COUNT(*) AS playerscount FROM " . $mysql_tableprefix . "players");
+	$result = $con_main->query("SELECT COUNT(*) AS playerscount FROM " . $mysql_tableprefix . "players");
 
-	if ($result && mysql_num_rows($result) > 0 && ($row = mysql_fetch_array($result)))
+	if ($result && $result->num_rows > 0 && ($row = $result->fetch_assoc()))
 		return $row['playerscount'];
 
 	return -1;
@@ -48,7 +48,7 @@ include("./common.php");
 	if ($last_online_months > 0)
 	{
 		$query = "DELETE FROM " . $mysql_tableprefix . "players WHERE lastontime < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL " . $last_online_months . " MONTH))";
-		if (mysql_query($query)) echo "<font color=\"darkgreen\">Last time online: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Last time online: " . mysql_error() . "</font><br />\n";
+		if ($con_main->query($query)) echo "<font color=\"darkgreen\">Last time online: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Last time online: " . mysqli_error() . "</font><br />\n";
 	}
 	else
 		echo "<font color=\"orange\">Last time online: Cleaning disabled!</font><br />\n";
@@ -56,7 +56,7 @@ include("./common.php");
 	if ($min_playtime_minutes > 0)
 	{
 		$query = "DELETE FROM " . $mysql_tableprefix . "players WHERE " . $TOTALPLAYTIME . " < " . $min_playtime_minutes . " AND lastontime < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 HOUR))";
-		if (mysql_query($query)) echo "<font color=\"darkgreen\">Total playtime: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Total playtime: " . mysql_error() . "</font><br />\n";
+		if ($con_main->query($query)) echo "<font color=\"darkgreen\">Total playtime: Cleaning successfully!</font><br />\n"; else echo "<font color=\"darkred\">Total playtime: " . mysqli_error() . "</font><br />\n";
 	}
 	else
 		echo "<font color=\"orange\">Total playtime: Cleaning disabled!</font><br />\n";

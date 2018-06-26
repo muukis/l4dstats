@@ -107,7 +107,7 @@ class DB_MySQL
 	 */
 	function query($sql, $soft = false)
 	{
-		$result = @mysql_query($sql, $this->link);
+		$result = @$con_main->query($sql, $this->link);
 
 		if ( $result === false && !$soft ) {
 			$this->error($sql);
@@ -126,10 +126,10 @@ class DB_MySQL
 	function error($sql = '')
 	{
 		if ( $this->config['db_show_queries'] && $sql ) {
-			$this->error = sprintf($this->language['db_error_query'], @mysql_error($this->link), $sql);
+			$this->error = sprintf($this->language['db_error_query'], @mysqli_error($this->link), $sql);
 		}
 		else {
-			$this->error = sprintf($this->language['db_error'], @mysql_error($this->link));
+			$this->error = sprintf($this->language['db_error'], @mysqli_error($this->link));
 		}
 
 		return $this->error;
@@ -144,7 +144,7 @@ class DB_MySQL
 	 */
 	function escape($value)
 	{
-		$value = @mysql_real_escape_string($value, $this->link);
+		$value = @mysqli_real_escape_string($value, $this->link);
 
 		return $value;
 	}

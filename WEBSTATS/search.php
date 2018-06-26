@@ -15,21 +15,21 @@ include("./common.php");
 $tpl = new Template($templatefiles['layout.tpl']);
 
 // Set Steam ID as var, and quit on hack attempt
-$searchstring = mysql_real_escape_string($_POST['search']);
+$searchstring = mysqli_real_escape_string($_POST['search']);
 if ($searchstring."" == "") $searchstring = md5("nostring");
 
 $tpl->set("title", $language_pack['playersearch']); // Window title
 $tpl->set("page_heading", $language_pack['playersearch']); // Page header
 
-$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE name LIKE '%" . $searchstring . "%' OR steamid LIKE '%" . $searchstring . "%' ORDER BY name LIMIT 100");
-if (mysql_error()) {
-  $output = "<p><b>MySQL Error:</b> " . mysql_error() . "</p>\n";
+$result = $con_main->query("SELECT * FROM " . $mysql_tableprefix . "players WHERE name LIKE '%" . $searchstring . "%' OR steamid LIKE '%" . $searchstring . "%' ORDER BY name LIMIT 100");
+if (mysqli_error()) {
+  $output = "<p><b>MySQL Error:</b> " . mysqli_error() . "</p>\n";
 } else {
   $arr_players = array();
   $stats = new Template($templatefiles['search.tpl']);
 
   $i = 1;
-  while ($row = mysql_fetch_array($result))
+  while ($row = $result->fetch_assoc())
   {
     $arr_players[$i++] = getplayerinfo($row);
     /*
@@ -42,7 +42,7 @@ if (mysql_error()) {
     */
   }
 
-  //if (mysql_num_rows($result) == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $language_pack['noplayersfound'] . "</td</tr>\n";
+  //if ($result->num_rows == 0) $arr_online[] = "<tr><td colspan=\"3\" align=\"center\">" . $language_pack['noplayersfound'] . "</td</tr>\n";
   $stats->set("searchstr", $_POST['search']);
   $stats->set("players", $arr_players);
   $output = $stats->fetch($templatefiles['search.tpl']);

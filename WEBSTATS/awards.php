@@ -110,13 +110,13 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	}
 
 	$query = "SELECT *" . $extrasql . " FROM " . $mysql_tableprefix . "players WHERE (" . $real_playtime_sql . ") >= " . $award_minplaytime . " ORDER BY (" . $real_points . " / " . $real_playtime . ") DESC LIMIT " . $award_display_players;
-	$result = mysql_query($query);
+	$result = $con_main->query($query);
 
-	if ($result && mysql_num_rows($result) > 0)
+	if ($result && $result->num_rows > 0)
 	{
 		$i = 0;
 
-		while ($row = mysql_fetch_array($result))
+		while ($row = $result->fetch_assoc())
 		{
 			if ($i++ == 0)
 			{
@@ -132,13 +132,13 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	}
 
 	$query = "SELECT *" . $extrasql . " FROM " . $mysql_tableprefix . "players WHERE (" . $real_playtime_sql . ") >= " . $award_minplaytime . " ORDER BY " . $real_playtime . " DESC LIMIT " . $award_display_players;
-	$result = mysql_query($query);
+	$result = $con_main->query($query);
 
-	if ($result && mysql_num_rows($result) > 0)
+	if ($result && $result->num_rows > 0)
 	{
 		$i = 0;
 
-		while ($row = mysql_fetch_array($result))
+		while ($row = $result->fetch_assoc())
 		{
 			if ($i++ == 0)
 			{
@@ -156,13 +156,13 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 	$headshotratiosql = $real_playtime_sql . " >= " . $award_minplaytime . " AND " . $real_points_sql . " >= " . $award_minpoints . " AND kills >= " . $award_minkills . " AND headshots >= " . $award_minheadshots;
 
 	$query = "SELECT *" . $extrasql . " FROM " . $mysql_tableprefix . "players WHERE " . $headshotratiosql . " ORDER BY (headshots/kills) DESC LIMIT " . $award_display_players;
-	$result = mysql_query($query);
+	$result = $con_main->query($query);
 
-	if ($result && mysql_num_rows($result) > 0)
+	if ($result && $result->num_rows > 0)
 	{
 		$i = 0;
 
-		while ($row = mysql_fetch_array($result))
+		while ($row = $result->fetch_assoc())
 		{
 			if (!($row['headshots'] && $row['kills']))
 			{
@@ -188,13 +188,13 @@ if ($cachedate < time() - (60*$award_cache_refresh)) {
 		$awardsql = ($award !== "award_teamkill" || $award !== "award_friendlyfire") ? " WHERE " . $real_playtime_sql . " >= " . $award_minplaytime . " AND " . $real_points_sql . " >= " . $award_minpointstotal : "";
 
 		$query = "SELECT name, steamid, ip, " . $award . " AS queryvalue" . $extrasql . " FROM " . $mysql_tableprefix . "players " . $awardsql . " ORDER BY " . $award . " DESC LIMIT " . $award_display_players;
-		$result = mysql_query($query);
+		$result = $con_main->query($query);
 
-		if ($result && mysql_num_rows($result) > 0)
+		if ($result && $result->num_rows > 0)
 		{
 			$i = 0;
 
-			while ($row = mysql_fetch_array($result))
+			while ($row = $result->fetch_assoc())
 			{
 				if ($i++ == 0)
 				{

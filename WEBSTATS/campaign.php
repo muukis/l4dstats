@@ -16,7 +16,7 @@ $tpl = new Template($templatefiles['layout.tpl']);
 
 // Set Campaign ID as var, and quit on hack attempt
 if (strstr($_GET['id'], "/")) exit;
-$campaign = mysql_real_escape_string($_GET['id']);
+$campaign = mysqli_real_escape_string($_GET['id']);
 
 // Set GameType as var, and quit on hack attempt
 if (strstr($_GET['type'], "/")) exit;
@@ -92,8 +92,8 @@ if ($type == "coop" || $type == "versus" || $type == "realism" || $type == "surv
 	$query .= $query_where;
 	$query .= " ORDER BY name ASC";
 	
-	$result = mysql_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	$result = $con_main->query($query);
+	while ($row = $result->fetch_assoc()) {
 			$playtime = array($row['playtime_nor'], $row['playtime_adv'], $row['playtime_exp'], $row['playtime_nor'] + $row['playtime_adv'] + $row['playtime_exp']);
 			$points = array($row['points_nor'], $row['points_adv'], $row['points_exp'], $row['points_nor'] + $row['points_adv'] + $row['points_exp']);
 			

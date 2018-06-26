@@ -207,8 +207,8 @@
     	return $g_link;
     }
     
-    $g_link = mysql_connect($mysql_server, $mysql_user, $mysql_password) or die('Could not connect to server.');
-    mysql_select_db($mysql_db, $g_link) or die('Could not select database.');
+    $g_link = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_db) or die('Could not connect to server.');
+    $g_link->query("SET NAMES 'utf8'");
     
     return $g_link;
   }
@@ -332,8 +332,8 @@
 
 		GetDbConnection();
 		
-		$query = "select * from " . $mysql_tableprefix . "players where steamid = '" . mysql_real_escape_string($steamId) . "'";
-  	$result = mysql_query($query);
+		$query = "select * from " . $mysql_tableprefix . "players where steamid = '" . mysqli_real_escape_string($steamId) . "'";
+  	$result = $g_link->query($query);
 	
 		if (!$result)
 		{
@@ -341,7 +341,7 @@
 			return NULL;
 		}
 	
-		if (!($row = mysql_fetch_array($result)))
+		if (!($row = $result->fetch_assoc()))
 		{
 			CleanUpDb();
 			return NULL;
@@ -378,8 +378,8 @@
 
 		GetDbConnection();
 		
-		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players where steamid = '" . mysql_real_escape_string($steamId) . "'";
-  	$result = mysql_query($query);
+		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players where steamid = '" . mysqli_real_escape_string($steamId) . "'";
+  	$result = $g_link->query($query);
 	
 		if (!$result)
 		{
@@ -387,7 +387,7 @@
 			return NULL;
 		}
 	
-		if (!($row = mysql_fetch_array($result)))
+		if (!($row = $result->fetch_assoc()))
 		{
 			CleanUpDb();
 			return NULL;
@@ -413,7 +413,7 @@
 		
 		foreach ($steamIds as $steamId)
 		{
-			$securedSteamIds[] = "steamid = '" . mysql_real_escape_string($steamId) . "'";
+			$securedSteamIds[] = "steamid = '" . mysqli_real_escape_string($steamId) . "'";
 		}
 		
 		if (!isset($securedSteamIds))
@@ -426,7 +426,7 @@
 		GetDbConnection();
 		
 		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players " . $where;
-  	$result = mysql_query($query);
+  	$result = $g_link->query($query);
 	
 		if (!$result)
 		{
@@ -434,7 +434,7 @@
 			return NULL;
 		}
 
-		while ($row = mysql_fetch_array($result))
+		while ($row = $result->fetch_assoc())
 		{
 			$retval[] = ParsePlayerCompact($row);
 		}	
@@ -461,7 +461,7 @@
 		GetDbConnection();
 		
 		$query = "select steamid, name, lastontime, playtime, points, kills, kill_infected from " . $mysql_tableprefix . "players order by points desc limit " . $startIndex . ", " . ($startIndex + $pageSize);
-  	$result = mysql_query($query);
+  	$result = $g_link->query($query);
 	
 		if (!$result)
 		{
@@ -469,7 +469,7 @@
 			return NULL;
 		}
 
-		while ($row = mysql_fetch_array($result))
+		while ($row = $result->fetch_assoc())
 		{
 			$retval[] = ParsePlayerCompact($row);
 		}	

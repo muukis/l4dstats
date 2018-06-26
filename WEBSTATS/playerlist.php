@@ -102,13 +102,13 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 	
 	$query = "SELECT COUNT(*) as players_count FROM " . $mysql_tableprefix . "players WHERE " . $playtime . " > 0";
 
-	$result = mysql_query($query);
+	$result = $con_main->query($query);
 	
-	if (mysql_error()) {
-    $output = "<p><b>MySQL Error:</b> " . mysql_error() . "</p>\n";
+	if (mysqli_error()) {
+    $output = "<p><b>MySQL Error:</b> " . mysqli_error() . "</p>\n";
 	
 	} else {
-		$row = mysql_fetch_array($result);
+		$row = $result->fetch_assoc();
 
     $arr_players = array();
 
@@ -146,17 +146,17 @@ if($type == "" || $type == "coop" || $type == "realism" || $type == "versus" || 
 		if ($row['players_count'] > 0)
 		{
 	    $query = "SELECT *, " . $sort . " as real_points, " . $playtime . " as real_playtime FROM " . $mysql_tableprefix . "players where " . $playtime . " > 0 ORDER BY " . $sort . " DESC LIMIT ". intval($page_current * $page_perpage) .",". $page_perpage;
-	    $result = mysql_query($query);
+	    $result = $con_main->query($query);
 
-			if (mysql_error())
+			if (mysqli_error())
 			{
-				$arr_players[] = "<p><b>MySQL Error:</b> " . mysql_error() . "</p>\n";
+				$arr_players[] = "<p><b>MySQL Error:</b> " . mysqli_error() . "</p>\n";
 				//$arr_players[] = "<br /><p><b>Query:</b> " . $query . "</p>\n";
 		  }
 			else
 			{
 		    $i = ($page_current !== 0) ? 1 + intval($page_current * 100) : 1;
-		    while ($row = mysql_fetch_array($result))
+		    while ($row = $result->fetch_assoc())
 		    {
 			    $arr_players[$i++] = getplayerinfo($row);
 /*

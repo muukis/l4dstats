@@ -43,7 +43,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 *********************************************************/
 
-if(strcmp('5.0.0', @phpversion()) < 0)
+if(strcmp('7.0.0', @phpversion()) < 0)
+	include_once('ip2country.php7.php');
+else if(strcmp('5.0.0', @phpversion()) < 0)
 	include_once('ip2country.php5.php');
 else
 	include_once('ip2country.php4.php');

@@ -16,15 +16,15 @@ $tpl = new Template($templatefiles['layout.tpl']);
 
 // Set Steam ID as var, and quit on hack attempt
 if (strstr($_GET['steamid'], "/")) exit;
-$id = trim(mysql_real_escape_string($_GET['steamid']));
+$id = trim(mysqli_real_escape_string($_GET['steamid']));
 
 // Set Steam ID as var, and quit on hack attempt
 if (strstr($_GET['id'], "/")) exit;
-$mapprefix = trim(mysql_real_escape_string($_GET['id']));
+$mapprefix = trim(mysqli_real_escape_string($_GET['id']));
 
 // Set gamemode as var, and quit on hack attempt
 if (strstr($_GET['gamemode'], "/")) exit;
-$gamemode = trim(mysql_real_escape_string($_GET['gamemode']));
+$gamemode = trim(mysqli_real_escape_string($_GET['gamemode']));
 
 $tpl->set("title", $language_pack['timedmaps']); // Window title
 $tpl->set("page_heading", $language_pack['timedmaps']); // Page header
@@ -32,8 +32,8 @@ $tpl->set("page_heading", $language_pack['timedmaps']); // Page header
 $fulloutput = "";
 $campaigns = array();
 
-if (mysql_error()) {
-	$fulloutput = "<p><b>MySQL Error:</b> " . mysql_error() . "</p>\n";
+if (mysqli_error()) {
+	$fulloutput = "<p><b>MySQL Error:</b> " . mysqli_error() . "</p>\n";
 
 } else if (!$timedmaps_show_all && !(strlen($id) > 0 || strlen($mapprefix) > 0 && strlen($gamemode) > 0)) {
 	$fulloutput = "<p><b>You must provide a player <a href=\"http://developer.valvesoftware.com/wiki/SteamID\" target=\"_blank\">Steam ID</a> or proper map info to display Timed Maps statistics!</b></p>\n";
@@ -109,13 +109,13 @@ if (mysql_error()) {
 			$query .= $query_where;
 			$query .= " ORDER BY m1.gamemode ASC, m1.map ASC, m1.difficulty DESC, m1.time " . $query_orderby . ", p.name ASC";
 
-			$result = mysql_query($query);
+			$result = $con_main->query($query);
 
-			if (!$result || mysql_num_rows($result) <= 0)
+			if (!$result || $result->num_rows <= 0)
 				continue;
 
 			$i = 1;
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = $result->fetch_assoc()) {
 
 				$line = "<tr"; // onmouseover=\"showtip('test');\" onmouseout=\"hidetip();\"";
 				$line .= ($i++ & 1) ? ">" : " class=\"alt\">";
@@ -203,7 +203,7 @@ if (mysql_error()) {
 				$previous_map = $row['map'];
 			}
 		
-			if (mysql_num_rows($result) == 0) $arr_maprunners[] = "<tr><td colspan=\"3\" align=\"center\">There are no map timings!</td</tr>\n";
+			if ($result->num_rows == 0) $arr_maprunners[] = "<tr><td colspan=\"3\" align=\"center\">There are no map timings!</td</tr>\n";
 		
 			$maprun->set("maprunners", $arr_maprunners);
 			$body = $maprun->fetch($templatefiles['timedmaps.tpl']);

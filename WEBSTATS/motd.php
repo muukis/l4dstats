@@ -35,13 +35,13 @@ if (strlen($motd_message) > 0)
 	$tpl->set("motd_message", $tpl_msg->fetch($templatefiles['motd_message.tpl']));
 }
 
-$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
-if ($result && mysql_num_rows($result) > 0)
+$result = $con_main->query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
+if ($result && $result->num_rows > 0)
 {
 	$top10 = array();
 	$i = 1;
 
-	while ($row = mysql_fetch_array($result))
+	while ($row = $result->fetch_assoc())
 	{
 		// This character is A PAIN... Find out how to convert it in to a HTML entity!
 		// http://www.fileformat.info/info/unicode/char/06d5/index.htm
@@ -69,14 +69,14 @@ $real_points = "real_points";
 $extrasql = ", " . $real_points_sql . " as " . $real_points . ", " . $real_playtime_sql . " as " . $real_playtime;
 
 $query = "SELECT *" . $extrasql . " FROM " . $mysql_tableprefix . "players WHERE (" . $real_playtime_sql . ") >= " . $award_minplaytime . " ORDER BY (" . $real_points . " / " . $real_playtime . ") DESC LIMIT 5";
-$result = mysql_query($query);
+$result = $con_main->query($query);
 
-if ($result && mysql_num_rows($result) > 0)
+if ($result && $result->num_rows > 0)
 {
 	$topppm = array();
 	$i = 1;
 
-	while ($row = mysql_fetch_array($result))
+	while ($row = $result->fetch_assoc())
 	{
 		// This character is A PAIN... Find out how to convert it in to a HTML entity!
 		// http://www.fileformat.info/info/unicode/char/06d5/index.htm

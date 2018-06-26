@@ -97,8 +97,8 @@ $players_sql = "
 		" . $mysql_tableprefix . "players
 ";
 
-$result = mysql_query($players_sql) or die("Error: " . mysql_error());
-$total = mysql_fetch_array($result);
+$result = $con_main->query($players_sql) or die("Error: " . mysqli_error();
+$total = $result->fetch_assoc();
 
 //Players
 //Total players
@@ -289,7 +289,7 @@ $maps_sql = "
 		gamemode
 ";
 
-$result = mysql_query($maps_sql) or die("Error: " . mysql_error());
+$result = $con_main->query($maps_sql) or die("Error: " . mysqli_error();
 $arr_maps = array();
 
 $totalplaytime = 0;
@@ -304,7 +304,7 @@ $totalmaps = 0;
 
 $arr_ppm_playtime = array();
 
-while ($row = mysql_fetch_array($result))
+while ($row = $result->fetch_assoc())
 {
 	$gamemodename = "Unknown";
 	$arr_vals = array();

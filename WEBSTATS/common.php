@@ -219,12 +219,12 @@ function getppm($__points, $__playtime)
 
 function getserversettingsvalue($name)
 {
-	global $mysql_tableprefix;
+	global $con_main, $mysql_tableprefix;
 
-	$q = "SELECT svalue FROM " . $mysql_tableprefix . "server_settings WHERE sname = '" . mysql_real_escape_string($name) . "'";
-	$res = mysql_query($q);
+	$q = "SELECT svalue FROM " . $mysql_tableprefix . "server_settings WHERE sname = '" . mysqli_real_escape_string($name) . "'";
+	$res = $con_main->query($q);
 
-	if ($res && mysql_num_rows($res) == 1 && ($r = mysql_fetch_array($res)))
+	if ($res && $res->num_rows == 1 && ($r = $res->fetch_assoc()))
 		return $r['svalue'];
 
 	return "";
@@ -446,12 +446,11 @@ if (strlen($mysql_ip2c_server) > 0)
 {
 	$con_ip2c = mysql_connect($mysql_ip2c_server, $mysql_ip2c_user, $mysql_ip2c_password);
 	mysql_select_db($mysql_ip2c_db, $con_ip2c);
-	mysql_query("SET NAMES 'utf8'", $con_ip2c);
+	$con_main->query("SET NAMES 'utf8'", $con_ip2c);
 }
 
-$con_main = mysql_connect($mysql_server, $mysql_user, $mysql_password);
-mysql_select_db($mysql_db, $con_main);
-mysql_query("SET NAMES 'utf8'", $con_main);
+$con_main = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_db);
+$con_main->query("SET NAMES 'utf8'");
 
 if (!$con_ip2c)
 	$con_ip2c = $con_main;
@@ -928,8 +927,8 @@ if ($timedmaps_show_all)
 $header_extra = array();
 $header_extra[$language_pack['zombieskilled']] = 0;
 $header_extra[$language_pack['playersserved']] = 0;
-$result = mysql_query("SELECT COUNT(*) AS players_served, sum(kills) AS total_kills FROM " . $mysql_tableprefix . "players");
-if ($result && $row = mysql_fetch_array($result))
+$result = $con_main->query("SELECT COUNT(*) AS players_served, sum(kills) AS total_kills FROM " . $mysql_tableprefix . "players");
+if ($result && $row = $result->fetch_assoc())
 {
 	$header_extra[$language_pack['zombieskilled']] = $row['total_kills'];
 	$header_extra[$language_pack['playersserved']] = $row['players_served'];
@@ -937,10 +936,10 @@ if ($result && $row = mysql_fetch_array($result))
 
 $i = 1;
 
-$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
-if ($result && mysql_num_rows($result) > 0)
+$result = $con_main->query("SELECT * FROM " . $mysql_tableprefix . "players ORDER BY " . $TOTALPOINTS . " DESC LIMIT 10");
+if ($result && $result->num_rows > 0)
 {
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = $result->fetch_assoc()) {
 		// This character is A PAIN... Find out how to convert it in to a HTML entity!
 		// http://www.fileformat.info/info/unicode/char/06d5/index.htm
 		// Maybe it's the same with all Arabic characters???? From right to left type of writing.

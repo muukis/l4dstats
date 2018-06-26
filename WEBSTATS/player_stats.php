@@ -16,12 +16,12 @@ $tpl = new Template($templatefiles['layout.tpl']);
 
 // Set Steam ID as var, and quit on hack attempt
 if (strstr($_GET['steamid'], "/")) exit;
-$id = mysql_real_escape_string($_GET['steamid']);
+$id = mysqli_real_escape_string($_GET['steamid']);
 
-$result = mysql_query("SELECT * FROM " . $mysql_tableprefix . "players WHERE steamid = '" . $id . "'");
-$row = mysql_fetch_array($result);
+$result = $con_main->query("SELECT * FROM " . $mysql_tableprefix . "players WHERE steamid = '" . $id . "'");
+$row = $result->fetch_assoc();
 $totalpoints = $row['points'] + $row['points_survival'] + $row['points_survivors'] + $row['points_infected'] + ($game_version != 1 ? $row['points_realism'] + $row['points_scavenge_survivors'] + $row['points_scavenge_infected'] + $row['points_realism_survivors'] + $row['points_realism_infected'] + $row['points_mutations'] : 0);
-$rankrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS rank FROM " . $mysql_tableprefix . "players WHERE points + points_survival + points_survivors + points_infected" . ($game_version != 1 ? " + points_realism + points_scavenge_survivors + points_scavenge_infected + points_realism_survivors + points_realism_infected + points_mutations" : "") . " >= '" . $totalpoints . "'"));
+$rankrow = $con_main->query("SELECT COUNT(*->fetch_assoc() AS rank FROM " . $mysql_tableprefix . "players WHERE points + points_survival + points_survivors + points_infected" . ($game_version != 1 ? " + points_realism + points_scavenge_survivors + points_scavenge_infected + points_realism_survivors + points_realism_infected + points_mutations" : "") . " >= '" . $totalpoints . "'");
 $rank = $rankrow['rank'];
 
 $arr_kills = array();
@@ -45,12 +45,12 @@ $arr_demerits[$language_pack['friendliesleftfordead']] = array($row['award_left4
 $arr_demerits[$language_pack['infectedletinsaferoom']] = array($row['award_letinsafehouse'], $language_pack['infectedletinsaferoomtitle']);
 $arr_demerits[$language_pack['witchesdisturbed']] = array($row['award_witchdisturb'], $language_pack['witchesdisturbedtitle']);
 
-if (mysql_num_rows($result) > 0)
+if ($result->num_rows > 0)
 {
 	$playername = htmlentities($row['name'], ENT_COMPAT, "UTF-8");
 	$playername2 = $playername;
 
-	$timesrow = mysql_fetch_array(mysql_query("SELECT COUNT(*) AS times FROM " . $mysql_tableprefix . "timedmaps WHERE steamid = '" . $id . "'"));
+	$timesrow = $con_main->query("SELECT COUNT(*->fetch_assoc() AS times FROM " . $mysql_tableprefix . "timedmaps WHERE steamid = '" . $id . "'");
 	$times = $timesrow['times'];
 
 	$tpl->set("title", $playername . " :: " . $language_pack['playerstats']); // Window title
