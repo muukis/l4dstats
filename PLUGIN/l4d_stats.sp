@@ -11650,8 +11650,8 @@ public ReadDbMotdCallback(Handle:owner, Handle:hndl, const String:error[], any:d
 
 public int Native_StatsGetClientPpm(Handle plugin, int numParams)
 {
-  int client = GetNativeCell(1);
-  
+	int client = GetNativeCell(1);
+
 	if (!IsClientConnected(client) && !IsClientInGame(client) && IsClientBot(client))
 	{
 		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
@@ -11663,7 +11663,8 @@ public int Native_StatsGetClientPpm(Handle plugin, int numParams)
 	GetClientRankAuthString(client, SteamID, sizeof(SteamID));
 	Format(query, sizeof(query), "SELECT (%s) / (%s) AS ppm FROM %splayers WHERE steamid = '%s'", DB_PLAYERS_TOTALPOINTS, DB_PLAYERS_TOTALPLAYTIME, DbPrefix, SteamID);
 
-	decl Handle:hndl = SQL_Query(db, query);
+	decl Handle:hndl;
+	hndl = SQL_Query(db, query);
 
 	if (hndl == INVALID_HANDLE)
 	{
