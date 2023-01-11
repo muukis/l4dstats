@@ -254,9 +254,6 @@ Version History
 
 #define INF_WEAROFF_TIME 0.5
 
-#define SERVER_VERSION_L4D1 40
-#define SERVER_VERSION_L4D2 50
-
 #define CLEAR_DATABASE_CONFIRMTIME 10.0
 
 #define CM_UNKNOWN -1
@@ -317,7 +314,7 @@ new String:StatsSound_Hunter_Perfect[32];
 new String:StatsSound_Tank_Bulldozer[32];
 
 // Server version
-new ServerVersion = SERVER_VERSION_L4D1;
+new EngineVersion:ServerVersion = Engine_Left4Dead;
 
 // Database handle
 new Handle:db = INVALID_HANDLE;
@@ -620,9 +617,9 @@ public OnPluginStart()
 		return;
 	}
 
-	ServerVersion = GuessSDKVersion();
+	ServerVersion = GetEngineVersion();
 
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		strcopy(StatsSound_MapTime_Start, sizeof(StatsSound_MapTime_Start), SOUND_MAPTIME_START_L4D1);
 		strcopy(StatsSound_MapTime_Improve, sizeof(StatsSound_MapTime_Improve), SOUND_MAPTIME_IMPROVE_L4D1);
@@ -659,8 +656,8 @@ public OnPluginStart()
 	cvar_InfectedLimit = FindConVar("z_max_player_zombies");
 
 	// Administrative Cvars
-	cvar_AdminPlayerCleanLastOnTime = CreateConVar("l4d_stats_adm_cleanoldplayers", "2", "How many months old players (last online time) will be cleaned. 0 = Disabled", FCVAR_PLUGIN, true, 0.0);
-	cvar_AdminPlayerCleanPlatime = CreateConVar("l4d_stats_adm_cleanplaytime", "30", "How many minutes of playtime to not get cleaned from stats. 0 = Disabled", FCVAR_PLUGIN, true, 0.0);
+	cvar_AdminPlayerCleanLastOnTime = CreateConVar("l4d_stats_adm_cleanoldplayers", "2", "How many months old players (last online time) will be cleaned. 0 = Disabled", _, true, 0.0);
+	cvar_AdminPlayerCleanPlatime = CreateConVar("l4d_stats_adm_cleanplaytime", "30", "How many minutes of playtime to not get cleaned from stats. 0 = Disabled", _, true, 0.0);
 
 	// Config/control Cvars
 	cvar_EnableRankVote = CreateConVar("l4d_stats_enablerankvote", "1", "Enable voting of team shuffle by player PPM (Points Per Minute)", _, true, 0.0, true, 1.0);
@@ -768,7 +765,7 @@ public OnPluginStart()
 	cvar_HunterNicePounceSuccess = CreateConVar("l4d_stats_nicepouncesuccess", "10", "Base score for a successful Nice Pounce", _, true, 1.0);
 	cvar_HunterDamageCap = CreateConVar("l4d_stats_hunterdamagecap", "25", "Hunter stored damage cap", _, true, 25.0);
 
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		MaxPounceDistance = GetConVarInt(FindConVar("z_pounce_damage_range_max"));
 		MinPounceDistance = GetConVarInt(FindConVar("z_pounce_damage_range_min"));
@@ -812,7 +809,7 @@ public OnPluginStart()
 	HookEvent("player_death", event_PlayerDeath);
 	HookEvent("infected_death", event_InfectedDeath);
 	HookEvent("tank_killed", event_TankKilled);
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		HookEvent("weapon_given", event_GivePills);
 	}
@@ -842,7 +839,7 @@ public OnPluginStart()
 	HookEvent("player_no_longer_it", event_PlayerBlindEnd);
 
 	// Team Loss Events / Misc. Events
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		HookEvent("award_earned", event_Award_L4D1);
 	}
@@ -867,7 +864,7 @@ public OnPluginStart()
 	// Smoker stats
 	HookEvent("tongue_grab", event_SmokerGrap);
 	HookEvent("tongue_release", event_SmokerRelease);
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		HookEvent("tongue_broke_victim_died", event_SmokerRelease);
 	}
@@ -880,7 +877,7 @@ public OnPluginStart()
 	// Hunter stats
 	HookEvent("pounce_end", event_HunterRelease);
 
-	if (ServerVersion != SERVER_VERSION_L4D1)
+	if (ServerVersion != Engine_Left4Dead)
 	{
 		// Spitter stats
 		//HookEvent("spitter_killed", event_SpitterKilled);
@@ -975,7 +972,7 @@ public OnPluginStart()
 	EnableSounds_Hunter_Perfect = PrecacheSound(StatsSound_Hunter_Perfect); // Sound from a hunter perfect pounce (Death From Above)
 	EnableSounds_Tank_Bulldozer = PrecacheSound(StatsSound_Tank_Bulldozer); // Sound from a tank bulldozer
 
-	if (ServerVersion != SERVER_VERSION_L4D1)
+	if (ServerVersion != Engine_Left4Dead)
 	{
 		EnableSounds_Charger_Ram = PrecacheSound(SOUND_CHARGER_RAM); // Sound from a charger scattering ram
 	}
@@ -1034,15 +1031,15 @@ public OnConfigsExecuted()
 
 // Load our categories and menus
 
-public OnAdminMenuReady(Handle:TopMenu)
+public OnAdminMenuReady(Handle:TopMenuHandle)
 {
 	// Block us from being called twice
-	if (TopMenu == RankAdminMenu)
+	if (TopMenuHandle == RankAdminMenu)
 	{
 		return;
 	}
 
-	RankAdminMenu = TopMenu;
+	RankAdminMenu = TopMenuHandle;
 
 	// Add a category to the SourceMod menu called "Player Stats"
 	AddToTopMenu(RankAdminMenu, "Player Stats", TopMenuObject_Category, ClearRankCategoryHandler, INVALID_TOPMENUOBJECT);
@@ -2578,7 +2575,7 @@ public UpdatePlayer(client)
 	ReplaceString(Name, sizeof(Name), "\"", "");
 	ReplaceString(Name, sizeof(Name), "'", "");
 	ReplaceString(Name, sizeof(Name), ";", "");
-	ReplaceString(Name, sizeof(Name), " ", "");
+	ReplaceString(Name, sizeof(Name), "�", "");
 	ReplaceString(Name, sizeof(Name), "`", "");
 
 	UpdatePlayerFull(client, SteamID, Name);
@@ -3503,7 +3500,7 @@ public Action:event_InfectedDeath(Handle:event, const String:name[], bool:dontBr
 	TimerKills[Attacker] = TimerKills[Attacker] + 1;
 
 	// Melee?
-	if (ServerVersion != SERVER_VERSION_L4D1)
+	if (ServerVersion != Engine_Left4Dead)
 	{
 		new WeaponID = GetEventInt(event, "weapon_id");
 
@@ -9180,7 +9177,7 @@ bool:IsClientBot(client)
 
 ModifyScoreRealism(BaseScore, ClientTeam, bool:ToCeil=true)
 {
-	if (ServerVersion != SERVER_VERSION_L4D1)
+	if (ServerVersion != Engine_Left4Dead)
 	{
 		decl Handle:Multiplier;
 		
@@ -9997,20 +9994,20 @@ DoInfectedFinalChecks(Client, ClientInfType = -1)
 		SmokerDamageCounter[Client] = 0;
 		UpdateSmokerDamage(Client, Damage);
 	}
-	else if (ServerVersion != SERVER_VERSION_L4D1 && ClientInfType == INF_ID_SPITTER_L4D2)
+	else if (ServerVersion != Engine_Left4Dead && ClientInfType == INF_ID_SPITTER_L4D2)
 	{
 		new Damage = SpitterDamageCounter[Client];
 		SpitterDamageCounter[Client] = 0;
 		UpdateSpitterDamage(Client, Damage);
 	}
-	else if (ServerVersion != SERVER_VERSION_L4D1 && ClientInfType == INF_ID_JOCKEY_L4D2)
+	else if (ServerVersion != Engine_Left4Dead && ClientInfType == INF_ID_JOCKEY_L4D2)
 	{
 		new Damage = JockeyDamageCounter[Client];
 		JockeyDamageCounter[Client] = 0;
 		UpdateJockeyDamage(Client, Damage);
 		UpdateJockeyRideLength(Client);
 	}
-	else if (ServerVersion != SERVER_VERSION_L4D1 && ClientInfType == INF_ID_CHARGER_L4D2)
+	else if (ServerVersion != Engine_Left4Dead && ClientInfType == INF_ID_CHARGER_L4D2)
 	{
 		new Damage = ChargerDamageCounter[Client];
 		ChargerDamageCounter[Client] = 0;
@@ -10025,7 +10022,7 @@ GetInfType(Client)
 	new InfType = GetEntProp(Client, Prop_Send, "m_zombieClass");
 
 	// Make the conversion so that everything gets stored in the correct fields
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		if (InfType == INF_ID_WITCH_L4D1)
 			return INF_ID_WITCH_L4D2;
@@ -10384,7 +10381,7 @@ SurvivorDiedNamed(Attacker, Victim, const String:VictimName[], const String:Atta
 		AttackerInfType = ClientInfectedType[Attacker];
 	}
 
-	if (ServerVersion == SERVER_VERSION_L4D1)
+	if (ServerVersion == Engine_Left4Dead)
 	{
 		if (AttackerInfType != INF_ID_SMOKER
 				&& AttackerInfType != INF_ID_BOOMER
@@ -10792,7 +10789,7 @@ AnnounceMedkitPenalty(Mode = -1)
 		Mode = GetConVarInt(cvar_AnnounceMode);
 
 	if (Mode)
-		StatsPrintToChatTeam(TEAM_SURVIVORS, "\x03ALL SURVIVORS \x01now earns only \x04%i percent \x01of their normal points after using their \x05%i%s Medkit%s\x01!", RoundToNearest(ReductionFactor * 100), MedkitsUsedCounter, (MedkitsUsedCounter == 1 ? "st" : (MedkitsUsedCounter == 2 ? "nd" : (MedkitsUsedCounter == 3 ? "rd" : "th"))), (ServerVersion == SERVER_VERSION_L4D1 ? "" : " or Defibrillator"));
+		StatsPrintToChatTeam(TEAM_SURVIVORS, "\x03ALL SURVIVORS \x01now earns only \x04%i percent \x01of their normal points after using their \x05%i%s Medkit%s\x01!", RoundToNearest(ReductionFactor * 100), MedkitsUsedCounter, (MedkitsUsedCounter == 1 ? "st" : (MedkitsUsedCounter == 2 ? "nd" : (MedkitsUsedCounter == 3 ? "rd" : "th"))), (ServerVersion == Engine_Left4Dead ? "" : " or Defibrillator"));
 }
 
 GetClientInfectedType(Client)
@@ -10864,7 +10861,6 @@ public StatsPrintToChatTeam(Team, const String:Message[], any:...)
 	else
 		StatsPrintToChatAllPreFormatted(FormattedMessage);
 }
-
 
 // Disable map timings when opposing team has human players. The time is too much depending on opposing team that is is comparable.
 
@@ -11135,7 +11131,7 @@ public InitializeRankVote(client)
 		}
 		else
 		{
-			if (ServerVersion == SERVER_VERSION_L4D1)
+			if (ServerVersion == Engine_Left4Dead)
 			{
 				StatsPrintToChatPreFormatted2(client, true, "The \x04Rank Vote \x01is enabled in \x03Versus \x01gamemode!");
 			}
@@ -11321,7 +11317,7 @@ GetClientRankAuthString(client, String:auth[], maxlength)
 {
 	if (GetConVarInt(cvar_Lan))
 	{
-		GetClientAuthString(client, auth, maxlength);
+		GetClientAuthId(client, AuthId_Steam2, auth, maxlength);
 
 		if (!StrEqual(auth, "BOT", false))
 		{
@@ -11330,7 +11326,7 @@ GetClientRankAuthString(client, String:auth[], maxlength)
 	}
 	else
 	{
-		GetClientAuthString(client, auth, maxlength);
+		GetClientAuthId(client, AuthId_Steam2, auth, maxlength);
 
 		if (StrEqual(auth, "STEAM_ID_LAN", false))
 		{
