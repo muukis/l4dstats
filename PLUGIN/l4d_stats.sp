@@ -204,6 +204,8 @@ Version History
 
 -- 1.4B122 (2/24/15) Cleaned up some warnings
 
+-- 1.5 (1/11/23) Fixed errors and warnings. Now compiles for SourceMod 1.11.
+
 -----------------------------------------------------------------------------
 */
 
@@ -216,7 +218,7 @@ Version History
 #include <adminmenu>
 
 #define PLUGIN_NAME "Custom Player Stats"
-#define PLUGIN_VERSION "1.4B122"
+#define PLUGIN_VERSION "1.5"
 #define PLUGIN_DESCRIPTION "Player Stats and Ranking for Left 4 Dead and Left 4 Dead 2."
 
 #define MAX_LINE_WIDTH 64
