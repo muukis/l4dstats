@@ -637,7 +637,7 @@ public OnPluginStart()
 	}
 
 	// Plugin version public Cvar
-	CreateConVar("l4d_stats_version", PLUGIN_VERSION, "Custom Player Stats Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("l4d_stats_version", PLUGIN_VERSION, "Custom Player Stats Version", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 
 	// Disable setting Cvars
 	cvar_Difficulty = FindConVar("z_difficulty");
@@ -654,114 +654,115 @@ public OnPluginStart()
 	cvar_InfectedLimit = FindConVar("z_max_player_zombies");
 
 	// Administrative Cvars
-	cvar_AdminPlayerCleanLastOnTime = CreateConVar("l4d_stats_adm_cleanoldplayers", "2", "How many months old players (last online time) will be cleaned. 0 = Disabled", FCVAR_PLUGIN, true, 0.0);
-	cvar_AdminPlayerCleanPlatime = CreateConVar("l4d_stats_adm_cleanplaytime", "30", "How many minutes of playtime to not get cleaned from stats. 0 = Disabled", FCVAR_PLUGIN, true, 0.0);
+	CreateConVar("myplugin_enabled", "1", "Sets whether my plugin is enabled");
+	cvar_AdminPlayerCleanLastOnTime = CreateConVar("l4d_stats_adm_cleanoldplayers", "2", "How many months old players (last online time) will be cleaned. 0 = Disabled", _, true, 0.0);
+	cvar_AdminPlayerCleanPlatime = CreateConVar("l4d_stats_adm_cleanplaytime", "30", "How many minutes of playtime to not get cleaned from stats. 0 = Disabled", _, true, 0.0);
 
 	// Config/control Cvars
-	cvar_EnableRankVote = CreateConVar("l4d_stats_enablerankvote", "1", "Enable voting of team shuffle by player PPM (Points Per Minute)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_HumansNeeded = CreateConVar("l4d_stats_minhumans", "2", "Minimum Human players before stats will be enabled", FCVAR_PLUGIN, true, 1.0, true, 4.0);
-	cvar_UpdateRate = CreateConVar("l4d_stats_updaterate", "90", "Number of seconds between Common Infected point earn announcement/update", FCVAR_PLUGIN, true, 30.0);
-	//cvar_AnnounceRankMinChange = CreateConVar("l4d_stats_announcerankminpoint", "500", "Minimum change to points before rank change announcement", FCVAR_PLUGIN, true, 0.0);
-	cvar_AnnounceRankChange = CreateConVar("l4d_stats_announcerank", "1", "Chat announcment for rank change", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_AnnounceRankChangeIVal = CreateConVar("l4d_stats_announcerankinterval", "60", "Rank change check interval", FCVAR_PLUGIN, true, 10.0);
-	cvar_AnnouncePlayerJoined = CreateConVar("l4d_stats_announceplayerjoined", "1", "Chat announcment for player joined.", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_AnnounceMotd = CreateConVar("l4d_stats_announcemotd", "1", "Chat announcment for the message of the day.", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_AnnounceMode = CreateConVar("l4d_stats_announcemode", "1", "Chat announcment mode. 0 = Off, 1 = Player Only, 2 = Player Only w/ Public Headshots, 3 = All Public", FCVAR_PLUGIN, true, 0.0, true, 3.0);
-	cvar_AnnounceToTeam = CreateConVar("l4d_stats_announceteam", "2", "Chat announcment team messages to the team only mode. 0 = Print messages to all teams, 1 = Print messages to own team only, 2 = Print messages to own team and spectators only", FCVAR_PLUGIN, true, 0.0, true, 2.0);
-	//cvar_AnnounceSpecial = CreateConVar("l4d_stats_announcespecial", "1", "Chat announcment mode for special events. 0 = Off, 1 = Player Only, 2 = Print messages to all teams, 3 = Print messages to own team only, 4 = Print messages to own team and spectators only", FCVAR_PLUGIN, true, 0.0, true, 4.0);
-	cvar_MedkitMode = CreateConVar("l4d_stats_medkitmode", "0", "Medkit point award mode. 0 = Based on amount healed, 1 = Static amount", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_SiteURL = CreateConVar("l4d_stats_siteurl", "", "Community site URL, for rank panel display", FCVAR_PLUGIN);
-	cvar_RankOnJoin = CreateConVar("l4d_stats_rankonjoin", "1", "Display player's rank when they connect. 0 = Disable, 1 = Enable", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_SilenceChat = CreateConVar("l4d_stats_silencechat", "0", "Silence chat triggers. 0 = Show chat triggers, 1 = Silence chat triggers", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_DisabledMessages = CreateConVar("l4d_stats_disabledmessages", "1", "Show 'Stats Disabled' messages, allow chat commands to work when stats disabled. 0 = Hide messages/disable chat, 1 = Show messages/allow chat", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	//cvar_MaxPoints = CreateConVar("l4d_stats_maxpoints", "500", "Maximum number of points that can be earned in a single map. Normal = x1, Adv = x2, Expert = x3", FCVAR_PLUGIN, true, 500.0);
-	cvar_DbPrefix = CreateConVar("l4d_stats_dbprefix", "", "Prefix for your stats tables", FCVAR_PLUGIN);
-	//cvar_LeaderboardTime = CreateConVar("l4d_stats_leaderboardtime", "14", "Time in days to show Survival Leaderboard times", FCVAR_PLUGIN, true, 1.0);
-	cvar_EnableNegativeScore = CreateConVar("l4d_stats_enablenegativescore", "1", "Enable point losses (negative score)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_FriendlyFireMode = CreateConVar("l4d_stats_ffire_mode", "2", "Friendly fire mode. 0 = Normal, 1 = Cooldown, 2 = Damage based", FCVAR_PLUGIN, true, 0.0, true, 2.0);
-	cvar_FriendlyFireMultiplier = CreateConVar("l4d_stats_ffire_multiplier", "1.5", "Friendly fire damage multiplier (Formula: Score = Damage * Multiplier)", FCVAR_PLUGIN, true, 0.0);
-	cvar_FriendlyFireCooldown = CreateConVar("l4d_stats_ffire_cooldown", "10.0", "Time in seconds for friendly fire cooldown", FCVAR_PLUGIN, true, 1.0);
-	cvar_FriendlyFireCooldownMode = CreateConVar("l4d_stats_ffire_cooldownmode", "1", "Friendly fire cooldown mode. 0 = Disable, 1 = Player specific, 2 = General", FCVAR_PLUGIN, true, 0.0, true, 2.0);
+	cvar_EnableRankVote = CreateConVar("l4d_stats_enablerankvote", "1", "Enable voting of team shuffle by player PPM (Points Per Minute)", _, true, 0.0, true, 1.0);
+	cvar_HumansNeeded = CreateConVar("l4d_stats_minhumans", "2", "Minimum Human players before stats will be enabled", _, true, 1.0, true, 4.0);
+	cvar_UpdateRate = CreateConVar("l4d_stats_updaterate", "90", "Number of seconds between Common Infected point earn announcement/update", _, true, 30.0);
+	//cvar_AnnounceRankMinChange = CreateConVar("l4d_stats_announcerankminpoint", "500", "Minimum change to points before rank change announcement", _, true, 0.0);
+	cvar_AnnounceRankChange = CreateConVar("l4d_stats_announcerank", "1", "Chat announcment for rank change", _, true, 0.0, true, 1.0);
+	cvar_AnnounceRankChangeIVal = CreateConVar("l4d_stats_announcerankinterval", "60", "Rank change check interval", _, true, 10.0);
+	cvar_AnnouncePlayerJoined = CreateConVar("l4d_stats_announceplayerjoined", "1", "Chat announcment for player joined.", _, true, 0.0, true, 1.0);
+	cvar_AnnounceMotd = CreateConVar("l4d_stats_announcemotd", "1", "Chat announcment for the message of the day.", _, true, 0.0, true, 1.0);
+	cvar_AnnounceMode = CreateConVar("l4d_stats_announcemode", "1", "Chat announcment mode. 0 = Off, 1 = Player Only, 2 = Player Only w/ Public Headshots, 3 = All Public", _, true, 0.0, true, 3.0);
+	cvar_AnnounceToTeam = CreateConVar("l4d_stats_announceteam", "2", "Chat announcment team messages to the team only mode. 0 = Print messages to all teams, 1 = Print messages to own team only, 2 = Print messages to own team and spectators only", _, true, 0.0, true, 2.0);
+	//cvar_AnnounceSpecial = CreateConVar("l4d_stats_announcespecial", "1", "Chat announcment mode for special events. 0 = Off, 1 = Player Only, 2 = Print messages to all teams, 3 = Print messages to own team only, 4 = Print messages to own team and spectators only", _, true, 0.0, true, 4.0);
+	cvar_MedkitMode = CreateConVar("l4d_stats_medkitmode", "0", "Medkit point award mode. 0 = Based on amount healed, 1 = Static amount", _, true, 0.0, true, 1.0);
+	cvar_SiteURL = CreateConVar("l4d_stats_siteurl", "", "Community site URL, for rank panel display", _);
+	cvar_RankOnJoin = CreateConVar("l4d_stats_rankonjoin", "1", "Display player's rank when they connect. 0 = Disable, 1 = Enable", _, true, 0.0, true, 1.0);
+	cvar_SilenceChat = CreateConVar("l4d_stats_silencechat", "0", "Silence chat triggers. 0 = Show chat triggers, 1 = Silence chat triggers", _, true, 0.0, true, 1.0);
+	cvar_DisabledMessages = CreateConVar("l4d_stats_disabledmessages", "1", "Show 'Stats Disabled' messages, allow chat commands to work when stats disabled. 0 = Hide messages/disable chat, 1 = Show messages/allow chat", _, true, 0.0, true, 1.0);
+	//cvar_MaxPoints = CreateConVar("l4d_stats_maxpoints", "500", "Maximum number of points that can be earned in a single map. Normal = x1, Adv = x2, Expert = x3", _, true, 500.0);
+	cvar_DbPrefix = CreateConVar("l4d_stats_dbprefix", "", "Prefix for your stats tables", _);
+	//cvar_LeaderboardTime = CreateConVar("l4d_stats_leaderboardtime", "14", "Time in days to show Survival Leaderboard times", _, true, 1.0);
+	cvar_EnableNegativeScore = CreateConVar("l4d_stats_enablenegativescore", "1", "Enable point losses (negative score)", _, true, 0.0, true, 1.0);
+	cvar_FriendlyFireMode = CreateConVar("l4d_stats_ffire_mode", "2", "Friendly fire mode. 0 = Normal, 1 = Cooldown, 2 = Damage based", _, true, 0.0, true, 2.0);
+	cvar_FriendlyFireMultiplier = CreateConVar("l4d_stats_ffire_multiplier", "1.5", "Friendly fire damage multiplier (Formula: Score = Damage * Multiplier)", _, true, 0.0);
+	cvar_FriendlyFireCooldown = CreateConVar("l4d_stats_ffire_cooldown", "10.0", "Time in seconds for friendly fire cooldown", _, true, 1.0);
+	cvar_FriendlyFireCooldownMode = CreateConVar("l4d_stats_ffire_cooldownmode", "1", "Friendly fire cooldown mode. 0 = Disable, 1 = Player specific, 2 = General", _, true, 0.0, true, 2.0);
 
 	// Game mode Cvars
-	cvar_Enable = CreateConVar("l4d_stats_enable", "1", "Enable/Disable all stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableCoop = CreateConVar("l4d_stats_enablecoop", "1", "Enable/Disable coop stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableSv = CreateConVar("l4d_stats_enablesv", "1", "Enable/Disable survival stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableVersus = CreateConVar("l4d_stats_enableversus", "1", "Enable/Disable versus stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableTeamVersus = CreateConVar("l4d_stats_enableteamversus", "1", "[L4D2] Enable/Disable team versus stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableRealism = CreateConVar("l4d_stats_enablerealism", "1", "[L4D2] Enable/Disable realism stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableScavenge = CreateConVar("l4d_stats_enablescavenge", "1", "[L4D2] Enable/Disable scavenge stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableTeamScavenge = CreateConVar("l4d_stats_enableteamscavenge", "1", "[L4D2] Enable/Disable team scavenge stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableRealismVersus = CreateConVar("l4d_stats_enablerealismvs", "1", "[L4D2] Enable/Disable realism versus stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableTeamRealismVersus = CreateConVar("l4d_stats_enableteamrealismvs", "1", "[L4D2] Enable/Disable team realism versus stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableMutations = CreateConVar("l4d_stats_enablemutations", "1", "[L4D2] Enable/Disable mutations stat tracking", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvar_Enable = CreateConVar("l4d_stats_enable", "1", "Enable/Disable all stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableCoop = CreateConVar("l4d_stats_enablecoop", "1", "Enable/Disable coop stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableSv = CreateConVar("l4d_stats_enablesv", "1", "Enable/Disable survival stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableVersus = CreateConVar("l4d_stats_enableversus", "1", "Enable/Disable versus stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableTeamVersus = CreateConVar("l4d_stats_enableteamversus", "1", "[L4D2] Enable/Disable team versus stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableRealism = CreateConVar("l4d_stats_enablerealism", "1", "[L4D2] Enable/Disable realism stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableScavenge = CreateConVar("l4d_stats_enablescavenge", "1", "[L4D2] Enable/Disable scavenge stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableTeamScavenge = CreateConVar("l4d_stats_enableteamscavenge", "1", "[L4D2] Enable/Disable team scavenge stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableRealismVersus = CreateConVar("l4d_stats_enablerealismvs", "1", "[L4D2] Enable/Disable realism versus stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableTeamRealismVersus = CreateConVar("l4d_stats_enableteamrealismvs", "1", "[L4D2] Enable/Disable team realism versus stat tracking", _, true, 0.0, true, 1.0);
+	cvar_EnableMutations = CreateConVar("l4d_stats_enablemutations", "1", "[L4D2] Enable/Disable mutations stat tracking", _, true, 0.0, true, 1.0);
 
 	// Game mode depended Cvars
-	cvar_RealismMultiplier = CreateConVar("l4d_stats_realismmultiplier", "1.4", "[L4D2] Realism score multiplier for coop score", FCVAR_PLUGIN, true, 1.0);
-	cvar_RealismVersusSurMultiplier = CreateConVar("l4d_stats_realismvsmultiplier_s", "1.4", "[L4D2] Realism score multiplier for survivors versus score", FCVAR_PLUGIN, true, 1.0);
-	cvar_RealismVersusInfMultiplier = CreateConVar("l4d_stats_realismvsmultiplier_i", "0.6", "[L4D2] Realism score multiplier for infected versus score", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_EnableSvMedicPoints = CreateConVar("l4d_stats_medicpointssv", "0", "Survival medic points enabled", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvar_RealismMultiplier = CreateConVar("l4d_stats_realismmultiplier", "1.4", "[L4D2] Realism score multiplier for coop score", _, true, 1.0);
+	cvar_RealismVersusSurMultiplier = CreateConVar("l4d_stats_realismvsmultiplier_s", "1.4", "[L4D2] Realism score multiplier for survivors versus score", _, true, 1.0);
+	cvar_RealismVersusInfMultiplier = CreateConVar("l4d_stats_realismvsmultiplier_i", "0.6", "[L4D2] Realism score multiplier for infected versus score", _, true, 0.0, true, 1.0);
+	cvar_EnableSvMedicPoints = CreateConVar("l4d_stats_medicpointssv", "0", "Survival medic points enabled", _, true, 0.0, true, 1.0);
 
 	// Infected point Cvars
-	cvar_Infected = CreateConVar("l4d_stats_infected", "1", "Base score for killing a Common Infected", FCVAR_PLUGIN, true, 1.0);
-	cvar_Hunter = CreateConVar("l4d_stats_hunter", "2", "Base score for killing a Hunter", FCVAR_PLUGIN, true, 1.0);
-	cvar_Smoker = CreateConVar("l4d_stats_smoker", "3", "Base score for killing a Smoker", FCVAR_PLUGIN, true, 1.0);
-	cvar_Boomer = CreateConVar("l4d_stats_boomer", "5", "Base score for killing a Boomer", FCVAR_PLUGIN, true, 1.0);
-	cvar_Spitter = CreateConVar("l4d_stats_spitter", "5", "[L4D2] Base score for killing a Spitter", FCVAR_PLUGIN, true, 1.0);
-	cvar_Jockey = CreateConVar("l4d_stats_jockey", "5", "[L4D2] Base score for killing a Jockey", FCVAR_PLUGIN, true, 1.0);
-	cvar_Charger = CreateConVar("l4d_stats_charger", "5", "[L4D2] Base score for killing a Charger", FCVAR_PLUGIN, true, 1.0);
-	cvar_InfectedDamage = CreateConVar("l4d_stats_infected_damage", "2", "The amount of damage inflicted to Survivors to earn 1 point", FCVAR_PLUGIN, true, 1.0);
+	cvar_Infected = CreateConVar("l4d_stats_infected", "1", "Base score for killing a Common Infected", _, true, 1.0);
+	cvar_Hunter = CreateConVar("l4d_stats_hunter", "2", "Base score for killing a Hunter", _, true, 1.0);
+	cvar_Smoker = CreateConVar("l4d_stats_smoker", "3", "Base score for killing a Smoker", _, true, 1.0);
+	cvar_Boomer = CreateConVar("l4d_stats_boomer", "5", "Base score for killing a Boomer", _, true, 1.0);
+	cvar_Spitter = CreateConVar("l4d_stats_spitter", "5", "[L4D2] Base score for killing a Spitter", _, true, 1.0);
+	cvar_Jockey = CreateConVar("l4d_stats_jockey", "5", "[L4D2] Base score for killing a Jockey", _, true, 1.0);
+	cvar_Charger = CreateConVar("l4d_stats_charger", "5", "[L4D2] Base score for killing a Charger", _, true, 1.0);
+	cvar_InfectedDamage = CreateConVar("l4d_stats_infected_damage", "2", "The amount of damage inflicted to Survivors to earn 1 point", _, true, 1.0);
 
 	// Misc personal gain Cvars
-	cvar_Pills = CreateConVar("l4d_stats_pills", "15", "Base score for giving Pills to a friendly", FCVAR_PLUGIN, true, 1.0);
-	cvar_Adrenaline = CreateConVar("l4d_stats_adrenaline", "15", "[L4D2] Base score for giving Adrenaline to a friendly", FCVAR_PLUGIN, true, 1.0);
-	cvar_Medkit = CreateConVar("l4d_stats_medkit", "20", "Base score for using a Medkit on a friendly", FCVAR_PLUGIN, true, 1.0);
-	cvar_Defib = CreateConVar("l4d_stats_defib", "20", "[L4D2] Base score for using a Defibrillator on a friendly", FCVAR_PLUGIN, true, 1.0);
-	cvar_SmokerDrag = CreateConVar("l4d_stats_smokerdrag", "5", "Base score for saving a friendly from a Smoker Tongue Drag", FCVAR_PLUGIN, true, 1.0);
-	cvar_JockeyRide = CreateConVar("l4d_stats_jockeyride", "10", "[L4D2] Base score for saving a friendly from a Jockey Ride", FCVAR_PLUGIN, true, 1.0);
-	cvar_ChargerPlummel = CreateConVar("l4d_stats_chargerplummel", "10", "[L4D2] Base score for saving a friendly from a Charger Plummel", FCVAR_PLUGIN, true, 1.0);
-	cvar_ChargerCarry = CreateConVar("l4d_stats_chargercarry", "15", "[L4D2] Base score for saving a friendly from a Charger Carry", FCVAR_PLUGIN, true, 1.0);
-	cvar_ChokePounce = CreateConVar("l4d_stats_chokepounce", "10", "Base score for saving a friendly from a Hunter Pounce / Smoker Choke", FCVAR_PLUGIN, true, 1.0);
-	cvar_Revive = CreateConVar("l4d_stats_revive", "15", "Base score for Revive a friendly from Incapacitated state", FCVAR_PLUGIN, true, 1.0);
-	cvar_Rescue = CreateConVar("l4d_stats_rescue", "10", "Base score for Rescue a friendly from a closet", FCVAR_PLUGIN, true, 1.0);
-	cvar_Protect = CreateConVar("l4d_stats_protect", "3", "Base score for Protect a friendly in combat", FCVAR_PLUGIN, true, 1.0);
-	cvar_PlayerLedgeSuccess = CreateConVar("l4d_stats_ledgegrap", "15", "Base score for causing a survivor to grap a ledge", FCVAR_PLUGIN, true, 1.0);
-	cvar_Matador = CreateConVar("l4d_stats_matador", "30", "[L4D2] Base score for killing a charging Charger with a melee weapon", FCVAR_PLUGIN, true, 1.0);
-	cvar_WitchCrowned = CreateConVar("l4d_stats_witchcrowned", "30", "Base score for Crowning a Witch", FCVAR_PLUGIN, true, 1.0);
+	cvar_Pills = CreateConVar("l4d_stats_pills", "15", "Base score for giving Pills to a friendly", _, true, 1.0);
+	cvar_Adrenaline = CreateConVar("l4d_stats_adrenaline", "15", "[L4D2] Base score for giving Adrenaline to a friendly", _, true, 1.0);
+	cvar_Medkit = CreateConVar("l4d_stats_medkit", "20", "Base score for using a Medkit on a friendly", _, true, 1.0);
+	cvar_Defib = CreateConVar("l4d_stats_defib", "20", "[L4D2] Base score for using a Defibrillator on a friendly", _, true, 1.0);
+	cvar_SmokerDrag = CreateConVar("l4d_stats_smokerdrag", "5", "Base score for saving a friendly from a Smoker Tongue Drag", _, true, 1.0);
+	cvar_JockeyRide = CreateConVar("l4d_stats_jockeyride", "10", "[L4D2] Base score for saving a friendly from a Jockey Ride", _, true, 1.0);
+	cvar_ChargerPlummel = CreateConVar("l4d_stats_chargerplummel", "10", "[L4D2] Base score for saving a friendly from a Charger Plummel", _, true, 1.0);
+	cvar_ChargerCarry = CreateConVar("l4d_stats_chargercarry", "15", "[L4D2] Base score for saving a friendly from a Charger Carry", _, true, 1.0);
+	cvar_ChokePounce = CreateConVar("l4d_stats_chokepounce", "10", "Base score for saving a friendly from a Hunter Pounce / Smoker Choke", _, true, 1.0);
+	cvar_Revive = CreateConVar("l4d_stats_revive", "15", "Base score for Revive a friendly from Incapacitated state", _, true, 1.0);
+	cvar_Rescue = CreateConVar("l4d_stats_rescue", "10", "Base score for Rescue a friendly from a closet", _, true, 1.0);
+	cvar_Protect = CreateConVar("l4d_stats_protect", "3", "Base score for Protect a friendly in combat", _, true, 1.0);
+	cvar_PlayerLedgeSuccess = CreateConVar("l4d_stats_ledgegrap", "15", "Base score for causing a survivor to grap a ledge", _, true, 1.0);
+	cvar_Matador = CreateConVar("l4d_stats_matador", "30", "[L4D2] Base score for killing a charging Charger with a melee weapon", _, true, 1.0);
+	cvar_WitchCrowned = CreateConVar("l4d_stats_witchcrowned", "30", "Base score for Crowning a Witch", _, true, 1.0);
 
 	// Team gain Cvars
-	cvar_Tank = CreateConVar("l4d_stats_tank", "25", "Base team score for killing a Tank", FCVAR_PLUGIN, true, 1.0);
-	cvar_Panic = CreateConVar("l4d_stats_panic", "25", "Base team score for surviving a Panic Event with no Incapacitations", FCVAR_PLUGIN, true, 1.0);
-	cvar_BoomerMob = CreateConVar("l4d_stats_boomermob", "10", "Base team score for surviving a Boomer Mob with no Incapacitations", FCVAR_PLUGIN, true, 1.0);
-	cvar_SafeHouse = CreateConVar("l4d_stats_safehouse", "10", "Base score for reaching a Safe House", FCVAR_PLUGIN, true, 1.0);
-	cvar_Witch = CreateConVar("l4d_stats_witch", "10", "Base score for Not Disturbing a Witch", FCVAR_PLUGIN, true, 1.0);
-	cvar_VictorySurvivors = CreateConVar("l4d_stats_campaign", "5", "Base score for Completing a Campaign", FCVAR_PLUGIN, true, 1.0);
-	cvar_VictoryInfected = CreateConVar("l4d_stats_infected_win", "30", "Base victory score for Infected Team", FCVAR_PLUGIN, true, 1.0);
+	cvar_Tank = CreateConVar("l4d_stats_tank", "25", "Base team score for killing a Tank", _, true, 1.0);
+	cvar_Panic = CreateConVar("l4d_stats_panic", "25", "Base team score for surviving a Panic Event with no Incapacitations", _, true, 1.0);
+	cvar_BoomerMob = CreateConVar("l4d_stats_boomermob", "10", "Base team score for surviving a Boomer Mob with no Incapacitations", _, true, 1.0);
+	cvar_SafeHouse = CreateConVar("l4d_stats_safehouse", "10", "Base score for reaching a Safe House", _, true, 1.0);
+	cvar_Witch = CreateConVar("l4d_stats_witch", "10", "Base score for Not Disturbing a Witch", _, true, 1.0);
+	cvar_VictorySurvivors = CreateConVar("l4d_stats_campaign", "5", "Base score for Completing a Campaign", _, true, 1.0);
+	cvar_VictoryInfected = CreateConVar("l4d_stats_infected_win", "30", "Base victory score for Infected Team", _, true, 1.0);
 
 	// Point loss Cvars
-	cvar_FFire = CreateConVar("l4d_stats_ffire", "25", "Base score for Friendly Fire", FCVAR_PLUGIN, true, 1.0);
-	cvar_FIncap = CreateConVar("l4d_stats_fincap", "75", "Base score for a Friendly Incap", FCVAR_PLUGIN, true, 1.0);
-	cvar_FKill = CreateConVar("l4d_stats_fkill", "250", "Base score for a Friendly Kill", FCVAR_PLUGIN, true, 1.0);
-	cvar_InSafeRoom = CreateConVar("l4d_stats_insaferoom", "5", "Base score for letting Infected in the Safe Room", FCVAR_PLUGIN, true, 1.0);
-	cvar_Restart = CreateConVar("l4d_stats_restart", "100", "Base score for a Round Restart", FCVAR_PLUGIN, true, 1.0);
-	cvar_MedkitUsedPointPenalty = CreateConVar("l4d_stats_medkitpenalty", "0.1", "Score reduction for all Survivor earned points for each used Medkit (Formula: Score = NormalPoints * (1 - MedkitsUsed * MedkitPenalty))", FCVAR_PLUGIN, true, 0.0, true, 0.5);
-	cvar_MedkitUsedPointPenaltyMax = CreateConVar("l4d_stats_medkitpenaltymax", "1.0", "Maximum score reduction (the score reduction will not go over this value when a Medkit is used)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvar_MedkitUsedFree = CreateConVar("l4d_stats_medkitpenaltyfree", "0", "Team Survivors can use this many Medkits for free without any reduction to the score", FCVAR_PLUGIN, true, 0.0);
-	cvar_MedkitUsedRealismFree = CreateConVar("l4d_stats_medkitpenaltyfree_r", "4", "Team Survivors can use this many Medkits for free without any reduction to the score when playing in Realism gamemodes (-1 = use the value in l4d_stats_medkitpenaltyfree)", FCVAR_PLUGIN, true, -1.0);
-	cvar_MedkitBotMode = CreateConVar("l4d_stats_medkitbotmode", "1", "Add score reduction when bot uses a medkit. 0 = No, 1 = Bot uses a Medkit to a human player, 2 = Bot uses a Medkit to other than itself, 3 = Yes", FCVAR_PLUGIN, true, 0.0, true, 2.0);
-	cvar_CarAlarm = CreateConVar("l4d_stats_caralarm", "50", "[L4D2] Base score for a Triggering Car Alarm", FCVAR_PLUGIN, true, 1.0);
-	cvar_BotScoreMultiplier = CreateConVar("l4d_stats_botscoremultiplier", "1.0", "Multiplier to use when receiving bot related score penalty. 0 = Disable", FCVAR_PLUGIN, true, 0.0);
+	cvar_FFire = CreateConVar("l4d_stats_ffire", "25", "Base score for Friendly Fire", _, true, 1.0);
+	cvar_FIncap = CreateConVar("l4d_stats_fincap", "75", "Base score for a Friendly Incap", _, true, 1.0);
+	cvar_FKill = CreateConVar("l4d_stats_fkill", "250", "Base score for a Friendly Kill", _, true, 1.0);
+	cvar_InSafeRoom = CreateConVar("l4d_stats_insaferoom", "5", "Base score for letting Infected in the Safe Room", _, true, 1.0);
+	cvar_Restart = CreateConVar("l4d_stats_restart", "100", "Base score for a Round Restart", _, true, 1.0);
+	cvar_MedkitUsedPointPenalty = CreateConVar("l4d_stats_medkitpenalty", "0.1", "Score reduction for all Survivor earned points for each used Medkit (Formula: Score = NormalPoints * (1 - MedkitsUsed * MedkitPenalty))", _, true, 0.0, true, 0.5);
+	cvar_MedkitUsedPointPenaltyMax = CreateConVar("l4d_stats_medkitpenaltymax", "1.0", "Maximum score reduction (the score reduction will not go over this value when a Medkit is used)", _, true, 0.0, true, 1.0);
+	cvar_MedkitUsedFree = CreateConVar("l4d_stats_medkitpenaltyfree", "0", "Team Survivors can use this many Medkits for free without any reduction to the score", _, true, 0.0);
+	cvar_MedkitUsedRealismFree = CreateConVar("l4d_stats_medkitpenaltyfree_r", "4", "Team Survivors can use this many Medkits for free without any reduction to the score when playing in Realism gamemodes (-1 = use the value in l4d_stats_medkitpenaltyfree)", _, true, -1.0);
+	cvar_MedkitBotMode = CreateConVar("l4d_stats_medkitbotmode", "1", "Add score reduction when bot uses a medkit. 0 = No, 1 = Bot uses a Medkit to a human player, 2 = Bot uses a Medkit to other than itself, 3 = Yes", _, true, 0.0, true, 2.0);
+	cvar_CarAlarm = CreateConVar("l4d_stats_caralarm", "50", "[L4D2] Base score for a Triggering Car Alarm", _, true, 1.0);
+	cvar_BotScoreMultiplier = CreateConVar("l4d_stats_botscoremultiplier", "1.0", "Multiplier to use when receiving bot related score penalty. 0 = Disable", _, true, 0.0);
 
 	// Survivor point Cvars
-	cvar_SurvivorDeath = CreateConVar("l4d_stats_survivor_death", "40", "Base score for killing a Survivor", FCVAR_PLUGIN, true, 1.0);
-	cvar_SurvivorIncap = CreateConVar("l4d_stats_survivor_incap", "15", "Base score for incapacitating a Survivor", FCVAR_PLUGIN, true, 1.0);
+	cvar_SurvivorDeath = CreateConVar("l4d_stats_survivor_death", "40", "Base score for killing a Survivor", _, true, 1.0);
+	cvar_SurvivorIncap = CreateConVar("l4d_stats_survivor_incap", "15", "Base score for incapacitating a Survivor", _, true, 1.0);
 
 	// Hunter point Cvars
-	cvar_HunterPerfectPounceDamage = CreateConVar("l4d_stats_perfectpouncedamage", "25", "The amount of damage from a pounce to earn Perfect Pounce (Death From Above) success points", FCVAR_PLUGIN, true, 1.0);
-	cvar_HunterPerfectPounceSuccess = CreateConVar("l4d_stats_perfectpouncesuccess", "25", "Base score for a successful Perfect Pounce", FCVAR_PLUGIN, true, 1.0);
-	cvar_HunterNicePounceDamage = CreateConVar("l4d_stats_nicepouncedamage", "15", "The amount of damage from a pounce to earn Nice Pounce (Pain From Above) success points", FCVAR_PLUGIN, true, 1.0);
-	cvar_HunterNicePounceSuccess = CreateConVar("l4d_stats_nicepouncesuccess", "10", "Base score for a successful Nice Pounce", FCVAR_PLUGIN, true, 1.0);
-	cvar_HunterDamageCap = CreateConVar("l4d_stats_hunterdamagecap", "25", "Hunter stored damage cap", FCVAR_PLUGIN, true, 25.0);
+	cvar_HunterPerfectPounceDamage = CreateConVar("l4d_stats_perfectpouncedamage", "25", "The amount of damage from a pounce to earn Perfect Pounce (Death From Above) success points", _, true, 1.0);
+	cvar_HunterPerfectPounceSuccess = CreateConVar("l4d_stats_perfectpouncesuccess", "25", "Base score for a successful Perfect Pounce", _, true, 1.0);
+	cvar_HunterNicePounceDamage = CreateConVar("l4d_stats_nicepouncedamage", "15", "The amount of damage from a pounce to earn Nice Pounce (Pain From Above) success points", _, true, 1.0);
+	cvar_HunterNicePounceSuccess = CreateConVar("l4d_stats_nicepouncesuccess", "10", "Base score for a successful Nice Pounce", _, true, 1.0);
+	cvar_HunterDamageCap = CreateConVar("l4d_stats_hunterdamagecap", "25", "Hunter stored damage cap", _, true, 25.0);
 
 	if (ServerVersion == Engine_Left4Dead)
 	{
@@ -776,29 +777,29 @@ public OnPluginStart()
 	MaxPounceDamage = GetConVarInt(FindConVar("z_hunter_max_pounce_bonus_damage"));
 
 	// Boomer point Cvars
-	cvar_BoomerSuccess = CreateConVar("l4d_stats_boomersuccess", "5", "Base score for a successfully vomiting on survivor", FCVAR_PLUGIN, true, 1.0);
-	cvar_BoomerPerfectHits = CreateConVar("l4d_stats_boomerperfecthits", "4", "The number of survivors that needs to get blinded to earn Boomer Perfect Vomit Award and success points", FCVAR_PLUGIN, true, 4.0);
-	cvar_BoomerPerfectSuccess = CreateConVar("l4d_stats_boomerperfectsuccess", "30", "Base score for a successful Boomer Perfect Vomit", FCVAR_PLUGIN, true, 1.0);
+	cvar_BoomerSuccess = CreateConVar("l4d_stats_boomersuccess", "5", "Base score for a successfully vomiting on survivor", _, true, 1.0);
+	cvar_BoomerPerfectHits = CreateConVar("l4d_stats_boomerperfecthits", "4", "The number of survivors that needs to get blinded to earn Boomer Perfect Vomit Award and success points", _, true, 4.0);
+	cvar_BoomerPerfectSuccess = CreateConVar("l4d_stats_boomerperfectsuccess", "30", "Base score for a successful Boomer Perfect Vomit", _, true, 1.0);
 
 	// Tank point Cvars
-	cvar_TankDamageCap = CreateConVar("l4d_stats_tankdmgcap", "500", "Maximum inflicted damage done by Tank to earn Infected damagepoints", FCVAR_PLUGIN, true, 150.0);
-	cvar_TankDamageTotal = CreateConVar("l4d_stats_bulldozer", "200", "Damage inflicted by Tank to earn Bulldozer Award and success points", FCVAR_PLUGIN, true, 200.0);
-	cvar_TankDamageTotalSuccess = CreateConVar("l4d_stats_bulldozersuccess", "50", "Base score for Bulldozer Award", FCVAR_PLUGIN, true, 1.0);
-	cvar_TankThrowRockSuccess = CreateConVar("l4d_stats_tankthrowrocksuccess", "5", "Base score for a Tank thrown rock hit", FCVAR_PLUGIN, true, 0.0);
+	cvar_TankDamageCap = CreateConVar("l4d_stats_tankdmgcap", "500", "Maximum inflicted damage done by Tank to earn Infected damagepoints", _, true, 150.0);
+	cvar_TankDamageTotal = CreateConVar("l4d_stats_bulldozer", "200", "Damage inflicted by Tank to earn Bulldozer Award and success points", _, true, 200.0);
+	cvar_TankDamageTotalSuccess = CreateConVar("l4d_stats_bulldozersuccess", "50", "Base score for Bulldozer Award", _, true, 1.0);
+	cvar_TankThrowRockSuccess = CreateConVar("l4d_stats_tankthrowrocksuccess", "5", "Base score for a Tank thrown rock hit", _, true, 0.0);
 
 	// Charger point Cvars
-	cvar_ChargerRamSuccess = CreateConVar("l4d_stats_chargerramsuccess", "40", "Base score for a successful Charger Scattering Ram", FCVAR_PLUGIN, true, 1.0);
-	cvar_ChargerRamHits = CreateConVar("l4d_stats_chargerramhits", "4", "The number of impacts on survivors to earn Scattering Ram Award and success points", FCVAR_PLUGIN, true, 2.0);
+	cvar_ChargerRamSuccess = CreateConVar("l4d_stats_chargerramsuccess", "40", "Base score for a successful Charger Scattering Ram", _, true, 1.0);
+	cvar_ChargerRamHits = CreateConVar("l4d_stats_chargerramhits", "4", "The number of impacts on survivors to earn Scattering Ram Award and success points", _, true, 2.0);
 
 	// Misc L4D2 Cvars
-	cvar_AmmoUpgradeAdded = CreateConVar("l4d_stats_deployammoupgrade", "10", "[L4D2] Base score for deploying ammo upgrade pack", FCVAR_PLUGIN, true, 0.0);
-	cvar_GascanPoured = CreateConVar("l4d_stats_gascanpoured", "5", "[L4D2] Base score for successfully pouring a gascan", FCVAR_PLUGIN, true, 0.0);
+	cvar_AmmoUpgradeAdded = CreateConVar("l4d_stats_deployammoupgrade", "10", "[L4D2] Base score for deploying ammo upgrade pack", _, true, 0.0);
+	cvar_GascanPoured = CreateConVar("l4d_stats_gascanpoured", "5", "[L4D2] Base score for successfully pouring a gascan", _, true, 0.0);
 
 	// Other Cvars
-	cvar_Top10PPMMin = CreateConVar("l4d_stats_top10ppmplaytime", "30", "Minimum playtime (minutes) to show in top10 ppm list", FCVAR_PLUGIN, true, 1.0);
-	cvar_RankVoteTime = CreateConVar("l4d_stats_rankvotetime", "20", "Time to wait people to vote", FCVAR_PLUGIN, true, 10.0);
+	cvar_Top10PPMMin = CreateConVar("l4d_stats_top10ppmplaytime", "30", "Minimum playtime (minutes) to show in top10 ppm list", _, true, 1.0);
+	cvar_RankVoteTime = CreateConVar("l4d_stats_rankvotetime", "20", "Time to wait people to vote", _, true, 10.0);
 
-	cvar_SoundsEnabled = CreateConVar("l4d_stats_soundsenabled", "1", "Play sounds on certain events", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvar_SoundsEnabled = CreateConVar("l4d_stats_soundsenabled", "1", "Play sounds on certain events", _, true, 0.0, true, 1.0);
 
 	// Make that config!
 	AutoExecConfig(true, "l4d_stats");
@@ -962,79 +963,17 @@ public OnPluginStart()
 	}
 
 	// Sounds
-	if (!IsSoundPrecached(SOUND_RANKVOTE))
-	{
-		EnableSounds_Rankvote = PrecacheSound(SOUND_RANKVOTE); // Sound from rankvote team switch
-	}
-	else
-	{
-		EnableSounds_Rankvote = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_MapTime_Start))
-	{
-		EnableSounds_Maptime_Start = PrecacheSound(StatsSound_MapTime_Start); // Sound map timer start
-	}
-	else
-	{
-		EnableSounds_Maptime_Start = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_MapTime_Improve))
-	{
-		EnableSounds_Maptime_Improve = PrecacheSound(StatsSound_MapTime_Improve); // Sound from improving personal map timing
-	}
-	else
-	{
-		EnableSounds_Maptime_Improve = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_Rankmenu_Show))
-	{
-		EnableSounds_Rankmenu_Show = PrecacheSound(StatsSound_Rankmenu_Show); // Sound from showing the rankmenu
-	}
-	else
-	{
-		EnableSounds_Rankmenu_Show = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_Boomer_Vomit))
-	{
-		EnableSounds_Boomer_Vomit = PrecacheSound(StatsSound_Boomer_Vomit); // Sound from a successful boomer vomit (Perfect Blindness)
-	}
-	else
-	{
-		EnableSounds_Boomer_Vomit = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_Hunter_Perfect))
-	{
-		EnableSounds_Hunter_Perfect = PrecacheSound(StatsSound_Hunter_Perfect); // Sound from a hunter perfect pounce (Death From Above)
-	}
-	else
-	{
-		EnableSounds_Hunter_Perfect = true;
-	}
-
-	if (!IsSoundPrecached(StatsSound_Tank_Bulldozer))
-	{
-		EnableSounds_Tank_Bulldozer = PrecacheSound(StatsSound_Tank_Bulldozer); // Sound from a tank bulldozer
-	}
-	else
-	{
-		EnableSounds_Tank_Bulldozer = true;
-	}
+	EnableSounds_Rankvote = PrecacheSound(SOUND_RANKVOTE); // Sound from rankvote team switch
+	EnableSounds_Maptime_Start = PrecacheSound(StatsSound_MapTime_Start); // Sound map timer start
+	EnableSounds_Maptime_Improve = PrecacheSound(StatsSound_MapTime_Improve); // Sound from improving personal map timing
+	EnableSounds_Rankmenu_Show = PrecacheSound(StatsSound_Rankmenu_Show); // Sound from showing the rankmenu
+	EnableSounds_Boomer_Vomit = PrecacheSound(StatsSound_Boomer_Vomit); // Sound from a successful boomer vomit (Perfect Blindness)
+	EnableSounds_Hunter_Perfect = PrecacheSound(StatsSound_Hunter_Perfect); // Sound from a hunter perfect pounce (Death From Above)
+	EnableSounds_Tank_Bulldozer = PrecacheSound(StatsSound_Tank_Bulldozer); // Sound from a tank bulldozer
 
 	if (ServerVersion != Engine_Left4Dead)
 	{
-		if (!IsSoundPrecached(SOUND_CHARGER_RAM))
-		{
-			EnableSounds_Charger_Ram = PrecacheSound(SOUND_CHARGER_RAM); // Sound from a charger scattering ram
-		}
-		else
-		{
-			EnableSounds_Charger_Ram = true;
-		}
+		EnableSounds_Charger_Ram = PrecacheSound(SOUND_CHARGER_RAM); // Sound from a charger scattering ram
 	}
 	else
 	{
@@ -1383,7 +1322,7 @@ public OnPluginEnd()
 	if (db == INVALID_HANDLE)
 		return;
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -1488,7 +1427,7 @@ public OnClientDisconnect(client)
 		}
 	}
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -1945,7 +1884,7 @@ public Action:InitPlayers(Handle:timer)
 	Format(query, sizeof(query), "SELECT COUNT(*) FROM %splayers", DbPrefix);
 	SQL_TQuery(db, GetRankTotal, query);
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -2987,7 +2926,7 @@ public Action:timer_ShuffleTeams(Handle:timer, any:data)
 	decl String:query[1024];
 	Format(query, sizeof(query), "SELECT steamid FROM %splayers WHERE ", DbPrefix);
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	decl String:SteamID[MAX_LINE_WIDTH], String:where[512];
 	new counter = 0, team;
 
@@ -3087,7 +3026,7 @@ public Action:timer_UpdatePlayers(Handle:timer, Handle:hndl)
 
 	UpdateMapStat("playtime", 1);
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	for (new i = 1; i <= maxplayers; i++)
 	{
 		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -3143,7 +3082,7 @@ public Action:timer_ShowTimerScore(Handle:timer, Handle:hndl)
 	new Mode = GetConVarInt(cvar_AnnounceMode);
 	decl String:Name[MAX_LINE_WIDTH];
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	for (new i = 1; i <= maxplayers; i++)
 	{
 		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -3604,7 +3543,7 @@ public Action:event_TankKilled(Handle:event, const String:name[], bool:dontBroad
 	new Deaths = 0;
 	new Players = 0;
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	for (new i = 1; i <= maxplayers; i++)
 	{
 		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -4160,7 +4099,7 @@ public Action:event_CampaignWin(Handle:event, const String:name[], bool:dontBroa
 		}
 	}
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	for (new i = 1; i <= maxplayers; i++)
 	{
 		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -4284,7 +4223,7 @@ public Action:timer_PanicEventEnd(Handle:timer, Handle:hndl)
 				}
 			}
 
-			new maxplayers = GetMaxClients();
+			new maxplayers = MaxClients;
 			for (new i = 1; i <= maxplayers; i++)
 			{
 				if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -4403,7 +4342,7 @@ public Action:event_PlayerBlindEnd(Handle:event, const String:name[], bool:dontB
 				}
 			}
 
-			new maxplayers = GetMaxClients();
+			new maxplayers = MaxClients;
 			for (new i = 1; i <= maxplayers; i++)
 			{
 				if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
@@ -6333,7 +6272,7 @@ public Action:event_ScavengeHalftime(Handle:event, const String:name[], bool:don
 
 	CampaignOver = true;
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -6417,7 +6356,7 @@ public Action:event_CarAlarm(Handle:event, const String:name[], bool:dontBroadca
 		}
 	}
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	new Mode = GetConVarInt(cvar_AnnounceMode);
 	decl String:iID[MAX_LINE_WIDTH];
 
@@ -7468,7 +7407,7 @@ public DisplayRank(Handle:owner, Handle:hndl, const String:error[], any:client)
 	new String:URL[MAX_LINE_WIDTH];
 
 	GetConVarString(cvar_SiteURL, URL, sizeof(URL));
-	new Float:HeadshotRatio = Headshots == 0 ? 0.00 : FloatDiv(float(Headshots), float(InfectedKilled))*100;
+	new Float:HeadshotRatio = Headshots == 0 ? 0.00 : (float(Headshots)/float(InfectedKilled))*100;
 
 	Format(Value, sizeof(Value), "Ranking of %s" , Name);
 	SetPanelTitle(RankPanel, Value);
@@ -7484,7 +7423,7 @@ public DisplayRank(Handle:owner, Handle:hndl, const String:error[], any:client)
 
 	if (Playtime > 60)
 	{
-		Format(Value, sizeof(Value), "Playtime: %.2f hours" , FloatDiv(float(Playtime), 60.0));
+		Format(Value, sizeof(Value), "Playtime: %.2f hours" , float(Playtime)/60.0);
 		DrawPanelText(RankPanel, Value);
 	}
 	else
@@ -7714,7 +7653,7 @@ public Action:cmd_ShowPPMs(client, args)
 
 	Format(query, sizeof(query), "SELECT steamid, name, (%s) / (%s) AS ppm FROM %splayers WHERE ", DB_PLAYERS_TOTALPOINTS, DB_PLAYERS_TOTALPLAYTIME, DbPrefix);
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	decl String:SteamID[MAX_LINE_WIDTH], String:where[512];
 	new counter = 0;
 
@@ -7759,7 +7698,7 @@ public Action:cmd_ShowRanks(client, args)
 
 	Format(query, sizeof(query), "SELECT steamid, name, %s AS totalpoints FROM %splayers WHERE ", DB_PLAYERS_TOTALPOINTS, DbPrefix);
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	decl String:SteamID[MAX_LINE_WIDTH], String:where[512];
 	new counter = 0;
 
@@ -7868,7 +7807,7 @@ public ExecuteTeamShuffle(Handle:owner, Handle:hndl, const String:error[], any:d
 	}
 
 	decl String:SteamID[MAX_LINE_WIDTH];
-	new i, team, maxplayers = GetMaxClients(), client, topteam;
+	new i, team, maxplayers = MaxClients, client, topteam;
 	new SurvivorsLimit = GetConVarInt(cvar_SurvivorLimit), InfectedLimit = GetConVarInt(cvar_InfectedLimit);
 	new Handle:PlayersTrie = CreateTrie();
 	new Handle:InfectedArray = CreateArray();
@@ -8991,7 +8930,7 @@ CheckRankVotes(&Humans, &Votes, &YesVotes, &NoVotes, &WinningVoteCount)
 	NoVotes = 0;
 	WinningVoteCount = 0;
 
-	new i, team, maxplayers = GetMaxClients();
+	new i, team, maxplayers = MaxClients;
 
 	for (i = 1; i <= maxplayers; i++)
 	{
@@ -9031,7 +8970,7 @@ DisplayClearPanel(client, delay=30)
 	//}
 
 	new Handle:ClearPlayerMenu = CreateMenu(DisplayClearPanelHandler);
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	decl String:id[3], String:Name[32];
 
 	for (new i = 1; i <= maxplayers; i++)
@@ -9377,7 +9316,7 @@ bool:CheckHumans()
 {
 	new MinHumans = GetConVarInt(cvar_HumansNeeded);
 	new Humans = 0;
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -9469,7 +9408,7 @@ ResetVars()
 
 	TankCount = 0;
 
-	new i, j, maxplayers = GetMaxClients();
+	new i, j, maxplayers = MaxClients;
 	for (i = 1; i <= maxplayers; i++)
 	{
 		AnnounceCounter[i] = 0;
@@ -9503,7 +9442,7 @@ ResetVars()
 
 public ResetRankChangeCheck()
 {
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 		StartRankChangeCheck(i);
@@ -9657,7 +9596,7 @@ public CheckSurvivorsWin()
 	new Mode = GetConVarInt(cvar_AnnounceMode);
 	decl String:iID[MAX_LINE_WIDTH];
 	decl String:query[1024];
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	decl String:UpdatePoints[32], String:UpdatePointsPenalty[32];
 	new ClientTeam, bool:NegativeScore = GetConVarBool(cvar_EnableNegativeScore);
 
@@ -9784,7 +9723,7 @@ CheckSurvivorsAllDown()
 				CurrentGamemodeID == GAMEMODE_REALISM)
 		return;
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 	new ClientTeam;
 	new bool:ClientIsAlive, bool:ClientIsBot, bool:ClientIsIncap;
 	new KilledSurvivor[MaxClients];
@@ -10900,7 +10839,7 @@ public StatsPrintToChatTeam(Team, const String:Message[], any:...)
 
 	if (Team > 0 && AnnounceToTeam)
 	{
-		new maxplayers = GetMaxClients();
+		new maxplayers = MaxClients;
 		new ClientTeam;
 
 		for (new i = 1; i <= maxplayers; i++)
@@ -10921,20 +10860,6 @@ public StatsPrintToChatTeam(Team, const String:Message[], any:...)
 
 // Debugging...
 
-public PrintToConsoleAll(const String:Message[], any:...)
-{
-	new String:FormattedMessage[MAX_MESSAGE_WIDTH];
-	VFormat(FormattedMessage, sizeof(FormattedMessage), Message, 2);
-
-	PrintToConsole(0, FormattedMessage);
-
-	new maxplayers = GetMaxClients();
-
-	for (new i = 1; i <= maxplayers; i++)
-		if (IsClientConnected(i) && IsClientInGame(i) && !IsClientBot(i))
-			PrintToConsole(i, FormattedMessage);
-}
-
 // Disable map timings when opposing team has human players. The time is too much depending on opposing team that is is comparable.
 
 MapTimingEnabled()
@@ -10951,7 +10876,7 @@ public StartMapTiming()
 
 	MapTimingStartTime = GetEngineTime();
 
-	new ClientTeam, maxplayers = GetMaxClients();
+	new ClientTeam, maxplayers = MaxClients;
 	decl String:ClientID[MAX_LINE_WIDTH];
 
 	ClearTrie(MapTimingSurvivors);
@@ -11005,7 +10930,7 @@ public StopMapTiming()
 	MapTimingBlocked = true;
 
 	new Handle:dp = INVALID_HANDLE;
-	new ClientTeam, enabled, maxplayers = GetMaxClients();
+	new ClientTeam, enabled, maxplayers = MaxClients;
 	decl String:ClientID[MAX_LINE_WIDTH], String:MapName[MAX_LINE_WIDTH], String:query[512];
 
 	GetCurrentMap(MapName, sizeof(MapName));
@@ -11257,7 +11182,7 @@ public InitializeRankVote(client)
 		PlayerRankVote[i] = RANKVOTE_NOVOTE;
 	}
 
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (i = 1; i <= maxplayers; i++)
 	{
@@ -11426,7 +11351,7 @@ public StatsPrintToChatAll2(bool:Forced, const String:Message[], any:...)
 
 public StatsPrintToChatAllPreFormatted(const String:Message[])
 {
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -11439,7 +11364,7 @@ public StatsPrintToChatAllPreFormatted(const String:Message[])
 
 public StatsPrintToChatAllPreFormatted2(bool:Forced, const String:Message[])
 {
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
@@ -11567,7 +11492,7 @@ bool:UpdateServerSettings(Client, const String:Key[], const String:Value[], cons
 
 ShowMOTDAll()
 {
-	new maxplayers = GetMaxClients();
+	new maxplayers = MaxClients;
 
 	for (new i = 1; i <= maxplayers; i++)
 	{
