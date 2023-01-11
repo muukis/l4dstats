@@ -188,7 +188,7 @@ $language_pack['str_points']                                    = "Points";
 $language_pack['str_name']                                      = "Name";
 
 /*==================================
-	Achivements
+	Achievements
 ==================================*/
 
 $language_pack['ach01']                                         = "City Buster";
@@ -239,7 +239,7 @@ $language_pack['ach11_progress']                                = "4";
 $language_pack['ach11_award']                                   = "award_medkit";
 
 /*==================================
-	Extra Achivement Description
+	Extra Achievements Description
 ==================================*/
 
 $language_pack['badachivementvar']                              = "W"; // Stands for 'Bad/Warning'
@@ -247,7 +247,7 @@ $language_pack['badachivementvar_desc']                         = "<b>WARNING:</
 $language_pack['devtestvar']                                    = "D"; // Stands for 'Debug/Dev/Testing'
 $language_pack['devtestvar_desc']                               = "<b>DEBUG:</b> Test achievement for Versus Mode. This user was part of the <i><b>Testing Group</b></i><br>Last updated <b>(2013-09-10)</b>"; // The description when you hover.
 $language_pack['infectedvar']                                   = "I"; // Stands for 'Infected (TEAM)'
-$language_pack['infectedvar_desc']                              = "<b>VERSUS:</b> This achievement only specify for Team Infected)</b>"; // The description when you hover.
+$language_pack['infectedvar_desc']                              = "<b>VERSUS:</b> This achievement only specify for Team Infected</b>"; // The description when you hover.
 $language_pack['survivorvar']                                   = "S"; // Stands for 'Survivor (TEAM)'
 $language_pack['survivorvar_desc']                              = "<b>VERSUS:</b> This achievement only specify for Team Survivor</b>"; // The description when you hover.
 
