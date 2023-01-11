@@ -279,12 +279,12 @@ $language_pack['ach06']                                         = "Плохой 
 $language_pack['ach06_desc']                                    = "Убейте <b>15</b> союзников.";
 $language_pack['ach06_progress']                                = "15";
 $language_pack['ach06_award']                                   = "award_teamkill";
-$language_pack['ach07']                                         = "Плохая точность";
-$language_pack['ach07_desc']                                    = "Вывел из строя <b>30</b> союзников.";
+$language_pack['ach07']                                         = "Плохо стреляешь";
+$language_pack['ach07_desc']                                    = "Выведите из строя <b>30</b> союзников.";
 $language_pack['ach07_progress']                                = "30";
 $language_pack['ach07_award']                                   = "award_fincap";
 $language_pack['ach08']                                         = "Буум!";
-$language_pack['ach08_desc']                                    = "Убейте <b>4</b> толстяка в режиме «Сражения».";
+$language_pack['ach08_desc']                                    = "Убейте <b>4</b> толстяков в режиме «Сражения».";
 $language_pack['ach08_progress']                                = "4";
 $language_pack['ach08_award']                                   = "kill_boomer";
 $language_pack['ach09']                                         = "Тут таблетки!";
@@ -321,67 +321,67 @@ $language_pack['award_ppm']                                     = "самый э
 $language_pack['award_time']                                    = "имеет наибольшее время игры с всего <b>%s играми</b>.";
 $language_pack['award_second']                                  = "закончил %s с <b>%s местом</b>.";
 
-$language_pack['award_kills']                                   = "стал настоящим Чикаго Тед, <b>убив %s</b>.";
+$language_pack['award_kills']                                   = "стал настоящим Чикаго Тедом, <b>убив %s</b>.";
 $language_pack['award_headshots']                               = "может стремиться к вершине, <b>убив %s в голову</b>.";
 $language_pack['award_ratio']                                   = "стал королём выстрелов в голову, набрав <b>%s&#37; соотношение убийств в голову</b>.";
 $language_pack['award_melee_kills']                             = "стал мастером боевых искусств, <b>убив %s в ближнем бою</b>.";
 
-$language_pack['award_killsurvivor']                            = "осваивает жизнь нежити, <b>убив %s</b> <b>Выживших</b>.";
-$language_pack['award_killinfected']                            = "может убить любого, <b>убив %s</b> <b>обычных Заражённых</b>.";
-$language_pack['award_killhunter']                              = "движется, прямо как он, <b>убив %s</b> <b>Охотников</b>.";
-$language_pack['award_killsmoker']                              = "находится в секции для некурящих, <b>убив %s</b> <b>Курильщиков</b>.";
-$language_pack['award_killboomer']                              = "тренер по снижению веса, <b>убив %s Толстяков</b>.";
-$language_pack['award_killspitter']                             = "не любит зомби без манер, <b>убив %s Плевальщиц</b>.";
-$language_pack['award_killjockey']                              = "любит быть на вершине, <b>убив %s Жокеев</b>.";
-$language_pack['award_killcharger']                             = "не любит, когда его вдалбливают в землю, <b>убив %s Громил</b>.";
+$language_pack['award_killsurvivor']                            = "осваивает жизнь нежити, <b>убив %s</b> <b>выживших</b>.";
+$language_pack['award_killinfected']                            = "может убить любого, <b>убив %s</b> <b>обычных заражённых</b>.";
+$language_pack['award_killhunter']                              = "движется, прямо как он, <b>убив %s</b> <b>охотников</b>.";
+$language_pack['award_killsmoker']                              = "находится в секции для некурящих, <b>убив %s</b> <b>курильщиков</b>.";
+$language_pack['award_killboomer']                              = "тренер по снижению веса, <b>убив %s толстяков</b>.";
+$language_pack['award_killspitter']                             = "не любит невежливых зомби, <b>убив %s плевальщиц</b>.";
+$language_pack['award_killjockey']                              = "любит быть на вершине, <b>убив %s жокеев</b>.";
+$language_pack['award_killcharger']                             = "не любит, когда его вдалбливают в землю, <b>убив %s громил</b>.";
 
 $language_pack['award_pills']                                   = "говорит, что первое попадание бесплатно, передав <b>%s таблеток</b>.";
 $language_pack['award_medkit']                                  = "желает, чтобы у него была лечебная пушка, использовав <b>%s аптечек</b>.";
-$language_pack['award_hunter']                                  = "<b>спас %s пригвоздённых товарищей по команде от Охотника</b>.";
-$language_pack['award_smoker']                                  = "фанат аниме, но не в этом смысле, который <b>спас %s товарищей по команде от Курильщиков</b>.";
-$language_pack['award_jockey']                                  = "стал борцом за свободу, который <b>спас %s товарищей по команде от Жокеев</b>.";
-$language_pack['award_charger']                                 = "показал, что бывает с задирами, который <b>спас %s товарищей по команде от Громил</b>.";
-$language_pack['award_protect']                                 = "спасает твою задницу, <b>защитив %s товарищей по команде</b>.";
-$language_pack['award_revive']                                  = "там, когда он тебе нужен. <b>Помог %s товарищам по команде</b>.";
-$language_pack['award_rescue']                                  = "проверяет все туалеты. <b>Спас из комнаты спасения %s товарищей по команде</b>.";
+$language_pack['award_hunter']                                  = "<b>спас %s пригвоздённых союзников от охотника</b>.";
+$language_pack['award_smoker']                                  = "фанат аниме, но не в этом смысле, который <b>спас %s союзников от курильщиков</b>.";
+$language_pack['award_jockey']                                  = "стал борцом за свободу, который <b>спас %s союзников от жокеев</b>.";
+$language_pack['award_charger']                                 = "показал, что бывает с задирами, который <b>спас %s союзников от громил</b>.";
+$language_pack['award_protect']                                 = "спасает твою задницу, <b>защитив %s союзников</b>.";
+$language_pack['award_revive']                                  = "там, когда он тебе нужен. <b>Помог %s союзникам</b>.";
+$language_pack['award_rescue']                                  = "проверяет все туалеты. <b>Спас из комнаты спасения %s союзников</b>.";
 $language_pack['award_campaigns']                               = "спасается... снова! <b>Завершив %s кампаний</b>.";
-$language_pack['award_tankkill']                                = "Дом вверх дном. <b>Командная помощь в убийстве %s Танков</b>.";
-$language_pack['award_tankkillnodeaths']                        = "приносит превосходную огневую мощь в <b>командная помощь в убийстве %s Танков без потерь</b>.";
-$language_pack['award_allinsafehouse']                          = "не оставляет никого позади, <b>добравшись до %s убежищ со всеми Выжившими</b>.";
+$language_pack['award_tankkill']                                = "Дом вверх дном. <b>Командная помощь в убийстве %s танков</b>.";
+$language_pack['award_tankkillnodeaths']                        = "приносит превосходную огневую мощь в <b>командную помощь в убийстве %s танков без потерь</b>.";
+$language_pack['award_allinsafehouse']                          = "не оставляет никого позади, <b>добравшись до %s убежищ со всеми выжившими</b>.";
 
 $language_pack['award_friendlyfire']                            = "ужасный друг, который <b>%s раза стрелял по своим</b>.";
-$language_pack['award_teamkill']                                = "будет забанен, заработав <b>%s убийств товарищей по команде</b>.";
-$language_pack['award_fincap']                                  = "не очень дружелюбен, <b>отправив в отключку %s товарищей по команде</b>.";
-$language_pack['award_left4dead']                               = "оставил тебя умирать, <b>позволив умереть %s товарищам по команде</b> у него на глазах.";
-$language_pack['award_letinsafehouse']                          = "превращается в одного из них, <b>позволив войти в убежище %s Заражённым</b>.";
-$language_pack['award_witchdisturb']                            = "не дамский угодник, <b>потревожив %s Ведьм</b>.";
+$language_pack['award_teamkill']                                = "будет заблокирован, заработав <b>%s убийств союзников</b>.";
+$language_pack['award_fincap']                                  = "не очень дружелюбен, <b>отправив в отключку %s союзников</b>.";
+$language_pack['award_left4dead']                               = "оставил тебя умирать, <b>позволив умереть %s союзникам</b> у него на глазах.";
+$language_pack['award_letinsafehouse']                          = "превращается в одного из них, <b>позволив войти в убежище %s заражённым</b>.";
+$language_pack['award_witchdisturb']                            = "не дамский угодник, <b>потревожив %s ведьм</b>.";
 
-$language_pack['award_pounce_nice']                             = "боль с небес, заработав <b>%s удачных прыжков за Охотника</b>.";
-$language_pack['award_pounce_perfect']                          = "смерть с небес, заработав <b>%s идеальных прыжков за Охотника</b>.";
-$language_pack['award_perfect_blindness']                       = "стал художником, <b>%s раза заблевав Выживших за Толстяка</b>.";
-$language_pack['award_infected_win']                            = "ведёт Выживших к вымиранию, заработав <b>%s побед за Заражённых</b>.";
-$language_pack['award_bulldozer']                               = "танковый бульдозер, наносящий <b>большой урон Выжившим %s раза</b>.";
+$language_pack['award_pounce_nice']                             = "боль с небес, заработав <b>%s удачных прыжков за охотника</b>.";
+$language_pack['award_pounce_perfect']                          = "смерть с небес, заработав <b>%s идеальных прыжков за охотника</b>.";
+$language_pack['award_perfect_blindness']                       = "стал художником, <b>%s раза заблевав выживших за толстяка</b>.";
+$language_pack['award_infected_win']                            = "ведёт выживших к вымиранию, заработав <b>%s побед за заражённых</b>.";
+$language_pack['award_bulldozer']                               = "танковый бульдозер, наносящий <b>большой урон выжившим %s раза</b>.";
 $language_pack['award_survivor_down']                           = "ставит выживших на колени, <b>отправив в отключку %s</b>.";
-$language_pack['award_ledgegrab']                               = "хочет выживших на карте, <b>почти столкнув %s Выживших с уступа</b>.";
-$language_pack['award_matador']                                 = "стал матадором <b>разгромив %s Громил</b>.";
-$language_pack['award_witchcrowned']                            = "знает, как обращаться с женщинами, <b>убив %s Ведьм</b>.";
+$language_pack['award_ledgegrab']                               = "хочет столкнуть выживших с карты, <b>почти столкнув %s выживших с уступа</b>.";
+$language_pack['award_matador']                                 = "стал матадором, <b>разгромив %s громил</b>.";
+$language_pack['award_witchcrowned']                            = "знает, как обращаться с женщинами, <b>убив %s ведьм</b>.";
 
-$language_pack['award_tanksniper']                              = "стал танковым снайпером, который попал <b>%s раз по Выжившим своим камнем</b>.";
+$language_pack['award_tanksniper']                              = "стал танковым снайпером, который попал <b>%s раз по выжившим своим камнем</b>.";
 
 /*==================================
 	Rank awards (only L4D2)
 ==================================*/
 
-$language_pack['award_killspitter']                             = "не любит зомби без манер, заработав <b>убийств %s Плевальщиц</b>.";
-$language_pack['award_killjockey']                              = "любит быть на высоте, заработав <b>убийств %s Жокеев</b>.";
-$language_pack['award_killcharger']                             = "не любит, когда его вдалбливают в землю, <b>убив %s Громил</b>.";
+$language_pack['award_killspitter']                             = "не любит невежливых зомби, заработав <b>убийств %s плевальщиц</b>.";
+$language_pack['award_killjockey']                              = "любит быть на высоте, заработав <b>убийств %s жокеев</b>.";
+$language_pack['award_killcharger']                             = "не любит, когда его вдалбливают в землю, <b>убив %s громил</b>.";
 
-$language_pack['award_adrenaline']                              = "нужно, чтобы товарищи по команде оставались на максимальной скорости, передав <b>%s шприцев с адреналином</b>.";
+$language_pack['award_adrenaline']                              = "нужно, чтобы союзники оставались на максимальной скорости, передав <b>%s шприцев с адреналином</b>.";
 $language_pack['award_defib']                                   = "дарит жизнь, использовав <b>%s дефибрилляторов</b>.";
-$language_pack['award_jockey']                                  = "стал борцом за свободу, который <b>спас %s товарищей по команде от Жокеев</b>.";
-$language_pack['award_charger']                                 = "показал, что бывает с задирами, который <b>спас %s товарищей по команде от Громил</b>.";
+$language_pack['award_jockey']                                  = "стал борцом за свободу, который <b>спас %s союзников от жокеев</b>.";
+$language_pack['award_charger']                                 = "показал, что бывает с задирами, который <b>спас %s союзников от громил</b>.";
 
-$language_pack['award_matador']                                 = "стал матадором <b>разгромив %s Громил</b>.";
-$language_pack['award_scatteringram']                           = "стал разрушителем толпы <b>протаранив %s игроков</b>.";
+$language_pack['award_matador']                                 = "стал матадором, <b>разгромив %s громил</b>.";
+$language_pack['award_scatteringram']                           = "стал разрушителем толпы, <b>протаранив %s выживших</b>.";
 
 ?>
